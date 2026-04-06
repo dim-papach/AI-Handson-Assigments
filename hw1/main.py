@@ -98,17 +98,17 @@ def detach_targets(clean_df: pd.DataFrame, target_col: str) -> Tuple[pd.DataFram
     return clean_df, y
 
 def main(
-    filepath="data/HECATE.csv", 
-    target_col=TARGET_COL, 
-    train_size=TRAIN_SIZE, 
-    val_size=VAL_SIZE, 
-    test_size=TEST_SIZE,
-    key_vars=KEY_VARS,
-    err_vars=ERR_VARS,
-    no_err_vars=NO_ERR_VARS,
-    flags_vars=FLAGS_VARS,
-    color_vars=COLOR_VARS,
-    visuals_dir: str = "visuals"
+    filepath: str = "data/HECATE.csv",
+    target_col: str = TARGET_COL,
+    train_size: float = TRAIN_SIZE,
+    val_size: float = VAL_SIZE,
+    test_size: float = TEST_SIZE,
+    key_vars: List[str] = KEY_VARS,
+    err_vars: List[str] = ERR_VARS,
+    no_err_vars: List[str] = NO_ERR_VARS,
+    flags_vars: List[str] = FLAGS_VARS,
+    color_vars: List[str] = COLOR_VARS,
+    visuals_dir: str = "visuals",
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series, Any]:
     """Main execution function matching proper separated execution strategies."""
     df_prepared = load_and_filter_data(filepath, key_vars, err_vars, no_err_vars, flags_vars, color_vars)

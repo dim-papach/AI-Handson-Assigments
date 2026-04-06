@@ -92,23 +92,29 @@ def plot_model_evaluations(model_results: Dict[str, Any], visuals_dir: str = "vi
     
     print(f"Saved evaluation graphs to {metrics_path} and {cm_path}")
 
-def train_classical_models(X_train: pd.DataFrame, y_train: pd.Series, X_val: pd.DataFrame, y_val: pd.Series) -> Any:
-    """
-    Grid search over Decision Tree, Random Forest, XGBoost, Logistic Regression, and SVM.
-    Returns the best model across all types searched.
-    """
-    unique_classes = np.unique(y_train)
-    is_multiclass = len(unique_classes) > 2
+def build_model_grid(is_multiclass: bool) -> Dict[str, Any]:
+    """Returns the model classes and hyperparameter grids to search over.
 
-    models_and_grids = {
+    Parameters
+    ----------
+    is_multiclass : bool
+        Whether the classification task has more than two classes.
+        Affects XGBoost's eval_metric selection.
+
+    Returns
+    -------
+    Dict[str, Any]
+        Mapping of model name to a dict with keys ``model_cls`` and ``grid``.
+    """
+    return {
         'DecisionTree': {
             'model_cls': DecisionTreeClassifier,
             'grid': {
                 'max_depth': [None, 5, 10, 20],
                 'min_samples_split': [2, 5, 10],
                 'class_weight': ['balanced'],
-                'random_state': [42]
-            }
+                'random_state': [42],
+            },
         },
         'LogisticRegression': {
             'model_cls': LogisticRegression,
@@ -116,8 +122,8 @@ def train_classical_models(X_train: pd.DataFrame, y_train: pd.Series, X_val: pd.
                 'C': [0.1, 1.0, 10.0],
                 'max_iter': [1000],
                 'class_weight': ['balanced'],
-                'random_state': [42]
-            }
+                'random_state': [42],
+            },
         },
         'SVM': {
             'model_cls': SVC,
@@ -126,8 +132,8 @@ def train_classical_models(X_train: pd.DataFrame, y_train: pd.Series, X_val: pd.
                 'kernel': ['rbf', 'linear'],
                 'probability': [True],  # Required for predict_proba & AUC
                 'class_weight': ['balanced'],
-                'random_state': [42]
-            }
+                'random_state': [42],
+            },
         },
         'RandomForest': {
             'model_cls': RandomForestClassifier,
@@ -135,8 +141,8 @@ def train_classical_models(X_train: pd.DataFrame, y_train: pd.Series, X_val: pd.
                 'n_estimators': [50, 100],
                 'max_depth': [None, 10, 20],
                 'class_weight': ['balanced'],
-                'random_state': [42]
-            }
+                'random_state': [42],
+            },
         },
         'XGBoost': {
             'model_cls': XGBClassifier,
@@ -145,101 +151,191 @@ def train_classical_models(X_train: pd.DataFrame, y_train: pd.Series, X_val: pd.
                 'max_depth': [3, 5, 7],
                 'learning_rate': [0.01, 0.1],
                 'random_state': [42],
-                'eval_metric': ['logloss' if not is_multiclass else 'mlogloss']
-            }
-        }
+                'eval_metric': ['mlogloss' if is_multiclass else 'logloss'],
+            },
+        },
     }
 
-    best_overall_model = None
-    best_overall_score = -1
-    best_overall_name = ""
-    
-    # Dictionary to collect results for graphs
-    model_evaluations = {}
+
+def run_grid_search_for_model(
+    model_name: str,
+    config: Dict[str, Any],
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    X_val: pd.DataFrame,
+    y_val: pd.Series,
+    is_multiclass: bool,
+) -> Tuple[Any, Dict[str, float], np.ndarray, float]:
+    """Exhaustively searches the parameter grid for one model type.
+
+    Parameters
+    ----------
+    model_name : str
+        Human-readable model identifier (e.g. ``'RandomForest'``).
+    config : Dict[str, Any]
+        Dict containing ``model_cls`` and ``grid`` keys as produced by
+        :func:`build_model_grid`.
+    X_train : pd.DataFrame
+        Training feature matrix.
+    y_train : pd.Series
+        Training labels.
+    X_val : pd.DataFrame
+        Validation feature matrix.
+    y_val : pd.Series
+        Validation labels.
+    is_multiclass : bool
+        Whether the task has more than two target classes.
+
+    Returns
+    -------
+    Tuple[Any, Dict[str, float], np.ndarray, float]
+        ``(best_model, best_metrics, best_predictions, best_score)``
+    """
+    best_model: Any = None
+    best_score: float = -1.0
+    best_metrics: Dict[str, float] = {}
+    best_predictions: np.ndarray = np.array([])
+
+    for params in ParameterGrid(config['grid']):
+        model = config['model_cls'](**params)
+
+        if model_name == 'XGBoost':
+            model.set_params(early_stopping_rounds=10)
+            model.fit(X_train, y_train, eval_set=[(X_val, y_val)], verbose=False)
+        else:
+            model.fit(X_train, y_train)
+
+        metrics, y_pred = evaluate_model(model, X_val, y_val, is_multiclass)
+        score = metrics['ROC-AUC'] if not np.isnan(metrics['ROC-AUC']) else metrics['Accuracy']
+
+        if score > best_score:
+            best_score = score
+            best_model = model
+            best_metrics = metrics
+            best_predictions = y_pred
+
+    print(f"Best {model_name} Validation Score (AUC fallback to Acc): {best_score:.4f}")
+    for metric_name, value in best_metrics.items():
+        print(f"  {metric_name}: {value:.4f}")
+
+    return best_model, best_metrics, best_predictions, best_score
+
+
+def report_feature_importances(model: Any, X_train: pd.DataFrame, top_n: int = 10) -> None:
+    """Prints feature importances or linear coefficients for the given model.
+
+    Parameters
+    ----------
+    model : Any
+        A fitted sklearn-compatible model.
+    X_train : pd.DataFrame
+        Training feature matrix, used to retrieve column names.
+    top_n : int, optional
+        Number of top features to display, by default 10.
+    """
+    if hasattr(model, "feature_importances_"):
+        print("\nFeature importances:")
+        importances: np.ndarray = model.feature_importances_
+        indices = np.argsort(importances)[::-1]
+        feat_len = X_train.shape[1]
+        for idx in indices[:top_n]:
+            if idx < feat_len:
+                feat_name = X_train.columns[idx]
+                print(f"  {feat_name}: {importances[idx]:.4f}")
+    elif hasattr(model, "coef_"):
+        print("\nCoefficients:")
+        print(model.coef_)
+
+
+def save_best_model(model: Any, models_dir: str = "models") -> str:
+    """Persists the best model to disk via joblib.
+
+    Parameters
+    ----------
+    model : Any
+        Fitted model to save.
+    models_dir : str, optional
+        Directory to write the file into, by default ``"models"``.
+
+    Returns
+    -------
+    str
+        Absolute path of the saved model file.
+    """
+    os.makedirs(models_dir, exist_ok=True)
+    model_path = os.path.join(models_dir, "classical_model.pkl")
+    joblib.dump(model, model_path)
+    print(f"Saved best classical model to {model_path}")
+    return model_path
+
+
+def train_classical_models(
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    X_val: pd.DataFrame,
+    y_val: pd.Series,
+    models_dir: str = "models",
+    visuals_dir: str = "visuals",
+) -> Any:
+    """Grid search over classical ML algorithms and return the best model.
+
+    Searches Decision Tree, Random Forest, XGBoost, Logistic Regression,
+    and SVM. Saves the winner and plots evaluation metrics.
+
+    Parameters
+    ----------
+    X_train : pd.DataFrame
+        Training feature matrix.
+    y_train : pd.Series
+        Training labels.
+    X_val : pd.DataFrame
+        Validation feature matrix.
+    y_val : pd.Series
+        Validation labels.
+    models_dir : str, optional
+        Directory to save the best model, by default ``"models"``.
+    visuals_dir : str, optional
+        Directory to save evaluation plots, by default ``"visuals"``.
+
+    Returns
+    -------
+    Any
+        The best fitted sklearn-compatible model found across all searches.
+    """
+    is_multiclass: bool = len(np.unique(y_train)) > 2
+    model_grid = build_model_grid(is_multiclass)
+
+    best_overall_model: Any = None
+    best_overall_score: float = -1.0
+    best_overall_name: str = ""
+    model_evaluations: Dict[str, Any] = {}
 
     print("Starting Grid Search for Classical ML Models...")
 
-    for model_name, config in models_and_grids.items():
+    for model_name, config in model_grid.items():
         print(f"\n--- Training {model_name} ---")
-        grid = list(ParameterGrid(config['grid']))
-        best_model_for_type = None
-        best_score_for_type = -1
-        best_metrics_for_type = None
-        best_preds_for_type = None
-        
-        for params in grid:
-            model = config['model_cls'](**params)
-            
-            if model_name == 'XGBoost':
-                # XGBoost specific handling for early stopping
-                model.set_params(early_stopping_rounds=10)
-                model.fit(
-                    X_train, y_train,
-                    eval_set=[(X_val, y_val)],
-                    verbose=False
-                )
-            else:
-                model.fit(X_train, y_train)
-            
-            # Retrieve robust classification metrics instead of just simple accuracy
-            metrics, y_pred = evaluate_model(model, X_val, y_val, is_multiclass)
-            
-            # Using ROC-AUC if possible to choose the model, fallback to Accuracy
-            score = metrics['ROC-AUC'] if not np.isnan(metrics['ROC-AUC']) else metrics['Accuracy']
-            
-            if score > best_score_for_type:
-                best_score_for_type = score
-                best_model_for_type = model
-                best_metrics_for_type = metrics
-                best_preds_for_type = y_pred
-                
-        print(f"Best {model_name} Validation Score (AUC fallback to Acc): {best_score_for_type:.4f}")
-        for k, v in best_metrics_for_type.items():
-            print(f"  {k}: {v:.4f}")
-            
-        # Store for visualizations
+        best_model, best_metrics, best_predictions, best_score = run_grid_search_for_model(
+            model_name, config, X_train, y_train, X_val, y_val, is_multiclass
+        )
+
         model_evaluations[model_name] = {
-            'metrics': best_metrics_for_type,
-            'cm': confusion_matrix(y_val, best_preds_for_type)
+            'metrics': best_metrics,
+            'cm': confusion_matrix(y_val, best_predictions),
         }
-        
-        if best_score_for_type > best_overall_score:
-            best_overall_score = best_score_for_type
-            best_overall_model = best_model_for_type
+
+        if best_score > best_overall_score:
+            best_overall_score = best_score
+            best_overall_model = best_model
             best_overall_name = model_name
 
     print(f"\nBest Overall Classical Model: {best_overall_name} with score: {best_overall_score:.4f}")
-    
-    # 5. Generate the specified plots for the metrics and confusion matrices
-    plot_model_evaluations(model_evaluations, visuals_dir="visuals")
-    
-    # Ensure models directory exists
-    os.makedirs("models", exist_ok=True)
-    
-    # Save best overall model
-    model_path = os.path.join("models", "classical_model.pkl")
-    joblib.dump(best_overall_model, model_path)
-    print(f"Saved best classical model to {model_path}")
-    
-    # Print feature importances or coefficients for insights
-    if hasattr(best_overall_model, "feature_importances_"):
-        print("\nFeature importances:")
-        importances = best_overall_model.feature_importances_
-        # Sort importances
-        indices = np.argsort(importances)[::-1]
-        
-        # Determine valid feature length
-        feat_len = X_train.shape[1] if hasattr(X_train, "shape") else len(X_train.columns)
-        for idx in indices[:10]: # Print top 10
-            if idx < feat_len:
-                feat_name = X_train.columns[idx] if hasattr(X_train, "columns") else f"Feature {idx}"
-                print(f"{feat_name}: {importances[idx]:.4f}")
-                
-    elif hasattr(best_overall_model, "coef_"):
-        print("\nCoefficients:")
-        print(best_overall_model.coef_)
+
+    plot_model_evaluations(model_evaluations, visuals_dir=visuals_dir)
+    save_best_model(best_overall_model, models_dir=models_dir)
+    report_feature_importances(best_overall_model, X_train)
 
     return best_overall_model
+
 
 if __name__ == "__main__":
     print("This module provides classical ML training logic.")

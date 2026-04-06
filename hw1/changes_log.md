@@ -11,7 +11,7 @@ Initial commit of the homework assignment, including project documentation, poet
 - Created tests in `tests/test_main.py` and `tests/test_preprocessing.py`.
 # 2026-04-07
 
-Implemented classical ML training logic with grid search across multiple models, added target variable encoding to the preprocessing pipeline, verified the framework with comprehensive unit tests, and refined the codebase with explicit return type hints to ensure consistent data structures throughout the pipeline.
+Implemented classical ML training logic with grid search across multiple models, added target variable encoding to the preprocessing pipeline, verified the framework with comprehensive unit tests, refined the codebase with explicit return type hints, and further refactored the training module into smaller focused functions for improved readability and maintainability.
 
 ## dev-00:24
 ### Classical ML training and preprocessing enhancements
@@ -28,3 +28,10 @@ Implemented classical ML training logic with grid search across multiple models,
 - Updated `src/preprocessing.py`: Defined return types for all data manipulation functions.
 - Updated `src/train_classical.py`: Added return type hints for evaluation and search components.
 - Updated `tests/`: Added return type hints to all test functions and fixtures across the integration and unit test suite.
+## dev-01:05
+### Modular refactoring of classical ML training pipeline
+- Extracted `run_grid_search_for_model` from `train_classical_models` to isolate per-model grid search logic into a dedicated, testable function.
+- Extracted `save_best_model` to handle model persistence independently, with a configurable `models_dir` parameter.
+- Extracted `report_feature_importances` to cleanly separate feature importance printing from the main training loop.
+- Updated `train_classical_models` to accept `models_dir` and `visuals_dir` parameters instead of hardcoded paths.
+- Cleaned up `main.py` to align with refactored function signatures.
