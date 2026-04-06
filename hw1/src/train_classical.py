@@ -12,7 +12,9 @@ from sklearn.svm import SVC
 from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix
 from sklearn.model_selection import ParameterGrid
-from typing import Dict, Tuple, Any, List
+from typing import Dict, Tuple, Any, List, Optional
+from src.config import PipelineConfig
+
 
 def evaluate_model(model: Any, X_val: pd.DataFrame, y_val: pd.Series, is_multiclass: bool = False) -> Tuple[Dict[str, float], np.ndarray]:
     """Evaluates the model and returns a dictionary of robust classification metrics."""
@@ -41,7 +43,12 @@ def evaluate_model(model: Any, X_val: pd.DataFrame, y_val: pd.Series, is_multicl
         
     return metrics, y_pred
 
-def plot_model_evaluations(model_results: Dict[str, Any], visuals_dir: str = "visuals") -> None:
+def plot_model_evaluations(
+    model_results: Dict[str, Any],
+    visuals_dir: str = PipelineConfig.visuals_dir,
+    metrics_filename: str = PipelineConfig.metrics_filename,
+    cm_filename: str = PipelineConfig.cm_filename,
+) -> None:
     """
     Creates bar plots for metrics and confusion matrices for each model.
     model_results is a dict: {'ModelName': {'metrics': metrics_dict, 'cm': confusion_matrix_array}}
@@ -68,7 +75,7 @@ def plot_model_evaluations(model_results: Dict[str, Any], visuals_dir: str = "vi
         
     plt.suptitle('Validation Metrics Comparison', fontsize=14, y=1.05)
     plt.tight_layout()
-    metrics_path = os.path.join(visuals_dir, "classical_models_metrics.png")
+    metrics_path = os.path.join(visuals_dir, metrics_filename)
     plt.savefig(metrics_path, bbox_inches='tight', dpi=300)
     plt.close()
     
@@ -86,13 +93,27 @@ def plot_model_evaluations(model_results: Dict[str, Any], visuals_dir: str = "vi
         
     plt.suptitle('Confusion Matrices', fontsize=14, y=1.05)
     plt.tight_layout()
-    cm_path = os.path.join(visuals_dir, "classical_models_confusion_matrices.png")
+    cm_path = os.path.join(visuals_dir, cm_filename)
     plt.savefig(cm_path, bbox_inches='tight', dpi=300)
     plt.close()
     
     print(f"Saved evaluation graphs to {metrics_path} and {cm_path}")
 
-def build_model_grid(is_multiclass: bool) -> Dict[str, Any]:
+def build_model_grid(
+    is_multiclass: bool,
+    random_state: int = PipelineConfig.random_state,
+    dt_max_depth: Optional[List[Optional[int]]] = None,
+    dt_min_samples_split: Optional[List[int]] = None,
+    lr_C: Optional[List[float]] = None,
+    lr_max_iter: Optional[List[int]] = None,
+    svm_C: Optional[List[float]] = None,
+    svm_kernel: Optional[List[str]] = None,
+    rf_n_estimators: Optional[List[int]] = None,
+    rf_max_depth: Optional[List[Optional[int]]] = None,
+    xgb_n_estimators: Optional[List[int]] = None,
+    xgb_max_depth: Optional[List[int]] = None,
+    xgb_learning_rate: Optional[List[float]] = None,
+) -> Dict[str, Any]:
     """Returns the model classes and hyperparameter grids to search over.
 
     Parameters
@@ -100,57 +121,82 @@ def build_model_grid(is_multiclass: bool) -> Dict[str, Any]:
     is_multiclass : bool
         Whether the classification task has more than two classes.
         Affects XGBoost's eval_metric selection.
+    random_state : int
+        Random seed applied to every model that accepts one.
+    dt_max_depth : List[Optional[int]], optional
+    dt_min_samples_split : List[int], optional
+    lr_C : List[float], optional
+    lr_max_iter : List[int], optional
+    svm_C : List[float], optional
+    svm_kernel : List[str], optional
+    rf_n_estimators : List[int], optional
+    rf_max_depth : List[Optional[int]], optional
+    xgb_n_estimators : List[int], optional
+    xgb_max_depth : List[int], optional
+    xgb_learning_rate : List[float], optional
 
     Returns
     -------
     Dict[str, Any]
         Mapping of model name to a dict with keys ``model_cls`` and ``grid``.
     """
+    cfg = PipelineConfig()
+    dt_max_depth = dt_max_depth or cfg.dt_max_depth
+    dt_min_samples_split = dt_min_samples_split or cfg.dt_min_samples_split
+    lr_C = lr_C or cfg.lr_C
+    lr_max_iter = lr_max_iter or cfg.lr_max_iter
+    svm_C = svm_C or cfg.svm_C
+    svm_kernel = svm_kernel or cfg.svm_kernel
+    rf_n_estimators = rf_n_estimators or cfg.rf_n_estimators
+    rf_max_depth = rf_max_depth or cfg.rf_max_depth
+    xgb_n_estimators = xgb_n_estimators or cfg.xgb_n_estimators
+    xgb_max_depth = xgb_max_depth or cfg.xgb_max_depth
+    xgb_learning_rate = xgb_learning_rate or cfg.xgb_learning_rate
     return {
         'DecisionTree': {
             'model_cls': DecisionTreeClassifier,
             'grid': {
-                'max_depth': [None, 5, 10, 20],
-                'min_samples_split': [2, 5, 10],
+                'max_depth': dt_max_depth,
+                'min_samples_split': dt_min_samples_split,
                 'class_weight': ['balanced'],
-                'random_state': [42],
+                'random_state': [random_state],
             },
         },
         'LogisticRegression': {
             'model_cls': LogisticRegression,
             'grid': {
-                'C': [0.1, 1.0, 10.0],
-                'max_iter': [1000],
+                'C': lr_C,
+                'max_iter': lr_max_iter,
                 'class_weight': ['balanced'],
-                'random_state': [42],
+                'random_state': [random_state],
             },
         },
         'SVM': {
             'model_cls': SVC,
             'grid': {
-                'C': [0.1, 1.0],
-                'kernel': ['rbf', 'linear'],
+                'C': svm_C,
+                'kernel': svm_kernel,
                 'probability': [True],  # Required for predict_proba & AUC
                 'class_weight': ['balanced'],
-                'random_state': [42],
+                'random_state': [random_state],
             },
         },
         'RandomForest': {
             'model_cls': RandomForestClassifier,
             'grid': {
-                'n_estimators': [50, 100],
-                'max_depth': [None, 10, 20],
+                'n_estimators': rf_n_estimators,
+                'max_depth': rf_max_depth,
                 'class_weight': ['balanced'],
-                'random_state': [42],
+                'random_state': [random_state],
             },
         },
         'XGBoost': {
             'model_cls': XGBClassifier,
             'grid': {
-                'n_estimators': [50, 100, 200],
-                'max_depth': [3, 5, 7],
-                'learning_rate': [0.01, 0.1],
-                'random_state': [42],
+                'n_estimators': xgb_n_estimators,
+                'max_depth': xgb_max_depth,
+                'learning_rate': xgb_learning_rate,
+                'random_state': [random_state],
                 'eval_metric': ['mlogloss' if is_multiclass else 'logloss'],
             },
         },
@@ -165,6 +211,7 @@ def run_grid_search_for_model(
     X_val: pd.DataFrame,
     y_val: pd.Series,
     is_multiclass: bool,
+    early_stopping_rounds: int = PipelineConfig.xgb_early_stopping_rounds,
 ) -> Tuple[Any, Dict[str, float], np.ndarray, float]:
     """Exhaustively searches the parameter grid for one model type.
 
@@ -185,6 +232,8 @@ def run_grid_search_for_model(
         Validation labels.
     is_multiclass : bool
         Whether the task has more than two target classes.
+    early_stopping_rounds : int, optional
+        XGBoost early stopping patience, by default 10.
 
     Returns
     -------
@@ -200,7 +249,7 @@ def run_grid_search_for_model(
         model = config['model_cls'](**params)
 
         if model_name == 'XGBoost':
-            model.set_params(early_stopping_rounds=10)
+            model.set_params(early_stopping_rounds=early_stopping_rounds)
             model.fit(X_train, y_train, eval_set=[(X_val, y_val)], verbose=False)
         else:
             model.fit(X_train, y_train)
@@ -247,7 +296,11 @@ def report_feature_importances(model: Any, X_train: pd.DataFrame, top_n: int = 1
         print(model.coef_)
 
 
-def save_best_model(model: Any, models_dir: str = "models") -> str:
+def save_best_model(
+    model: Any,
+    models_dir: str = PipelineConfig.models_dir,
+    model_filename: str = PipelineConfig.model_filename,
+) -> str:
     """Persists the best model to disk via joblib.
 
     Parameters
@@ -256,6 +309,8 @@ def save_best_model(model: Any, models_dir: str = "models") -> str:
         Fitted model to save.
     models_dir : str, optional
         Directory to write the file into, by default ``"models"``.
+    model_filename : str, optional
+        Name of the output file, by default ``"classical_model.pkl"``.
 
     Returns
     -------
@@ -263,7 +318,7 @@ def save_best_model(model: Any, models_dir: str = "models") -> str:
         Absolute path of the saved model file.
     """
     os.makedirs(models_dir, exist_ok=True)
-    model_path = os.path.join(models_dir, "classical_model.pkl")
+    model_path = os.path.join(models_dir, model_filename)
     joblib.dump(model, model_path)
     print(f"Saved best classical model to {model_path}")
     return model_path
@@ -274,8 +329,24 @@ def train_classical_models(
     y_train: pd.Series,
     X_val: pd.DataFrame,
     y_val: pd.Series,
-    models_dir: str = "models",
-    visuals_dir: str = "visuals",
+    random_state: int = PipelineConfig.random_state,
+    models_dir: str = PipelineConfig.models_dir,
+    visuals_dir: str = PipelineConfig.visuals_dir,
+    metrics_filename: str = PipelineConfig.metrics_filename,
+    cm_filename: str = PipelineConfig.cm_filename,
+    model_filename: str = PipelineConfig.model_filename,
+    xgb_early_stopping_rounds: int = PipelineConfig.xgb_early_stopping_rounds,
+    dt_max_depth: Optional[List[Optional[int]]] = None,
+    dt_min_samples_split: Optional[List[int]] = None,
+    lr_C: Optional[List[float]] = None,
+    lr_max_iter: Optional[List[int]] = None,
+    svm_C: Optional[List[float]] = None,
+    svm_kernel: Optional[List[str]] = None,
+    rf_n_estimators: Optional[List[int]] = None,
+    rf_max_depth: Optional[List[Optional[int]]] = None,
+    xgb_n_estimators: Optional[List[int]] = None,
+    xgb_max_depth: Optional[List[int]] = None,
+    xgb_learning_rate: Optional[List[float]] = None,
 ) -> Any:
     """Grid search over classical ML algorithms and return the best model.
 
@@ -292,18 +363,46 @@ def train_classical_models(
         Validation feature matrix.
     y_val : pd.Series
         Validation labels.
+    random_state : int, optional
     models_dir : str, optional
-        Directory to save the best model, by default ``"models"``.
     visuals_dir : str, optional
-        Directory to save evaluation plots, by default ``"visuals"``.
+    metrics_filename : str, optional
+    cm_filename : str, optional
+    model_filename : str, optional
 
     Returns
     -------
     Any
         The best fitted sklearn-compatible model found across all searches.
     """
+    cfg = PipelineConfig()
+    dt_max_depth = dt_max_depth or cfg.dt_max_depth
+    dt_min_samples_split = dt_min_samples_split or cfg.dt_min_samples_split
+    lr_C = lr_C or cfg.lr_C
+    lr_max_iter = lr_max_iter or cfg.lr_max_iter
+    svm_C = svm_C or cfg.svm_C
+    svm_kernel = svm_kernel or cfg.svm_kernel
+    rf_n_estimators = rf_n_estimators or cfg.rf_n_estimators
+    rf_max_depth = rf_max_depth or cfg.rf_max_depth
+    xgb_n_estimators = xgb_n_estimators or cfg.xgb_n_estimators
+    xgb_max_depth = xgb_max_depth or cfg.xgb_max_depth
+    xgb_learning_rate = xgb_learning_rate or cfg.xgb_learning_rate
     is_multiclass: bool = len(np.unique(y_train)) > 2
-    model_grid = build_model_grid(is_multiclass)
+    model_grid = build_model_grid(
+        is_multiclass=is_multiclass,
+        random_state=random_state,
+        dt_max_depth=dt_max_depth,
+        dt_min_samples_split=dt_min_samples_split,
+        lr_C=lr_C,
+        lr_max_iter=lr_max_iter,
+        svm_C=svm_C,
+        svm_kernel=svm_kernel,
+        rf_n_estimators=rf_n_estimators,
+        rf_max_depth=rf_max_depth,
+        xgb_n_estimators=xgb_n_estimators,
+        xgb_max_depth=xgb_max_depth,
+        xgb_learning_rate=xgb_learning_rate,
+    )
 
     best_overall_model: Any = None
     best_overall_score: float = -1.0
@@ -315,7 +414,9 @@ def train_classical_models(
     for model_name, config in model_grid.items():
         print(f"\n--- Training {model_name} ---")
         best_model, best_metrics, best_predictions, best_score = run_grid_search_for_model(
-            model_name, config, X_train, y_train, X_val, y_val, is_multiclass
+            model_name, config, X_train, y_train, X_val, y_val,
+            is_multiclass=is_multiclass,
+            early_stopping_rounds=xgb_early_stopping_rounds,
         )
 
         model_evaluations[model_name] = {
@@ -330,8 +431,13 @@ def train_classical_models(
 
     print(f"\nBest Overall Classical Model: {best_overall_name} with score: {best_overall_score:.4f}")
 
-    plot_model_evaluations(model_evaluations, visuals_dir=visuals_dir)
-    save_best_model(best_overall_model, models_dir=models_dir)
+    plot_model_evaluations(
+        model_evaluations,
+        visuals_dir=visuals_dir,
+        metrics_filename=metrics_filename,
+        cm_filename=cm_filename,
+    )
+    save_best_model(best_overall_model, models_dir=models_dir, model_filename=model_filename)
     report_feature_importances(best_overall_model, X_train)
 
     return best_overall_model

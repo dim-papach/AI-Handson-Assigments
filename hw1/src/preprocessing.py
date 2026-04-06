@@ -13,6 +13,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from typing import Dict, Tuple, List, Optional, Any
+from src.config import PipelineConfig
 
 
 # =========================================================
@@ -65,7 +66,7 @@ def filter_error_ratios(df: pd.DataFrame, key_vars: List[str], err_vars: List[st
     return df
 
 
-def select_metal_flag(df: pd.DataFrame, frac: float = 0.005, random_state: int = 42) -> pd.DataFrame:
+def select_metal_flag(df: pd.DataFrame, frac: float = 0.005, random_state: int = PipelineConfig.random_state) -> pd.DataFrame:
     """2. Subsample FLAG_METAL=-1 rows."""
     if 'FLAG_METAL' not in df.columns:
         return df
@@ -81,7 +82,14 @@ def select_metal_flag(df: pd.DataFrame, frac: float = 0.005, random_state: int =
     return pd.concat([df_valid, df_missing_reduced]).sort_index()
 
 
-def split_data(df: pd.DataFrame, target_col: str, train_size: float, val_size: float, test_size: float, random_state: int = 42) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def split_data(
+    df: pd.DataFrame,
+    target_col: str = PipelineConfig.target_col,
+    train_size: float = PipelineConfig.train_size,
+    val_size: float = PipelineConfig.val_size,
+    test_size: float = PipelineConfig.test_size,
+    random_state: int = PipelineConfig.random_state,
+) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """
     3. Split to training, validation and test returning intact native dataframes
     """
@@ -115,24 +123,29 @@ def split_data(df: pd.DataFrame, target_col: str, train_size: float, val_size: f
 # 3. Missing Value Treatment & Imputation
 # =========================================================
 
-def drop_missing_targets(df: pd.DataFrame, target_col: str) -> pd.DataFrame:
+def drop_missing_targets(df: pd.DataFrame, target_col: str = PipelineConfig.target_col) -> pd.DataFrame:
     """
     Drop rows where the target variable itself is missing entirely natively.
     """
     return df.dropna(subset=[target_col]).copy()
 
-def fit_target_encoder(train_df: pd.DataFrame, target_col: str) -> LabelEncoder:
+def fit_target_encoder(
+    train_df: pd.DataFrame,
+    target_col: str = PipelineConfig.target_col,
+    models_dir: str = PipelineConfig.models_dir,
+    encoder_filename: str = PipelineConfig.encoder_filename,
+) -> LabelEncoder:
     """
     Fits target encoder securely against training targets.
     """
     le = LabelEncoder()
     temp_targets = train_df.dropna(subset=[target_col])[target_col]
     le.fit(temp_targets)
-    os.makedirs("models", exist_ok=True)
-    joblib.dump(le, "models/label_encoder.pkl")
+    os.makedirs(models_dir, exist_ok=True)
+    joblib.dump(le, os.path.join(models_dir, encoder_filename))
     return le
 
-def apply_target_encoder(df: pd.DataFrame, target_col: str, le: LabelEncoder) -> pd.DataFrame:
+def apply_target_encoder(df: pd.DataFrame, le: LabelEncoder, target_col: str = PipelineConfig.target_col) -> pd.DataFrame:
     """
     Encodes the target variable numerically via Pipeline format.
     """
@@ -172,7 +185,7 @@ def apply_iqr_capping(X: pd.DataFrame, bounds: Dict[str, Tuple[float, float]]) -
     return X_capped
 
 
-def save_outlier_histograms(df: pd.DataFrame, prefix: str = "dataset", out_dir: str = "visuals") -> pd.DataFrame:
+def save_outlier_histograms(df: pd.DataFrame, prefix: str = "dataset", out_dir: str = PipelineConfig.visuals_dir) -> pd.DataFrame:
     """
     Generates and saves a histogram for all numeric columns post-outlier truncation securely.
     Acts as a seamless passthrough mapping natively via Pandas .pipe() structures.
@@ -248,7 +261,7 @@ def build_preprocessing_pipeline(X_train: pd.DataFrame) -> Pipeline:
     return full_pipeline
 
 
-def apply_imputation(df: pd.DataFrame, pipeline: Pipeline, target_col: str) -> pd.DataFrame:
+def apply_imputation(df: pd.DataFrame, pipeline: Pipeline, target_col: str = PipelineConfig.target_col) -> pd.DataFrame:
     """
     Natively bridges Scikit-Learn transformers smoothly accommodating Pandas .pipe() capabilities
     by managing extracting, applying, and gracefully reconstructing variables.
@@ -272,7 +285,7 @@ def get_fitted_scaler(X_train: pd.DataFrame) -> Tuple[StandardScaler, pd.Index]:
     return scaler, num_cols
 
 
-def apply_scaling(df: pd.DataFrame, scaler: StandardScaler, num_cols: pd.Index, target_col: str) -> pd.DataFrame:
+def apply_scaling(df: pd.DataFrame, scaler: StandardScaler, num_cols: pd.Index, target_col: str = PipelineConfig.target_col) -> pd.DataFrame:
     """
     Applies static boundaries iteratively across splits ensuring target states are untouched
     preventing testing / validation cross-leakage mathematically.
@@ -288,10 +301,16 @@ def apply_scaling(df: pd.DataFrame, scaler: StandardScaler, num_cols: pd.Index, 
     return X_scaled.assign(**{target_col: y})
 
 
-def generate_pca_insights(X_train: pd.DataFrame, y_train: pd.Series, out_dir: str = "visuals") -> None:
+def generate_pca_insights(
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    out_dir: str = PipelineConfig.visuals_dir,
+    scree_filename: str = PipelineConfig.scree_filename,
+    projection_filename: str = PipelineConfig.projection_filename,
+) -> None:
     """
     Executes Exploratory PCA on the completely scaled training set structurally matching Task 2.7.
-    Produces Scree Plots, 2D Scatter Distributions natively matching class labels, 
+    Produces Scree Plots, 2D Scatter Distributions natively matching class labels,
     and formally outputs dominant Absolute PCA Loadings across Top Components.
     """
     if not out_dir:
@@ -311,7 +330,7 @@ def generate_pca_insights(X_train: pd.DataFrame, y_train: pd.Series, out_dir: st
     plt.ylabel('Cumulative Explained Variance')
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig(os.path.join(out_dir, "pca_scree_plot.png"))
+    plt.savefig(os.path.join(out_dir, scree_filename))
     plt.close()
     
     # 2. 2D Orthogonal Projection matching target states iteratively
@@ -322,7 +341,7 @@ def generate_pca_insights(X_train: pd.DataFrame, y_train: pd.Series, out_dir: st
     plt.ylabel(f'PC2 ({pca.explained_variance_ratio_[1]*100:.1f}%)')
     plt.legend(title='Target Class')
     plt.tight_layout()
-    plt.savefig(os.path.join(out_dir, "pca_2d_projection.png"))
+    plt.savefig(os.path.join(out_dir, projection_filename))
     plt.close()
     
     # 3. Parameter Weight Configurations evaluating the original mapping limits

@@ -3,11 +3,11 @@ import joblib
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from dataclasses import dataclass, field
 from typing import Dict, Tuple, List, Any, Optional
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.pipeline import Pipeline
 
+from src.config import PipelineConfig
 from src.preprocessing import (
     compute_colors,
     filter_error_ratios,
@@ -27,80 +27,6 @@ from src.preprocessing import (
     generate_pca_insights,
 )
 from src.train_classical import train_classical_models, evaluate_model
-
-
-# ---------------------------------------------------------------------------
-# Configuration
-# ---------------------------------------------------------------------------
-
-@dataclass
-class PipelineConfig:
-    """Central configuration for the full ML pipeline.
-
-    Parameters
-    ----------
-    filepath : str
-        Path to the raw CSV dataset.
-    target_col : str
-        Name of the target (label) column in the dataset.
-    train_size : float
-        Fraction of data reserved for training. Must sum to 1.0 with
-        ``val_size`` and ``test_size``.
-    val_size : float
-        Fraction of data reserved for validation.
-    test_size : float
-        Fraction of data reserved for testing.
-    key_vars : List[str]
-        Primary feature columns used for modelling.
-    err_vars : List[str]
-        Error columns corresponding to ``key_vars``.  When left empty the
-        list is derived automatically as ``['E_<var>' for var in key_vars]``.
-    no_err_vars : List[str]
-        Feature columns that have no associated error columns.
-    flags_vars : List[str]
-        Flag columns included in feature selection.
-    color_vars : List[str]
-        Computed colour-index columns.
-    visuals_dir : str
-        Directory where all plots are saved.
-    models_dir : str
-        Directory where serialised models are saved.
-    random_state : int
-        Global random seed for reproducibility.
-    """
-
-    filepath: str = "data/HECATE.csv"
-    target_col: str = "CLASS_SP"
-    train_size: float = 0.80
-    val_size: float = 0.10
-    test_size: float = 0.10
-    key_vars: List[str] = field(
-        default_factory=lambda: [
-            "T", "WF1", "WF2", "WF3", "WF4", "UT", "BT", "VT", "IT",
-            "U", "R", "G", "I", "Z",
-        ]
-    )
-    err_vars: List[str] = field(default_factory=list)
-    no_err_vars: List[str] = field(
-        default_factory=lambda: ["CLASS_SP", "AGN_HEC", "logM_HEC", "logSFR_HEC"]
-    )
-    flags_vars: List[str] = field(default_factory=lambda: ["METAL"])
-    color_vars: List[str] = field(
-        default_factory=lambda: ["u-g", "g-r", "W3-UT", "(W3+UT)/W1"]
-    )
-    visuals_dir: str = "visuals"
-    models_dir: str = "models"
-    random_state: int = 42
-
-    def __post_init__(self) -> None:
-        """Validate split fractions and auto-derive ``err_vars`` if needed."""
-        if round(self.train_size + self.val_size + self.test_size, 5) != 1.0:
-            raise ValueError(
-                "train_size + val_size + test_size must equal exactly 1.0 "
-                f"(got {self.train_size + self.val_size + self.test_size})."
-            )
-        if not self.err_vars:
-            self.err_vars = [f"E_{var}" for var in self.key_vars]
 
 
 # ---------------------------------------------------------------------------
@@ -169,7 +95,12 @@ def fit_preprocessing_params(
     Tuple[Dict[str, Tuple[float, float]], StandardScaler, pd.Index, Pipeline, LabelEncoder]
         ``(iqr_bounds, scaler, num_cols, imputation_pipeline, label_encoder)``
     """
-    le = fit_target_encoder(train_df, config.target_col)
+    le = fit_target_encoder(
+        train_df,
+        config.target_col,
+        models_dir=config.models_dir,
+        encoder_filename=config.encoder_filename,
+    )
 
     iqr_bounds = compute_iqr_bounds(
         train_df.drop(columns=[config.target_col]), factor=1.5
@@ -185,7 +116,7 @@ def fit_preprocessing_params(
     scaler, num_cols = get_fitted_scaler(train_temp.drop(columns=[config.target_col]))
 
     os.makedirs(config.models_dir, exist_ok=True)
-    joblib.dump(scaler, os.path.join(config.models_dir, "scaler.pkl"))
+    joblib.dump(scaler, os.path.join(config.models_dir, config.scaler_filename))
 
     train_temp_scaled = train_temp.pipe(
         apply_scaling, scaler=scaler, num_cols=num_cols, target_col=config.target_col
@@ -330,15 +261,37 @@ def main(
     X_test, y_test = detach_targets(test_clean, config.target_col)
 
     if config.visuals_dir:
-        generate_pca_insights(X_train, y_train, out_dir=config.visuals_dir)
+        generate_pca_insights(
+            X_train,
+            y_train,
+            out_dir=config.visuals_dir,
+            scree_filename=config.scree_filename,
+            projection_filename=config.projection_filename,
+        )
 
     print("\n" + "=" * 50)
     print("PHASE: Classical ML Training & Grid Search")
     print("=" * 50)
     best_model = train_classical_models(
         X_train, y_train, X_val, y_val,
+        random_state=config.random_state,
         models_dir=config.models_dir,
         visuals_dir=config.visuals_dir,
+        metrics_filename=config.metrics_filename,
+        cm_filename=config.cm_filename,
+        model_filename=config.model_filename,
+        xgb_early_stopping_rounds=config.xgb_early_stopping_rounds,
+        dt_max_depth=config.dt_max_depth,
+        dt_min_samples_split=config.dt_min_samples_split,
+        lr_C=config.lr_C,
+        lr_max_iter=config.lr_max_iter,
+        svm_C=config.svm_C,
+        svm_kernel=config.svm_kernel,
+        rf_n_estimators=config.rf_n_estimators,
+        rf_max_depth=config.rf_max_depth,
+        xgb_n_estimators=config.xgb_n_estimators,
+        xgb_max_depth=config.xgb_max_depth,
+        xgb_learning_rate=config.xgb_learning_rate,
     )
 
     print("\n" + "=" * 50)

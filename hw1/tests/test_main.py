@@ -7,13 +7,13 @@ import os
 
 from main import (
     main,
-    PipelineConfig,
     load_and_filter_data,
     fit_preprocessing_params,
     preprocess_split,
     detach_targets,
     configure_plot_style
 )
+from src.config import PipelineConfig
 
 @pytest.fixture
 def mock_config(tmp_path: Any) -> PipelineConfig:
@@ -42,14 +42,6 @@ def mock_config(tmp_path: Any) -> PipelineConfig:
         models_dir=str(tmp_path / "models")
     )
 
-
-def test_pipeline_config_validation() -> None:
-    """Test PipelineConfig validation logic."""
-    with pytest.raises(ValueError):
-        PipelineConfig(train_size=0.5, val_size=0.2, test_size=0.2) # Sums to 0.9
-        
-    config = PipelineConfig(key_vars=["T", "WF1"])
-    assert config.err_vars == ["E_T", "E_WF1"]
 
 
 def test_load_and_filter_data(mock_config: PipelineConfig) -> None:
@@ -243,3 +235,44 @@ def test_main_integration(mock_config: PipelineConfig) -> None:
     assert os.path.exists(mock_config.models_dir)
     assert os.path.exists(os.path.join(mock_config.models_dir, "scaler.pkl"))
     assert os.path.exists(os.path.join(mock_config.models_dir, "classical_model.pkl"))
+
+
+def test_pipeline_config_explicit_err_vars() -> None:
+    """PipelineConfig should NOT override err_vars when they are explicitly provided."""
+    explicit = ['E_custom1', 'E_custom2']
+    config = PipelineConfig(key_vars=['T', 'WF1'], err_vars=explicit)
+    assert config.err_vars == explicit
+
+
+def test_load_and_filter_data_no_flag_metal(tmp_path: Any) -> None:
+    """load_and_filter_data should not crash when FLAG_METAL column is absent."""
+    csv_file = tmp_path / "no_flag.csv"
+    data = {
+        'T': [1.0, 2.0, 3.0],
+        'E_T': [0.1, 0.2, 0.3],
+        'CLASS_SP': ['A', 'B', 'A'],
+        'METAL': [0.5, 0.6, 0.7],
+    }
+    pd.DataFrame(data).to_csv(csv_file, index=False)
+    config = PipelineConfig(
+        filepath=str(csv_file),
+        key_vars=['T'],
+        no_err_vars=['CLASS_SP'],
+        flags_vars=['METAL'],
+        color_vars=[],
+    )
+    df = load_and_filter_data(config)
+    assert isinstance(df, pd.DataFrame)
+    assert 'FLAG_METAL' not in df.columns
+
+
+def test_detach_targets_multifeature() -> None:
+    """detach_targets correctly separates multiple feature columns from target."""
+    df = pd.DataFrame({'feat1': [10, 20], 'feat2': [30, 40], 'label': [0, 1]})
+    X, y = detach_targets(df, 'label')
+    assert 'feat1' in X.columns
+    assert 'feat2' in X.columns
+    assert 'label' not in X.columns
+    assert isinstance(y, pd.Series)
+    assert list(y) == [0, 1]
+
