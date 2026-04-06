@@ -12,8 +12,9 @@ from sklearn.svm import SVC
 from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix
 from sklearn.model_selection import ParameterGrid
+from typing import Dict, Tuple, Any, List
 
-def evaluate_model(model, X_val, y_val, is_multiclass=False):
+def evaluate_model(model: Any, X_val: pd.DataFrame, y_val: pd.Series, is_multiclass: bool = False) -> Tuple[Dict[str, float], np.ndarray]:
     """Evaluates the model and returns a dictionary of robust classification metrics."""
     y_pred = model.predict(X_val)
     
@@ -40,7 +41,7 @@ def evaluate_model(model, X_val, y_val, is_multiclass=False):
         
     return metrics, y_pred
 
-def plot_model_evaluations(model_results, visuals_dir="visuals"):
+def plot_model_evaluations(model_results: Dict[str, Any], visuals_dir: str = "visuals") -> None:
     """
     Creates bar plots for metrics and confusion matrices for each model.
     model_results is a dict: {'ModelName': {'metrics': metrics_dict, 'cm': confusion_matrix_array}}
@@ -91,7 +92,7 @@ def plot_model_evaluations(model_results, visuals_dir="visuals"):
     
     print(f"Saved evaluation graphs to {metrics_path} and {cm_path}")
 
-def train_classical_models(X_train, y_train, X_val, y_val):
+def train_classical_models(X_train: pd.DataFrame, y_train: pd.Series, X_val: pd.DataFrame, y_val: pd.Series) -> Any:
     """
     Grid search over Decision Tree, Random Forest, XGBoost, Logistic Regression, and SVM.
     Returns the best model across all types searched.

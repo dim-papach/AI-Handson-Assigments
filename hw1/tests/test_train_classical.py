@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from unittest.mock import patch, MagicMock
 from sklearn.datasets import make_classification
+from typing import Dict, Tuple, List, Optional, Any
 from sklearn.linear_model import LogisticRegression
 
 # Import the targets to test
@@ -11,7 +12,7 @@ from src.train_classical import evaluate_model, plot_model_evaluations, train_cl
 
 
 @pytest.fixture
-def sample_data():
+def sample_data() -> Tuple[pd.DataFrame, np.ndarray, pd.DataFrame, np.ndarray]:
     """Generates synthetic dataset to mimic binary classification structure."""
     X, y = make_classification(
         n_samples=250, 
@@ -29,7 +30,7 @@ def sample_data():
     return X_train, y_train, X_val, y_val
 
 
-def test_evaluate_model(sample_data):
+def test_evaluate_model(sample_data: Tuple[pd.DataFrame, np.ndarray, pd.DataFrame, np.ndarray]) -> None:
     """Test target metric evaluations correctly identify standard structures."""
     X_train, y_train, X_val, y_val = sample_data
     
@@ -50,7 +51,7 @@ def test_evaluate_model(sample_data):
 
 
 @patch('matplotlib.pyplot.savefig')
-def test_plot_model_evaluations(mock_savefig, tmp_path):
+def test_plot_model_evaluations(mock_savefig: MagicMock, tmp_path: Any) -> None:
     """Test graphical plot mappings avoid crashing when triggered natively."""
     model_results = {
         'DummyModel': {
@@ -69,7 +70,7 @@ def test_plot_model_evaluations(mock_savefig, tmp_path):
     assert mock_savefig.call_count == 2 # 1 for metrics + 1 for confusion matrices
 
 
-def test_train_classical_models(sample_data, tmp_path):
+def test_train_classical_models(sample_data: Tuple[pd.DataFrame, np.ndarray, pd.DataFrame, np.ndarray], tmp_path: Any) -> None:
     """Test full training grid securely completes evaluations iteratively across all topologies."""
     X_train, y_train, X_val, y_val = sample_data
     

@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import pytest
+from typing import Dict, Tuple, List, Optional, Any
 
 # Adjusting import path assuming the script is run from project root or pytest config handles paths
 from src.preprocessing import (
@@ -17,7 +18,7 @@ from src.preprocessing import (
 from main import KEY_VARS, ERR_VARS, NO_ERR_VARS, FLAGS_VARS, COLOR_VARS
 
 @pytest.fixture
-def sample_df():
+def sample_df() -> pd.DataFrame:
     data = {
         'U': [10.0, 11.0, 12.0, np.nan, 10.0],
         'G': [9.0, 10.0, 11.0, 9.0, 9.0],
@@ -34,7 +35,7 @@ def sample_df():
     return pd.DataFrame(data)
 
 
-def test_compute_colors(sample_df):
+def test_compute_colors(sample_df: pd.DataFrame) -> None:
     df = compute_colors(sample_df)
     assert 'u-g' in df.columns
     assert 'g-r' in df.columns
@@ -44,7 +45,7 @@ def test_compute_colors(sample_df):
     assert df['g-r'].iloc[0] == 1.0
 
 
-def test_filter_important_columns(sample_df):
+def test_filter_important_columns(sample_df: pd.DataFrame) -> None:
     # compute colors first so that filter keeps them
     df = compute_colors(sample_df)
     filtered = filter_important_columns(df, KEY_VARS, ERR_VARS, NO_ERR_VARS, FLAGS_VARS, COLOR_VARS)
@@ -60,7 +61,7 @@ def test_filter_important_columns(sample_df):
     assert 'u-g' in filtered.columns
 
 
-def test_filter_error_ratios(sample_df):
+def test_filter_error_ratios(sample_df: pd.DataFrame) -> None:
     """
     sample_df has initial T/E_T values scaling linearly:
     Row 0: T:1, E_T:0.1 -> ratio is abs(1/0.1)*100 = 1000 (>3)
@@ -78,7 +79,7 @@ def test_filter_error_ratios(sample_df):
     assert len(filtered_df) == 4
 
 
-def test_select_metal_flag(sample_df):
+def test_select_metal_flag(sample_df: pd.DataFrame) -> None:
     # Using frac=1.0 ensures all -1 records are returned for predictable testing
     reduced = select_metal_flag(sample_df, frac=1.0)
     assert len(reduced) == 5
@@ -88,13 +89,13 @@ def test_select_metal_flag(sample_df):
     assert len(reduced_small) == 2
 
 
-def test_drop_missing_targets(sample_df):
+def test_drop_missing_targets(sample_df: pd.DataFrame) -> None:
     dropped_df = drop_missing_targets(sample_df, target_col='CLASS_SP')
     assert len(dropped_df) == 4
     assert dropped_df['CLASS_SP'].isna().sum() == 0
 
 
-def test_split_data(sample_df):
+def test_split_data(sample_df: pd.DataFrame) -> None:
     # Multiply the dataset so there are enough samples generated for the nested stratify splits
     # Notice this operates raw df natively.
     large_df = pd.concat([sample_df] * 4, ignore_index=True)
@@ -110,7 +111,7 @@ def test_split_data(sample_df):
     assert len(test_df) == 5
 
 
-def test_iqr_capping(sample_df):
+def test_iqr_capping(sample_df: pd.DataFrame) -> None:
     # Set explicitly identifiable upper and lower boundary outliers
     df = sample_df.copy()
     
@@ -134,7 +135,7 @@ def test_iqr_capping(sample_df):
     assert capped_X.loc[2, 'T'] == 3.0
 
 
-def test_build_preprocessing_pipeline(sample_df):
+def test_build_preprocessing_pipeline(sample_df: pd.DataFrame) -> None:
     X = sample_df.drop(columns=['CLASS_SP'])
     # Need mock y for TargetEncoder fit logic
     y = sample_df['CLASS_SP'].fillna('A')

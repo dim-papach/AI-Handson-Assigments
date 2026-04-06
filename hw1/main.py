@@ -2,6 +2,9 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+from typing import Dict, Tuple, List, Any
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.pipeline import Pipeline
 
 plt.style.use('bmh')
 plt.rcParams["axes.prop_cycle"] = plt.cycler("color", plt.cm.viridis(np.linspace(0, 1, 4)))
@@ -45,7 +48,7 @@ from src.preprocessing import (
 
 from src.train_classical import train_classical_models, evaluate_model
 
-def load_and_filter_data(filepath, key_vars, err_vars, no_err_vars, flags_vars, color_vars):
+def load_and_filter_data(filepath: str, key_vars: List[str], err_vars: List[str], no_err_vars: List[str], flags_vars: List[str], color_vars: List[str]) -> pd.DataFrame:
     """Loads raw data, filters important columns, and selects based on metal flag."""
     raw_df = pd.read_csv(filepath)
     df_prepared = (
@@ -55,7 +58,7 @@ def load_and_filter_data(filepath, key_vars, err_vars, no_err_vars, flags_vars, 
     )
     return df_prepared
 
-def fit_preprocessing_params(train_df, target_col):
+def fit_preprocessing_params(train_df: pd.DataFrame, target_col: str) -> Tuple[Dict[str, Tuple[float, float]], StandardScaler, pd.Index, Pipeline, LabelEncoder]:
     """Calculates bounds, fits independent scaling, and formulates imputation pipeline on training data."""
     le = fit_target_encoder(train_df, target_col)
     
@@ -75,7 +78,7 @@ def fit_preprocessing_params(train_df, target_col):
     
     return iqr_bounds, scaler, num_cols, pipeline, le
 
-def preprocess_pipeline(df, split_name, target_col, iqr_bounds, scaler, num_cols, pipeline, le, key_vars, err_vars, visuals_dir):
+def preprocess_pipeline(df: pd.DataFrame, split_name: str, target_col: str, iqr_bounds: Dict[str, Tuple[float, float]], scaler: StandardScaler, num_cols: pd.Index, pipeline: Pipeline, le: LabelEncoder, key_vars: List[str], err_vars: List[str], visuals_dir: str) -> pd.DataFrame:
     """Unified post-split architecture natively executed entirely in strict Pipeline format."""
     return (
         df
@@ -89,7 +92,7 @@ def preprocess_pipeline(df, split_name, target_col, iqr_bounds, scaler, num_cols
         .pipe(compute_colors)
     )
 
-def detach_targets(clean_df, target_col):
+def detach_targets(clean_df: pd.DataFrame, target_col: str) -> Tuple[pd.DataFrame, pd.Series]:
     """Detaches target features natively explicitly."""
     y = clean_df.pop(target_col)
     return clean_df, y
@@ -105,8 +108,8 @@ def main(
     no_err_vars=NO_ERR_VARS,
     flags_vars=FLAGS_VARS,
     color_vars=COLOR_VARS,
-    visuals_dir="visuals"
-):
+    visuals_dir: str = "visuals"
+) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series, Any]:
     """Main execution function matching proper separated execution strategies."""
     df_prepared = load_and_filter_data(filepath, key_vars, err_vars, no_err_vars, flags_vars, color_vars)
     

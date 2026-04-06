@@ -12,13 +12,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
+from typing import Dict, Tuple, List, Optional, Any
 
 
 # =========================================================
 # 1. Pandas Preprocessing Pipeline Functions
 # =========================================================
 
-def compute_colors(df):
+def compute_colors(df: pd.DataFrame) -> pd.DataFrame:
     """Compute color indices if required columns exist."""
     df = df.copy()
     if set(['U', 'G', 'R', 'WF3', 'UT', 'WF1']).issubset(df.columns):
@@ -28,7 +29,7 @@ def compute_colors(df):
         df['(W3+UT)/W1'] = (df['WF3'] + df['UT']) / df['WF1']
     return df
 
-def filter_important_columns(df, key_vars, err_vars, no_err_vars, flags_vars, color_vars):
+def filter_important_columns(df: pd.DataFrame, key_vars: List[str], err_vars: List[str], no_err_vars: List[str], flags_vars: List[str], color_vars: List[str]) -> pd.DataFrame:
     """
     1a. Keep only important columns and their errors
     1b. Keep only the metal flag of the key columns but only if metal exists
@@ -45,7 +46,7 @@ def filter_important_columns(df, key_vars, err_vars, no_err_vars, flags_vars, co
     return df[existing_cols].copy()
 
 
-def filter_error_ratios(df, key_vars, err_vars):
+def filter_error_ratios(df: pd.DataFrame, key_vars: List[str], err_vars: List[str]) -> pd.DataFrame:
     """
     Keep rows where the ratio of value / error is > 3, as per standard thresholding.
     """
@@ -64,7 +65,7 @@ def filter_error_ratios(df, key_vars, err_vars):
     return df
 
 
-def select_metal_flag(df, frac=0.005, random_state=42):
+def select_metal_flag(df: pd.DataFrame, frac: float = 0.005, random_state: int = 42) -> pd.DataFrame:
     """2. Subsample FLAG_METAL=-1 rows."""
     if 'FLAG_METAL' not in df.columns:
         return df
@@ -80,7 +81,7 @@ def select_metal_flag(df, frac=0.005, random_state=42):
     return pd.concat([df_valid, df_missing_reduced]).sort_index()
 
 
-def split_data(df, target_col, train_size, val_size, test_size, random_state=42):
+def split_data(df: pd.DataFrame, target_col: str, train_size: float, val_size: float, test_size: float, random_state: int = 42) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """
     3. Split to training, validation and test returning intact native dataframes
     """
@@ -114,13 +115,13 @@ def split_data(df, target_col, train_size, val_size, test_size, random_state=42)
 # 3. Missing Value Treatment & Imputation
 # =========================================================
 
-def drop_missing_targets(df, target_col):
+def drop_missing_targets(df: pd.DataFrame, target_col: str) -> pd.DataFrame:
     """
     Drop rows where the target variable itself is missing entirely natively.
     """
     return df.dropna(subset=[target_col]).copy()
 
-def fit_target_encoder(train_df, target_col):
+def fit_target_encoder(train_df: pd.DataFrame, target_col: str) -> LabelEncoder:
     """
     Fits target encoder securely against training targets.
     """
@@ -131,7 +132,7 @@ def fit_target_encoder(train_df, target_col):
     joblib.dump(le, "models/label_encoder.pkl")
     return le
 
-def apply_target_encoder(df, target_col, le):
+def apply_target_encoder(df: pd.DataFrame, target_col: str, le: LabelEncoder) -> pd.DataFrame:
     """
     Encodes the target variable numerically via Pipeline format.
     """
@@ -145,7 +146,7 @@ def apply_target_encoder(df, target_col, le):
 # 4. Outlier Detection (Winsorizing)
 # =========================================================
 
-def compute_iqr_bounds(X_train, factor=1.5):
+def compute_iqr_bounds(X_train: pd.DataFrame, factor: float = 1.5) -> Dict[str, Tuple[float, float]]:
     """
     Computes IQR boundaries strictly over numerical features belonging to the training set 
     to prevent data leakage against validation/test sets.
@@ -160,7 +161,7 @@ def compute_iqr_bounds(X_train, factor=1.5):
     return bounds
 
 
-def apply_iqr_capping(X, bounds):
+def apply_iqr_capping(X: pd.DataFrame, bounds: Dict[str, Tuple[float, float]]) -> pd.DataFrame:
     """
     Caps values across dataset subsets according to previously fit threshold bounds natively.
     """
@@ -171,7 +172,7 @@ def apply_iqr_capping(X, bounds):
     return X_capped
 
 
-def save_outlier_histograms(df, prefix="dataset", out_dir="visuals"):
+def save_outlier_histograms(df: pd.DataFrame, prefix: str = "dataset", out_dir: str = "visuals") -> pd.DataFrame:
     """
     Generates and saves a histogram for all numeric columns post-outlier truncation securely.
     Acts as a seamless passthrough mapping natively via Pandas .pipe() structures.
@@ -194,7 +195,7 @@ def save_outlier_histograms(df, prefix="dataset", out_dir="visuals"):
     return df
 
 
-def build_preprocessing_pipeline(X_train):
+def build_preprocessing_pipeline(X_train: pd.DataFrame) -> Pipeline:
     """
     4 and 5. Missing value treatment and Categorical Encoding.
     Identifies numerical and categorical cardinalities dynamically.
@@ -247,7 +248,7 @@ def build_preprocessing_pipeline(X_train):
     return full_pipeline
 
 
-def apply_imputation(df, pipeline, target_col):
+def apply_imputation(df: pd.DataFrame, pipeline: Pipeline, target_col: str) -> pd.DataFrame:
     """
     Natively bridges Scikit-Learn transformers smoothly accommodating Pandas .pipe() capabilities
     by managing extracting, applying, and gracefully reconstructing variables.
@@ -261,7 +262,7 @@ def apply_imputation(df, pipeline, target_col):
     X_transformed = pd.DataFrame(pipeline.transform(X), columns=out_columns, index=X.index)
     return X_transformed.assign(**{target_col: y})
 
-def get_fitted_scaler(X_train):
+def get_fitted_scaler(X_train: pd.DataFrame) -> Tuple[StandardScaler, pd.Index]:
     """
     Fits scaler exclusively against the continuous tracking shapes matching cleanly.
     """
@@ -271,7 +272,7 @@ def get_fitted_scaler(X_train):
     return scaler, num_cols
 
 
-def apply_scaling(df, scaler, num_cols, target_col):
+def apply_scaling(df: pd.DataFrame, scaler: StandardScaler, num_cols: pd.Index, target_col: str) -> pd.DataFrame:
     """
     Applies static boundaries iteratively across splits ensuring target states are untouched
     preventing testing / validation cross-leakage mathematically.
@@ -287,7 +288,7 @@ def apply_scaling(df, scaler, num_cols, target_col):
     return X_scaled.assign(**{target_col: y})
 
 
-def generate_pca_insights(X_train, y_train, out_dir="visuals"):
+def generate_pca_insights(X_train: pd.DataFrame, y_train: pd.Series, out_dir: str = "visuals") -> None:
     """
     Executes Exploratory PCA on the completely scaled training set structurally matching Task 2.7.
     Produces Scree Plots, 2D Scatter Distributions natively matching class labels, 

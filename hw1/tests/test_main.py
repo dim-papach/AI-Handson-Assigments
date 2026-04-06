@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from main import main
 
-def test_run_pipeline_integration(tmp_path):
+def test_run_pipeline_integration(tmp_path) -> None:
     """
     Validates the end-to-end orchestration in main.py simulating the exact read/write logic flawlessly natively.
     """
