@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder, TargetEncoder
+from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder, TargetEncoder, LabelEncoder
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
 from sklearn.decomposition import PCA
 import joblib
@@ -119,6 +119,26 @@ def drop_missing_targets(df, target_col):
     Drop rows where the target variable itself is missing entirely natively.
     """
     return df.dropna(subset=[target_col]).copy()
+
+def fit_target_encoder(train_df, target_col):
+    """
+    Fits target encoder securely against training targets.
+    """
+    le = LabelEncoder()
+    temp_targets = train_df.dropna(subset=[target_col])[target_col]
+    le.fit(temp_targets)
+    os.makedirs("models", exist_ok=True)
+    joblib.dump(le, "models/label_encoder.pkl")
+    return le
+
+def apply_target_encoder(df, target_col, le):
+    """
+    Encodes the target variable numerically via Pipeline format.
+    """
+    df = df.copy()
+    if target_col in df.columns:
+        df[target_col] = le.transform(df[target_col])
+    return df
 
 
 # =========================================================

@@ -30,6 +30,8 @@ from src.preprocessing import (
     filter_important_columns,
     select_metal_flag,
     drop_missing_targets,
+    fit_target_encoder,
+    apply_target_encoder,
     compute_iqr_bounds,
     apply_iqr_capping,
     save_outlier_histograms,    
@@ -53,9 +55,11 @@ def load_and_filter_data(filepath, key_vars, err_vars, no_err_vars, flags_vars, 
 
 def fit_preprocessing_params(train_df, target_col):
     """Calculates bounds, fits independent scaling, and formulates imputation pipeline on training data."""
+    le = fit_target_encoder(train_df, target_col)
+    
     iqr_bounds = compute_iqr_bounds(train_df.drop(columns=[target_col]), factor=1.5)
     
-    train_temp = train_df.pipe(drop_missing_targets, target_col=target_col).pipe(apply_iqr_capping, bounds=iqr_bounds)
+    train_temp = train_df.pipe(drop_missing_targets, target_col=target_col).pipe(apply_target_encoder, target_col=target_col, le=le).pipe(apply_iqr_capping, bounds=iqr_bounds)
     
     scaler, num_cols = get_fitted_scaler(train_temp.drop(columns=[target_col]))
     
@@ -67,13 +71,14 @@ def fit_preprocessing_params(train_df, target_col):
     pipeline = build_preprocessing_pipeline(train_temp_scaled.drop(columns=[target_col]))
     pipeline.fit(train_temp_scaled.drop(columns=[target_col]), train_temp_scaled[target_col])
     
-    return iqr_bounds, scaler, num_cols, pipeline
+    return iqr_bounds, scaler, num_cols, pipeline, le
 
-def preprocess_pipeline(df, split_name, target_col, iqr_bounds, scaler, num_cols, pipeline, key_vars, err_vars, visuals_dir):
+def preprocess_pipeline(df, split_name, target_col, iqr_bounds, scaler, num_cols, pipeline, le, key_vars, err_vars, visuals_dir):
     """Unified post-split architecture natively executed entirely in strict Pipeline format."""
     return (
         df
         .pipe(drop_missing_targets, target_col=target_col)
+        .pipe(apply_target_encoder, target_col=target_col, le=le)
         .pipe(apply_iqr_capping, bounds=iqr_bounds)
         .pipe(save_outlier_histograms, prefix=split_name, out_dir=visuals_dir)
         .pipe(apply_scaling, scaler=scaler, num_cols=num_cols, target_col=target_col)
@@ -111,11 +116,11 @@ def main(
         test_size=test_size
     )
     
-    iqr_bounds, scaler, num_cols, pipeline = fit_preprocessing_params(train_df, target_col)
+    iqr_bounds, scaler, num_cols, pipeline, le = fit_preprocessing_params(train_df, target_col)
     
-    train_clean = preprocess_pipeline(train_df, 'train', target_col, iqr_bounds, scaler, num_cols, pipeline, key_vars, err_vars, visuals_dir)
-    val_clean = preprocess_pipeline(val_df, 'val', target_col, iqr_bounds, scaler, num_cols, pipeline, key_vars, err_vars, visuals_dir)
-    test_clean = preprocess_pipeline(test_df, 'test', target_col, iqr_bounds, scaler, num_cols, pipeline, key_vars, err_vars, visuals_dir)
+    train_clean = preprocess_pipeline(train_df, 'train', target_col, iqr_bounds, scaler, num_cols, pipeline, le, key_vars, err_vars, visuals_dir)
+    val_clean = preprocess_pipeline(val_df, 'val', target_col, iqr_bounds, scaler, num_cols, pipeline, le, key_vars, err_vars, visuals_dir)
+    test_clean = preprocess_pipeline(test_df, 'test', target_col, iqr_bounds, scaler, num_cols, pipeline, le, key_vars, err_vars, visuals_dir)
 
     X_train, y_train = detach_targets(train_clean, target_col)
     X_val, y_val = detach_targets(val_clean, target_col)
