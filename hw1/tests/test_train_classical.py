@@ -150,3 +150,30 @@ def test_save_best_model(tmp_path: Any) -> None:
     path = save_best_model(model, models_dir=str(models_dir))
     assert os.path.exists(path)
     assert "classical_model.pkl" in path
+
+
+def test_evaluate_model_multiclass() -> None:
+    """Test evaluation logic for multiclass classification."""
+    X, y = make_classification(n_samples=100, n_features=5, n_classes=3, n_informative=3, random_state=42)
+    X_df = pd.DataFrame(X, columns=[f"feat_{i}" for i in range(5)])
+    
+    model = LogisticRegression()
+    model.fit(X_df, y)
+    
+    metrics, _ = evaluate_model(model, X_df, y, is_multiclass=True)
+    assert 'ROC-AUC' in metrics
+    assert not np.isnan(metrics['ROC-AUC'])
+
+
+def test_evaluate_model_no_proba() -> None:
+    """Test evaluation logic when model has no predict_proba."""
+    X, y = make_classification(n_samples=50, n_features=5, random_state=42)
+    X_df = pd.DataFrame(X, columns=[f"feat_{i}" for i in range(5)])
+    
+    # Create a mock model WITHOUT predict_proba
+    model = MagicMock()
+    model.predict.return_value = y
+    del model.predict_proba # Ensure it doesn't have it
+    
+    metrics, _ = evaluate_model(model, X_df, y)
+    assert np.isnan(metrics['ROC-AUC'])

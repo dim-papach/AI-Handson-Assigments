@@ -23,7 +23,13 @@ from src.preprocessing import (
     save_outlier_histograms,
     generate_pca_insights
 )
-from main import KEY_VARS, ERR_VARS, NO_ERR_VARS, FLAGS_VARS, COLOR_VARS
+
+# Local test configurations instead of importing from main.py
+KEY_VARS = ["T", "WF1", "WF2", "WF3", "WF4", "UT", "BT", "VT", "IT", "U", "R", "G", "I", "Z"]
+ERR_VARS = [f"E_{v}" for v in KEY_VARS]
+NO_ERR_VARS = ["CLASS_SP", "AGN_HEC", "logM_HEC", "logSFR_HEC"]
+FLAGS_VARS = ["METAL"]
+COLOR_VARS = ["u-g", "g-r", "W3-UT", "(W3+UT)/W1"]
 
 @pytest.fixture
 def sample_df() -> pd.DataFrame:
@@ -166,6 +172,7 @@ def test_build_preprocessing_pipeline(sample_df: pd.DataFrame) -> None:
     assert not df_transformed['U'].isnull().any()
 
 
+
 def test_target_encoder(sample_df: pd.DataFrame, tmp_path: Any) -> None:
     # Use a temporary directory for model saving
     df = drop_missing_targets(sample_df, target_col='CLASS_SP')
@@ -224,3 +231,34 @@ def test_pca_insights(sample_df: pd.DataFrame, tmp_path: Any) -> None:
     
     generate_pca_insights(X, y, out_dir=str(visuals_dir))
     assert os.path.exists(str(visuals_dir))
+
+
+def test_split_data_fallback() -> None:
+    """Test split_data when stratification fails (e.g. only 1 class)."""
+    df = pd.DataFrame({'feat': range(10), 'CLASS_SP': ['A']*10})
+    # This should trigger the try-except block when stratify=y fails due to single class with too few members
+    # (Actually it fails if some classes have < 2 members, but for 1 class it usually works IF test_size allows)
+    # To force failure, we can use a class with only 1 member and try to stratify
+    df.loc[0, 'CLASS_SP'] = 'B'
+    
+    # Trying to split with stratify while one class has 1 member might fail with some versions
+    train, val, test = split_data(df, 'CLASS_SP', 0.6, 0.2, 0.2)
+    assert len(train) + len(val) + len(test) == 10
+
+
+def test_select_metal_flag_no_column(sample_df: pd.DataFrame) -> None:
+    """Test select_metal_flag skips gracefully when column is missing."""
+    df = sample_df.drop(columns=['FLAG_METAL'])
+    res = select_metal_flag(df)
+    assert res.equals(df)
+
+
+def test_no_out_dir(sample_df: pd.DataFrame):
+    """Test that plotting functions return early when out_dir is empty."""
+    res1 = save_outlier_histograms(sample_df, out_dir="")
+    assert res1.equals(sample_df)
+    
+    # generate_pca_insights doesn't return anything but should not crash
+    X = sample_df.drop(columns=['CLASS_SP']).select_dtypes(include=[np.number]).fillna(0)
+    y = sample_df['CLASS_SP'].fillna('A')
+    generate_pca_insights(X, y, out_dir="")
