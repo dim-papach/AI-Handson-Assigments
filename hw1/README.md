@@ -1,69 +1,32 @@
+# Understanding the HECATE Galaxy Catalogue and our Pipeline
+Dimitris Papachristopoulos (math250018)
 
-# Installation & Execution
+- [<span class="toc-section-number">0.1</span> Dataset
+  Description](#dataset-description)
+- [<span class="toc-section-number">1</span> Reducing the
+  dataset](#reducing-the-dataset)
+  - [<span class="toc-section-number">1.1</span> Error
+    Ratios](#error-ratios)
+  - [<span class="toc-section-number">1.2</span>
+    Metallicity](#metallicity)
+  - [<span class="toc-section-number">1.3</span> Reduced
+    dataset](#reduced-dataset)
 
-Follow these steps to set up the environment and run the complete machine learning pipeline.
+For our project we are using the HECATE galaxy catalogue, which is a
+catalogue of galaxies (Kovlakas K., Zezas A., Andrews J. J., Basu-Zych
+A., Fragos T., Hornschemeier A., Kouroumpatzakis K., Lehmer B., Ptak. A
+(2021). “The Heraklion Extragalactic Catalogue (HECATE): a value added
+galaxy catalogue for multi-messenger astrophysics”. MNRAS in press.ADS
+link)
 
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/dim-papach/AI-Handson-Assigments.git
-cd AI-Handson-Assigments/hw1
-```
-
-
-# Setup Virtual Environment
-
-## Using Poetry
-
-```bash
-poetry install
-```
-
-## Using venv
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-# Run the Pipeline
-
-## With Poetry
-
-```bash
-poetry run python hw1/src/main.py
-```
-
-## With venv
-
-Can also be used with poetry
-```bash
-./venv/bin/python hw1/src/main.py
-```
-
-# The Data
-
-For our project we are using the HECATE galaxy catalogue, which is a catalogue of galaxies (Kovlakas K., Zezas A., Andrews J. J., Basu-Zych A., Fragos T., Hornschemeier A., Kouroumpatzakis K., Lehmer B., Ptak. A (2021). “The Heraklion Extragalactic Catalogue (HECATE): a value added galaxy catalogue for multi-messenger astrophysics”. MNRAS in press.ADS link)
-
-You can download the catalogue from [Kaggle](https://www.kaggle.com/datasets/tanmayshukla05/hecate-galaxy-catalogue?resource=download) or from the original [source](https://hecate.ia.forth.gr/catalog.php), and it is stored in the `data/` folder as `HECATE.csv`.
-
-For my project I choose a classification task, where I want to predict the nuclear activity classification of galaxies. This is usefull, since for our analysis we usally classify galaxies based on their nuclear activity.
-
-However since many of the galaxies do not have a reliable measurement of their nuclear activity, the completness of our sample is not good, especially for near and very distant galaxies (the near galaxies can are usually not well documented and the very distant galaxies are too faint to be observed ).
-
-The target variable is `CLASS_SP`, which is the nuclear activity classification of galaxies. It is a categorical variable with the following values:
-
-- 0: star-forming
-- 1: Seyfert
-- 2: LINER
-- 3: composite
-- -1: unknown
-
+You can download the catalogue from
+[Kaggle](https://www.kaggle.com/datasets/tanmayshukla05/hecate-galaxy-catalogue?resource=download)
+or from the original [source](https://hecate.ia.forth.gr/catalog.php),
+and it is stored in the `data/` folder as `HECATE.csv`.
 
 ## Dataset Description
 
-```python
+``` python
 import pandas as pd
 
 df = pd.read_csv("data/HECATE.csv")
@@ -72,48 +35,74 @@ print("Number of rows:", len(df))
 print("Number of columns:", len(df.columns))
 ```
 
-Since the dataset is quite large and most of the columns are not necessary for our analysis, we will only be using a subset of the columns for our analysis. We will be using the following columns:
+    Number of rows: 204733
+    Number of columns: 100
 
-1. `logM_HEC`: Decimal logarithm of the total stellar mass in solar masses.
-1. `logSFR_HEC`: Decimal logarithm of the homogenised star-formation rate in solar masses per year.
-1. `CLASS_SP`: Nuclear activity classification using the method in Stampoulis et al. 2019: 0=star-forming, 1=Seyfert, 2=LINER, 3=composite, -1=unknown.
-1. `AGN_HEC`: Adopted activity classification based on the combination of class_sp and agn_s17: Y=AGN, N=non-AGN, ?=unknown.
-1. `T`: Numerical Hubble-type following the de Vaucouleurs et al. 1976 system.
-1. `WF1`: 3.3μm-band (W1) apparent magnitude in the WISE forced photometry catalog (mag).
-1. `WF2`: 4.6μm-band (W2) apparent magnitude in the WISE forced photometry catalog (mag).
-1. `WF3`: 12μm-band (W3) apparent magnitude in the WISE forced photometry catalog (mag).
-1. `WF4`: 22μm-band (W4) apparent magnitude in the WISE forced photometry catalog (mag).
-1. `U`: u-band SDSS apparent magnitude (mag).
-1. `R`: r-band SDSS apparent magnitude (mag).
-1. `G`: g-band SDSS apparent magnitude (mag).
-1. `I`: i-band SDSS apparent magnitude (mag).
-1. `Z`: z-band SDSS apparent magnitude (mag).
-1. `UT`: Total U-band apparent magnitude (mag).
-1. `BT`: B-band apparent magnitude (mag).
-1. `VT`: V-band apparent magnitude (mag).
-1. `IT`: I-band apparent magnitude (mag).
+Since the dataset is quite large and most of the columns are not
+necessary for our analysis, we will only be using a subset of the
+columns for our analysis. We will be using the following columns:
 
-These columns will allow us to study the connections between star formation, metallicity, Hubble type, and AGN activity. We will also use the WISE W1 and W3 bands together with the UV and optical magnitudes to investigate galaxy spectral properties.
+1.  `logM_HEC`: Decimal logarithm of the total stellar mass in solar
+    masses.
+2.  `logSFR_HEC`: Decimal logarithm of the homogenised star-formation
+    rate in solar masses per year.
+3.  `class_sp`: Nuclear activity classification using the method in
+    Stampoulis et al. 2019: 0=star-forming, 1=Seyfert, 2=LINER,
+    3=composite, -1=unknown.
+4.  `agn_hec`: Adopted activity classification based on the combination
+    of class_sp and agn_s17: Y=AGN, N=non-AGN, ?=unknown.
+5.  `t`: Numerical Hubble-type following the de Vaucouleurs et al. 1976
+    system.
+6.  `wf1`: 3.3μm-band (W1) apparent magnitude in the WISE forced
+    photometry catalog (mag).
+7.  `wf3`: 12μm-band (W3) apparent magnitude in the WISE forced
+    photometry catalog (mag).
+8.  `ut`: Total U-band apparent magnitude (mag).
+9.  `u`: u-band SDSS apparent magnitude (mag).
+10. `r`: r-band SDSS apparent magnitude (mag).
 
-To support this, we will create the color indices `u-g` and `g-r`. Galaxy colors are useful because younger, star-forming systems tend to be bluer, while older, more evolved galaxies are redder.
+These columns will allow us to study the connections between star
+formation, metallicity, Hubble type, and AGN activity. We will also use
+the WISE W1 and W3 bands together with the UV and optical magnitudes to
+investigate galaxy spectral properties.
 
-The WISE W1 and W3 bands are particularly helpful for this analysis. The `W3-UT` color can trace hidden star formation from dust-obscured regions, while the `(W3 + UV)/W1` color can serve as a proxy for the stage of star formation in the galaxy (high ratio indicates ongoing star formation).
+To support this, we will create the color indices `u-g` and `g-r`.
+Galaxy colors are useful because younger, star-forming systems tend to
+be bluer, while older, more evolved galaxies are redder.
 
-We use both the total apparent magnitudes and the SDSS apparent magnitudes, since they are measured differently and can provide different information about the galaxy.
+The WISE W1 and W3 bands are particularly helpful for this analysis. The
+`W3-UT` color can trace hidden star formation from dust-obscured
+regions, while the `(W3 + UV)/W1` color can serve as a proxy for the
+stage of star formation in the galaxy (high ratio indicates ongoing star
+formation).
 
 # Reducing the dataset
 
-Before we move on to the analysis, we will sneak a quick peak into the data to understand the distribution of the data and identify any potential issues.
+Before we move on to the analysis, we will sneak a quick peak into the
+data to understand the distribution of the data and identify any
+potential issues.
 
-The final preprocessing will be done in the `preprocessing.py` script, but we will modify the dataset here to create the reduced dataset that we will use for our analysis. We will also check the distribution of the key columns and the color indices to understand the data better.
+The final preprocessing will be done in the `preprocessing.py` script,
+but we will modify the dataset here to create the reduced dataset that
+we will use for our analysis. We will also check the distribution of the
+key columns and the color indices to understand the data better.
 
-Why are we doing this?:
-- Because we want to make sure that the data we are using for our analysis is reliable and that we are not including any data points that have large errors. This will help us to get more accurate results from our analysis and to avoid any biases that may arise from including unreliable data points.
-- The HECATE catalogue contains a large number of data points, but not all of them are reliable or even usefull for analysis. By reducing the dataset to only include data points with reliable measurements, we can ensure that our analysis is based on high-quality data and that our results are more robust.
-- Since we can create a synthetic dataset for the homework, we can afford to be more selective with the data points we include in our analysis, if we are careful to maintain a large enough sample size for our analysis and not introduce any biases by excluding certain types of galaxies or measurements. 
+Why are we doing this?: - Because we want to make sure that the data we
+are using for our analysis is reliable and that we are not including any
+data points that have large errors. This will help us to get more
+accurate results from our analysis and to avoid any biases that may
+arise from including unreliable data points. - The HECATE catalogue
+contains a large number of data points, but not all of them are reliable
+or even usefull for analysis. By reducing the dataset to only include
+data points with reliable measurements, we can ensure that our analysis
+is based on high-quality data and that our results are more robust. -
+Since we can create a synthetic dataset for the homework, we can afford
+to be more selective with the data points we include in our analysis, if
+we are careful to maintain a large enough sample size for our analysis
+and not introduce any biases by excluding certain types of galaxies or
+measurements.
 
-
-```python
+``` python
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -128,8 +117,8 @@ df['W3-UT'] = df['WF3'] - df['UT']
 df['(W3+UT)/W1'] = (df['WF3'] + df['UT']) / df['WF1']
 
 # Check the distribution of the key columns
-key_columns_with_errors = ['T', 'WF1','WF2', 'WF3', 'WF4', 'UT', 'BT', 'VT','IT', 'U', 'R', 'G', 'R', 'I', 'Z']
-error_columns = ['E_T', 'E_WF1','E_WF2', 'E_WF3', 'E_WF4', 'E_UT', 'E_BT', 'E_VT', 'E_IT', 'E_U', 'E_R', 'E_G']
+key_columns_with_errors = ['T', 'WF1', 'WF3', 'UT', 'U', 'R', 'G']
+error_columns = ['E_T', 'E_WF1', 'E_WF3', 'E_UT', 'E_U', 'E_R', 'E_G']
 
 
 key_columns_with_no_errors = ['CLASS_SP', 'AGN_HEC', 'logM_HEC', 'logSFR_HEC']
@@ -143,42 +132,34 @@ color_columns = ['u-g', 'g-r', 'W3-UT', '(W3+UT)/W1']
 df_key_columns= df[key_columns+color_columns]
 ```
 
-
-```python
+``` python
 # Distribution of the key columns
 df.hist(column=key_columns_with_errors, bins=30, figsize=(15, 10))
 plt.suptitle('Distribution of Key Columns')
 plt.show()
 ```
 
-![Distribution of Key Columns](visuals/dist_key_columns.png)
+![](README_files/figure-commonmark/cell-4-output-1.png)
 
-As we can see most of the distributions are skewed, which is why we will imputate the NaN values with the median of the column.
-
-```python
-#| label: fig-key-columns-with-no-errors
-
+``` python
 df.hist(column=key_columns_with_no_errors, bins=30, figsize=(15, 10))
 plt.suptitle('Distribution of Key Columns with Flags')
 plt.show()
 ```
 
-![Distribution of Key Columns with Flags](visuals/dist_key_flags.png)
+![](README_files/figure-commonmark/cell-5-output-1.png)
 
-Most of our galaxies are of Class -1, which means they are unknown (Explaining the problem from the introduction better). Because of this, we will have to remove the data points with Class -1 from our dataset.
-
-```python
+``` python
 df.hist(column=color_columns, bins=30, figsize=(15, 10))
 plt.suptitle('Distribution of Color Indices')
 plt.show()
 ```
 
-![Distribution of Color Indices](visuals/dist_colors.png)
-
+![](README_files/figure-commonmark/cell-6-output-1.png)
 
 ## Error Ratios
 
-```python
+``` python
 # check if e_* has any zero values to avoid division by zero
 for err_col in error_columns:
     if (df[err_col] == 0).any():
@@ -187,8 +168,15 @@ for err_col in error_columns:
         print(f"Column {err_col} does not contain zero values.")
 ```
 
+    Column E_T does not contain zero values.
+    Column E_WF1 does not contain zero values.
+    Column E_WF3 does not contain zero values.
+    Column E_UT does not contain zero values.
+    Column E_U does not contain zero values.
+    Column E_R does not contain zero values.
+    Column E_G does not contain zero values.
 
-```python
+``` python
 # New ratio df
 ratio_df = pd.DataFrame()
 for key_col, err_col in zip(key_columns_with_errors, error_columns):
@@ -199,28 +187,74 @@ for key_col, err_col in zip(key_columns_with_errors, error_columns):
 ratio_df.describe()
 ```
 
-```python
+    Calculated ratio for T and E_T as T_ratio
+    Calculated ratio for WF1 and E_WF1 as WF1_ratio
+    Calculated ratio for WF3 and E_WF3 as WF3_ratio
+    Calculated ratio for UT and E_UT as UT_ratio
+    Calculated ratio for U and E_U as U_ratio
+    Calculated ratio for R and E_R as R_ratio
+    Calculated ratio for G and E_G as G_ratio
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+&#10;    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+&#10;    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+|  | T_ratio | WF1_ratio | WF3_ratio | UT_ratio | U_ratio | R_ratio | G_ratio |
+|----|----|----|----|----|----|----|----|
+| count | 136267.000000 | 1.230350e+05 | 1.119310e+05 | 99520.000000 | 123705.000000 | 1.237060e+05 | 1.237050e+05 |
+| mean | 255.338703 | 5.085501e+05 | 3.192076e+04 | 36445.560091 | 73259.018864 | 3.640088e+05 | 3.429541e+05 |
+| std | 313.904000 | 8.650206e+05 | 7.263040e+04 | 35953.248217 | 54500.142960 | 2.005090e+05 | 1.827832e+05 |
+| min | 0.000000 | 2.775289e+00 | 6.001792e-01 | 124.341085 | 51.575421 | 1.316937e+02 | 6.044271e+01 |
+| 25% | 100.000000 | 8.478112e+04 | 3.872181e+03 | 12704.973776 | 36371.153846 | 2.063531e+05 | 2.027111e+05 |
+| 50% | 188.461538 | 2.207350e+05 | 1.093788e+04 | 24216.774892 | 60648.387097 | 3.342200e+05 | 3.262600e+05 |
+| 75% | 250.000000 | 6.254943e+05 | 3.245651e+04 | 47310.064103 | 95868.421053 | 5.096000e+05 | 5.003333e+05 |
+| max | 4950.000000 | 3.832589e+07 | 4.280679e+06 | 708550.000000 | 685300.000000 | 1.329600e+06 | 1.337700e+06 |
+
+</div>
+
+``` python
 ratio_df.hist(bins=30, figsize=(15, 10))
 plt.suptitle('Distribution of Key Column to Error Ratios')
 plt.show()
 ```
 
-![Distribution of Key Column to Error Ratios](visuals/dist_error_ratios.png)
+![](README_files/figure-commonmark/cell-9-output-1.png)
 
-As we can see we have most galaxies with a Magnitude to Error ratio greater than 3. This means that these galaxies have reliable measurements. We will keep only the data points with a Magnitude to Error ratio greater than 3.
-
-```python
+``` python
 # if ratio is less than 3, we will ignore those data points
 for ratio_col in ratio_df.columns:
     ratio_df_reduced = ratio_df[ratio_df[ratio_col] > 3]  # keeping only data points with ratio greater than 3
 ratio_df_reduced.count()
 ```
 
+    T_ratio       96304
+    WF1_ratio    123034
+    WF3_ratio    111930
+    UT_ratio      97133
+    U_ratio      123705
+    R_ratio      123705
+    G_ratio      123705
+    dtype: int64
+
 ## Metallicity
 
-The metallicity of a galaxy is an important property that can provide insights into its formation and evolution. However, the metallicity measurements in our dataset have a flag column that indicates whether the measurement is reliable or not. We will check the distribution of the metallicity values and the flags to understand how many data points we can use for our analysis.
+The metallicity of a galaxy is an important property that can provide
+insights into its formation and evolution. However, the metallicity
+measurements in our dataset have a flag column that indicates whether
+the measurement is reliable or not. We will check the distribution of
+the metallicity values and the flags to understand how many data points
+we can use for our analysis.
 
-```python
+``` python
 # Check the distribution of metallicity and its flag
 plt.figure(figsize=(10, 5))
 plt.subplot(1, 2, 1)
@@ -251,8 +285,9 @@ plt.grid(axis='y', alpha=0.3)
 plt.show()
 ```
 
-![Distribution of Metallicity and Flags](visuals/dist_metallicity.png)
-c
+![](README_files/figure-commonmark/cell-11-output-1.png)
+
+![](README_files/figure-commonmark/cell-11-output-2.png)
 
 With the flags being:
 
@@ -260,13 +295,19 @@ With the flags being:
 
 - 0=reliable
 
-- 1=O3N2 ratio >2 (outside the PP04 range)
+- 1=O3N2 ratio \>2 (outside the PP04 range)
 
-- 2=low signal-to-noise ratio (<3 for the weakest line).
+- 2=low signal-to-noise ratio (\<3 for the weakest line).
 
-Since the metallicity flags -1 and 0 follow a similar distribution for different Hubble types and the flags 1 and 2 correspond to a small number of data points, we can cut the datapoints with flags -1 without being biased towards a specific type of galaxy. This is why we will keep only 0.5% of the data points with flag -1, to simulate the effect of having missing data but without losing the important information that the metallicity measurements provide for our analysis.
+Since the metallicity flags -1 and 0 follow a similar distribution for
+different Hubble types and the flags 1 and 2 correspond to a small
+number of data points, we can cut the datapoints with flags -1 without
+being biased towards a specific type of galaxy. This is why we will keep
+only 0.5% of the data points with flag -1, to simulate the effect of
+having missing data but without losing the important information that
+the metallicity measurements provide for our analysis.
 
-```python
+``` python
 # Separate the -1 flags from the rest
 df_flag_minus_1 = df[df['FLAG_METAL'] == -1]
 df_others = df[df['FLAG_METAL'] != -1]
@@ -281,8 +322,16 @@ df_metal_reduced = pd.concat([df_others, df_flag_minus_1_reduced])
 print(df_metal_reduced['FLAG_METAL'].value_counts())
 ```
 
+    FLAG_METAL
+     0    62728
+     2      882
+    -1      702
+     1      670
+    Name: count, dtype: int64
+
 ## Reduced dataset
-```python
+
+``` python
 # reduce the original df to only include rows where all key column to error ratios are greater than 3 and only include 0.5% of the data points with flag -1 
 # First, we will create a mask for the ratio conditions
 ratio_mask = np.ones(len(df), dtype=bool)
@@ -296,300 +345,41 @@ df_reduced = df_reduced[key_columns + color_columns]
 df_reduced.info()
 ```
 
-Now that we have a reduced dataset with reliable measurements, we can proceed with our analysis. 
+    <class 'pandas.DataFrame'>
+    Index: 64982 entries, 4 to 204700
+    Data columns (total 16 columns):
+     #   Column      Non-Null Count  Dtype  
+    ---  ------      --------------  -----  
+     0   T           58858 non-null  float64
+     1   WF1         64438 non-null  float64
+     2   WF3         61241 non-null  float64
+     3   UT          64048 non-null  float64
+     4   U           64558 non-null  float64
+     5   R           64559 non-null  float64
+     6   G           64558 non-null  float64
+     7   CLASS_SP    64982 non-null  int64  
+     8   AGN_HEC     64982 non-null  str    
+     9   logM_HEC    34663 non-null  float64
+     10  logSFR_HEC  49977 non-null  float64
+     11  METAL       64280 non-null  float64
+     12  u-g         64558 non-null  float64
+     13  g-r         64558 non-null  float64
+     14  W3-UT       60773 non-null  float64
+     15  (W3+UT)/W1  60727 non-null  float64
+    dtypes: float64(14), int64(1), str(1)
+    memory usage: 8.4 MB
 
-```python
+Now that we have a reduced dataset with reliable measurements, we can
+proceed with our analysis.
+
+``` python
 print("Original dataset shape:", df.shape)
 print("Reduced dataset shape:", df_reduced.shape)
 ```
-It is important to note that the reduced dataset still contains a large number of data points, more than 8,000 rows and 8 columns, as required from our project.
 
-# Preprocessing
+    Original dataset shape: (204733, 104)
+    Reduced dataset shape: (64982, 16)
 
-To begin with, we drop the columns that are not useful for our analysis and we remove the rows with no class label. We also drop most of the rows with metallicity flag -1, since they are not reliable (keep 0.5% of them to simulate noise).
-
-After, we spit the data into train, validation and test sets(80%, 10%, 10%) and:
-- we encode the target variable using Label Encoding.
-- We cap the outliers using the IQR method. 
-- We imputate the NaN values using the median of the column.
-- We filter out the data with an Error Ratio Magnitude/Error< 3.
-- We calculate the new colors as explained in the introduction.
-- We scale the data using the Standard Scaler, since we don't have any outliers after the treatment (Robust Scaler) and our data are not bound or uniformly distributed (MinMax Scaler).
-
-
-## Imbalance Problem
-
-As shown by @fig-key-columns-with-no-errors, the dataset is imbalanced. Even without the Class -1 galaxies, we have a lot of galaxies of Class 0, which means they are Star Forming Galaxies. 
-
-```python
-# Drop class -1 galaxies
-df_reduced = df_reduced[df_reduced['CLASS_SP'] != -1]
-
-# Check the percentages of the target variable
-print("Percentage of each class in the reduced dataset:")
-print(df_reduced['CLASS_SP'].value_counts(normalize=True) * 100)
-```
-
-Usually, the solution to this problem is to use SMOTE or RandomUnderSampler, however we will use a hybrid solution to this problem. We will use Undersampling for the majority class and SMOTE for the minority class. My final dataset should not be more than 10% larger from the original. 
-
-The reason for using this hybrid approach is to avoid the information loss that comes with undersampling and the overfitting that can come with oversampling/creation of synthetic and duplicate datapoints.
-
-# PCA
-
-![PCA Scree Plot](visuals/pca_scree_plot.png)
-![PCA 2D Projection](visuals/pca_2d_projection.png)
-
-| Feature | PC1 | PC2 | PC3 | PC4 | PC5 | PC6 | PC7 | PC8 | PC9 | PC10 | PC11 | PC12 | PC13 | PC14 | PC15 | PC16 | PC17 | PC18 | PC19 | PC20 | PC21 | PC22 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| T | 0.09 | -0.21 | 0.22 | 0.07 | 0.49 | 0.11 | 0.79 | 0.04 | -0.11 | -0.05 | 0.06 | -0.03 | 0.01 | 0.01 | -0.01 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
-| WF1 | 0.28 | -0.03 | -0.01 | 0.00 | 0.02 | 0.10 | -0.05 | 0.05 | -0.02 | 0.07 | -0.12 | 0.18 | 0.24 | -0.12 | -0.18 | 0.04 | -0.02 | 0.86 | 0.00 | -0.00 | 0.00 | -0.00 |
-| WF2 | 0.28 | -0.03 | -0.04 | 0.03 | 0.04 | 0.07 | -0.04 | 0.08 | -0.04 | 0.07 | -0.14 | 0.18 | 0.29 | -0.34 | 0.79 | -0.09 | 0.02 | -0.13 | -0.00 | 0.00 | -0.00 | -0.00 |
-| WF3 | 0.21 | 0.11 | -0.26 | 0.20 | 0.12 | 0.09 | -0.07 | -0.06 | -0.31 | 0.07 | -0.01 | 0.08 | 0.18 | -0.08 | -0.28 | -0.00 | 0.00 | -0.23 | 0.70 | 0.18 | -0.00 | -0.05 |
-| WF4 | 0.17 | 0.14 | -0.32 | 0.26 | 0.17 | -0.12 | 0.02 | 0.52 | 0.53 | 0.14 | 0.40 | -0.02 | -0.07 | 0.00 | -0.02 | 0.00 | 0.00 | -0.01 | -0.00 | 0.00 | -0.00 | 0.00 |
-| UT | 0.25 | 0.15 | -0.11 | -0.28 | 0.05 | -0.07 | 0.03 | -0.10 | 0.01 | -0.02 | 0.06 | -0.19 | 0.47 | -0.37 | -0.38 | 0.03 | 0.00 | -0.28 | -0.41 | -0.11 | 0.00 | 0.03 |
-| BT | 0.27 | 0.08 | -0.05 | -0.19 | 0.03 | -0.00 | -0.03 | -0.02 | -0.02 | -0.12 | 0.08 | -0.09 | 0.40 | 0.81 | 0.16 | 0.05 | 0.00 | -0.01 | -0.00 | 0.00 | 0.00 | -0.00 |
-| VT | 0.07 | 0.55 | 0.40 | 0.19 | -0.02 | -0.01 | 0.03 | 0.00 | -0.00 | -0.01 | -0.01 | 0.02 | -0.00 | -0.01 | -0.00 | -0.00 | -0.00 | 0.00 | -0.00 | -0.01 | -0.71 | 0.01 |
-| IT | 0.07 | 0.55 | 0.40 | 0.19 | -0.02 | -0.01 | 0.03 | 0.00 | -0.00 | -0.01 | -0.01 | 0.02 | -0.00 | -0.01 | -0.00 | -0.00 | -0.00 | 0.00 | 0.00 | 0.01 | 0.71 | -0.01 |
-| U | 0.25 | 0.15 | -0.12 | -0.29 | 0.09 | -0.05 | 0.04 | -0.08 | -0.00 | 0.06 | -0.08 | 0.09 | -0.32 | 0.03 | -0.00 | -0.30 | -0.12 | 0.01 | 0.05 | -0.37 | -0.00 | -0.66 |
-| R | 0.29 | 0.02 | -0.00 | -0.15 | 0.04 | 0.04 | -0.05 | 0.01 | -0.04 | -0.04 | -0.03 | -0.10 | -0.27 | 0.00 | -0.01 | -0.31 | -0.13 | 0.00 | 0.16 | -0.42 | 0.01 | 0.70 |
-| G | 0.28 | 0.06 | -0.04 | -0.21 | 0.04 | 0.01 | -0.02 | 0.01 | -0.05 | -0.14 | 0.01 | 0.02 | -0.29 | -0.01 | -0.01 | -0.31 | -0.13 | 0.01 | -0.20 | 0.78 | -0.01 | 0.06 |
-| I | 0.29 | 0.01 | 0.01 | -0.12 | 0.03 | 0.05 | -0.05 | 0.00 | -0.03 | -0.04 | -0.04 | -0.09 | -0.28 | -0.02 | 0.01 | 0.26 | 0.86 | -0.01 | -0.00 | 0.00 | -0.00 | -0.00 |
-| Z | 0.29 | -0.01 | 0.01 | -0.09 | 0.03 | 0.06 | -0.06 | 0.00 | -0.03 | -0.02 | -0.05 | -0.07 | -0.27 | -0.05 | 0.07 | 0.77 | -0.46 | -0.06 | 0.00 | -0.00 | 0.00 | 0.00 |
-| logM_HEC | -0.22 | 0.08 | 0.02 | -0.05 | 0.68 | 0.25 | -0.37 | -0.00 | 0.27 | -0.28 | -0.35 | 0.00 | 0.04 | -0.00 | -0.03 | -0.00 | 0.00 | -0.02 | -0.00 | 0.00 | -0.00 | 0.00 |
-| logSFR_HEC | -0.15 | -0.03 | 0.28 | -0.35 | 0.28 | 0.14 | -0.29 | 0.17 | -0.32 | 0.42 | 0.53 | 0.08 | 0.01 | -0.03 | 0.03 | 0.01 | 0.00 | 0.02 | 0.00 | -0.00 | 0.00 | -0.00 |
-| METAL | -0.11 | 0.04 | -0.01 | -0.10 | 0.10 | -0.56 | -0.02 | 0.59 | -0.38 | -0.04 | -0.37 | -0.14 | 0.03 | 0.01 | -0.02 | 0.03 | 0.00 | 0.02 | 0.00 | -0.00 | 0.00 | 0.00 |
-| AGN_HEC | -0.23 | 0.28 | -0.24 | -0.24 | -0.27 | 0.66 | 0.23 | 0.40 | -0.09 | -0.02 | -0.13 | -0.12 | 0.00 | -0.01 | 0.01 | 0.01 | 0.00 | 0.01 | 0.00 | -0.00 | 0.00 | 0.00 |
-| u-g | -0.16 | 0.25 | -0.23 | -0.20 | 0.13 | -0.16 | 0.21 | -0.25 | 0.17 | 0.64 | -0.31 | 0.19 | -0.03 | 0.12 | 0.03 | 0.11 | 0.05 | -0.01 | -0.02 | 0.12 | 0.00 | 0.22 |
-| g-r | -0.17 | 0.19 | -0.17 | -0.24 | 0.01 | -0.18 | 0.13 | -0.01 | -0.07 | -0.46 | 0.24 | 0.69 | -0.01 | -0.05 | 0.01 | 0.15 | 0.05 | 0.01 | 0.03 | -0.08 | 0.00 | 0.13 |
-| W3-UT | 0.08 | 0.02 | -0.26 | 0.49 | 0.13 | 0.18 | -0.12 | -0.00 | -0.43 | 0.11 | -0.06 | 0.25 | -0.13 | 0.18 | -0.08 | -0.02 | -0.00 | -0.09 | -0.52 | -0.14 | 0.00 | 0.04 |
-| (W3+UT)/W1 | -0.20 | 0.29 | -0.37 | 0.07 | 0.19 | -0.13 | 0.04 | -0.31 | -0.24 | -0.14 | 0.27 | -0.49 | -0.06 | -0.12 | 0.28 | 0.02 | -0.00 | 0.30 | 0.00 | -0.00 | 0.00 | -0.00 |
-
-PC1 Dominant Features:
-  - I           : 0.2866
-  - R           : 0.2859
-  - Z           : 0.2854
-
-PC2 Dominant Features:
-  - IT          : 0.5462
-  - VT          : 0.5462
-  - (W3+UT)/W1  : 0.2929
-
-PC3 Dominant Features:
-  - IT          : 0.4004
-  - VT          : 0.4004
-  - (W3+UT)/W1  : -0.3707
-
-### PCA Insights and Analysis
-
-The Exploratory PCA reveals several key insights about the structure of the HECATE dataset:
-
-1.  **Scree Plot Analysis**: The scree plot shows that the first principal component (PC1) explains approximately **67%** of the total variance, while the second (PC2) adds another **13%**. Collectively, the first two components capture over **80%** of the dataset's information. By the fifth component, we reach approximately **92%** cumulative explained variance, indicating that the dimensionality of the dataset can be significantly reduced with minimal information loss.
-
-2.  **Dominant Features**:
-    - **PC1 (67% variance)**: This component is heavily dominated by **apparent magnitudes** across multiple bands, specifically `I` (0.29), `R` (0.29), `Z` (0.29), `WF1` (0.28), and `WF2` (0.28). These features represent the overall brightness and scale of the galaxies.
-    - **PC2 (13% variance)**: This component is influenced primarily by **visual and total magnitudes**, with `VT` and `IT` contributing the highest weights (0.55). It is also shaped by **color indices** related to star formation, such as `(W3+UT)/W1` (0.29) and `u-g` (0.25). This suggests that PC2 captures the "spectral type" and dust-obscured activity rather than just absolute scale.
-
-3.  **2D Projection**: The 2D PCA projection (PC1 vs PC2) provides a visual map of the galaxy classes. While there is considerable overlap between the classes (Star-forming, Seyfert, LINER, and Composite), the projection shows some distinct density regions for different types. This separation suggests that the reduced feature space effectively preserves the most of the underlying physics needed for our classification task, even after reducing the original 22 dimensions down to just a few.
-
-# Classical Models
-
-We use 5 classical models to solve this problem:
-
-- Logistic Regression
-- Random Forest
-- Support Vector Machine
-- Decision Tree
-- Xgboost
-
---- Training DecisionTree ---
-Best DecisionTree Validation Score (AUC fallback to Acc): 0.9895
-  Accuracy: 0.9599
-  Precision: 0.9614
-  Recall: 0.9599
-  F1-score: 0.9600
-  ROC-AUC: 0.9895
-
---- Training LogisticRegression ---
-Best LogisticRegression Validation Score (AUC fallback to Acc): 0.9919
-  Accuracy: 0.9609
-  Precision: 0.9617
-  Recall: 0.9609
-  F1-score: 0.9610
-  ROC-AUC: 0.9919
-
---- Training SVM ---
-Best SVM Validation Score (AUC fallback to Acc): 0.9926
-  Accuracy: 0.9625
-  Precision: 0.9653
-  Recall: 0.9625
-  F1-score: 0.9629
-  ROC-AUC: 0.9926
-
---- Training RandomForest ---
-Best RandomForest Validation Score (AUC fallback to Acc): 0.9923
-  Accuracy: 0.9637
-  Precision: 0.9652
-  Recall: 0.9637
-  F1-score: 0.9641
-  ROC-AUC: 0.9923
-
---- Training XGBoost ---
-Best XGBoost Validation Score (AUC fallback to Acc): 0.9930
-  Accuracy: 0.9650
-  Precision: 0.9667
-  Recall: 0.9650
-  F1-score: 0.9653
-  ROC-AUC: 0.9930
-
-![Classical Models Metrics Comparison](visuals/classical_models_metrics.png)
-![Classical Models Confusion Matrices](visuals/classical_models_confusion_matrices.png)
-
-We train all of the models using a grid of parameters and we evaluate them using ROC-AUC
-
-The best model is the one with the highest ROC-AUC on the validation set.
-
-We use ROC-AUC as the main evaluation metric because it is robust to class imbalance and evaluates the model's ability to distinguish between classes across all possible classification thresholds, rather than just relying on a single fixed threshold (like 0.5). (we use One-vs-Rest for multiclass classification)
-
-The best model is XGBoost with a ROC-AUC of 0.9930. Also as seen from the confusion matrix, it is the best model in terms of correctly classifying the different classes. (Loses some samples on all the classes compared to the other models but not by much and is the most balanced model)
-
-### Feature Importance vs PCA Loadings
-
-The following table shows the feature importance for the best classical model (e.g., XGBoost).
-
-| Feature | Importance |
-| :--- | :--- |
-| **AGN_HEC** | 0.6910 |
-| **(W3+UT)/W1** | 0.0813 |
-| **METAL** | 0.0747 |
-| **W3-UT** | 0.0238 |
-| **R** | 0.0119 |
-| **WF4** | 0.0114 |
-| **logSFR_HEC** | 0.0111 |
-| **WF3** | 0.0097 |
-| **logM_HEC** | 0.0096 |
-| **u-g** | 0.0095 |
-| **G** | 0.0082 |
-| **I** | 0.0081 |
-| **WF2** | 0.0070 |
-| **BT** | 0.0068 |
-| **Z** | 0.0065 |
-| **g-r** | 0.0062 |
-| **WF1** | 0.0056 |
-| **T** | 0.0053 |
-| **UT** | 0.0051 |
-| **U** | 0.0048 |
-| **VT** | 0.0024 |
-| **IT** | 0.0000 |
-
-Comparing the feature importance with our PCA findings reveals a clear distinction between data variance and predictive power:
-
-- **Brightness vs. Classification**: While **PC1 (67% variance)** is dominated by apparent magnitudes (`I`, `R`, `Z`, `WF1`, `WF2`), these features have relatively low importance (<1.2%) in the classical classification model. This indicates that while total brightness explains the most variance in the dataset, it is not the primary factor for identifying a galaxy's nuclear activity class.
-- **Activity Indicators**: The classical model relies overwhelmingly on **`AGN_HEC` (69.1%)**, which was also a significant contributor to **PC2**. This confirms that established activity adopted-classification labels are the most reliable predictors.
-- **Star Formation & Metallicity**: Both PCA and the classical model emphasize the importance of star-formation proxies like **`(W3+UT)/W1`** and physical properties like **`METAL`** (7.5% importance). These features capture the underlying physics necessary for distinguishing between star-forming and AGN-dominated systems.
-
-# Neural Network
-
-We have created a NN with 3 hidden layers [128, 64, 32] with ReLU activation function and dropout of 0.2 between the layers. We train the model using the Adam optimizer and the cross-entropy loss function. We use early stopping to prevent overfitting.
-
-![NN Training History](visuals/nn_loss_curves.png)
-![NN Evaluation Metrics](visuals/nn_metrics.png)
-![NN Confusion Matrix](visuals/nn_confusion_matrix.png)
-
-Even though the neural network has good metrics, the loss curves show that after the training and validation curves are not converging (last training epoch 11), which means that the model is overfitting. 
-
-# Best Model
-
-The pipeline automatically identifies and saves the overall "Best Model" by performing a head-to-head comparison between the optimal classical model (found via grid search) and the trained neural network. Both models are evaluated on the unseen test set using ROC-AUC as the primary metric (falling back to Accuracy if necessary). The winning model is persisted in the `/models` directory as `best_model.pkl` (for classical) or `best_model.pt` (for neural network), ensuring that the most reliable predictor is always available for subsequent inference or deployment.
-
-
---- Classical Model Report ---
-              precision    recall  f1-score   support
-
-           0       1.00      1.00      1.00      5403
-           1       0.70      0.85      0.77       112
-           2       0.65      0.69      0.67       305
-           3       0.83      0.76      0.79       533
-
-    accuracy                           0.96      6353
-   macro avg       0.79      0.83      0.81      6353
-weighted avg       0.96      0.96      0.96      6353
-
-
---- Neural Network ---
-  Accuracy  : 0.9603
-  Precision : 0.9623
-  Recall    : 0.9603
-  F1-score  : 0.9608
-  ROC-AUC   : 0.9924
-
---- Neural Network Report ---
-              precision    recall  f1-score   support
-
-           0       1.00      1.00      1.00      5403
-           1       0.68      0.79      0.73       112
-           2       0.62      0.71      0.66       305
-           3       0.83      0.74      0.78       533
-
-    accuracy                           0.96      6353
-   macro avg       0.78      0.81      0.79      6353
-weighted avg       0.96      0.96      0.96      6353
-
-
-------------------------------
-Winner: Classical Model (Score: 0.9930 vs 0.9924)
-
-![Final Comparison Metrics](visuals/final_comparison_metrics.png)
-![Final Comparison Confusion Matrices](visuals/final_comparison_confusion_matrices.png)
-
-# Bonus: FastAPI Inference API
-
-The project includes a production-ready REST API built with **FastAPI** to serve the best-performing model. This allows for real-time predictions by sending photometric galaxy data as JSON.
-
-### Running the API
-
-You can start the API server after installing the dependencies:
-
-```bash
-# Using Python directly (runs on http://0.0.0.0:8000)
-python src/api.py
-
-# Or using uvicorn manually
-uvicorn src.api:app --reload
-```
-
-### Interactive Documentation
-
-Once the server is running, you can explore the API and test predictions directly from your browser:
-- **Swagger UI**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-- **ReDoc**: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
-
-### Example Request
-
-You can test the `/predict` endpoint using `curl`:
-
-```bash
-curl -X 'POST' \
-  'http://127.0.0.1:8000/predict' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "T": -3,
-  "WF1": 11.5,
-  "WF2": 11.5,
-  "WF3": 11.0,
-  "UT": 17.0,
-  "U": 17.1,
-  "G": 15.293,
-  "R": 14.5,
-  "I": 14.4,
-  "Z": 13.8,
-  "logM_HEC": 10.5,
-  "logSFR_HEC": -0.7,
-  "METAL": 8.6,
-  "AGN_HEC": "Y"
-}'
-```
-
-# Bonus Task 6
-
-I Created my own hyperparameter tuning for the classical models using a "DIY" grid inspired by GridsSearch, by using ParameterGrid from sklearn.model_selection, because i wanted to understand the process better and also I wanted to implement Early Stopping for XGBoost, which I was not able to do in GridSearch.
+It is important to note that the reduced dataset still contains a large
+number of data points, more than 8,000 rows and 8 columns, as required
+from our project.
