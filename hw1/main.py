@@ -309,9 +309,7 @@ def main(
 if __name__ == "__main__":
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
-    cfg = PipelineConfig(
-        filepath=os.path.join(current_dir, "data/HECATE.csv"),
-    )
+    cfg = PipelineConfig()
 
     print(f"Loading data from: {cfg.filepath}")
     print(f"Original dataset shape: {pd.read_csv(cfg.filepath).shape}")

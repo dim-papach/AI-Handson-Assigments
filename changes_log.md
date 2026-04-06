@@ -9,4 +9,13 @@ The focus was on modularizing and centralizing the machine learning pipeline's c
 - Implemented a `src/` package structure with `src/__init__.py`.
 - Added `tests/test_config.py` to validate configuration constraints and derivation logic.
 - Standardized function docstrings and resolved syntax issues in the training module.
-- Successfully executed the complete test suite with 52 passed unit tests.
+- Successfully executed the complete test suite with 55 passed unit tests.
+
+## dev-02:44
+### Configuration Refinement and Test Data Integration
+- Implemented robust relative path resolution in `src/config.py` using `__file__`.
+- Created `hw1/data/HECATE_test.csv` as a lightweight dataset for rapid pipeline validation.
+- Transitioned default pipeline configuration to utilize the test dataset.
+- Simplified `main.py` by removing redundant path overrides.
+- Updated `tests/test_config.py` and modularized configuration components into specialized sub-classes.
+- Verified end-to-end pipeline execution with the new development configuration.

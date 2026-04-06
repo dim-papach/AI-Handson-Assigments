@@ -1,5 +1,5 @@
 import pytest
-from src.config import PipelineConfig
+from src.config import PipelineConfig, DataConfig, SplitConfig, TuningConfig
 
 def test_pipeline_config_defaults() -> None:
     """Test that PipelineConfig initializes with default values."""
@@ -36,3 +36,24 @@ def test_pipeline_config_field_factories() -> None:
     assert c1.key_vars is not c2.key_vars
     c1.key_vars.append("new_feat")
     assert "new_feat" not in c2.key_vars
+
+def test_data_config_derivation() -> None:
+    """Test that DataConfig can derive err_vars independently."""
+    data = DataConfig(key_vars=["A", "B"])
+    data._derive_err_vars()
+    assert data.err_vars == ["E_A", "E_B"]
+
+def test_split_config_validation() -> None:
+    """Test that SplitConfig can validate splits independently."""
+    split = SplitConfig(train_size=0.5, val_size=0.2, test_size=0.3)
+    split._validate_splits() # Should not raise
+    
+    with pytest.raises(ValueError, match=r"train_size \+ val_size \+ test_size must equal exactly 1.0"):
+        invalid_split = SplitConfig(train_size=0.1, val_size=0.1, test_size=0.1)
+        invalid_split._validate_splits()
+
+def test_tuning_config_defaults() -> None:
+    """Test that TuningConfig initializes grids correctly."""
+    tune = TuningConfig()
+    assert tune.xgb_early_stopping_rounds == 10
+    assert len(tune.dt_max_depth) > 0
