@@ -43,6 +43,8 @@ from src.preprocessing import (
     generate_pca_insights
 )
 
+from src.train_classical import train_classical_models, evaluate_model
+
 def load_and_filter_data(filepath, key_vars, err_vars, no_err_vars, flags_vars, color_vars):
     """Loads raw data, filters important columns, and selects based on metal flag."""
     raw_df = pd.read_csv(filepath)
@@ -129,7 +131,27 @@ def main(
     if visuals_dir:
         generate_pca_insights(X_train, y_train, out_dir=visuals_dir)
     
-    return X_train, X_val, X_test, y_train, y_val, y_test
+    # ---------------------------------------------------------
+    # Classical Machine Learning Training Phase
+    # ---------------------------------------------------------
+    print("\n" + "="*50)
+    print("PHASE: Classical ML Training & Grid Search")
+    print("="*50)
+    best_model = train_classical_models(X_train, y_train, X_val, y_val)
+    
+    # ---------------------------------------------------------
+    # Final Evaluation on Held-out Test Set
+    # ---------------------------------------------------------
+    print("\n" + "="*50)
+    print("PHASE: Final Test Set Evaluation")
+    print("="*50)
+    test_metrics, _ = evaluate_model(best_model, X_test, y_test)
+    
+    print("\nBest Model Performance on Test Set:")
+    for metric, value in test_metrics.items():
+        print(f"  {metric:10s}: {value:.4f}")
+    
+    return X_train, X_val, X_test, y_train, y_val, y_test, best_model
 
 
 if __name__ == "__main__":
@@ -138,7 +160,7 @@ if __name__ == "__main__":
     
     print(f"Loading data from: {data_path}")
     print(f"Original dataset shape: {pd.read_csv(data_path).shape}")
-    X_train, X_val, X_test, y_train, y_val, y_test = main(data_path)
+    X_train, X_val, X_test, y_train, y_val, y_test, best_model = main(data_path)
     
     print("\n--- Pipeline Execution Complete ---")
     print(f"Train Features Shape: {X_train.shape}")

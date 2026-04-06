@@ -30,7 +30,7 @@ def test_run_pipeline_integration(tmp_path):
     csv_file = tmp_path / "mock_dataset.csv"
     large_df.to_csv(csv_file, index=False)
     
-    X_train, X_val, X_test, y_train, y_val, y_test = main(
+    X_train, X_val, X_test, y_train, y_val, y_test, best_model = main(
         filepath=str(csv_file),
         train_size=0.5, 
         val_size=0.25, 
@@ -42,6 +42,7 @@ def test_run_pipeline_integration(tmp_path):
     assert len(X_train) > 0
     assert len(X_val) > 0
     assert len(X_test) > 0
+    assert best_model is not None
     
     assert len(X_train) == len(y_train)
     assert 'CLASS_SP' not in X_train.columns
