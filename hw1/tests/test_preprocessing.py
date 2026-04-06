@@ -1,19 +1,27 @@
 import pandas as pd
 import numpy as np
 import pytest
+import os
 from typing import Dict, Tuple, List, Optional, Any
 
 # Adjusting import path assuming the script is run from project root or pytest config handles paths
 from src.preprocessing import (
     compute_colors,
-    filter_error_ratios,
     filter_important_columns,
+    filter_error_ratios,
     select_metal_flag,
     drop_missing_targets,
     compute_iqr_bounds,
     apply_iqr_capping,
     split_data,
-    build_preprocessing_pipeline
+    build_preprocessing_pipeline,
+    fit_target_encoder,
+    apply_target_encoder,
+    apply_imputation,
+    get_fitted_scaler,
+    apply_scaling,
+    save_outlier_histograms,
+    generate_pca_insights
 )
 from main import KEY_VARS, ERR_VARS, NO_ERR_VARS, FLAGS_VARS, COLOR_VARS
 
@@ -156,3 +164,63 @@ def test_build_preprocessing_pipeline(sample_df: pd.DataFrame) -> None:
     
     # Ensure missing numeric values (the 'U' column logic) were imputed correctly
     assert not df_transformed['U'].isnull().any()
+
+
+def test_target_encoder(sample_df: pd.DataFrame, tmp_path: Any) -> None:
+    # Use a temporary directory for model saving
+    df = drop_missing_targets(sample_df, target_col='CLASS_SP')
+    with open(os.devnull, 'w') as f: # Suppress print
+        le = fit_target_encoder(df, target_col='CLASS_SP')
+    
+    assert le is not None
+    assert 'A' in le.classes_
+    
+    encoded_df = apply_target_encoder(df, target_col='CLASS_SP', le=le)
+    assert encoded_df['CLASS_SP'].iloc[0] == 0 # 'A' should be 0
+    assert encoded_df['CLASS_SP'].dtype == np.int64 or encoded_df['CLASS_SP'].dtype == np.int32
+
+
+def test_apply_imputation(sample_df: pd.DataFrame) -> None:
+    X = sample_df.drop(columns=['CLASS_SP'])
+    y = sample_df['CLASS_SP'].fillna('A')
+    pipeline = build_preprocessing_pipeline(X)
+    pipeline.fit(X, y)
+    
+    imputed_df = apply_imputation(sample_df, pipeline, target_col='CLASS_SP')
+    assert 'CLASS_SP' in imputed_df.columns
+    assert not imputed_df.drop(columns=['CLASS_SP']).isnull().any().any()
+
+
+def test_scaling(sample_df: pd.DataFrame) -> None:
+    # Prepare numeric data
+    df = sample_df.drop(columns=['CLASS_SP'])
+    # Add a mock class for application
+    df['CLASS_SP'] = [0, 1, 0, 1, 0]
+    
+    scaler, num_cols = get_fitted_scaler(df.drop(columns=['CLASS_SP']))
+    assert scaler is not None
+    assert 'U' in num_cols
+    
+    scaled_df = apply_scaling(df, scaler, num_cols, target_col='CLASS_SP')
+    assert 'CLASS_SP' in scaled_df.columns
+    # Check if a value is scaled (U=10.0, etc, mean would be around 10.75, so scaled != 10.0)
+    assert scaled_df['U'].iloc[0] != 10.0
+
+
+def test_save_outlier_histograms(sample_df: pd.DataFrame, tmp_path: Any) -> None:
+    # Should run without error and respect out_dir
+    visuals_dir = tmp_path / "visuals"
+    res = save_outlier_histograms(sample_df, prefix="test", out_dir=str(visuals_dir))
+    assert res.equals(sample_df)
+    # Check if directory was created
+    assert os.path.exists(str(visuals_dir))
+
+
+def test_pca_insights(sample_df: pd.DataFrame, tmp_path: Any) -> None:
+    # Test PCA generation doesn't crash
+    visuals_dir = tmp_path / "pca_test"
+    X = sample_df.drop(columns=['CLASS_SP']).select_dtypes(include=[np.number]).fillna(0)
+    y = sample_df['CLASS_SP'].fillna('A')
+    
+    generate_pca_insights(X, y, out_dir=str(visuals_dir))
+    assert os.path.exists(str(visuals_dir))

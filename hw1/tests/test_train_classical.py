@@ -8,7 +8,15 @@ from typing import Dict, Tuple, List, Optional, Any
 from sklearn.linear_model import LogisticRegression
 
 # Import the targets to test
-from src.train_classical import evaluate_model, plot_model_evaluations, train_classical_models
+from src.train_classical import (
+    evaluate_model, 
+    plot_model_evaluations, 
+    train_classical_models,
+    build_model_grid,
+    run_grid_search_for_model,
+    report_feature_importances,
+    save_best_model
+)
 
 
 @pytest.fixture
@@ -86,3 +94,59 @@ def test_train_classical_models(sample_data: Tuple[pd.DataFrame, np.ndarray, pd.
     
     mock_plot.assert_called_once()
     assert mock_dump.call_count >= 1
+
+
+def test_build_model_grid() -> None:
+    grid_binary = build_model_grid(is_multiclass=False)
+    assert 'XGBoost' in grid_binary
+    assert grid_binary['XGBoost']['grid']['eval_metric'] == ['logloss']
+    
+    grid_multi = build_model_grid(is_multiclass=True)
+    assert grid_multi['XGBoost']['grid']['eval_metric'] == ['mlogloss']
+
+
+def test_run_grid_search_for_model(sample_data: Tuple[pd.DataFrame, np.ndarray, pd.DataFrame, np.ndarray]) -> None:
+    X_train, y_train, X_val, y_val = sample_data
+    y_train_s = pd.Series(y_train)
+    y_val_s = pd.Series(y_val)
+    
+    # We'll test with a simple model to keep it fast
+    config = {
+        'model_cls': LogisticRegression,
+        'grid': {'C': [0.1, 1.0], 'max_iter': [100]}
+    }
+    
+    best_model, best_metrics, best_preds, best_score = run_grid_search_for_model(
+        'LogReg', config, X_train, y_train_s, X_val, y_val_s, is_multiclass=False
+    )
+    
+    assert best_model is not None
+    assert 'Accuracy' in best_metrics
+    assert len(best_preds) == len(y_val)
+    assert best_score >= 0
+
+
+def test_report_feature_importances(sample_data: Tuple[pd.DataFrame, np.ndarray, pd.DataFrame, np.ndarray]) -> None:
+    X_train, y_train, _, _ = sample_data
+    model = LogisticRegression()
+    model.fit(X_train, y_train)
+    
+    # Linear model uses coef_
+    with patch('sys.stdout', new=MagicMock()) as mock_out:
+        report_feature_importances(model, X_train)
+    
+    # Tree model uses feature_importances_
+    from sklearn.tree import DecisionTreeClassifier
+    tree = DecisionTreeClassifier()
+    tree.fit(X_train, y_train)
+    with patch('sys.stdout', new=MagicMock()) as mock_out:
+        report_feature_importances(tree, X_train)
+
+
+def test_save_best_model(tmp_path: Any) -> None:
+    model = LogisticRegression()
+    models_dir = tmp_path / "models"
+    
+    path = save_best_model(model, models_dir=str(models_dir))
+    assert os.path.exists(path)
+    assert "classical_model.pkl" in path
