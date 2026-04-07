@@ -11,7 +11,11 @@ from main import (
     fit_preprocessing_params,
     preprocess_split,
     detach_targets,
-    configure_plot_style
+    configure_plot_style,
+    run_data_ingestion_and_preprocessing,
+    run_classical_training,
+    run_neural_training,
+    evaluate_and_save_best_model,
 )
 from src.config import PipelineConfig
 
@@ -286,11 +290,148 @@ def test_load_and_filter_data_no_flag_metal(tmp_path: Any) -> None:
 
 def test_detach_targets_multifeature() -> None:
     """detach_targets correctly separates multiple feature columns from target."""
-    df = pd.DataFrame({'feat1': [10, 20], 'feat2': [30, 40], 'label': [0, 1]})
-    X, y = detach_targets(df, 'label')
-    assert 'feat1' in X.columns
-    assert 'feat2' in X.columns
-    assert 'label' not in X.columns
+    df = pd.DataFrame({"feat1": [10, 20], "feat2": [30, 40], "label": [0, 1]})
+    X, y = detach_targets(df, "label")
+    assert "feat1" in X.columns
+    assert "feat2" in X.columns
+    assert "label" not in X.columns
     assert isinstance(y, pd.Series)
     assert list(y) == [0, 1]
+
+
+@patch("main.load_and_filter_data")
+@patch("main.split_data")
+@patch("main.fit_preprocessing_params")
+@patch("main.preprocess_split")
+@patch("main.generate_pca_insights")
+def test_run_data_ingestion_and_preprocessing(
+    mock_pca: MagicMock,
+    mock_preprocess: MagicMock,
+    mock_fit: MagicMock,
+    mock_split: MagicMock,
+    mock_load: MagicMock,
+    mock_config: PipelineConfig,
+) -> None:
+    """Test the data ingestion and preprocessing phase."""
+    df = pd.DataFrame({"T": [1] * 10, "CLASS_SP": [0] * 10})
+    mock_load.return_value = df
+    mock_split.return_value = (df.iloc[:6], df.iloc[6:8], df.iloc[8:])
+    mock_fit.return_value = (
+        {},
+        MagicMock(),
+        pd.Index(["T"]),
+        MagicMock(),
+        MagicMock(),
+    )
+    # Use side_effect to return new copies of the DataFrame to avoid pop() affecting subsequent calls
+    def mock_preprocess_side_effect(*args: Any, **kwargs: Any) -> pd.DataFrame:
+        return pd.DataFrame({"T": [1] * 5, "CLASS_SP": [0] * 5})
+
+    mock_preprocess.side_effect = mock_preprocess_side_effect
+
+    results = run_data_ingestion_and_preprocessing(mock_config)
+
+    assert len(results) == 6
+    assert all(isinstance(r, (pd.DataFrame, pd.Series)) for r in results)
+    assert mock_load.called
+    assert mock_split.called
+    assert mock_fit.called
+    assert mock_preprocess.call_count == 3
+    assert mock_pca.called
+
+
+@patch("main.train_classical_models")
+def test_run_classical_training(
+    mock_train: MagicMock, mock_config: PipelineConfig
+) -> None:
+    """Test the classical training phase."""
+    X = pd.DataFrame({"feat": [1, 2]})
+    y = pd.Series([0, 1])
+    mock_train.return_value = MagicMock()
+
+    model = run_classical_training(X, y, X, y, mock_config)
+
+    assert model == mock_train.return_value
+    assert mock_train.called
+
+
+@patch("main.train_neural_network")
+@patch("main.plot_nn_training_history")
+@patch("main.evaluate_nn_model")
+@patch("main.plot_nn_evaluation")
+def test_run_neural_training(
+    mock_plot_eval: MagicMock,
+    mock_eval: MagicMock,
+    mock_plot_hist: MagicMock,
+    mock_train: MagicMock,
+    mock_config: PipelineConfig,
+) -> None:
+    """Test the neural network training phase."""
+    X = pd.DataFrame({"feat": [1, 2]})
+    y = pd.Series([0, 1])
+    mock_model = MagicMock()
+    mock_train.return_value = (mock_model, {"loss": [0.1]})
+    mock_eval.return_value = ({"Accuracy": 0.9}, np.array([0, 1]))
+
+    model = run_neural_training(X, y, X, y, mock_config)
+
+    assert model == mock_model
+    assert mock_train.called
+    assert mock_plot_hist.called
+    assert mock_eval.called
+    assert mock_plot_eval.called
+
+
+@patch("main.evaluate_model")
+@patch("main.evaluate_nn_model")
+@patch("joblib.dump")
+@patch("torch.save")
+def test_evaluate_and_save_best_model_classical_wins(
+    mock_torch_save: MagicMock,
+    mock_joblib_dump: MagicMock,
+    mock_eval_nn: MagicMock,
+    mock_eval_classical: MagicMock,
+    mock_config: PipelineConfig,
+) -> None:
+    """Test evaluation and saving when classical model wins."""
+    X = pd.DataFrame({"feat": [1, 2]})
+    y = pd.Series([0, 1])
+    classical_model = MagicMock()
+    nn_model = MagicMock()
+
+    mock_eval_classical.return_value = ({"ROC-AUC": 0.9}, np.array([0, 1]))
+    mock_eval_nn.return_value = ({"ROC-AUC": 0.8}, np.array([0, 1]))
+
+    best = evaluate_and_save_best_model(classical_model, nn_model, X, y, mock_config)
+
+    assert best == classical_model
+    assert mock_joblib_dump.called
+    assert not mock_torch_save.called
+
+
+@patch("main.evaluate_model")
+@patch("main.evaluate_nn_model")
+@patch("joblib.dump")
+@patch("torch.save")
+def test_evaluate_and_save_best_model_nn_wins(
+    mock_torch_save: MagicMock,
+    mock_joblib_dump: MagicMock,
+    mock_eval_nn: MagicMock,
+    mock_eval_classical: MagicMock,
+    mock_config: PipelineConfig,
+) -> None:
+    """Test evaluation and saving when neural network wins."""
+    X = pd.DataFrame({"feat": [1, 2]})
+    y = pd.Series([0, 1])
+    classical_model = MagicMock()
+    nn_model = MagicMock()
+
+    mock_eval_classical.return_value = ({"ROC-AUC": 0.8}, np.array([0, 1]))
+    mock_eval_nn.return_value = ({"ROC-AUC": 0.9}, np.array([0, 1]))
+
+    best = evaluate_and_save_best_model(classical_model, nn_model, X, y, mock_config)
+
+    assert best == nn_model
+    assert not mock_joblib_dump.called
+    assert mock_torch_save.called
 

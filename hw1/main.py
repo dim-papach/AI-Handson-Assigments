@@ -211,30 +211,24 @@ def detach_targets(
 
 
 # ---------------------------------------------------------------------------
-# Main entry point
+# Pipeline steps
 # ---------------------------------------------------------------------------
 
-def main(
-    config: Optional[PipelineConfig] = None,
-) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series, Any]:
-    """Run the full preprocessing and classical ML training pipeline.
+def run_data_ingestion_and_preprocessing(
+    config: PipelineConfig,
+) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series]:
+    """Execute the data loading, splitting, and preprocessing pipeline.
 
     Parameters
     ----------
-    config : PipelineConfig, optional
-        Pipeline configuration. A default :class:`PipelineConfig` is used
-        when not provided.
+    config : PipelineConfig
+        Pipeline configuration object.
 
     Returns
     -------
-    Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series, Any]
-        ``(X_train, X_val, X_test, y_train, y_val, y_test, best_model)``
+    Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series]
+        (X_train, X_val, X_test, y_train, y_val, y_test)
     """
-    if config is None:
-        config = PipelineConfig()
-
-    configure_plot_style()
-
     df_prepared = load_and_filter_data(config)
 
     train_df, val_df, test_df = split_data(
@@ -276,11 +270,44 @@ def main(
             projection_filename=config.projection_filename,
         )
 
+    return X_train, X_val, X_test, y_train, y_val, y_test
+
+
+def run_classical_training(
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    X_val: pd.DataFrame,
+    y_val: pd.Series,
+    config: PipelineConfig,
+) -> Any:
+    """Train and optimize classical machine learning models.
+
+    Parameters
+    ----------
+    X_train : pd.DataFrame
+        Training features.
+    y_train : pd.Series
+        Training targets.
+    X_val : pd.DataFrame
+        Validation features.
+    y_val : pd.Series
+        Validation targets.
+    config : PipelineConfig
+        Pipeline configuration object.
+
+    Returns
+    -------
+    Any
+        The best fitted classical model found during grid search.
+    """
     print("\n" + "=" * 50)
     print("PHASE: Classical ML Training & Grid Search")
     print("=" * 50)
-    best_model = train_classical_models(
-        X_train, y_train, X_val, y_val,
+    return train_classical_models(
+        X_train,
+        y_train,
+        X_val,
+        y_val,
         random_state=config.random_state,
         models_dir=config.models_dir,
         visuals_dir=config.visuals_dir,
@@ -301,26 +328,86 @@ def main(
         xgb_learning_rate=config.xgb_learning_rate,
     )
 
+
+def run_neural_training(
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    X_val: pd.DataFrame,
+    y_val: pd.Series,
+    config: PipelineConfig,
+) -> torch.nn.Module:
+    """Train and evaluate the neural network model.
+
+    Parameters
+    ----------
+    X_train : pd.DataFrame
+        Training features.
+    y_train : pd.Series
+        Training targets.
+    X_val : pd.DataFrame
+        Validation features.
+    y_val : pd.Series
+        Validation targets.
+    config : PipelineConfig
+        Pipeline configuration object.
+
+    Returns
+    -------
+    torch.nn.Module
+        The trained neural network model.
+    """
     print("\n" + "=" * 50)
     print("PHASE: Neural Network Training")
     print("=" * 50)
     nn_model, nn_history = train_neural_network(
         X_train, y_train, X_val, y_val, config=config
     )
-    
+
     # Plot training history
     plot_nn_training_history(nn_history, config=config)
-    
+
     # Evaluate NN on validation set for comparison
-    nn_val_metrics, nn_y_pred_val = evaluate_nn_model(nn_model, X_val, y_val, config=config)
+    nn_val_metrics, nn_y_pred_val = evaluate_nn_model(
+        nn_model, X_val, y_val, config=config
+    )
     plot_nn_evaluation(nn_val_metrics, y_val.values, nn_y_pred_val, config=config)
 
+    return nn_model
+
+
+def evaluate_and_save_best_model(
+    best_classical: Any,
+    nn_model: torch.nn.Module,
+    X_test: pd.DataFrame,
+    y_test: pd.Series,
+    config: PipelineConfig,
+) -> Any:
+    """Evaluate both types of models on the test set and save the overall winner.
+
+    Parameters
+    ----------
+    best_classical : Any
+        The best fitted classical model.
+    nn_model : torch.nn.Module
+        The trained neural network model.
+    X_test : pd.DataFrame
+        Test features.
+    y_test : pd.Series
+        Test targets.
+    config : PipelineConfig
+        Pipeline configuration object.
+
+    Returns
+    -------
+    Any
+        The overall best performing model (either classical or neural).
+    """
     print("\n" + "=" * 50)
     print("PHASE: Final Test Set Evaluation & Comparison")
     print("=" * 50)
-    
+
     print("\n--- Classical Model (Best) ---")
-    test_metrics_classical, _ = evaluate_model(best_model, X_test, y_test)
+    test_metrics_classical, _ = evaluate_model(best_classical, X_test, y_test)
     for metric, value in test_metrics_classical.items():
         print(f"  {metric:10s}: {value:.4f}")
 
@@ -330,13 +417,13 @@ def main(
         print(f"  {metric:10s}: {value:.4f}")
 
     # Determine best overall model
-    classical_score = test_metrics_classical.get('ROC-AUC', 0)
+    classical_score = test_metrics_classical.get("ROC-AUC", 0)
     if np.isnan(classical_score):
-        classical_score = test_metrics_classical.get('Accuracy', 0)
-        
-    nn_score = test_metrics_nn.get('ROC-AUC', 0)
+        classical_score = test_metrics_classical.get("Accuracy", 0)
+
+    nn_score = test_metrics_nn.get("ROC-AUC", 0)
     if np.isnan(nn_score):
-        nn_score = test_metrics_nn.get('Accuracy', 0)
+        nn_score = test_metrics_nn.get("Accuracy", 0)
 
     print("\n" + "-" * 30)
     if nn_score > classical_score:
@@ -345,12 +432,62 @@ def main(
         best_model_path = os.path.join(config.models_dir, "best_model.pt")
         torch.save(nn_model.state_dict(), best_model_path)
     else:
-        print(f"Winner: Classical Model (Score: {classical_score:.4f} vs {nn_score:.4f})")
-        best_overall = best_model
+        print(
+            f"Winner: Classical Model (Score: {classical_score:.4f} vs {nn_score:.4f})"
+        )
+        best_overall = best_classical
         best_model_path = os.path.join(config.models_dir, "best_model.pkl")
-        joblib.dump(best_model, best_model_path)
-    
+        joblib.dump(best_classical, best_model_path)
+
     print(f"Designated best model saved to {best_model_path}")
+    return best_overall
+
+
+# ---------------------------------------------------------------------------
+# Main entry point
+# ---------------------------------------------------------------------------
+
+def main(
+    config: Optional[PipelineConfig] = None,
+) -> Tuple[
+    pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series, Any
+]:
+    """Run the full machine learning pipeline.
+
+    This function coordinates data loading, preprocessing, classical model training,
+    neural network training, evaluation, and saving the best overall model.
+
+    Parameters
+    ----------
+    config : PipelineConfig, optional
+        Pipeline configuration. A default :class:`PipelineConfig` is used
+        when not provided.
+
+    Returns
+    -------
+    Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series, Any]
+        (X_train, X_val, X_test, y_train, y_val, y_test, best_model)
+    """
+    if config is None:
+        config = PipelineConfig()
+
+    configure_plot_style()
+
+    # Phase 1: Data Ingestion and Preprocessing
+    X_train, X_val, X_test, y_train, y_val, y_test = (
+        run_data_ingestion_and_preprocessing(config)
+    )
+
+    # Phase 2: Classical ML Training
+    best_classical = run_classical_training(X_train, y_train, X_val, y_val, config)
+
+    # Phase 3: Neural Network Training
+    nn_model = run_neural_training(X_train, y_train, X_val, y_val, config)
+
+    # Phase 4: Final Evaluation and Saving
+    best_overall = evaluate_and_save_best_model(
+        best_classical, nn_model, X_test, y_test, config
+    )
 
     return X_train, X_val, X_test, y_train, y_val, y_test, best_overall
 
