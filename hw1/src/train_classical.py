@@ -10,94 +10,13 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from xgboost import XGBClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix
+from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import ParameterGrid
 from typing import Dict, Tuple, Any, List, Optional
 from src.config import PipelineConfig
+from src.evaluation import evaluate_classical_model, plot_model_performance
 
 
-def evaluate_model(model: Any, X_val: pd.DataFrame, y_val: pd.Series, is_multiclass: bool = False) -> Tuple[Dict[str, float], np.ndarray]:
-    """Evaluates the model and returns a dictionary of robust classification metrics."""
-    y_pred = model.predict(X_val)
-    
-    # Core performance metrics 
-    metrics = {
-        'Accuracy': accuracy_score(y_val, y_pred),
-        'Precision': precision_score(y_val, y_pred, average='weighted', zero_division=0),
-        'Recall': recall_score(y_val, y_pred, average='weighted', zero_division=0),
-        'F1-score': f1_score(y_val, y_pred, average='weighted', zero_division=0)
-    }
-    
-    # Calculate ROC-AUC
-    try:
-        y_prob = model.predict_proba(X_val)
-        if getattr(model, "classes_", None) is not None and len(model.classes_) > 2:
-            is_multiclass = True
-            
-        if is_multiclass:
-            metrics['ROC-AUC'] = roc_auc_score(y_val, y_prob, multi_class='ovr')
-        else:
-            metrics['ROC-AUC'] = roc_auc_score(y_val, y_prob[:, 1])
-    except (AttributeError, ValueError, IndexError):
-        metrics['ROC-AUC'] = np.nan
-        
-    return metrics, y_pred
-
-def plot_model_evaluations(
-    model_results: Dict[str, Any],
-    visuals_dir: str = PipelineConfig.visuals_dir,
-    metrics_filename: str = PipelineConfig.metrics_filename,
-    cm_filename: str = PipelineConfig.cm_filename,
-) -> None:
-    """
-    Creates bar plots for metrics and confusion matrices for each model.
-    model_results is a dict: {'ModelName': {'metrics': metrics_dict, 'cm': confusion_matrix_array}}
-    """
-    os.makedirs(visuals_dir, exist_ok=True)
-    num_models = len(model_results)
-    
-    # 1. Plot Metrics (Bar plot per model)
-    fig, axes = plt.subplots(1, num_models, figsize=(4 * num_models, 5), sharey=True)
-    if num_models == 1:
-        axes = [axes]
-        
-    for ax, (model_name, data) in zip(axes, model_results.items()):
-        metrics = data['metrics']
-        # Prune NaN values
-        metrics = {k: v for k, v in metrics.items() if not np.isnan(v)}
-        
-        ax.bar(metrics.keys(), metrics.values(), color=sns.color_palette("viridis", len(metrics)))
-        ax.set_title(f"{model_name}", fontweight='bold')
-        ax.set_ylim(0, 1.05)
-        for i, v in enumerate(metrics.values()):
-            ax.text(i, v + 0.01, f"{v:.3f}", ha='center', fontsize=9)
-        ax.tick_params(axis='x', rotation=45)
-        
-    plt.suptitle('Validation Metrics Comparison', fontsize=14, y=1.05)
-    plt.tight_layout()
-    metrics_path = os.path.join(visuals_dir, metrics_filename)
-    plt.savefig(metrics_path, bbox_inches='tight', dpi=300)
-    plt.close()
-    
-    # 2. Plot Confusion Matrices (1 heatmap per model)
-    fig2, axes2 = plt.subplots(1, num_models, figsize=(4 * num_models, 4))
-    if num_models == 1:
-        axes2 = [axes2]
-        
-    for ax, (model_name, data) in zip(axes2, model_results.items()):
-        cm = data['cm']
-        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=ax, cbar=False)
-        ax.set_title(f"{model_name}", fontweight='bold')
-        ax.set_xlabel("Predicted")
-        ax.set_ylabel("Actual")
-        
-    plt.suptitle('Confusion Matrices', fontsize=14, y=1.05)
-    plt.tight_layout()
-    cm_path = os.path.join(visuals_dir, cm_filename)
-    plt.savefig(cm_path, bbox_inches='tight', dpi=300)
-    plt.close()
-    
-    print(f"Saved evaluation graphs to {metrics_path} and {cm_path}")
 
 def build_model_grid(
     is_multiclass: bool,
@@ -254,7 +173,7 @@ def run_grid_search_for_model(
         else:
             model.fit(X_train, y_train)
 
-        metrics, y_pred = evaluate_model(model, X_val, y_val, is_multiclass)
+        metrics, y_pred = evaluate_classical_model(model, X_val, y_val)
         score = metrics['ROC-AUC'] if not np.isnan(metrics['ROC-AUC']) else metrics['Accuracy']
 
         if score > best_score:
@@ -431,11 +350,12 @@ def train_classical_models(
 
     print(f"\nBest Overall Classical Model: {best_overall_name} with score: {best_overall_score:.4f}")
 
-    plot_model_evaluations(
+    plot_model_performance(
         model_evaluations,
         visuals_dir=visuals_dir,
         metrics_filename=metrics_filename,
         cm_filename=cm_filename,
+        main_title="Validation Metrics Comparison"
     )
     save_best_model(best_overall_model, models_dir=models_dir, model_filename=model_filename)
     report_feature_importances(best_overall_model, X_train)

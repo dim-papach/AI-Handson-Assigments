@@ -1,4 +1,6 @@
 import pytest
+
+pytest.importorskip("xgboost")
 import os
 import numpy as np
 import pandas as pd
@@ -9,14 +11,13 @@ from sklearn.linear_model import LogisticRegression
 
 # Import the targets to test
 from src.train_classical import (
-    evaluate_model, 
-    plot_model_evaluations, 
     train_classical_models,
     build_model_grid,
     run_grid_search_for_model,
     report_feature_importances,
     save_best_model
 )
+from src.evaluation import evaluate_classical_model, plot_model_performance
 
 
 @pytest.fixture
@@ -47,7 +48,7 @@ def test_evaluate_model(sample_data: Tuple[pd.DataFrame, np.ndarray, pd.DataFram
     model.fit(X_train, y_train)
     
     # Trigger mapping method
-    metrics, y_pred = evaluate_model(model, X_val, y_val, is_multiclass=False)
+    metrics, y_pred = evaluate_classical_model(model, X_val, y_val)
     
     assert isinstance(metrics, dict)
     assert 'Accuracy' in metrics
@@ -71,7 +72,12 @@ def test_plot_model_evaluations(mock_savefig: MagicMock, tmp_path: Any) -> None:
     visuals_dir = tmp_path / "visuals"
     
     # Try plotting
-    plot_model_evaluations(model_results, visuals_dir=str(visuals_dir))
+    plot_model_performance(
+        model_results, 
+        visuals_dir=str(visuals_dir),
+        metrics_filename="metrics.png",
+        cm_filename="cm.png"
+    )
     
     # Check dir creation & mocking captures
     assert os.path.exists(str(visuals_dir))
@@ -85,7 +91,7 @@ def test_train_classical_models(sample_data: Tuple[pd.DataFrame, np.ndarray, pd.
     visuals_dir = str(tmp_path / "visuals")
 
     # Patch out file IO to ensure isolated testing functionality natively
-    with patch('src.train_classical.plot_model_evaluations') as mock_plot:
+    with patch('src.train_classical.plot_model_performance') as mock_plot:
         with patch('joblib.dump') as mock_dump:
             with patch('os.makedirs'):
                 best_model = train_classical_models(
@@ -214,7 +220,7 @@ def test_evaluate_model_multiclass() -> None:
     model = LogisticRegression()
     model.fit(X_df, y)
     
-    metrics, _ = evaluate_model(model, X_df, y, is_multiclass=True)
+    metrics, _ = evaluate_classical_model(model, X_df, y)
     assert 'ROC-AUC' in metrics
     assert not np.isnan(metrics['ROC-AUC'])
 
@@ -229,7 +235,7 @@ def test_evaluate_model_no_proba() -> None:
     model.predict.return_value = y
     del model.predict_proba # Ensure it doesn't have it
     
-    metrics, _ = evaluate_model(model, X_df, y)
+    metrics, _ = evaluate_classical_model(model, X_df, y)
     assert np.isnan(metrics['ROC-AUC'])
 
 
@@ -241,7 +247,7 @@ def test_evaluate_model_binary_auto_detect() -> None:
     model.fit(X_df, y)
 
     # Pass is_multiclass=False explicitly; model.classes_ has 2 entries → stays binary path
-    metrics, y_pred = evaluate_model(model, X_df, y, is_multiclass=False)
+    metrics, y_pred = evaluate_classical_model(model, X_df, y)
     assert 'ROC-AUC' in metrics
     assert len(y_pred) == len(y)
 
@@ -268,7 +274,12 @@ def test_plot_model_evaluations_multiple_models(mock_savefig: MagicMock, tmp_pat
         },
     }
     visuals_dir = str(tmp_path / "visuals")
-    plot_model_evaluations(model_results, visuals_dir=visuals_dir)
+    plot_model_performance(
+        model_results, 
+        visuals_dir=visuals_dir,
+        metrics_filename="metrics.png",
+        cm_filename="cm.png"
+    )
     assert mock_savefig.call_count == 2
 
 

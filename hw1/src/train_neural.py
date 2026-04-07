@@ -8,17 +8,15 @@ import seaborn as sns
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from sklearn.metrics import (
-    accuracy_score,
-    confusion_matrix,
-    f1_score,
-    precision_score,
-    recall_score,
-    roc_auc_score,
-)
+from sklearn.metrics import confusion_matrix
 from torch.utils.data import DataLoader, TensorDataset
 
 from src.config import PipelineConfig
+from src.evaluation import (
+    evaluate_nn_model,
+    plot_model_performance,
+    plot_nn_training_history,
+)
 
 
 class SimpleNN(nn.Module):
@@ -296,106 +294,6 @@ def train_neural_network(
     return model, history
 
 
-def evaluate_nn_model(
-    model: nn.Module,
-    X_test: pd.DataFrame,
-    y_test: pd.Series,
-    config: Optional[PipelineConfig] = None,
-) -> Tuple[Dict[str, float], np.ndarray]:
-    """
-    Evaluates the NN model and returns classification metrics.
-
-    Parameters
-    ----------
-    model : nn.Module
-        Fitted PyTorch model.
-    X_test : pd.DataFrame
-        Test features.
-    y_test : pd.Series
-        Test labels.
-    config : PipelineConfig, optional
-
-    Returns
-    -------
-    Tuple[Dict[str, float], np.ndarray]
-        (metrics, y_pred)
-    """
-    if config is None:
-        config = PipelineConfig()
-
-    model.eval()
-    X_test_t, _ = prepare_tensors(X_test, y_test)
-
-    with torch.no_grad():
-        logits = model(X_test_t)
-        
-        # Determine output activation from config or default to auto
-        out_act = config.nn_output_activation
-        if out_act is None:
-            out_act = "Sigmoid" if model.output_dim == 1 else "Softmax"
-
-        if out_act == "Sigmoid":
-            probs = torch.sigmoid(logits).squeeze().numpy()
-            y_pred = (probs >= 0.5).astype(int)
-        elif out_act == "Softmax":
-            probs = torch.softmax(logits, dim=1).numpy()
-            y_pred = np.argmax(probs, axis=1)
-        else:
-            # Fallback if an unsupported activation is provided in config
-            probs = logits.numpy()
-            y_pred = np.argmax(probs, axis=1) if model.output_dim > 1 else (probs >= 0).astype(int)
-
-    y_true = y_test.values
-    metrics = {
-        "Accuracy": accuracy_score(y_true, y_pred),
-        "Precision": precision_score(y_true, y_pred, average="weighted", zero_division=0),
-        "Recall": recall_score(y_true, y_pred, average="weighted", zero_division=0),
-        "F1-score": f1_score(y_true, y_pred, average="weighted", zero_division=0),
-    }
-
-    try:
-        if model.output_dim == 1:
-            metrics["ROC-AUC"] = roc_auc_score(y_true, probs)
-        else:
-            metrics["ROC-AUC"] = roc_auc_score(y_true, probs, multi_class="ovr")
-    except Exception:
-        metrics["ROC-AUC"] = np.nan
-
-    return metrics, y_pred
-
-
-def plot_nn_training_history(
-    history: Dict[str, List[float]],
-    config: Optional[PipelineConfig] = None,
-) -> None:
-    """
-    Plots training and validation loss curves.
-
-    Parameters
-    ----------
-    history : Dict[str, List[float]]
-        Dictionary containing 'train_loss' and 'val_loss'.
-    config : PipelineConfig, optional
-    """
-    if config is None:
-        config = PipelineConfig()
-
-    plt.figure(figsize=(10, 6))
-    plt.plot(history["train_loss"], label="Training Loss")
-    plt.plot(history["val_loss"], label="Validation Loss")
-    plt.xlabel("Epoch")
-    plt.ylabel("Loss")
-    plt.title("Neural Network Training History")
-    plt.legend()
-    plt.grid(True)
-
-    os.makedirs(config.visuals_dir, exist_ok=True)
-    plot_path = os.path.join(config.visuals_dir, config.nn_loss_plot_filename)
-    plt.savefig(plot_path, bbox_inches="tight", dpi=300)
-    plt.close()
-    print(f"Saved training history plot to {plot_path}")
-
-
 def plot_nn_evaluation(
     metrics: Dict[str, float],
     y_true: np.ndarray,
@@ -403,7 +301,7 @@ def plot_nn_evaluation(
     config: Optional[PipelineConfig] = None,
 ) -> None:
     """
-    Plots evaluation metrics and confusion matrix for the NN.
+    Plots evaluation metrics and confusion matrix for the NN using the unified plotter.
 
     Parameters
     ----------
@@ -415,35 +313,20 @@ def plot_nn_evaluation(
     if config is None:
         config = PipelineConfig()
 
-    os.makedirs(config.visuals_dir, exist_ok=True)
+    model_results = {
+        "Neural Network": {
+            "metrics": metrics,
+            "cm": confusion_matrix(y_true, y_pred),
+        }
+    }
 
-    # Plot Metrics
-    plt.figure(figsize=(8, 5))
-    valid_metrics = {k: v for k, v in metrics.items() if not np.isnan(v)}
-    bars = plt.bar(valid_metrics.keys(), valid_metrics.values(), color=sns.color_palette("viridis", len(valid_metrics)))
-    plt.title("Neural Network Performance Metrics", fontweight="bold")
-    plt.ylim(0, 1.05)
-    for bar in bars:
-        yval = bar.get_height()
-        plt.text(bar.get_x() + bar.get_width()/2, yval + 0.01, f"{yval:.3f}", ha="center", va="bottom")
-    
-    metrics_path = os.path.join(config.visuals_dir, config.nn_metrics_filename)
-    plt.savefig(metrics_path, bbox_inches="tight", dpi=300)
-    plt.close()
-
-    # Plot Confusion Matrix
-    cm = confusion_matrix(y_true, y_pred)
-    plt.figure(figsize=(6, 5))
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
-    plt.title("Neural Network Confusion Matrix", fontweight="bold")
-    plt.xlabel("Predicted")
-    plt.ylabel("Actual")
-    
-    cm_path = os.path.join(config.visuals_dir, config.nn_cm_filename)
-    plt.savefig(cm_path, bbox_inches="tight", dpi=300)
-    plt.close()
-    
-    print(f"Saved evaluation plots to {metrics_path} and {cm_path}")
+    plot_model_performance(
+        model_results,
+        visuals_dir=config.visuals_dir,
+        metrics_filename=config.nn_metrics_filename,
+        cm_filename=config.nn_cm_filename,
+        main_title="Neural Network Evaluation",
+    )
 
 if __name__ == "__main__":
     print("This module provides Neural Network training logic.")

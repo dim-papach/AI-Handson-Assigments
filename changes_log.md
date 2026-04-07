@@ -1,6 +1,18 @@
+# 2026-04-08
+
+The day began with a focus on modularizing the machine learning pipeline's evaluation logic. Centralized evaluation and visualization tools into a dedicated module, refactored training scripts to eliminate redundancy, and expanded test coverage to ensure the integrity of the new decentralized architecture.
+
+## dev-00:14
+### Centralizing Evaluation Logic and Modularization
+- Created `hw1/src/evaluation.py` to centralize all evaluation and visualization logic (ROC-AUC, PR Curves, Confusion Matrices, Metric Bar Plots).
+- Refactored `hw1/src/train_classical.py` and `hw1/src/train_neural.py` to use the shared evaluation module, reducing code duplication.
+- Updated `hw1/main.py` to leverage the centralized evaluation tools for final model comparisons.
+- Expanded the test suite with `hw1/tests/test_evaluation.py` and updated existing tests to align with the new modular structure.
+- Ensured 100% pass rate for the refactored evaluation pipeline.
+
 # 2026-04-07
 
-The focus was on modularizing and centralizing the machine learning pipeline's configuration, implementing a fully functional Neural Network pipeline, and refactoring the main orchestration logic. Decoupled hyperparameters and file paths into a dedicated `src/config.py` module and updated the entire pipeline to use these defaults. Refactored `main.py` into distinct, single-responsibility functions to improve maintainability. Developed a comprehensive test suite for configuration, training, and orchestration modules, achieving a 100% test pass rate across the entire pipeline.
+The focus was on modularizing and centralizing the machine learning pipeline's configuration, implementing a fully functional Neural Network pipeline, and refactoring the main orchestration logic. Introduced Poetry for dependency management, established a project-wide README, and stabilized the configuration test suite. Achieved a 100% test pass rate (67 unit tests) in the new orchestrated environment.
 
 ## dev-02:12
 ### Centralizing Pipeline Configuration and Testing
@@ -36,3 +48,11 @@ The focus was on modularizing and centralizing the machine learning pipeline's c
 - Implemented extensive unit tests in `tests/test_main.py` to validate each pipeline phase independently.
 - Stabilized the main orchestration logic with mock-based testing, ensuring robust component interaction.
 - Verified the integrity of the refactored pipeline with 16 dedicated orchestration tests, all passing.
+
+## dev-23:52
+### Dependency Management and Project Initialization
+- Initialized `pyproject.toml` and `poetry.lock` for automated dependency management.
+- Set up root-level `README.md` to provide project context and structure.
+- Configured Poetry to utilize `package-mode = false`, facilitating loose assignment orchestration.
+- Re-stabilized `hw1/tests/test_config.py` by resolving attribute failures related to dataclass field defaults.
+- Verified that the entire project (67 unit tests) passes successfully within the managed Poetry environment.

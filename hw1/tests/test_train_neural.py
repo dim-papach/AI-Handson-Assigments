@@ -3,6 +3,8 @@ import shutil
 import numpy as np
 import pandas as pd
 import pytest
+
+pytest.importorskip("torch")
 import torch
 import torch.nn as nn
 from src.config import PipelineConfig
@@ -11,9 +13,10 @@ from src.train_neural import (
     EarlyStopping,
     prepare_tensors,
     train_neural_network,
+)
+from src.evaluation import (
     evaluate_nn_model,
     plot_nn_training_history,
-    plot_nn_evaluation,
 )
 
 @pytest.fixture
@@ -115,6 +118,7 @@ def test_plotting_functions(temp_config):
     plot_nn_training_history(history, config=temp_config)
     assert os.path.exists(os.path.join(temp_config.visuals_dir, temp_config.nn_loss_plot_filename))
     
+    from src.train_neural import plot_nn_evaluation
     metrics = {"Accuracy": 0.8, "F1-score": 0.75}
     y_true = np.array([0, 1])
     y_pred = np.array([0, 0])

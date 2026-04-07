@@ -27,9 +27,10 @@ from src.preprocessing import (
     apply_scaling,
     generate_pca_insights,
 )
-from src.train_classical import train_classical_models, evaluate_model
-from src.train_neural import (
-    train_neural_network,
+from src.train_classical import train_classical_models
+from src.train_neural import train_neural_network
+from src.evaluation import (
+    evaluate_classical_model,
     evaluate_nn_model,
     plot_nn_training_history,
     plot_nn_evaluation,
@@ -407,7 +408,7 @@ def evaluate_and_save_best_model(
     print("=" * 50)
 
     print("\n--- Classical Model (Best) ---")
-    test_metrics_classical, _ = evaluate_model(best_classical, X_test, y_test)
+    test_metrics_classical, _ = evaluate_classical_model(best_classical, X_test, y_test)
     for metric, value in test_metrics_classical.items():
         print(f"  {metric:10s}: {value:.4f}")
 

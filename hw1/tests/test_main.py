@@ -4,6 +4,10 @@ import numpy as np
 from unittest.mock import patch, MagicMock
 from typing import Any
 import os
+import pytest
+
+pytest.importorskip("torch")
+pytest.importorskip("xgboost")
 
 from main import (
     main,
@@ -137,7 +141,7 @@ def test_preprocess_split(mock_config: PipelineConfig) -> None:
 @patch('main.fit_preprocessing_params')
 @patch('main.preprocess_split')
 @patch('main.train_classical_models')
-@patch('main.evaluate_model')
+@patch('main.evaluate_classical_model')
 @patch('main.train_neural_network')
 @patch('main.evaluate_nn_model')
 @patch('main.plot_nn_training_history')
@@ -204,7 +208,7 @@ def test_detach_targets() -> None:
 @patch('main.fit_preprocessing_params')
 @patch('main.preprocess_split')
 @patch('main.train_classical_models')
-@patch('main.evaluate_model')
+@patch('main.evaluate_classical_model')
 def test_main_no_config(
     mock_eval: MagicMock,
     mock_train: MagicMock,
@@ -382,7 +386,7 @@ def test_run_neural_training(
     assert mock_plot_eval.called
 
 
-@patch("main.evaluate_model")
+@patch("main.evaluate_classical_model")
 @patch("main.evaluate_nn_model")
 @patch("joblib.dump")
 @patch("torch.save")
@@ -409,7 +413,7 @@ def test_evaluate_and_save_best_model_classical_wins(
     assert not mock_torch_save.called
 
 
-@patch("main.evaluate_model")
+@patch("main.evaluate_classical_model")
 @patch("main.evaluate_nn_model")
 @patch("joblib.dump")
 @patch("torch.save")
