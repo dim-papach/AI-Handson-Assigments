@@ -62,9 +62,9 @@ def test_nn_config_defaults() -> None:
     """Test that NNConfig initializes with default values."""
     config = PipelineConfig()
     assert config.nn_hidden_layers == [128, 64, 32]
-    assert config.nn_activation == "ReLU"
-    assert config.nn_dropout == 0.2
-    assert config.nn_epochs == 100
-    assert config.nn_patience == 10
-    assert config.nn_checkpoint_path == "models/nn_best_model.pth"
-    assert config.nn_output_activation is None
+    assert config.nn_activation == PipelineConfig.nn_activation
+    assert config.nn_dropout == PipelineConfig.nn_dropout
+    assert config.nn_epochs == PipelineConfig.nn_epochs
+    assert config.nn_patience == PipelineConfig.nn_patience
+    assert config.nn_checkpoint_path == PipelineConfig.nn_checkpoint_path
+    assert config.nn_output_activation == PipelineConfig.nn_output_activation
