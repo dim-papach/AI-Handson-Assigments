@@ -1,5 +1,6 @@
 import os
 import joblib
+import torch
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -27,6 +28,12 @@ from src.preprocessing import (
     generate_pca_insights,
 )
 from src.train_classical import train_classical_models, evaluate_model
+from src.train_neural import (
+    train_neural_network,
+    evaluate_nn_model,
+    plot_nn_training_history,
+    plot_nn_evaluation,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -295,15 +302,57 @@ def main(
     )
 
     print("\n" + "=" * 50)
-    print("PHASE: Final Test Set Evaluation")
+    print("PHASE: Neural Network Training")
     print("=" * 50)
-    test_metrics, _ = evaluate_model(best_model, X_test, y_test)
+    nn_model, nn_history = train_neural_network(
+        X_train, y_train, X_val, y_val, config=config
+    )
+    
+    # Plot training history
+    plot_nn_training_history(nn_history, config=config)
+    
+    # Evaluate NN on validation set for comparison
+    nn_val_metrics, nn_y_pred_val = evaluate_nn_model(nn_model, X_val, y_val, config=config)
+    plot_nn_evaluation(nn_val_metrics, y_val.values, nn_y_pred_val, config=config)
 
-    print("\nBest Model Performance on Test Set:")
-    for metric, value in test_metrics.items():
+    print("\n" + "=" * 50)
+    print("PHASE: Final Test Set Evaluation & Comparison")
+    print("=" * 50)
+    
+    print("\n--- Classical Model (Best) ---")
+    test_metrics_classical, _ = evaluate_model(best_model, X_test, y_test)
+    for metric, value in test_metrics_classical.items():
         print(f"  {metric:10s}: {value:.4f}")
 
-    return X_train, X_val, X_test, y_train, y_val, y_test, best_model
+    print("\n--- Neural Network ---")
+    test_metrics_nn, _ = evaluate_nn_model(nn_model, X_test, y_test, config=config)
+    for metric, value in test_metrics_nn.items():
+        print(f"  {metric:10s}: {value:.4f}")
+
+    # Determine best overall model
+    classical_score = test_metrics_classical.get('ROC-AUC', 0)
+    if np.isnan(classical_score):
+        classical_score = test_metrics_classical.get('Accuracy', 0)
+        
+    nn_score = test_metrics_nn.get('ROC-AUC', 0)
+    if np.isnan(nn_score):
+        nn_score = test_metrics_nn.get('Accuracy', 0)
+
+    print("\n" + "-" * 30)
+    if nn_score > classical_score:
+        print(f"Winner: Neural Network (Score: {nn_score:.4f} vs {classical_score:.4f})")
+        best_overall = nn_model
+        best_model_path = os.path.join(config.models_dir, "best_model.pt")
+        torch.save(nn_model.state_dict(), best_model_path)
+    else:
+        print(f"Winner: Classical Model (Score: {classical_score:.4f} vs {nn_score:.4f})")
+        best_overall = best_model
+        best_model_path = os.path.join(config.models_dir, "best_model.pkl")
+        joblib.dump(best_model, best_model_path)
+    
+    print(f"Designated best model saved to {best_model_path}")
+
+    return X_train, X_val, X_test, y_train, y_val, y_test, best_overall
 
 
 if __name__ == "__main__":

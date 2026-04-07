@@ -134,7 +134,19 @@ def test_preprocess_split(mock_config: PipelineConfig) -> None:
 @patch('main.preprocess_split')
 @patch('main.train_classical_models')
 @patch('main.evaluate_model')
+@patch('main.train_neural_network')
+@patch('main.evaluate_nn_model')
+@patch('main.plot_nn_training_history')
+@patch('main.plot_nn_evaluation')
+@patch('joblib.dump')
+@patch('torch.save')
 def test_main_orchestration(
+    mock_torch_save: MagicMock,
+    mock_joblib_dump: MagicMock,
+    mock_plot_nn_eval: MagicMock,
+    mock_plot_nn_hist: MagicMock,
+    mock_eval_nn: MagicMock,
+    mock_train_nn: MagicMock,
     mock_eval: MagicMock,
     mock_train: MagicMock,
     mock_preprocess: MagicMock,
@@ -155,14 +167,20 @@ def test_main_orchestration(
     
     mock_preprocess.side_effect = mock_preprocess_side_effect
     
-    mock_eval.return_value = ({'Accuracy': 1.0}, np.array([0]*5))
-    
+    mock_eval.return_value = ({'Accuracy': 1.0, 'ROC-AUC': 0.9}, np.array([0]*5))
+    mock_train_nn.return_value = (MagicMock(), {"train_loss": [0.1], "val_loss": [0.1]})
+    mock_eval_nn.return_value = ({'Accuracy': 0.9, 'ROC-AUC': 0.85}, np.array([0]*5))
+
     X_train, X_val, X_test, y_train, y_val, y_test, best_model = main(mock_config)
     
     assert mock_load.called
     assert mock_split.called
     assert mock_train.called
     assert mock_eval.called
+    assert mock_train_nn.called
+    assert mock_eval_nn.called
+    assert mock_plot_nn_hist.called
+    assert mock_plot_nn_eval.called
     assert len(X_train) == 5
     assert len(X_val) == 5
     assert len(X_test) == 5

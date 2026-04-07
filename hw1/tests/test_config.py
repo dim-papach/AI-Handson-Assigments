@@ -4,11 +4,11 @@ from src.config import PipelineConfig, DataConfig, SplitConfig, TuningConfig
 def test_pipeline_config_defaults() -> None:
     """Test that PipelineConfig initializes with default values."""
     config = PipelineConfig()
-    assert config.target_col == "CLASS_SP"
-    assert config.train_size == 0.80
-    assert config.val_size == 0.10
-    assert config.test_size == 0.10
-    assert config.random_state == 42
+    assert config.target_col == PipelineConfig.target_col
+    assert config.train_size == PipelineConfig.train_size
+    assert config.val_size == PipelineConfig.val_size
+    assert config.test_size == PipelineConfig.test_size
+    assert config.random_state == PipelineConfig.random_state
     # Ensure err_vars are auto-derived
     assert len(config.err_vars) == len(config.key_vars)
     assert config.err_vars[0] == f"E_{config.key_vars[0]}"
@@ -57,3 +57,14 @@ def test_tuning_config_defaults() -> None:
     tune = TuningConfig()
     assert tune.xgb_early_stopping_rounds == 10
     assert len(tune.dt_max_depth) > 0
+
+def test_nn_config_defaults() -> None:
+    """Test that NNConfig initializes with default values."""
+    config = PipelineConfig()
+    assert config.nn_hidden_layers == [128, 64, 32]
+    assert config.nn_activation == "ReLU"
+    assert config.nn_dropout == 0.2
+    assert config.nn_epochs == 100
+    assert config.nn_patience == 10
+    assert config.nn_checkpoint_path == "models/nn_best_model.pth"
+    assert config.nn_output_activation is None

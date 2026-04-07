@@ -33,6 +33,11 @@ class DataConfig:
     scree_filename: str = "pca_scree_plot.png"
     projection_filename: str = "pca_2d_projection.png"
 
+    nn_model_filename: str = "neural_network.pt"
+    nn_metrics_filename: str = "nn_metrics.png"
+    nn_loss_plot_filename: str = "nn_loss_curves.png"
+    nn_cm_filename: str = "nn_confusion_matrix.png"
+
     def _derive_err_vars(self) -> None:
         """Derives ``err_vars`` list if left empty."""
         if not self.err_vars:
@@ -79,7 +84,22 @@ class TuningConfig:
     xgb_learning_rate: List[float] = field(default_factory=lambda: [0.01, 0.1])
 
 @dataclass
-class PipelineConfig(DataConfig, SplitConfig, TuningConfig):
+class NNConfig:
+    """Configuration for Neural Network architecture and training."""
+
+    nn_hidden_layers: List[int] = field(default_factory=lambda: [128, 64, 32])
+    nn_activation: str = "ReLU"  # Options: ReLU, LeakyRFelu, ELU, Tanh
+    nn_checkpoint_path: str = "models/nn_best_model.pth"
+    nn_dropout: float = 0.2
+    nn_learning_rate: float = 0.001
+    nn_epochs: int = 100
+    nn_batch_size: int = 64
+    nn_patience: int = 10
+    nn_output_activation: Optional[str] = None  # Sigmoid, Softmax, or None (auto)
+    nn_random_state: int = 42
+
+@dataclass
+class PipelineConfig(DataConfig, SplitConfig, TuningConfig, NNConfig):
     """Unified configuration class inheriting from specialized sub-configs."""
 
     def __post_init__(self) -> None:
