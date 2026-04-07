@@ -23,8 +23,8 @@ class DataConfig:
     color_vars: List[str] = field(
         default_factory=lambda: ["u-g", "g-r", "W3-UT", "(W3+UT)/W1"]
     )
-    visuals_dir: str = "visuals"
-    models_dir: str = "models"
+    visuals_dir: str = os.path.join(current_dir, "../visuals")
+    models_dir: str = os.path.join(current_dir, "../models")
     scaler_filename: str = "scaler.pkl"
     encoder_filename: str = "label_encoder.pkl"
     model_filename: str = "classical_model.pkl"
@@ -89,7 +89,7 @@ class NNConfig:
 
     nn_hidden_layers: List[int] = field(default_factory=lambda: [128, 64, 32])
     nn_activation: str = "ReLU"  # Options: ReLU, LeakyRFelu, ELU, Tanh
-    nn_checkpoint_path: str = "models/nn_best_model.pth"
+    nn_checkpoint_path: str = os.path.join(current_dir, "../models/nn_best_model.pth")
     nn_dropout: float = 0.2
     nn_learning_rate: float = 0.001
     nn_epochs: int = 100

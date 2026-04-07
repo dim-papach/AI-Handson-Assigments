@@ -1,6 +1,6 @@
 # 2026-04-07
 
-The focus was on modularizing and centralizing the machine learning pipeline's configuration, and implementing a fully functional Neural Network pipeline. Decoupled hyperparameters and file paths into a dedicated `src/config.py` module, and updated the entire pipeline to use these defaults, enhancing the codebase's maintainability and reducing hardcoding. Developed a comprehensive test suite for the configuration and training modules, resolving NumPy 2.0 compatibility issues, and achieving 100% test pass rate across 62 unit tests.
+The focus was on modularizing and centralizing the machine learning pipeline's configuration, implementing a fully functional Neural Network pipeline, and refactoring the main orchestration logic. Decoupled hyperparameters and file paths into a dedicated `src/config.py` module and updated the entire pipeline to use these defaults. Refactored `main.py` into distinct, single-responsibility functions to improve maintainability. Developed a comprehensive test suite for configuration, training, and orchestration modules, achieving a 100% test pass rate across the entire pipeline.
 
 ## dev-02:12
 ### Centralizing Pipeline Configuration and Testing
@@ -28,3 +28,11 @@ The focus was on modularizing and centralizing the machine learning pipeline's c
 - Developed 10 new unit tests in `tests/test_train_neural.py` covering model architecture, training loops, and evaluation.
 - Resolved NumPy 2.0 compatibility issue by updating deprecated `np.Inf` to `np.inf`.
 - Verified the complete project with 62 passing unit tests.
+
+## dev-23:22
+### Modular Refactoring of Main Pipeline and Test Suite Expansion
+- Refactored `main.py` into distinct, single-responsibility phases: Ingestion/Preprocessing, Classical Training, Neural Training, and Final Evaluation.
+- Introduced `run_data_ingestion_and_preprocessing`, `run_classical_training`, `run_neural_training`, and `evaluate_and_save_best_model` orchestrators.
+- Implemented extensive unit tests in `tests/test_main.py` to validate each pipeline phase independently.
+- Stabilized the main orchestration logic with mock-based testing, ensuring robust component interaction.
+- Verified the integrity of the refactored pipeline with 16 dedicated orchestration tests, all passing.
