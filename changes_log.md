@@ -17,10 +17,11 @@ Addressed significant class imbalance by implementing SMOTE (Synthetic Minority 
 - Enhanced `src/train_neural.py` with runtime thread-configuration protection.
 
 ## dev-00:44
-### Visual Optimization of Model Comparisons
-- Refactored `src/evaluation.py` to transition model performance plots from a monolithic row to a responsive grid layout.
-- Optimized subplot management for the 5 classical models, resulting in a cleaner 3x2 grid that improves side-by-side comparison readability.
-- Verified visual artifact generation through end-to-end pipeline execution and regression testing.
+### Visual Layout Optimization for Model Comparison
+- Refactored `src/evaluation.py` to support a dynamic grid layout (defaulting to 2 columns) for confusion matrices and model metrics, replacing the monolithic row format.
+- Verified the new 2x2 grid layout through pipeline execution and unit testing.
+- Fixed a `RuntimeError` in neural network training related to torch thread configuration during parallel testing.
+- Stabilized the main execution pipeline to ensure consistency when SMOTE is applied to small datasets by refining test mocks.
 
 # 2026-04-08
 
