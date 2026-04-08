@@ -32,6 +32,7 @@ def build_model_grid(
     xgb_n_estimators: Optional[List[int]] = None,
     xgb_max_depth: Optional[List[int]] = None,
     xgb_learning_rate: Optional[List[float]] = None,
+    n_jobs: int = PipelineConfig.n_jobs,
 ) -> Dict[str, Any]:
     """Returns the model classes and hyperparameter grids to search over.
 
@@ -53,6 +54,9 @@ def build_model_grid(
     xgb_n_estimators : List[int], optional
     xgb_max_depth : List[int], optional
     xgb_learning_rate : List[float], optional
+    n_jobs : int, optional
+        Number of CPU cores to use for parallel models (LogisticRegression, RandomForest, XGBoost).
+        -1 means use all available cores.
 
     Returns
     -------
@@ -89,6 +93,7 @@ def build_model_grid(
                 'class_weight': ['balanced'],
                 'random_state': [random_state],
             },
+            'init_kwargs': {'n_jobs': n_jobs},
         },
         'SVM': {
             'model_cls': SVC,
@@ -108,6 +113,7 @@ def build_model_grid(
                 'class_weight': ['balanced'],
                 'random_state': [random_state],
             },
+            'init_kwargs': {'n_jobs': n_jobs},
         },
         'XGBoost': {
             'model_cls': XGBClassifier,
@@ -118,6 +124,7 @@ def build_model_grid(
                 'random_state': [random_state],
                 'eval_metric': ['mlogloss' if is_multiclass else 'logloss'],
             },
+            'init_kwargs': {'n_jobs': n_jobs},
         },
     }
 
@@ -165,6 +172,7 @@ def run_grid_search_for_model(
     best_predictions: np.ndarray = np.array([])
 
     for params in ParameterGrid(config['grid']):
+        params = {**params, **config.get('init_kwargs', {})}
         model = config['model_cls'](**params)
 
         if model_name == 'XGBoost':
@@ -255,6 +263,7 @@ def train_classical_models(
     cm_filename: str = PipelineConfig.cm_filename,
     model_filename: str = PipelineConfig.model_filename,
     xgb_early_stopping_rounds: int = PipelineConfig.xgb_early_stopping_rounds,
+    n_jobs: int = PipelineConfig.n_jobs,
     dt_max_depth: Optional[List[Optional[int]]] = None,
     dt_min_samples_split: Optional[List[int]] = None,
     lr_C: Optional[List[float]] = None,
@@ -321,6 +330,7 @@ def train_classical_models(
         xgb_n_estimators=xgb_n_estimators,
         xgb_max_depth=xgb_max_depth,
         xgb_learning_rate=xgb_learning_rate,
+        n_jobs=n_jobs,
     )
 
     best_overall_model: Any = None

@@ -319,6 +319,7 @@ def run_classical_training(
         cm_filename=config.cm_filename,
         model_filename=config.model_filename,
         xgb_early_stopping_rounds=config.xgb_early_stopping_rounds,
+        n_jobs=config.n_jobs,
         dt_max_depth=config.dt_max_depth,
         dt_min_samples_split=config.dt_min_samples_split,
         lr_C=config.lr_C,

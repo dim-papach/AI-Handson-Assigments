@@ -189,6 +189,9 @@ def train_neural_network(
     torch.manual_seed(config.nn_random_state)
     np.random.seed(config.nn_random_state)
 
+    torch.set_num_threads(config.nn_num_threads)
+    torch.set_num_interop_threads(config.nn_num_threads)
+
     # Determine dimensions
     input_dim = X_train.shape[1]
     num_classes = len(np.unique(y_train))

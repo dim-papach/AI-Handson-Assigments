@@ -7,7 +7,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 class DataConfig:
     """Configuration for data paths, column names, and filenames."""
 
-    filepath: str = os.path.join(current_dir, "../data/HECATE_test.csv")
+    filepath: str = os.path.join(current_dir, "../data/HECATE.csv")
     target_col: str = "CLASS_SP"
     key_vars: List[str] = field(
         default_factory=lambda: [
@@ -68,6 +68,7 @@ class TuningConfig:
     """Configuration for model training and hyperparameter search spaces."""
 
     xgb_early_stopping_rounds: int = 10
+    n_jobs: int = -1
 
     # Hyperparameter search spaces
     dt_max_depth: List[Optional[int]] = field(default_factory=lambda: [None, 5, 10, 20])
@@ -101,6 +102,7 @@ class NNConfig:
     nn_patience: int = 10
     nn_output_activation: Optional[str] = None  # Sigmoid, Softmax, or None (auto)
     nn_random_state: int = 42
+    nn_num_threads: int = field(default_factory=lambda: os.cpu_count() or 1)
 
 @dataclass
 class PipelineConfig(DataConfig, SplitConfig, TuningConfig, NNConfig):
