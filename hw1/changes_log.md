@@ -52,7 +52,7 @@ Implemeted complete unit test coverage for the machine learning pipeline, added 
 
 # 2026-04-08
 
-Completed the mandatory coding requirements for Homework 1 Task 4 by implementing final test set evaluation and side-by-side model comparison visualizations. Successfully verified the full pipeline with real data and achieved 100% pass rate across the comprehensive unit test suite (77 tests).
+Completed the mandatory coding requirements for Homework 1 Task 4 and Task 5. Successfully implemented final test set evaluation comparison, optimized the pipeline with a "skip-training" mechanism for instant model loading, and deployed the final best model as a production-ready REST API using FastAPI.
 
 ## dev-22:15
 ### Completion of Task 4 and Test Suite Alignment
@@ -61,3 +61,9 @@ Completed the mandatory coding requirements for Homework 1 Task 4 by implementin
 - **Unit Test Coverage Expansion**: Updated `tests/test_main.py` and `tests/test_config.py` to cover the new Task 4 logic, reaching a total of 77 passing tests.
 - **Integration Reliability**: Resolved a critical mock environment issue involving `sys.stdout.encoding` that was causing failures in the main integration test.
 - **Configuration Synchronization**: Added dedicated plot filename fields to `PipelineConfig` to support the final comparison phase.
+
+## dev-23:47
+### FastAPI Deployment and Pipeline Performance Optimization
+- **Task 5 (FastAPI Implementation)**: Created `src/api.py` to expose the best model via a REST API. Integrated full preprocessing (capping, scaling, imputation) to handle raw photometric data inputs.
+- **Skip-Training Logic**: Implemented automated checks in `main.py` to detect existing model files. The pipeline now skips the expensive training phases if `best_model.pkl` or `best_model.pt` are found.
+- **Model Inversion & Loading**: Updated `run_neural_training` to correctly instantiate the architecture and load PyTorch weights when retraining is skipped.
