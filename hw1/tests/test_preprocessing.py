@@ -22,7 +22,8 @@ from src.preprocessing import (
     get_fitted_scaler,
     apply_scaling,
     save_outlier_histograms,
-    generate_pca_insights
+    generate_pca_insights,
+    apply_smote
 )
 
 # Local test configurations instead of importing from main.py
@@ -341,4 +342,25 @@ def test_apply_scaling_no_cols_to_scale() -> None:
     result = apply_scaling(df, scaler=scaler, num_cols=pd.Index([]), target_col='CLASS_SP')
     assert 'CLASS_SP' in result.columns
     assert list(result['cat']) == ['x', 'y']
+
+
+def test_apply_smote() -> None:
+    """Test standard SMOTE oversampling correctly balances classes."""
+    X = pd.DataFrame({
+        'feat1': [1.0, 1.1, 1.2, 1.3, 5.0, 5.1],
+        'feat2': [10.0, 10.1, 10.2, 10.3, 50.0, 50.1]
+    })
+    y = pd.Series([0, 0, 0, 0, 1, 1], name='target')
+    
+    # K-neighbors=1 for small minority class size
+    X_res, y_res = apply_smote(X, y, k_neighbors=1, random_state=42)
+    
+    # Assert counts: minority should match majority (4 each)
+    assert len(X_res) == 8
+    assert len(y_res) == 8
+    assert (y_res == 1).sum() == 4
+    assert (y_res == 0).sum() == 4
+    # Metadata preservation
+    assert list(X_res.columns) == ['feat1', 'feat2']
+    assert y_res.name == 'target'
 

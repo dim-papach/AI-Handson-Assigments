@@ -46,7 +46,8 @@ def mock_config(tmp_path: Any) -> PipelineConfig:
         val_size=0.2,
         test_size=0.2,
         visuals_dir=str(tmp_path / "visuals"),
-        models_dir=str(tmp_path / "models")
+        models_dir=str(tmp_path / "models"),
+        smote_k_neighbors=1
     )
 
 def test_load_and_filter_data(mock_config: PipelineConfig) -> None:
@@ -151,7 +152,7 @@ def test_main_orchestration(
     mock_load.return_value = df
     mock_split.return_value = (df.iloc[:6], df.iloc[6:8], df.iloc[8:])
     def mock_preprocess_side_effect(*args: Any, **kwargs: Any) -> pd.DataFrame:
-        return pd.DataFrame({'T': [1]*5, 'WF1': [2]*5, 'WF2': [3]*5, 'CLASS_SP': [0]*5}).copy()
+        return pd.DataFrame({'T': [1]*5, 'WF1': [2]*5, 'WF2': [3]*5, 'CLASS_SP': [0, 1, 1, 0, 1]}).copy()
     mock_preprocess.side_effect = mock_preprocess_side_effect
     
     # Mock le to have classes and working inverse_transform
@@ -167,7 +168,7 @@ def test_main_orchestration(
     X_train, X_val, X_test, y_train, y_val, y_test, le_out, best_model = main(mock_config)
     
     assert mock_load.called
-    assert len(X_train) == 5
+    assert len(X_train) >= 5
     assert best_model is not None
 
 def test_detach_targets() -> None:
@@ -212,21 +213,20 @@ def test_main_no_config(
     df = pd.DataFrame({'T': [1]*30, 'WF1': [2]*30, 'WF2': [3]*30, 'CLASS_SP': ['A']*30})
     mock_load.return_value = df
     mock_split.return_value = (df.iloc[:20], df.iloc[20:25], df.iloc[25:])
-    mock_fit.return_value = ({}, MagicMock(), pd.Index(['T', 'WF1', 'WF2']), MagicMock(), MagicMock())
     
     def mock_preprocess_side_effect(*args: Any, **kwargs: Any) -> pd.DataFrame:
-        return pd.DataFrame({'T': [1]*5, 'WF1': [2]*5, 'WF2': [3]*5, 'CLASS_SP': [0]*5}).copy()
+        return pd.DataFrame({'T': [1]*12, 'WF1': [2]*12, 'WF2': [3]*12, 'CLASS_SP': [0, 1]*6}).copy()
     mock_preprocess.side_effect = mock_preprocess_side_effect
     
     # Mock le to have classes and working inverse_transform
     mock_le = MagicMock()
     mock_le.classes_ = ['A', 'B']
-    mock_le.inverse_transform.return_value = np.array(['A']*5)
+    mock_le.inverse_transform.return_value = np.array(['A']*12)
     mock_fit.return_value = ({}, MagicMock(), pd.Index(['T', 'WF1', 'WF2']), MagicMock(), mock_le)
     
-    mock_eval.return_value = ({'Accuracy': 1.0}, np.array([0]*5))
+    mock_eval.return_value = ({'Accuracy': 1.0}, np.array([0]*12))
     mock_train_nn.return_value = (MagicMock(), {"train_loss": [0.1], "val_loss": [0.1]})
-    mock_eval_nn.return_value = ({'Accuracy': 0.9, 'ROC-AUC': 0.85}, np.array([0]*5))
+    mock_eval_nn.return_value = ({'Accuracy': 0.9, 'ROC-AUC': 0.85}, np.array([0]*12))
     
     with patch('os.path.exists', return_value=False):
         with patch('pandas.read_csv') as mock_read:
@@ -279,7 +279,7 @@ def test_run_data_ingestion_and_preprocessing(
     mock_fit.return_value = ({}, MagicMock(), pd.Index(["T"]), MagicMock(), MagicMock())
     
     def mock_preprocess_side_effect(*args: Any, **kwargs: Any) -> pd.DataFrame:
-        return pd.DataFrame({"T": [1] * 5, "CLASS_SP": [0] * 5}).copy()
+        return pd.DataFrame({"T": [1] * 5, "CLASS_SP": [0, 1, 0, 1, 0]}).copy()
     mock_preprocess.side_effect = mock_preprocess_side_effect
     
     results = run_data_ingestion_and_preprocessing(mock_config)

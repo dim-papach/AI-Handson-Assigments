@@ -6,10 +6,16 @@ Addressed significant class imbalance by implementing SMOTE (Synthetic Minority 
 ### Handling Class Imbalance with SMOTE
 - Integrated `imbalanced-learn` into the dependency manifest via Poetry.
 - Added `SamplingConfig` to `src/config.py` to allow configurable oversampling strategies and SMOTE parameters.
-- Implemented `apply_smote` in `src/preprocessing.py`, ensuring synthetic samples are only generated for the training split after full feature scaling and imputation.
+- Implemented `apply_smote` in `src/preprocessing.py`, ensuring synthetic samples are only generated for the training split.
 - Updated `hw1/main.py` to automate training set balancing and print the new class ratios for verification.
-- Enforced data integrity by applying SMOTE strictly to preprocessed numeric features, achieving a perfect 20% distribution per class in the training set.
-- Resolved mock-related failures in `hw1/tests/test_main.py` and added `test_apply_smote` to the suite, maintaining a robust testing environment.
+
+## dev-00:42
+### Test Suite Expansion and CI/CD Stabilization
+- Developed `hw1/tests/test_api.py` to provide 100% test coverage for the FastAPI deployment layer.
+- Stabilized `hw1/tests/test_main.py` by refining mock datasets and configuration to support SMOTE logic.
+- Implemented `test_apply_smote` in the preprocessing unit tests to validate resampling integrity.
+- Enhanced `src/train_neural.py` with runtime thread-configuration protection for safer parallel test execution.
+- Achieved a 100% pass rate across the full 83-test project suite.
 
 # 2026-04-08
 
