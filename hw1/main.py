@@ -29,7 +29,7 @@ from src.preprocessing import (
     generate_pca_insights,
 )
 from src.train_classical import train_classical_models
-from src.train_neural import train_neural_network
+from src.train_neural import train_neural_network, SimpleNN
 from src.evaluation import (
     evaluate_classical_model,
     evaluate_nn_model,
@@ -140,6 +140,9 @@ def fit_preprocessing_params(
         train_temp_scaled.drop(columns=[config.target_col]),
         train_temp_scaled[config.target_col],
     )
+
+    joblib.dump(pipeline, os.path.join(config.models_dir, "imputation_pipeline.pkl"))
+    joblib.dump(iqr_bounds, os.path.join(config.models_dir, "iqr_bounds.pkl"))
 
     return iqr_bounds, scaler, num_cols, pipeline, le
 
@@ -304,6 +307,11 @@ def run_classical_training(
     Any
         The best fitted classical model found during grid search.
     """
+    model_path = os.path.join(config.models_dir, config.model_filename)
+    if os.path.exists(model_path):
+        print(f"\n[SKIP] Classical model found at {model_path}. Skipping training...")
+        return joblib.load(model_path)
+
     print("\n" + "=" * 50)
     print("PHASE: Classical ML Training & Grid Search")
     print("=" * 50)
@@ -359,8 +367,27 @@ def run_neural_training(
     Returns
     -------
     torch.nn.Module
-        The trained neural network model.
+        The trained or loaded neural network model.
     """
+    model_path = os.path.join(config.models_dir, config.nn_model_filename)
+    if os.path.exists(model_path):
+        print(f"\n[SKIP] Neural network found at {model_path}. Skipping training...")
+        
+        num_classes = len(np.unique(y_train))
+        is_binary = num_classes <= 2
+        output_dim = 1 if is_binary else num_classes
+        
+        nn_model = SimpleNN(
+            input_dim=X_train.shape[1],
+            hidden_layers=config.nn_hidden_layers,
+            output_dim=output_dim,
+            dropout=config.nn_dropout,
+            activation=config.nn_activation,
+        )
+        nn_model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+        nn_model.eval()
+        return nn_model
+
     print("\n" + "=" * 50)
     print("PHASE: Neural Network Training")
     print("=" * 50)

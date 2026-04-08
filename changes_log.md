@@ -1,6 +1,6 @@
 # 2026-04-08
 
-The day began with a focus on modularizing the machine learning pipeline's evaluation logic. Centralized evaluation and visualization tools into a dedicated module, refactored training scripts to eliminate redundancy, and expanded test coverage to ensure the integrity of the new decentralized architecture.
+The day focused on transitioning the machine learning pipeline from a batch-processing research tool to a production-ready system. Initial efforts centralized evaluation and visualization logic, followed by the implementation of a FastAPI deployment layer. Successfully exposed the best-performing models via a REST API, ensuring full parity between training and inference preprocessing.
 
 ## dev-00:14
 ### Centralizing Evaluation Logic and Modularization
@@ -9,6 +9,15 @@ The day began with a focus on modularizing the machine learning pipeline's evalu
 - Updated `hw1/main.py` to leverage the centralized evaluation tools for final model comparisons.
 - Expanded the test suite with `hw1/tests/test_evaluation.py` and updated existing tests to align with the new modular structure.
 - Ensured 100% pass rate for the refactored evaluation pipeline.
+
+## dev-23:30
+### Model Deployment and FastAPI Integration (Task 5)
+- Created `hw1/src/api.py` implementing a FastAPI REST endpoint to expose the best performing model.
+- Developed a `/predict` POST endpoint using Pydantic for input validation and automatic documentation.
+- Integrated the saved preprocessing pipeline (Scaler, LabelEncoder, Imputer, IQR bounds) into the inference logic for feature parity.
+- Enhanced `hw1/main.py` to persist all necessary preprocessing artifacts (`imputation_pipeline.pkl`, `iqr_bounds.pkl`).
+- Added a `hw1/requirements.txt` manifest documenting deployment dependencies.
+- Verified the production-ready API through the Swagger UI with successful real-time inference tests.
 
 # 2026-04-07
 
