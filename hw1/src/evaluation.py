@@ -218,11 +218,15 @@ def plot_model_performance(
         return
 
     # 1. Plot Metrics (Bar plots)
-    fig, axes = plt.subplots(1, num_models, figsize=(4 * num_models, 5), sharey=True)
-    if num_models == 1:
-        axes = [axes]
+    num_cols = 2 if num_models >= 2 else 1
+    num_rows = (num_models + num_cols - 1) // num_cols
+    fig, axes = plt.subplots(num_rows, num_cols, figsize=(5 * num_cols, 4 * num_rows), sharey=True)
+    
+    # Flatten axes for easier iteration if it's a grid
+    axes_flat = axes.flatten() if num_models > 1 else [axes]
 
-    for ax, (model_name, data) in zip(axes, model_results.items()):
+    for i, (model_name, data) in enumerate(model_results.items()):
+        ax = axes_flat[i]
         metrics = {k: v for k, v in data["metrics"].items() if not np.isnan(v)}
         ax.bar(
             metrics.keys(),
@@ -231,22 +235,26 @@ def plot_model_performance(
         )
         ax.set_title(model_name, fontweight="bold")
         ax.set_ylim(0, 1.05)
-        for i, v in enumerate(metrics.values()):
-            ax.text(i, v + 0.01, f"{v:.3f}", ha="center", fontsize=9)
+        for j, v in enumerate(metrics.values()):
+            ax.text(j, v + 0.01, f"{v:.3f}", ha="center", fontsize=9)
         ax.tick_params(axis="x", rotation=45)
 
-    plt.suptitle(main_title, fontsize=14, y=1.05)
+    # Hide unused axes
+    for i in range(num_models, len(axes_flat)):
+        axes_flat[i].axis("off")
+
+    plt.suptitle(main_title, fontsize=14, y=1.02)
     plt.tight_layout()
     metrics_path = os.path.join(visuals_dir, metrics_filename)
     plt.savefig(metrics_path, bbox_inches="tight", dpi=300)
     plt.close()
 
     # 2. Plot Confusion Matrices
-    fig2, axes2 = plt.subplots(1, num_models, figsize=(4 * num_models, 4))
-    if num_models == 1:
-        axes2 = [axes2]
+    fig2, axes2 = plt.subplots(num_rows, num_cols, figsize=(5 * num_cols, 4 * num_rows))
+    axes2_flat = axes2.flatten() if num_models > 1 else [axes2]
 
-    for ax, (model_name, data) in zip(axes2, model_results.items()):
+    for i, (model_name, data) in enumerate(model_results.items()):
+        ax = axes2_flat[i]
         cm = data["cm"]
         sns.heatmap(
             cm,
@@ -262,7 +270,11 @@ def plot_model_performance(
         ax.set_xlabel("Predicted")
         ax.set_ylabel("Actual")
 
-    plt.suptitle(f"{main_title} - Confusion Matrices", fontsize=14, y=1.05)
+    # Hide unused axes
+    for i in range(num_models, len(axes2_flat)):
+        axes2_flat[i].axis("off")
+
+    plt.suptitle(f"{main_title} - Confusion Matrices", fontsize=14, y=1.02)
     plt.tight_layout()
     cm_path = os.path.join(visuals_dir, cm_filename)
     plt.savefig(cm_path, bbox_inches="tight", dpi=300)

@@ -13,9 +13,14 @@ Addressed significant class imbalance by implementing SMOTE (Synthetic Minority 
 ### Test Suite Expansion and CI/CD Stabilization
 - Developed `hw1/tests/test_api.py` to provide 100% test coverage for the FastAPI deployment layer.
 - Stabilized `hw1/tests/test_main.py` by refining mock datasets and configuration to support SMOTE logic.
-- Implemented `test_apply_smote` in the preprocessing unit tests to validate resampling integrity.
-- Enhanced `src/train_neural.py` with runtime thread-configuration protection for safer parallel test execution.
-- Achieved a 100% pass rate across the full 83-test project suite.
+- Implemented `test_apply_smote` in the preprocessing unit tests grid resampling.
+- Enhanced `src/train_neural.py` with runtime thread-configuration protection.
+
+## dev-00:44
+### Visual Optimization of Model Comparisons
+- Refactored `src/evaluation.py` to transition model performance plots from a monolithic row to a responsive grid layout.
+- Optimized subplot management for the 5 classical models, resulting in a cleaner 3x2 grid that improves side-by-side comparison readability.
+- Verified visual artifact generation through end-to-end pipeline execution and regression testing.
 
 # 2026-04-08
 
