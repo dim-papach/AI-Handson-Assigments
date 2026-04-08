@@ -20,7 +20,12 @@ dependencies = [
 "scikit-learn",
 "torch",
 "pytest (>=9.0.2,<10.0.0)",
-"xgboost (>=3.2.0,<4.0.0)"
+"xgboost (>=3.2.0,<4.0.0)",
+"fastapi",
+"uvicorn",
+"pydantic",
+"joblib",
+"swagger-ui-bundle",
 ]
 
 [tool.poetry]

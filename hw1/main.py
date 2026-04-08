@@ -141,6 +141,9 @@ def fit_preprocessing_params(
         train_temp_scaled[config.target_col],
     )
 
+    joblib.dump(pipeline, os.path.join(config.models_dir, "imputation_pipeline.pkl"))
+    joblib.dump(iqr_bounds, os.path.join(config.models_dir, "iqr_bounds.pkl"))
+
     return iqr_bounds, scaler, num_cols, pipeline, le
 
 
