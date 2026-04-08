@@ -8,6 +8,7 @@ from unittest.mock import patch, MagicMock
 from sklearn.datasets import make_classification
 from typing import Dict, Tuple, List, Optional, Any
 from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import LabelEncoder
 
 # Import the targets to test
 from src.train_classical import (
@@ -114,6 +115,7 @@ def test_train_classical_models(sample_data: Tuple[pd.DataFrame, np.ndarray, pd.
                     xgb_n_estimators=[10],
                     xgb_max_depth=[3],
                     xgb_learning_rate=[0.1],
+                    le=LabelEncoder().fit([0, 1]),
                 )
 
     # Evaluation Assertions

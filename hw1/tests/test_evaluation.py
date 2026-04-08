@@ -142,6 +142,7 @@ def test_plot_model_performance(mock_savefig: MagicMock, tmp_path: Any) -> None:
         visuals_dir=visuals_dir,
         metrics_filename="metrics.png",
         cm_filename="cm.png",
+        class_names=["Class0", "Class1"],
     )
 
     assert os.path.exists(visuals_dir)
@@ -170,12 +171,13 @@ def test_plot_nn_evaluation(mock_plot_perf: MagicMock) -> None:
     config = PipelineConfig()
     config.visuals_dir = "mock_dir"
 
-    plot_nn_evaluation(metrics, y_true, y_pred, config=config)
+    plot_nn_evaluation(metrics, y_true, y_pred, config=config, class_names=["A", "B"])
 
     mock_plot_perf.assert_called_once()
     args, kwargs = mock_plot_perf.call_args
     assert "Neural Network" in args[0]
     assert kwargs["visuals_dir"] == "mock_dir"
+    assert kwargs["class_names"] == ["A", "B"]
 
 
 def test_evaluate_nn_model_softmax(sample_multiclass_data: Tuple[pd.DataFrame, pd.Series]) -> None:

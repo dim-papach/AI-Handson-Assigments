@@ -17,6 +17,7 @@ from src.preprocessing import (
     build_preprocessing_pipeline,
     fit_target_encoder,
     apply_target_encoder,
+    inverse_transform_labels,
     apply_imputation,
     get_fitted_scaler,
     apply_scaling,
@@ -185,6 +186,17 @@ def test_target_encoder(sample_df: pd.DataFrame, tmp_path: Any) -> None:
     encoded_df = apply_target_encoder(df, target_col='CLASS_SP', le=le)
     assert encoded_df['CLASS_SP'].iloc[0] == 0 # 'A' should be 0
     assert encoded_df['CLASS_SP'].dtype == np.int64 or encoded_df['CLASS_SP'].dtype == np.int32
+
+def test_inverse_transform_labels(sample_df: pd.DataFrame) -> None:
+    df = drop_missing_targets(sample_df, target_col='CLASS_SP')
+    le = fit_target_encoder(df, target_col='CLASS_SP')
+    
+    y_encoded = np.array([0, 1, 0])
+    y_decoded = inverse_transform_labels(y_encoded, le)
+    
+    assert len(y_decoded) == 3
+    assert y_decoded[0] == 'A'
+    assert y_decoded[1] == 'B'
 
 
 def test_apply_imputation(sample_df: pd.DataFrame) -> None:

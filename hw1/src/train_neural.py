@@ -333,3 +333,4 @@ def plot_nn_evaluation(
 
 if __name__ == "__main__":
     print("This module provides Neural Network training logic.")
+    print("Import and run `train_neural_network(X_train, y_train, X_val, y_val)`.")

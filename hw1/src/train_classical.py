@@ -12,6 +12,7 @@ from sklearn.svm import SVC
 from xgboost import XGBClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import ParameterGrid
+from sklearn.preprocessing import LabelEncoder
 from typing import Dict, Tuple, Any, List, Optional
 from src.config import PipelineConfig
 from src.evaluation import evaluate_classical_model, plot_model_performance
@@ -275,6 +276,7 @@ def train_classical_models(
     xgb_n_estimators: Optional[List[int]] = None,
     xgb_max_depth: Optional[List[int]] = None,
     xgb_learning_rate: Optional[List[float]] = None,
+    le: Optional[LabelEncoder] = None,
 ) -> Any:
     """Grid search over classical ML algorithms and return the best model.
 
@@ -297,6 +299,8 @@ def train_classical_models(
     metrics_filename : str, optional
     cm_filename : str, optional
     model_filename : str, optional
+    le : LabelEncoder, optional
+        Target label encoder fitted on the training set.
 
     Returns
     -------
@@ -360,12 +364,14 @@ def train_classical_models(
 
     print(f"\nBest Overall Classical Model: {best_overall_name} with score: {best_overall_score:.4f}")
 
+    class_names = [str(c) for c in le.classes_] if le is not None else None
     plot_model_performance(
         model_evaluations,
         visuals_dir=visuals_dir,
         metrics_filename=metrics_filename,
         cm_filename=cm_filename,
-        main_title="Validation Metrics Comparison"
+        main_title="Validation Metrics Comparison",
+        class_names=class_names,
     )
     save_best_model(best_overall_model, models_dir=models_dir, model_filename=model_filename)
     report_feature_importances(best_overall_model, X_train)

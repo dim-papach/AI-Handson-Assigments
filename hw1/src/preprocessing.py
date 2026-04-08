@@ -155,6 +155,52 @@ def apply_target_encoder(df: pd.DataFrame, le: LabelEncoder, target_col: str = P
     return df
 
 
+def inverse_transform_labels(y: np.ndarray, le: LabelEncoder) -> np.ndarray:
+    """
+    Inverse transforms numeric labels back to their original class names.
+
+    Parameters
+    ----------
+    y : np.ndarray
+        Numeric labels.
+    le : LabelEncoder
+        Fitted label encoder.
+
+    Returns
+    -------
+    np.ndarray
+        Original class names.
+    """
+    return le.inverse_transform(y)
+
+
+def print_class_ratios(df: pd.DataFrame, target_col: str, title: str) -> pd.DataFrame:
+    """
+    Calculate and print the distribution (ratio) of classes in the target variable.
+    Supports Pandas .pipe() by returning the input DataFrame.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input dataframe.
+    target_col : str
+        Target column name.
+    title : str
+        Context title for the printed output.
+
+    Returns
+    -------
+    pd.DataFrame
+        The original dataframe (unmodified).
+    """
+    if target_col in df.columns:
+        counts = df[target_col].value_counts(normalize=True) * 100
+        print(f"\n--- Class Ratios: {title} ---")
+        for cls, ratio in counts.sort_index().items():
+            print(f"  {cls}: {ratio:.2f}%")
+    return df
+
+
 # =========================================================
 # 4. Outlier Detection (Winsorizing)
 # =========================================================

@@ -27,6 +27,7 @@ from src.preprocessing import (
     get_fitted_scaler,
     apply_scaling,
     generate_pca_insights,
+    print_class_ratios,
 )
 from src.train_classical import train_classical_models
 from src.train_neural import train_neural_network, SimpleNN
@@ -37,6 +38,7 @@ from src.evaluation import (
     plot_nn_evaluation,
     plot_model_performance,
     save_evaluation_tables,
+    display_detailed_report,
 )
 
 
@@ -186,7 +188,9 @@ def preprocess_split(
     return (
         df
         .pipe(drop_missing_targets, target_col=config.target_col)
+        .pipe(print_class_ratios, target_col=config.target_col, title=f"{split_name} (Before Encoding)")
         .pipe(apply_target_encoder, target_col=config.target_col, le=le)
+        .pipe(print_class_ratios, target_col=config.target_col, title=f"{split_name} (After Encoding)")
         .pipe(apply_iqr_capping, bounds=iqr_bounds)
         .pipe(save_outlier_histograms, prefix=split_name, out_dir=config.visuals_dir)
         .pipe(apply_scaling, scaler=scaler, num_cols=num_cols, target_col=config.target_col)
@@ -223,7 +227,7 @@ def detach_targets(
 
 def run_data_ingestion_and_preprocessing(
     config: PipelineConfig,
-) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series]:
+) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series, LabelEncoder]:
     """Execute the data loading, splitting, and preprocessing pipeline.
 
     Parameters
@@ -233,8 +237,8 @@ def run_data_ingestion_and_preprocessing(
 
     Returns
     -------
-    Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series]
-        (X_train, X_val, X_test, y_train, y_val, y_test)
+    Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series, LabelEncoder]
+        (X_train, X_val, X_test, y_train, y_val, y_test, label_encoder)
     """
     df_prepared = load_and_filter_data(config)
 
@@ -277,7 +281,7 @@ def run_data_ingestion_and_preprocessing(
             projection_filename=config.projection_filename,
         )
 
-    return X_train, X_val, X_test, y_train, y_val, y_test
+    return X_train, X_val, X_test, y_train, y_val, y_test, le
 
 
 def run_classical_training(
@@ -286,6 +290,7 @@ def run_classical_training(
     X_val: pd.DataFrame,
     y_val: pd.Series,
     config: PipelineConfig,
+    le: LabelEncoder,
 ) -> Any:
     """Train and optimize classical machine learning models.
 
@@ -301,6 +306,8 @@ def run_classical_training(
         Validation targets.
     config : PipelineConfig
         Pipeline configuration object.
+    le : LabelEncoder
+        Target label encoder fitted on the training set.
 
     Returns
     -------
@@ -339,6 +346,7 @@ def run_classical_training(
         xgb_n_estimators=config.xgb_n_estimators,
         xgb_max_depth=config.xgb_max_depth,
         xgb_learning_rate=config.xgb_learning_rate,
+        le=le,
     )
 
 
@@ -348,6 +356,7 @@ def run_neural_training(
     X_val: pd.DataFrame,
     y_val: pd.Series,
     config: PipelineConfig,
+    le: LabelEncoder,
 ) -> torch.nn.Module:
     """Train and evaluate the neural network model.
 
@@ -363,6 +372,8 @@ def run_neural_training(
         Validation targets.
     config : PipelineConfig
         Pipeline configuration object.
+    le : LabelEncoder
+        Target label encoder fitted on the training set.
 
     Returns
     -------
@@ -402,7 +413,10 @@ def run_neural_training(
     nn_val_metrics, nn_y_pred_val = evaluate_nn_model(
         nn_model, X_val, y_val, config=config
     )
-    plot_nn_evaluation(nn_val_metrics, y_val.values, nn_y_pred_val, config=config)
+    class_names = [str(c) for c in le.classes_]
+    plot_nn_evaluation(
+        nn_val_metrics, y_val.values, nn_y_pred_val, config=config, class_names=class_names
+    )
 
     return nn_model
 
@@ -413,6 +427,7 @@ def evaluate_and_save_best_model(
     X_train: pd.DataFrame,
     X_test: pd.DataFrame,
     y_test: pd.Series,
+    le: LabelEncoder,
     config: PipelineConfig,
 ) -> Any:
     """Evaluate both types of models on the test set and save the overall winner.
@@ -438,16 +453,26 @@ def evaluate_and_save_best_model(
     print("\n" + "=" * 50)
     print("PHASE: Final Test Set Evaluation & Comparison")
     print("=" * 50)
+    
+    # After Inversing Check
+    y_test_inv = le.inverse_transform(y_test)
+    y_test_inv_df = pd.DataFrame({config.target_col: y_test_inv})
+    print_class_ratios(y_test_inv_df, target_col=config.target_col, title="Test Set (After Inversing)")
 
     print("\n--- Classical Model (Best) ---")
     test_metrics_classical, y_pred_cl = evaluate_classical_model(best_classical, X_test, y_test)
     for metric, value in test_metrics_classical.items():
         print(f"  {metric:10s}: {value:.4f}")
 
+    class_names = [str(c) for c in le.classes_]
+    display_detailed_report(y_test, y_pred_cl, class_names=class_names, title="Classical Model Report")
+
     print("\n--- Neural Network ---")
     test_metrics_nn, y_pred_nn = evaluate_nn_model(nn_model, X_test, y_test, config=config)
     for metric, value in test_metrics_nn.items():
         print(f"  {metric:10s}: {value:.4f}")
+
+    display_detailed_report(y_test, y_pred_nn, class_names=class_names, title="Neural Network Report")
 
     # Determine best overall model
     classical_score = test_metrics_classical.get("ROC-AUC", 0)
@@ -475,22 +500,25 @@ def evaluate_and_save_best_model(
     print(f"Designated best model saved to {best_model_path}")
 
     # Generate final comparison plots for Task 4
+    all_labels = np.arange(len(le.classes_))
     model_results = {
         "Classical (Best)": {
             "metrics": test_metrics_classical,
-            "cm": confusion_matrix(y_test, y_pred_cl),
+            "cm": confusion_matrix(y_test, y_pred_cl, labels=all_labels),
         },
         "Neural Network": {
             "metrics": test_metrics_nn,
-            "cm": confusion_matrix(y_test, y_pred_nn),
+            "cm": confusion_matrix(y_test, y_pred_nn, labels=all_labels),
         },
     }
+    class_names = [str(c) for c in le.classes_]
     plot_model_performance(
         model_results,
         visuals_dir=config.visuals_dir,
         metrics_filename=config.comparison_metrics_filename,
         cm_filename=config.comparison_cm_filename,
         main_title="Final Model Comparison on Test Set",
+        class_names=class_names,
     )
 
     # Task 4.2: Side-by-side comparison CSVs
@@ -508,7 +536,7 @@ def evaluate_and_save_best_model(
 def main(
     config: Optional[PipelineConfig] = None,
 ) -> Tuple[
-    pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series, Any
+    pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series, LabelEncoder, Any
 ]:
     """Run the full machine learning pipeline.
 
@@ -523,8 +551,8 @@ def main(
 
     Returns
     -------
-    Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series, Any]
-        (X_train, X_val, X_test, y_train, y_val, y_test, best_model)
+    Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series, LabelEncoder, Any]
+        (X_train, X_val, X_test, y_train, y_val, y_test, label_encoder, best_model)
     """
     if config is None:
         config = PipelineConfig()
@@ -532,22 +560,22 @@ def main(
     configure_plot_style()
 
     # Phase 1: Data Ingestion and Preprocessing
-    X_train, X_val, X_test, y_train, y_val, y_test = (
+    X_train, X_val, X_test, y_train, y_val, y_test, le = (
         run_data_ingestion_and_preprocessing(config)
     )
 
     # Phase 2: Classical ML Training
-    best_classical = run_classical_training(X_train, y_train, X_val, y_val, config)
+    best_classical = run_classical_training(X_train, y_train, X_val, y_val, config, le)
 
     # Phase 3: Neural Network Training
-    nn_model = run_neural_training(X_train, y_train, X_val, y_val, config)
+    nn_model = run_neural_training(X_train, y_train, X_val, y_val, config, le)
 
     # Phase 4: Final Evaluation and Saving
     best_overall = evaluate_and_save_best_model(
-        best_classical, nn_model, X_train, X_test, y_test, config
+        best_classical, nn_model, X_train, X_test, y_test, le, config
     )
 
-    return X_train, X_val, X_test, y_train, y_val, y_test, best_overall
+    return X_train, X_val, X_test, y_train, y_val, y_test, le, best_overall
 
 
 if __name__ == "__main__":
@@ -558,7 +586,7 @@ if __name__ == "__main__":
     print(f"Loading data from: {cfg.filepath}")
     print(f"Original dataset shape: {pd.read_csv(cfg.filepath).shape}")
 
-    X_train, X_val, X_test, y_train, y_val, y_test, best_model = main(cfg)
+    X_train, X_val, X_test, y_train, y_val, y_test, le, best_model = main(cfg)
 
     print("\n--- Pipeline Execution Complete ---")
     print(f"Train Features Shape: {X_train.shape}")

@@ -67,3 +67,14 @@ Completed the mandatory coding requirements for Homework 1 Task 4 and Task 5. Su
 - **Task 5 (FastAPI Implementation)**: Created `src/api.py` to expose the best model via a REST API. Integrated full preprocessing (capping, scaling, imputation) to handle raw photometric data inputs.
 - **Skip-Training Logic**: Implemented automated checks in `main.py` to detect existing model files. The pipeline now skips the expensive training phases if `best_model.pkl` or `best_model.pt` are found.
 - **Model Inversion & Loading**: Updated `run_neural_training` to correctly instantiate the architecture and load PyTorch weights when retraining is skipped.
+
+# 2026-04-09
+
+Implemented class ratio monitoring to verify data distribution consistency throughout the preprocessing pipeline and enhanced visual evaluations with explicit class name labeling across all models.
+
+## dev-00:23
+### Class ratio monitoring and plot labeling enhancements
+- **Class Ratio Monitoring**: Added `print_class_ratios` utility to `src/preprocessing.py` and integrated it into the pipeline to track class distributions before/after encoding and after inversion.
+- **Enhanced Visualizations**: Updated `train_classical_models` and `evaluate_nn_model` to accept the `LabelEncoder`, ensuring that confusion matrices and evaluation reports use actual class names instead of numeric indices.
+- **Refactored Evaluation API**: Unified `plot_model_performance` and `plot_nn_evaluation` to support dynamic class labeling, improving the interpretability of Task 4 results.
+- **Test Suite Updates**: Synchronized the entire test suite with the updated function signatures, ensuring comprehensive coverage for the new labeling and monitoring logic.

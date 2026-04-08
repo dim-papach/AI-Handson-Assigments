@@ -10,6 +10,7 @@ import torch.nn as nn
 from sklearn.decomposition import PCA
 from sklearn.metrics import (
     accuracy_score,
+    classification_report,
     confusion_matrix,
     f1_score,
     precision_score,
@@ -101,6 +102,31 @@ def evaluate_classical_model(
     return metrics, y_pred
 
 
+def display_detailed_report(
+    y_true: np.ndarray,
+    y_pred: np.ndarray,
+    class_names: Optional[List[str]] = None,
+    title: str = "Classification Report",
+) -> None:
+    """
+    Prints a detailed classification report using class names.
+
+    Parameters
+    ----------
+    y_true : np.ndarray
+        Ground truth labels.
+    y_pred : np.ndarray
+        Predicted labels.
+    class_names : List[str], optional
+        Actual names of the classes.
+    title : str, optional
+        Title for the report.
+    """
+    print(f"\n--- {title} ---")
+    report = classification_report(y_true, y_pred, target_names=class_names, zero_division=0)
+    print(report)
+
+
 def evaluate_nn_model(
     model: nn.Module,
     X: pd.DataFrame,
@@ -165,6 +191,7 @@ def plot_model_performance(
     metrics_filename: str,
     cm_filename: str,
     main_title: str = "Model Performance Comparison",
+    class_names: Optional[List[str]] = None,
 ) -> None:
     """
     Generates bar plots for metrics and confusion matrices for multiple models.
@@ -182,6 +209,8 @@ def plot_model_performance(
         Filename for the confusion matrices heatmap.
     main_title : str, optional
         Title for the plots.
+    class_names : List[str], optional
+        List of class names for confusion matrix labels.
     """
     os.makedirs(visuals_dir, exist_ok=True)
     num_models = len(model_results)
@@ -219,7 +248,16 @@ def plot_model_performance(
 
     for ax, (model_name, data) in zip(axes2, model_results.items()):
         cm = data["cm"]
-        sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=ax, cbar=False)
+        sns.heatmap(
+            cm,
+            annot=True,
+            fmt="d",
+            cmap="Blues",
+            ax=ax,
+            cbar=False,
+            xticklabels=class_names if class_names is not None else "auto",
+            yticklabels=class_names if class_names is not None else "auto",
+        )
         ax.set_title(model_name, fontweight="bold")
         ax.set_xlabel("Predicted")
         ax.set_ylabel("Actual")
@@ -238,6 +276,7 @@ def plot_nn_evaluation(
     y_true: np.ndarray,
     y_pred: np.ndarray,
     config: Optional[PipelineConfig] = None,
+    class_names: Optional[List[str]] = None,
 ) -> None:
     """
     Plots evaluation metrics and confusion matrix for the NN using the unified plotter.
@@ -248,6 +287,7 @@ def plot_nn_evaluation(
     y_true : np.ndarray
     y_pred : np.ndarray
     config : PipelineConfig, optional
+    class_names : List[str], optional
     """
     if config is None:
         config = PipelineConfig()
@@ -265,6 +305,7 @@ def plot_nn_evaluation(
         metrics_filename=config.nn_metrics_filename,
         cm_filename=config.nn_cm_filename,
         main_title="Neural Network Evaluation",
+        class_names=class_names,
     )
 
 
