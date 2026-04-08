@@ -12,6 +12,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
+from imblearn.over_sampling import SMOTE
 from typing import Dict, Tuple, List, Optional, Any
 from src.config import PipelineConfig
 
@@ -405,3 +406,54 @@ def generate_pca_insights(
             print(f"  - {feat:12s}: {loadings.loc[feat, pc]:.4f}")
             
     print(f"\nSaved Exploratory PCA visual tracking metrics correctly inside '{out_dir}/' directory.")
+
+
+def apply_smote(
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    sampling_strategy: str = "auto",
+    k_neighbors: int = 5,
+    random_state: int = PipelineConfig.smote_random_state,
+) -> Tuple[pd.DataFrame, pd.Series]:
+    """
+    Applies Synthetic Minority Over-sampling Technique (SMOTE) to the training data.
+
+    Calculates synthetic samples for minority classes to balance the dataset,
+    ensuring that the model does not become biased towards the majority class.
+
+    Parameters
+    ----------
+    X_train : pd.DataFrame
+        Training feature matrix.
+    y_train : pd.Series
+        Training target labels.
+    sampling_strategy : str, optional
+        SMOTE sampling strategy, by default "auto".
+    k_neighbors : int, optional
+        Number of nearest neighbors to use for SMOTE, by default 5.
+    random_state : int, optional
+        Random seed for reproducibility.
+
+    Returns
+    -------
+    Tuple[pd.DataFrame, pd.Series]
+        The resampled feature matrix and target labels.
+    """
+    smote = SMOTE(
+        sampling_strategy=sampling_strategy,
+        k_neighbors=k_neighbors,
+        random_state=random_state
+    )
+    
+    # SMOTE expects numeric features, which our pipeline ensures
+    X_resampled, y_resampled = smote.fit_resample(X_train, y_train)
+    
+    # Reconstruct DataFrame and Series to maintain metadata and column names
+    X_resampled_df = pd.DataFrame(X_resampled, columns=X_train.columns)
+    y_resampled_series = pd.Series(y_resampled, name=y_train.name)
+    
+    print("\n--- SMOTE Application ---")
+    print(f"  Original shape:  {X_train.shape}")
+    print(f"  Resampled shape: {X_resampled_df.shape}")
+    
+    return X_resampled_df, y_resampled_series

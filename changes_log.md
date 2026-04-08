@@ -1,3 +1,16 @@
+# 2026-04-09
+
+Addressed significant class imbalance by implementing SMOTE (Synthetic Minority Over-sampling Technique) into the preprocessing pipeline. Successfully integrated the `imbalanced-learn` library, updated the configuration to handle sampling strategies, and verified the balancing effect where the training set now perfectly distributes samples across all target classes.
+
+## dev-00:35
+### Handling Class Imbalance with SMOTE
+- Integrated `imbalanced-learn` into the dependency manifest via Poetry.
+- Added `SamplingConfig` to `src/config.py` to allow configurable oversampling strategies and SMOTE parameters.
+- Implemented `apply_smote` in `src/preprocessing.py`, ensuring synthetic samples are only generated for the training split after full feature scaling and imputation.
+- Updated `hw1/main.py` to automate training set balancing and print the new class ratios for verification.
+- Enforced data integrity by applying SMOTE strictly to preprocessed numeric features, achieving a perfect 20% distribution per class in the training set.
+- Resolved mock-related failures in `hw1/tests/test_main.py` and added `test_apply_smote` to the suite, maintaining a robust testing environment.
+
 # 2026-04-08
 
 The day focused on transitioning the machine learning pipeline from a batch-processing research tool to a production-ready system. Initial efforts centralized evaluation and visualization logic, followed by the implementation of a FastAPI deployment layer. Successfully exposed the best-performing models via a REST API, ensuring full parity between training and inference preprocessing.

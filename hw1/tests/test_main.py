@@ -150,11 +150,15 @@ def test_main_orchestration(
     df = pd.DataFrame({'T': [1]*10, 'WF1': [2]*10, 'WF2': [3]*10, 'CLASS_SP': ['A']*10})
     mock_load.return_value = df
     mock_split.return_value = (df.iloc[:6], df.iloc[6:8], df.iloc[8:])
-    mock_fit.return_value = ({}, MagicMock(), pd.Index(['T', 'WF1', 'WF2']), MagicMock(), MagicMock())
-    
     def mock_preprocess_side_effect(*args: Any, **kwargs: Any) -> pd.DataFrame:
-        return pd.DataFrame({'T': [1]*5, 'WF1': [2]*5, 'WF2': [3]*5, 'CLASS_SP': [0]*5})
+        return pd.DataFrame({'T': [1]*5, 'WF1': [2]*5, 'WF2': [3]*5, 'CLASS_SP': [0]*5}).copy()
     mock_preprocess.side_effect = mock_preprocess_side_effect
+    
+    # Mock le to have classes and working inverse_transform
+    mock_le = MagicMock()
+    mock_le.classes_ = ['A', 'B']
+    mock_le.inverse_transform.return_value = np.array(['A']*5)
+    mock_fit.return_value = ({}, MagicMock(), pd.Index(['T', 'WF1', 'WF2']), MagicMock(), mock_le)
     
     mock_eval.return_value = ({'Accuracy': 1.0, 'ROC-AUC': 0.9}, np.array([0]*5))
     mock_train_nn.return_value = (MagicMock(), {"train_loss": [0.1], "val_loss": [0.1]})
@@ -209,14 +213,25 @@ def test_main_no_config(
     mock_load.return_value = df
     mock_split.return_value = (df.iloc[:20], df.iloc[20:25], df.iloc[25:])
     mock_fit.return_value = ({}, MagicMock(), pd.Index(['T', 'WF1', 'WF2']), MagicMock(), MagicMock())
-    mock_preprocess.return_value = pd.DataFrame({'T': [1]*5, 'WF1': [2]*5, 'WF2': [3]*5, 'CLASS_SP': [0]*5})
+    
+    def mock_preprocess_side_effect(*args: Any, **kwargs: Any) -> pd.DataFrame:
+        return pd.DataFrame({'T': [1]*5, 'WF1': [2]*5, 'WF2': [3]*5, 'CLASS_SP': [0]*5}).copy()
+    mock_preprocess.side_effect = mock_preprocess_side_effect
+    
+    # Mock le to have classes and working inverse_transform
+    mock_le = MagicMock()
+    mock_le.classes_ = ['A', 'B']
+    mock_le.inverse_transform.return_value = np.array(['A']*5)
+    mock_fit.return_value = ({}, MagicMock(), pd.Index(['T', 'WF1', 'WF2']), MagicMock(), mock_le)
+    
     mock_eval.return_value = ({'Accuracy': 1.0}, np.array([0]*5))
     mock_train_nn.return_value = (MagicMock(), {"train_loss": [0.1], "val_loss": [0.1]})
     mock_eval_nn.return_value = ({'Accuracy': 0.9, 'ROC-AUC': 0.85}, np.array([0]*5))
     
-    with patch('pandas.read_csv') as mock_read:
-        mock_read.return_value = df
-        main(config=None)
+    with patch('os.path.exists', return_value=False):
+        with patch('pandas.read_csv') as mock_read:
+            mock_read.return_value = df
+            main(config=None)
     assert mock_load.called
 
 def test_main_integration(mock_config: PipelineConfig) -> None:
@@ -262,7 +277,11 @@ def test_run_data_ingestion_and_preprocessing(
     mock_load.return_value = df
     mock_split.return_value = (df.iloc[:6], df.iloc[6:8], df.iloc[8:])
     mock_fit.return_value = ({}, MagicMock(), pd.Index(["T"]), MagicMock(), MagicMock())
-    mock_preprocess.return_value = pd.DataFrame({"T": [1] * 5, "CLASS_SP": [0] * 5})
+    
+    def mock_preprocess_side_effect(*args: Any, **kwargs: Any) -> pd.DataFrame:
+        return pd.DataFrame({"T": [1] * 5, "CLASS_SP": [0] * 5}).copy()
+    mock_preprocess.side_effect = mock_preprocess_side_effect
+    
     results = run_data_ingestion_and_preprocessing(mock_config)
     assert len(results) == 7
     assert mock_load.called
@@ -315,7 +334,36 @@ def test_evaluate_and_save_best_model(
     X = pd.DataFrame({"feat": [1, 2]})
     y = pd.Series([0, 1])
     le = MagicMock()
+    le.classes_ = ['A', 'B']
+    le.inverse_transform.return_value = np.array(['A', 'B'])
     mock_eval_cl.return_value = ({"ROC-AUC": 0.9}, np.array([0, 1]))
     mock_eval_nn.return_value = ({"ROC-AUC": 0.8}, np.array([0, 1]))
     evaluate_and_save_best_model(MagicMock(), MagicMock(), X, X, y, le, mock_config)
     assert mock_plot_perf.called
+
+
+def test_apply_smote() -> None:
+    """Test SMOTE application functionality."""
+    from src.preprocessing import apply_smote
+    
+    X = pd.DataFrame({
+        'feat1': [1.0, 1.1, 1.2, 5.0, 5.1, 5.2],
+        'feat2': [10.0, 10.1, 10.2, 50.0, 50.1, 50.2]
+    })
+    y = pd.Series([0, 0, 0, 1, 1, 1], name='target')
+    
+    # Imbalance: 3 of class 0, 2 of class 1 (wait, I used 3 and 3)
+    # Let's make it more imbalanced
+    X = pd.DataFrame({
+        'feat1': [1.0, 1.1, 1.2, 1.3, 5.0, 5.1],
+        'feat2': [10.0, 10.1, 10.2, 10.3, 50.0, 50.1]
+    })
+    y = pd.Series([0, 0, 0, 0, 1, 1], name='target')
+    
+    # SMOTE k_neighbors=1 since we only have 2 samples of class 1
+    X_res, y_res = apply_smote(X, y, k_neighbors=1)
+    
+    assert len(X_res) > len(X)
+    assert len(y_res) == len(X_res)
+    assert (y_res == 1).sum() == (y_res == 0).sum()
+    assert list(X_res.columns) == list(X.columns)

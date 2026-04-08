@@ -26,6 +26,7 @@ dependencies = [
 "pydantic",
 "joblib",
 "swagger-ui-bundle",
+"imbalanced-learn (>=0.14.1,<0.15.0)",
 ]
 
 [tool.poetry]

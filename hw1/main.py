@@ -28,6 +28,7 @@ from src.preprocessing import (
     apply_scaling,
     generate_pca_insights,
     print_class_ratios,
+    apply_smote,
 )
 from src.train_classical import train_classical_models
 from src.train_neural import train_neural_network, SimpleNN
@@ -271,6 +272,18 @@ def run_data_ingestion_and_preprocessing(
     X_train, y_train = detach_targets(train_clean, config.target_col)
     X_val, y_val = detach_targets(val_clean, config.target_col)
     X_test, y_test = detach_targets(test_clean, config.target_col)
+
+    if config.use_smote:
+        X_train, y_train = apply_smote(
+            X_train,
+            y_train,
+            sampling_strategy=config.smote_sampling_strategy,
+            k_neighbors=config.smote_k_neighbors,
+            random_state=config.smote_random_state
+        )
+        # Print ratios after SMOTE
+        smote_df = X_train.assign(**{config.target_col: y_train})
+        print_class_ratios(smote_df, target_col=config.target_col, title="Train Set (After SMOTE)")
 
     if config.visuals_dir:
         generate_pca_insights(

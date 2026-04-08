@@ -105,7 +105,16 @@ class NNConfig:
     nn_num_threads: int = field(default_factory=lambda: os.cpu_count() or 1)
 
 @dataclass
-class PipelineConfig(DataConfig, SplitConfig, TuningConfig, NNConfig):
+class SamplingConfig:
+    """Configuration for handling class imbalance (SMOTE, etc.)."""
+
+    use_smote: bool = True
+    smote_sampling_strategy: str = "auto"
+    smote_k_neighbors: int = 5
+    smote_random_state: int = 42
+
+@dataclass
+class PipelineConfig(DataConfig, SplitConfig, TuningConfig, NNConfig, SamplingConfig):
     """Unified configuration class inheriting from specialized sub-configs."""
 
     def __post_init__(self) -> None:
