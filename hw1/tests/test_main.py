@@ -146,11 +146,15 @@ def test_preprocess_split(mock_config: PipelineConfig) -> None:
 @patch('main.evaluate_nn_model')
 @patch('main.plot_nn_training_history')
 @patch('main.plot_nn_evaluation')
+@patch('main.plot_model_performance')
+@patch('main.save_evaluation_tables')
 @patch('joblib.dump')
 @patch('torch.save')
 def test_main_orchestration(
     mock_torch_save: MagicMock,
     mock_joblib_dump: MagicMock,
+    mock_save_tables: MagicMock,
+    mock_plot_perf: MagicMock,
     mock_plot_nn_eval: MagicMock,
     mock_plot_nn_hist: MagicMock,
     mock_eval_nn: MagicMock,
@@ -209,7 +213,23 @@ def test_detach_targets() -> None:
 @patch('main.preprocess_split')
 @patch('main.train_classical_models')
 @patch('main.evaluate_classical_model')
+@patch('main.train_neural_network')
+@patch('main.evaluate_nn_model')
+@patch('main.plot_nn_training_history')
+@patch('main.plot_nn_evaluation')
+@patch('main.plot_model_performance')
+@patch('main.save_evaluation_tables')
+@patch('joblib.dump')
+@patch('torch.save')
 def test_main_no_config(
+    mock_torch_save: MagicMock,
+    mock_joblib_dump: MagicMock,
+    mock_save_tables: MagicMock,
+    mock_plot_perf: MagicMock,
+    mock_plot_nn_eval: MagicMock,
+    mock_plot_nn_hist: MagicMock,
+    mock_eval_nn: MagicMock,
+    mock_train_nn: MagicMock,
     mock_eval: MagicMock,
     mock_train: MagicMock,
     mock_preprocess: MagicMock,
@@ -224,6 +244,8 @@ def test_main_no_config(
     mock_fit.return_value = ({}, MagicMock(), pd.Index(['T', 'WF1', 'WF2']), MagicMock(), MagicMock())
     mock_preprocess.return_value = pd.DataFrame({'T': [1]*5, 'WF1': [2]*5, 'WF2': [3]*5, 'CLASS_SP': [0]*5})
     mock_eval.return_value = ({'Accuracy': 1.0}, np.array([0]*5))
+    mock_train_nn.return_value = (MagicMock(), {"train_loss": [0.1], "val_loss": [0.1]})
+    mock_eval_nn.return_value = ({'Accuracy': 0.9, 'ROC-AUC': 0.85}, np.array([0]*5))
     
     # This should call main() which will create a default PipelineConfig
     def mock_preprocess_side_effect(*args: Any, **kwargs: Any) -> pd.DataFrame:
@@ -249,7 +271,9 @@ def test_main_integration(mock_config: PipelineConfig) -> None:
     
     # Use patch context managers to mock I/O/visuals but let main logic run naturally.
     with patch('matplotlib.pyplot.savefig'): 
-        with patch('sys.stdout', new=MagicMock()): 
+        mock_stdout = MagicMock()
+        mock_stdout.encoding = 'utf-8'
+        with patch('sys.stdout', new=mock_stdout): 
              X_train, X_val, X_test, y_train, y_val, y_test, best_model = main(mock_config)
     
     # Check outputs are correct types and shapes
@@ -388,54 +412,72 @@ def test_run_neural_training(
 
 @patch("main.evaluate_classical_model")
 @patch("main.evaluate_nn_model")
+@patch("main.plot_model_performance")
+@patch("main.save_evaluation_tables")
 @patch("joblib.dump")
 @patch("torch.save")
 def test_evaluate_and_save_best_model_classical_wins(
     mock_torch_save: MagicMock,
     mock_joblib_dump: MagicMock,
+    mock_save_tables: MagicMock,
+    mock_plot_perf: MagicMock,
     mock_eval_nn: MagicMock,
     mock_eval_classical: MagicMock,
     mock_config: PipelineConfig,
 ) -> None:
-    """Test evaluation and saving when classical model wins."""
-    X = pd.DataFrame({"feat": [1, 2]})
-    y = pd.Series([0, 1])
+    """Classical (Best) score: 0.9, NN score: 0.8. Tests designation and saving."""
+    X_train = pd.DataFrame({"feat": [1, 2]})
+    X_test = pd.DataFrame({"feat": [1, 2]})
+    y_test = pd.Series([0, 1])
     classical_model = MagicMock()
     nn_model = MagicMock()
 
     mock_eval_classical.return_value = ({"ROC-AUC": 0.9}, np.array([0, 1]))
     mock_eval_nn.return_value = ({"ROC-AUC": 0.8}, np.array([0, 1]))
 
-    best = evaluate_and_save_best_model(classical_model, nn_model, X, y, mock_config)
+    best = evaluate_and_save_best_model(
+        classical_model, nn_model, X_train, X_test, y_test, mock_config
+    )
 
     assert best == classical_model
     assert mock_joblib_dump.called
     assert not mock_torch_save.called
+    assert mock_plot_perf.called
+    assert mock_save_tables.called
 
 
 @patch("main.evaluate_classical_model")
 @patch("main.evaluate_nn_model")
+@patch("main.plot_model_performance")
+@patch("main.save_evaluation_tables")
 @patch("joblib.dump")
 @patch("torch.save")
 def test_evaluate_and_save_best_model_nn_wins(
     mock_torch_save: MagicMock,
     mock_joblib_dump: MagicMock,
+    mock_save_tables: MagicMock,
+    mock_plot_perf: MagicMock,
     mock_eval_nn: MagicMock,
     mock_eval_classical: MagicMock,
     mock_config: PipelineConfig,
 ) -> None:
-    """Test evaluation and saving when neural network wins."""
-    X = pd.DataFrame({"feat": [1, 2]})
-    y = pd.Series([0, 1])
+    """NN score: 0.9, Classical score: 0.8. Tests designation and saving."""
+    X_train = pd.DataFrame({"feat": [1, 2]})
+    X_test = pd.DataFrame({"feat": [1, 2]})
+    y_test = pd.Series([0, 1])
     classical_model = MagicMock()
     nn_model = MagicMock()
 
     mock_eval_classical.return_value = ({"ROC-AUC": 0.8}, np.array([0, 1]))
     mock_eval_nn.return_value = ({"ROC-AUC": 0.9}, np.array([0, 1]))
 
-    best = evaluate_and_save_best_model(classical_model, nn_model, X, y, mock_config)
+    best = evaluate_and_save_best_model(
+        classical_model, nn_model, X_train, X_test, y_test, mock_config
+    )
 
     assert best == nn_model
     assert not mock_joblib_dump.called
     assert mock_torch_save.called
+    assert mock_plot_perf.called
+    assert mock_save_tables.called
 

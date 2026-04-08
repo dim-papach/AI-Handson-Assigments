@@ -61,7 +61,7 @@ def test_tuning_config_defaults() -> None:
 def test_nn_config_defaults() -> None:
     """Test that NNConfig initializes with default values."""
     config = PipelineConfig()
-    assert config.nn_hidden_layers == [128, 64, 32]
+    assert config.nn_hidden_layers == [32, 16]
     assert config.nn_activation == PipelineConfig.nn_activation
     assert config.nn_dropout == PipelineConfig.nn_dropout
     assert config.nn_epochs == PipelineConfig.nn_epochs

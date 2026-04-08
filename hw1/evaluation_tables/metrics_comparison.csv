@@ -1,0 +1,6 @@
+Metric,Best_classical,Neural_Network
+Accuracy,1.0,1.0
+Precision,1.0,1.0
+Recall,1.0,1.0
+F1-score,1.0,1.0
+ROC-AUC,0.0,0.0

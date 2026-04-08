@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 from typing import Dict, Tuple, List, Any, Optional
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.pipeline import Pipeline
+from sklearn.metrics import confusion_matrix
 
 from src.config import PipelineConfig
 from src.preprocessing import (
@@ -34,6 +35,8 @@ from src.evaluation import (
     evaluate_nn_model,
     plot_nn_training_history,
     plot_nn_evaluation,
+    plot_model_performance,
+    save_evaluation_tables,
 )
 
 
@@ -379,6 +382,7 @@ def run_neural_training(
 def evaluate_and_save_best_model(
     best_classical: Any,
     nn_model: torch.nn.Module,
+    X_train: pd.DataFrame,
     X_test: pd.DataFrame,
     y_test: pd.Series,
     config: PipelineConfig,
@@ -408,12 +412,12 @@ def evaluate_and_save_best_model(
     print("=" * 50)
 
     print("\n--- Classical Model (Best) ---")
-    test_metrics_classical, _ = evaluate_classical_model(best_classical, X_test, y_test)
+    test_metrics_classical, y_pred_cl = evaluate_classical_model(best_classical, X_test, y_test)
     for metric, value in test_metrics_classical.items():
         print(f"  {metric:10s}: {value:.4f}")
 
     print("\n--- Neural Network ---")
-    test_metrics_nn, _ = evaluate_nn_model(nn_model, X_test, y_test, config=config)
+    test_metrics_nn, y_pred_nn = evaluate_nn_model(nn_model, X_test, y_test, config=config)
     for metric, value in test_metrics_nn.items():
         print(f"  {metric:10s}: {value:.4f}")
 
@@ -441,6 +445,31 @@ def evaluate_and_save_best_model(
         joblib.dump(best_classical, best_model_path)
 
     print(f"Designated best model saved to {best_model_path}")
+
+    # Generate final comparison plots for Task 4
+    model_results = {
+        "Classical (Best)": {
+            "metrics": test_metrics_classical,
+            "cm": confusion_matrix(y_test, y_pred_cl),
+        },
+        "Neural Network": {
+            "metrics": test_metrics_nn,
+            "cm": confusion_matrix(y_test, y_pred_nn),
+        },
+    }
+    plot_model_performance(
+        model_results,
+        visuals_dir=config.visuals_dir,
+        metrics_filename=config.comparison_metrics_filename,
+        cm_filename=config.comparison_cm_filename,
+        main_title="Final Model Comparison on Test Set",
+    )
+
+    # Task 4.2: Side-by-side comparison CSVs
+    save_evaluation_tables(
+        X_train, X_test, y_test, best_classical, nn_model, config=config
+    )
+
     return best_overall
 
 
@@ -487,7 +516,7 @@ def main(
 
     # Phase 4: Final Evaluation and Saving
     best_overall = evaluate_and_save_best_model(
-        best_classical, nn_model, X_test, y_test, config
+        best_classical, nn_model, X_train, X_test, y_test, config
     )
 
     return X_train, X_val, X_test, y_train, y_val, y_test, best_overall

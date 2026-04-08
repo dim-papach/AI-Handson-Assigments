@@ -7,6 +7,7 @@ import pandas as pd
 import seaborn as sns
 import torch
 import torch.nn as nn
+from sklearn.decomposition import PCA
 from sklearn.metrics import (
     accuracy_score,
     confusion_matrix,
@@ -298,3 +299,80 @@ def plot_nn_training_history(
     plt.savefig(plot_path, bbox_inches="tight", dpi=300)
     plt.close()
     print(f"Saved training history plot to {plot_path}")
+
+
+def save_evaluation_tables(
+    X_train: pd.DataFrame,
+    X_test: pd.DataFrame,
+    y_test: pd.Series,
+    best_classical: Any,
+    nn_model: nn.Module,
+    config: Optional[PipelineConfig] = None,
+) -> None:
+    """
+    Generates side-by-side comparison CSVs for Task 4.2.
+    Includes Metrics Comparison, Classical Feature Importance, and PCA Loadings.
+
+    Parameters
+    ----------
+    X_train : pd.DataFrame
+        Training features (for PCA).
+    X_test : pd.DataFrame
+        Test features.
+    y_test : pd.Series
+        Test labels.
+    best_classical : Any
+        The fitted classical model.
+    nn_model : nn.Module
+        The trained neural network.
+    config : PipelineConfig, optional
+        Configuration object.
+    """
+    if config is None:
+        config = PipelineConfig()
+
+    eval_dir = config.evaluation_dir
+    os.makedirs(eval_dir, exist_ok=True)
+
+    # 1. Metrics Comparison
+    metrics_cl, _ = evaluate_classical_model(best_classical, X_test, y_test)
+    metrics_nn, _ = evaluate_nn_model(nn_model, X_test, y_test, config=config)
+
+    metrics_to_save = ["Accuracy", "Precision", "Recall", "F1-score", "ROC-AUC"]
+    comparison_data = []
+    for m in metrics_to_save:
+        comparison_data.append(
+            {
+                "Metric": m,
+                "Best_classical": metrics_cl.get(m, np.nan),
+                "Neural_Network": metrics_nn.get(m, np.nan),
+            }
+        )
+
+    pd.DataFrame(comparison_data).to_csv(
+        os.path.join(eval_dir, "metrics_comparison.csv"), index=False
+    )
+
+    # 2. Classical Feature Importance
+    if hasattr(best_classical, "feature_importances_"):
+        importances = best_classical.feature_importances_
+    elif hasattr(best_classical, "coef_"):
+        importances = np.abs(best_classical.coef_[0])
+    else:
+        importances = np.zeros(X_train.shape[1])
+
+    pd.DataFrame({"Feature": X_train.columns, "Importance": importances}).sort_values(
+        by="Importance", ascending=False
+    ).to_csv(os.path.join(eval_dir, "classical_feature_importance.csv"), index=False)
+
+    # 3. PCA Loadings
+    pca = PCA()
+    pca.fit(X_train)
+    loadings = pd.DataFrame(
+        pca.components_.T,
+        columns=[f"PC{i+1}" for i in range(pca.n_components_)],
+        index=X_train.columns,
+    )
+    loadings.to_csv(os.path.join(eval_dir, "pca_loadings.csv"), index=True)
+
+    print(f"Saved Task 4.2 evaluation CSVs to '{eval_dir}/' directory.")

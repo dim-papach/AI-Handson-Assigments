@@ -25,6 +25,7 @@ class DataConfig:
     )
     visuals_dir: str = os.path.join(current_dir, "../visuals")
     models_dir: str = os.path.join(current_dir, "../models")
+    evaluation_dir: str = os.path.join(current_dir, "../evaluation_tables")
     scaler_filename: str = "scaler.pkl"
     encoder_filename: str = "label_encoder.pkl"
     model_filename: str = "classical_model.pkl"
@@ -37,6 +38,8 @@ class DataConfig:
     nn_metrics_filename: str = "nn_metrics.png"
     nn_loss_plot_filename: str = "nn_loss_curves.png"
     nn_cm_filename: str = "nn_confusion_matrix.png"
+    comparison_metrics_filename: str = "final_comparison_metrics.png"
+    comparison_cm_filename: str = "final_comparison_confusion_matrices.png"
 
     def _derive_err_vars(self) -> None:
         """Derives ``err_vars`` list if left empty."""
