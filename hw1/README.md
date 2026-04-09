@@ -1,14 +1,5 @@
----
-title: Understanding the HECATE Galaxy Catalogue and our Pipeline
-author: Dimitris Papachristopoulos (math250018)
-format:
-  gfm:
-    fig-path: visuals/readme_figures/
-    variant: +yaml_metadata_block
-toc: true
-number-sections: true
----
-
+# Understanding the HECATE Galaxy Catalogue and our Pipeline
+Dimitris Papachristopoulos (math250018)
 
 - [<span class="toc-section-number">0.1</span> Dataset
   Description](#dataset-description)
@@ -550,6 +541,9 @@ with oversampling/creation of synthetic and duplicate datapoints.
 
 # PCA
 
+![PCA Scree Plot](visuals/pca_scree_plot.png) ![PCA 2D
+Projection](visuals/pca_2d_projection.png)
+
 # Classical Models
 
 We use 5 classical models to solve this problem:
@@ -559,6 +553,10 @@ We use 5 classical models to solve this problem:
 - Support Vector Machine
 - Decision Tree
 - Xgboost
+
+![Classical Models Metrics
+Comparison](visuals/classical_models_metrics.png) ![Classical Models
+Confusion Matrices](visuals/classical_models_confusion_matrices.png)
 
 We train all of the models using a grid of parameters and we evaluate
 them using ROC-AUC
@@ -579,6 +577,10 @@ activation function and dropout of 0.2 between the layers. We train the
 model using the Adam optimizer and the cross-entropy loss function. We
 use early stopping to prevent overfitting.
 
+![NN Training History](visuals/nn_loss_curves.png) ![NN Evaluation
+Metrics](visuals/nn_metrics.png) ![NN Confusion
+Matrix](visuals/nn_confusion_matrix.png)
+
 # Best Model
 
 The pipeline automatically identifies and saves the overall “Best Model”
@@ -589,6 +591,10 @@ metric (falling back to Accuracy if necessary). The winning model is
 persisted in the `/models` directory as `best_model.pkl` (for classical)
 or `best_model.pt` (for neural network), ensuring that the most reliable
 predictor is always available for subsequent inference or deployment.
+
+![Final Comparison Metrics](visuals/final_comparison_metrics.png)
+![Final Comparison Confusion
+Matrices](visuals/final_comparison_confusion_matrices.png)
 
 # Installation & Execution
 
