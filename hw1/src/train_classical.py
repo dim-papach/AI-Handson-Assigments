@@ -82,7 +82,7 @@ def build_model_grid(
             'grid': {
                 'max_depth': dt_max_depth,
                 'min_samples_split': dt_min_samples_split,
-                'class_weight': ['balanced'],
+                #'class_weight': ['balanced'],
                 'random_state': [random_state],
             },
         },
@@ -91,7 +91,7 @@ def build_model_grid(
             'grid': {
                 'C': lr_C,
                 'max_iter': lr_max_iter,
-                'class_weight': ['balanced'],
+                #'class_weight': ['balanced'],
                 'random_state': [random_state],
             },
             'init_kwargs': {'n_jobs': n_jobs},
@@ -102,7 +102,7 @@ def build_model_grid(
                 'C': svm_C,
                 'kernel': svm_kernel,
                 'probability': [True],  # Required for predict_proba & AUC
-                'class_weight': ['balanced'],
+                #'class_weight': ['balanced'],
                 'random_state': [random_state],
             },
         },
@@ -111,7 +111,7 @@ def build_model_grid(
             'grid': {
                 'n_estimators': rf_n_estimators,
                 'max_depth': rf_max_depth,
-                'class_weight': ['balanced'],
+                #'class_weight': ['balanced'],
                 'random_state': [random_state],
             },
             'init_kwargs': {'n_jobs': n_jobs},

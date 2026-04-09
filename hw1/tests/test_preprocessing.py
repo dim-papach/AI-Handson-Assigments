@@ -345,22 +345,41 @@ def test_apply_scaling_no_cols_to_scale() -> None:
 
 
 def test_apply_smote() -> None:
-    """Test standard SMOTE oversampling correctly balances classes."""
+    """Test SMOTE resampling enforces the capped target ratio behavior."""
     X = pd.DataFrame({
         'feat1': [1.0, 1.1, 1.2, 1.3, 5.0, 5.1],
         'feat2': [10.0, 10.1, 10.2, 10.3, 50.0, 50.1]
     })
     y = pd.Series([0, 0, 0, 0, 1, 1], name='target')
     
-    # K-neighbors=1 for small minority class size
     X_res, y_res = apply_smote(X, y, k_neighbors=1, random_state=42)
     
-    # Assert counts: minority should match majority (4 each)
-    assert len(X_res) == 8
-    assert len(y_res) == 8
+    # Original total is 6; cap is 10% => 6 samples.
+    assert len(X_res) == 6
+    assert len(y_res) == 6
+    assert (y_res == 0).sum() == 2
     assert (y_res == 1).sum() == 4
-    assert (y_res == 0).sum() == 4
     # Metadata preservation
+    assert list(X_res.columns) == ['feat1', 'feat2']
+    assert y_res.name == 'target'
+
+
+def test_apply_smote_with_full_target_distribution() -> None:
+    """Test the combined under-/over-sampling strategy on a full 4-class problem."""
+    X = pd.DataFrame({
+        'feat1': [1.0] * 5 + [2.0] * 2 + [3.0] * 1 + [4.0] * 1,
+        'feat2': [10.0] * 5 + [20.0] * 2 + [30.0] * 1 + [40.0] * 1,
+    })
+    y = pd.Series([0] * 5 + [1] * 2 + [2] * 1 + [3] * 1, name='target')
+    
+    X_res, y_res = apply_smote(X, y, k_neighbors=1, random_state=42)
+    
+    assert len(X_res) == 9
+    assert len(y_res) == 9
+    assert (y_res == 0).sum() == 2
+    assert (y_res == 1).sum() == 3
+    assert (y_res == 2).sum() == 2
+    assert (y_res == 3).sum() == 2
     assert list(X_res.columns) == ['feat1', 'feat2']
     assert y_res.name == 'target'
 

@@ -12,7 +12,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
-from imblearn.over_sampling import SMOTE
+from imblearn.over_sampling import SMOTE, RandomOverSampler
+from imblearn.under_sampling import RandomUnderSampler
+from imblearn.combine import SMOTETomek
 from typing import Dict, Tuple, List, Optional, Any
 from src.config import PipelineConfig
 
@@ -414,12 +416,22 @@ def apply_smote(
     sampling_strategy: str = "auto",
     k_neighbors: int = 5,
     random_state: int = PipelineConfig.smote_random_state,
+    target_distribution: Optional[Dict[int, float]] = None,
+    max_increase: float = 0.10,
 ) -> Tuple[pd.DataFrame, pd.Series]:
     """
-    Applies Synthetic Minority Over-sampling Technique (SMOTE) to the training data.
+    Applies a combined under-/over-sampling strategy to the training data.
 
-    Calculates synthetic samples for minority classes to balance the dataset,
-    ensuring that the model does not become biased towards the majority class.
+    The function enforces final class proportions while ensuring the resampled
+    dataset contains no more than ``100 * (1 + max_increase)`` percent of the
+    original training rows. Classes with excess samples are undersampled, while
+    classes with fewer samples are augmented with SMOTETomek.
+
+    Default target distribution is:
+        0 -> 20%
+        1 -> 30%
+        2 -> 25%
+        3 -> 25%
 
     Parameters
     ----------
@@ -428,32 +440,121 @@ def apply_smote(
     y_train : pd.Series
         Training target labels.
     sampling_strategy : str, optional
-        SMOTE sampling strategy, by default "auto".
+        SMOTETomek sampling strategy, by default "auto".
     k_neighbors : int, optional
         Number of nearest neighbors to use for SMOTE, by default 5.
     random_state : int, optional
         Random seed for reproducibility.
+    target_distribution : Optional[Dict[int, float]], optional
+        Desired final class proportions, by default the fixed 0/1/2/3 schema.
+    max_increase : float, optional
+        Maximum allowed relative increase in dataset size, by default 0.10.
 
     Returns
     -------
     Tuple[pd.DataFrame, pd.Series]
         The resampled feature matrix and target labels.
     """
-    smote = SMOTE(
-        sampling_strategy=sampling_strategy,
-        k_neighbors=k_neighbors,
-        random_state=random_state
-    )
-    
-    # SMOTE expects numeric features, which our pipeline ensures
-    X_resampled, y_resampled = smote.fit_resample(X_train, y_train)
-    
-    # Reconstruct DataFrame and Series to maintain metadata and column names
+    if target_distribution is None:
+        target_distribution = {0: 0.20, 1: 0.30, 2: 0.25, 3: 0.25}
+
+    original_counts = y_train.value_counts().sort_index()
+    original_total = len(y_train)
+    max_total = int(np.floor(original_total * (1.0 + max_increase)))
+    max_total = max(max_total, original_total)
+
+    target_classes = [cls for cls in original_counts.index if cls in target_distribution]
+    other_classes = [cls for cls in original_counts.index if cls not in target_distribution]
+
+    if not target_classes:
+        return X_train, y_train
+
+    total_other = sum(original_counts[cls] for cls in other_classes)
+    available_total = max_total - total_other
+    available_total = max(available_total, len(target_classes))
+
+    normalized_ratio = sum(target_distribution[cls] for cls in target_classes)
+    target_counts: Dict[int, int] = {}
+    for cls in target_classes:
+        target_counts[cls] = max(
+            1,
+            int(np.round((target_distribution[cls] / normalized_ratio) * available_total))
+        )
+
+    # Adjust rounding discrepancies to ensure exact final size
+    discrepancy = available_total - sum(target_counts[cls] for cls in target_classes)
+    sort_order = sorted(target_classes, key=lambda cls: target_distribution[cls], reverse=True)
+    idx = 0
+    while discrepancy != 0:
+        cls = sort_order[idx % len(sort_order)]
+        target_counts[cls] += 1 if discrepancy > 0 else -1
+        discrepancy = available_total - sum(target_counts[cls] for cls in target_classes)
+        idx += 1
+
+    for cls in other_classes:
+        target_counts[cls] = original_counts[cls]
+
+    # No resampling needed if current distribution already matches targets
+    if all(original_counts[cls] == target_counts[cls] for cls in original_counts.index):
+        print("\n--- SMOTE Application ---")
+        print("  No resampling required; training distribution already matches target counts.")
+        return X_train, y_train
+
+    undersample_strategy = {
+        cls: target_counts[cls]
+        for cls in original_counts.index
+        if target_counts[cls] < original_counts[cls]
+    }
+    oversample_strategy = {
+        cls: target_counts[cls]
+        for cls in original_counts.index
+        if target_counts[cls] > original_counts[cls]
+    }
+
+    X_resampled, y_resampled = X_train, y_train
+
+    if undersample_strategy:
+        rus = RandomUnderSampler(sampling_strategy=undersample_strategy, random_state=random_state)
+        X_resampled, y_resampled = rus.fit_resample(X_resampled, y_resampled)
+
+    if oversample_strategy:
+        post_counts = y_resampled.value_counts()
+        small_classes = [cls for cls in oversample_strategy if post_counts.get(cls, 0) < 2]
+        if small_classes:
+            ros_strategy = {
+                cls: max(2, post_counts[cls])
+                for cls in small_classes
+            }
+            ros = RandomOverSampler(sampling_strategy=ros_strategy, random_state=random_state)
+            X_resampled, y_resampled = ros.fit_resample(X_resampled, y_resampled)
+
+        effective_k = min(
+            k_neighbors,
+            max(1, min(post_counts.get(cls, 2) - 1 for cls in oversample_strategy))
+        )
+
+        # Create the SMOTE instance with the specific strategy FIRST
+        smote_internal = SMOTE(
+            sampling_strategy=oversample_strategy, 
+            k_neighbors=effective_k, 
+            random_state=random_state
+        )
+
+        # Pass that explicit instance into SMOTETomek
+        # Set SMOTETomek's own sampling_strategy to the same dictionary
+        smote = SMOTETomek(
+            smote=smote_internal, 
+            sampling_strategy=oversample_strategy, 
+            random_state=random_state
+        )
+        X_resampled, y_resampled = smote.fit_resample(X_resampled, y_resampled)
+
     X_resampled_df = pd.DataFrame(X_resampled, columns=X_train.columns)
     y_resampled_series = pd.Series(y_resampled, name=y_train.name)
-    
+
     print("\n--- SMOTE Application ---")
     print(f"  Original shape:  {X_train.shape}")
     print(f"  Resampled shape: {X_resampled_df.shape}")
-    
+    print(f"  Target counts:   {target_counts}")
+
     return X_resampled_df, y_resampled_series
