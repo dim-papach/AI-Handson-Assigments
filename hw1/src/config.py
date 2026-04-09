@@ -92,8 +92,8 @@ class TuningConfig:
 class NNConfig:
     """Configuration for Neural Network architecture and training."""
 
-    nn_hidden_layers: List[int] = field(default_factory=lambda: [128, 64, 32])
-    #nn_hidden_layers: List[int] = field(default_factory=lambda: [32, 16])
+    #nn_hidden_layers: List[int] = field(default_factory=lambda: [128, 64, 32])
+    nn_hidden_layers: List[int] = field(default_factory=lambda: [32, 16])
     nn_activation: str = "ReLU"  # Options: ReLU, LeakyRFelu, ELU, Tanh
     nn_checkpoint_path: str = os.path.join(current_dir, "../models/nn_best_model.pth")
     nn_dropout: float = 0.2
