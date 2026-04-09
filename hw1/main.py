@@ -152,8 +152,9 @@ def fit_preprocessing_params(
         filter_error_ratios, key_vars=config.key_vars, err_vars=config.err_vars
     )
 
-    # 4. Fit Scaler ONLY AFTER filtering and imputation
-    scaler, num_cols = get_fitted_scaler(train_temp_filtered.drop(columns=[config.target_col]))
+    # 4. Fit Scaler ONLY AFTER filtering, imputation and color calculation
+    train_temp_colored = train_temp_filtered.pipe(compute_colors)
+    scaler, num_cols = get_fitted_scaler(train_temp_colored.drop(columns=[config.target_col]))
 
     os.makedirs(config.models_dir, exist_ok=True)
     joblib.dump(scaler, os.path.join(config.models_dir, config.scaler_filename))
@@ -208,9 +209,9 @@ def preprocess_split(
         .pipe(apply_iqr_capping, bounds=iqr_bounds)
         .pipe(apply_imputation, pipeline=pipeline, target_col=config.target_col)
         .pipe(filter_error_ratios, key_vars=config.key_vars, err_vars=config.err_vars)
+        .pipe(compute_colors)
         .pipe(apply_scaling, scaler=scaler, num_cols=num_cols, target_col=config.target_col)
         .pipe(save_outlier_histograms, prefix=split_name, out_dir=config.visuals_dir)
-        .pipe(compute_colors)
     )
 
 
