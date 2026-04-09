@@ -113,6 +113,7 @@ class SamplingConfig:
     smote_sampling_strategy: str = "auto"
     smote_k_neighbors: int = 5
     smote_random_state: int = 42
+    target_distribution: Optional[Dict[Any, float]] = field(default_factory=lambda: {0: 0.30, 1: 0.20, 2: 0.22, 3: 0.28})  # e.g., {0: 1000, 1: 1000}
 
 @dataclass
 class PipelineConfig(DataConfig, SplitConfig, TuningConfig, NNConfig, SamplingConfig):
