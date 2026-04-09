@@ -33,6 +33,7 @@ class DataConfig:
     cm_filename: str = "classical_models_confusion_matrices.png"
     scree_filename: str = "pca_scree_plot.png"
     projection_filename: str = "pca_2d_projection.png"
+    drop_group: Optional[str] = -1
 
     nn_model_filename: str = "neural_network.pt"
     nn_metrics_filename: str = "nn_metrics.png"

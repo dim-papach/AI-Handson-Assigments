@@ -50,6 +50,19 @@ def filter_important_columns(df: pd.DataFrame, key_vars: List[str], err_vars: Li
     return df[existing_cols].copy()
 
 
+def drop_specific_group(df: pd.DataFrame, target_col: str, group_name: Optional[str]) -> pd.DataFrame:
+    """
+    Drop rows of a specific group from the target column if group_name is provided.
+    """
+    if group_name is None:
+        return df
+    
+    if target_col not in df.columns:
+        return df
+        
+    return df[df[target_col] != group_name].copy()
+
+
 def filter_error_ratios(df: pd.DataFrame, key_vars: List[str], err_vars: List[str]) -> pd.DataFrame:
     """
     Keep rows where the ratio of value / error is > 3, as per standard thresholding.

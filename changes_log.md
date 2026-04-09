@@ -1,4 +1,16 @@
 # 2026-04-09
+ 
+ Implemented functionality to drop specific class groups from the dataset, ensuring the pipeline is robust to dimension changes by automatically re-training models when mismatches occur. Expanded unit tests to cover the new filtering logic and configuration attributes.
+ 
+ ## dev-04:06
+ ### Implementing Class Group Filtering and Model Robustness
+ - Added `drop_group` attribute to `DataConfig` in `src/config.py` to allow targeted data subsetting.
+ - Implemented `drop_specific_group` in `src/preprocessing.py` and integrated it into the `main.py` ingestion pipeline.
+ - Enhanced `main.py` with robustness checks in `run_classical_training` and `run_neural_training` to detect dimension mismatches and re-train models automatically.
+ - Added comprehensive unit tests in `tests/test_preprocessing.py` and `tests/test_config.py` covering the new group filtering logic and configuration defaults.
+ - Verified the end-to-end pipeline execution and confirmed automatic re-training upon configuration changes.
+ 
+ # 2026-04-09 (Previous)
 
 Addressed significant class imbalance by implementing SMOTE (Synthetic Minority Over-sampling Technique) into the preprocessing pipeline. Successfully integrated the `imbalanced-learn` library, updated the configuration to handle sampling strategies, and verified the balancing effect where the training set now perfectly distributes samples across all target classes.
 

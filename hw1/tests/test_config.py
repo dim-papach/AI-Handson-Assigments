@@ -68,3 +68,15 @@ def test_nn_config_defaults() -> None:
     assert config.nn_patience == PipelineConfig.nn_patience
     assert config.nn_checkpoint_path == PipelineConfig.nn_checkpoint_path
     assert config.nn_output_activation == PipelineConfig.nn_output_activation
+
+
+def test_data_config_drop_group() -> None:
+    """Test that DataConfig includes the drop_group attribute."""
+    config = DataConfig()
+    assert hasattr(config, "drop_group")
+    # Current default is -1
+    assert config.drop_group == -1
+    
+    # Verify it can be set
+    config_set = DataConfig(drop_group="AnotherGroup")
+    assert config_set.drop_group == "AnotherGroup"

@@ -14,6 +14,7 @@ from src.preprocessing import (
     compute_colors,
     filter_error_ratios,
     filter_important_columns,
+    drop_specific_group,
     select_metal_flag,
     drop_missing_targets,
     fit_target_encoder,
@@ -86,6 +87,11 @@ def load_and_filter_data(config: PipelineConfig) -> pd.DataFrame:
             no_err_vars=config.no_err_vars,
             flags_vars=config.flags_vars,
             color_vars=config.color_vars,
+        )
+        .pipe(
+            drop_specific_group,
+            target_col=config.target_col,
+            group_name=config.drop_group,
         )
         .pipe(select_metal_flag)
     )
@@ -329,8 +335,13 @@ def run_classical_training(
     """
     model_path = os.path.join(config.models_dir, config.model_filename)
     if os.path.exists(model_path):
-        print(f"\n[SKIP] Classical model found at {model_path}. Skipping training...")
-        return joblib.load(model_path)
+        model = joblib.load(model_path)
+        # Check for dimension mismatch if possible
+        if hasattr(model, "n_features_in_") and model.n_features_in_ != X_train.shape[1]:
+            print(f"\n[WARN] Dimension mismatch in {model_path} ({model.n_features_in_} vs {X_train.shape[1]}). Re-training...")
+        else:
+            print(f"\n[SKIP] Classical model found at {model_path}. Skipping training...")
+            return model
 
     print("\n" + "=" * 50)
     print("PHASE: Classical ML Training & Grid Search")
@@ -395,8 +406,6 @@ def run_neural_training(
     """
     model_path = os.path.join(config.models_dir, config.nn_model_filename)
     if os.path.exists(model_path):
-        print(f"\n[SKIP] Neural network found at {model_path}. Skipping training...")
-        
         num_classes = len(np.unique(y_train))
         is_binary = num_classes <= 2
         output_dim = 1 if is_binary else num_classes
@@ -408,9 +417,14 @@ def run_neural_training(
             dropout=config.nn_dropout,
             activation=config.nn_activation,
         )
-        nn_model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
-        nn_model.eval()
-        return nn_model
+        try:
+            nn_model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+            nn_model.eval()
+            print(f"\n[SKIP] Neural network found at {model_path}. Skipping training...")
+            return nn_model
+        except Exception as e:
+            print(f"\n[WARN] Failed to load Neural Network from {model_path}: {e}")
+            print("Falling back to training a new model...")
 
     print("\n" + "=" * 50)
     print("PHASE: Neural Network Training")

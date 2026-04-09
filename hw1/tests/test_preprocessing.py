@@ -23,7 +23,8 @@ from src.preprocessing import (
     apply_scaling,
     save_outlier_histograms,
     generate_pca_insights,
-    apply_smote
+    apply_smote,
+    drop_specific_group
 )
 
 # Local test configurations instead of importing from main.py
@@ -382,4 +383,28 @@ def test_apply_smote_with_full_target_distribution() -> None:
     assert (y_res == 3).sum() == 2
     assert list(X_res.columns) == ['feat1', 'feat2']
     assert y_res.name == 'target'
+
+
+def test_drop_specific_group(sample_df: pd.DataFrame) -> None:
+    """
+    Test dropping a specific group from the target column.
+    """
+    # Test with group_name that exists ('A' appears twice in sample_df)
+    # Original 'CLASS_SP': ['A', 'B', np.nan, 'A', 'B']
+    df = drop_specific_group(sample_df, target_col='CLASS_SP', group_name='A')
+    assert len(df) == 3
+    assert 'A' not in df['CLASS_SP'].values
+    assert list(df['CLASS_SP'].dropna().unique()) == ['B']
+
+    # Test with group_name that doesn't exist
+    df = drop_specific_group(sample_df, target_col='CLASS_SP', group_name='C')
+    assert len(df) == 5
+
+    # Test with group_name=None (should do nothing)
+    df = drop_specific_group(sample_df, target_col='CLASS_SP', group_name=None)
+    assert len(df) == 5
+
+    # Test with missing target_col
+    df = drop_specific_group(sample_df, target_col='MISSING', group_name='A')
+    assert len(df) == 5
 
