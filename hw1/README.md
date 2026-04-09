@@ -320,6 +320,18 @@ The reason for using this hybrid approach is to avoid the information loss that 
 | (W3+UT)/W1 | -0.20 | 0.29 | -0.37 | 0.07 | 0.19 | -0.13 | 0.04 | -0.31 | -0.24 | -0.14 | 0.27 | -0.49 | -0.06 | -0.12 | 0.28 | 0.02 | -0.00 | 0.30 | 0.00 | -0.00 | 0.00 | -0.00 |
 
 
+### PCA Insights and Analysis
+
+The Exploratory PCA reveals several key insights about the structure of the HECATE dataset:
+
+1.  **Scree Plot Analysis**: The scree plot shows that the first principal component (PC1) explains approximately **67%** of the total variance, while the second (PC2) adds another **13%**. Collectively, the first two components capture over **80%** of the dataset's information. By the fifth component, we reach approximately **92%** cumulative explained variance, indicating that the dimensionality of the dataset can be significantly reduced with minimal information loss.
+
+2.  **Dominant Features**:
+    - **PC1 (67% variance)**: This component is heavily dominated by **apparent magnitudes** across multiple bands, specifically `I` (0.29), `R` (0.29), `Z` (0.29), `WF1` (0.28), and `WF2` (0.28). These features represent the overall brightness and scale of the galaxies.
+    - **PC2 (13% variance)**: This component is influenced primarily by **visual and total magnitudes**, with `VT` and `IT` contributing the highest weights (0.55). It is also shaped by **color indices** related to star formation, such as `(W3+UT)/W1` (0.29) and `u-g` (0.25). This suggests that PC2 captures the "spectral type" and dust-obscured activity rather than just absolute scale.
+
+3.  **2D Projection**: The 2D PCA projection (PC1 vs PC2) provides a visual map of the galaxy classes. While there is considerable overlap between the classes (Star-forming, Seyfert, LINER, and Composite), the projection shows some distinct density regions for different types. This separation suggests that the reduced feature space effectively preserves the most of the underlying physics needed for our classification task, even after reducing the original 22 dimensions down to just a few.
+
 # Classical Models
 
 We use 5 classical models to solve this problem:
