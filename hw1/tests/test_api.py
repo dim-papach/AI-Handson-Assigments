@@ -19,7 +19,7 @@ def test_observation_schema() -> None:
         "T": 5.0, "WF1": 12.5, "WF2": 10.2, "WF3": 5.1, "WF4": 2.3,
         "UT": 18.5, "BT": 13.2, "U": 14.5, "G": 13.8, "R": 13.5,
         "I": 13.3, "Z": 13.2, "logM_HEC": 10.5, "logSFR_HEC": 0.5,
-        "METAL": 0.02, "AGN_HEC": "N"
+        "METAL": 0.02, "AGN_HEC": "N", "VT": 13.5, "IT": 13.3
     }
     obs = Observation(**valid_data)
     assert obs.T == 5.0
@@ -79,7 +79,7 @@ def test_predict_endpoint_classical(mock_state: MagicMock) -> None:
                         "T": 5.0, "WF1": 12.5, "WF2": 10.2, "WF3": 5.1, "WF4": 2.3,
                         "UT": 18.5, "BT": 13.2, "U": 14.5, "G": 13.8, "R": 13.5,
                         "I": 13.3, "Z": 13.2, "logM_HEC": 10.5, "logSFR_HEC": 0.5,
-                        "METAL": 0.02, "AGN_HEC": "N"
+                        "METAL": 0.02, "AGN_HEC": "N", "VT": 13.5, "IT": 13.3
                     }
                     response = client.post("/predict", json=payload)
                     

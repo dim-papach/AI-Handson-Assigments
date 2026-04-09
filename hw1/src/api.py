@@ -60,17 +60,19 @@ class Observation(BaseModel):
     """
     # Key variables
     T: float = Field(..., description="T index")
-    WF1: float = Field(..., description="WISE W1 flux")
-    WF2: float = Field(..., description="WISE W2 flux")
-    WF3: float = Field(..., description="WISE W3 flux")
-    WF4: float = Field(..., description="WISE W4 flux")
-    UT: float = Field(..., description="GALEX Ultraviolet flux")
-    BT: float = Field(..., description="Blue total magnitude")
-    U: float = Field(..., description="SDSS u-band magnitude")
-    G: float = Field(..., description="SDSS g-band magnitude")
-    R: float = Field(..., description="SDSS r-band magnitude")
-    I: float = Field(..., description="SDSS i-band magnitude")
-    Z: float = Field(..., description="SDSS z-band magnitude")
+    WF1: Optional[float] = Field(None, description="WISE W1 flux")
+    WF2: Optional[float] = Field(None, description="WISE W2 flux")
+    WF3: Optional[float] = Field(None, description="WISE W3 flux")
+    WF4: Optional[float] = Field(None, description="WISE W4 flux")
+    UT: Optional[float] = Field(None, description="GALEX Ultraviolet flux")
+    BT: Optional[float] = Field(None, description="Blue total magnitude")
+    U: Optional[float] = Field(None, description="SDSS u-band magnitude")
+    G: Optional[float] = Field(None, description="SDSS g-band magnitude")
+    R: Optional[float] = Field(None, description="SDSS r-band magnitude")
+    I: Optional[float] = Field(None, description="SDSS i-band magnitude")
+    Z: Optional[float] = Field(None, description="SDSS z-band magnitude")
+    VT: Optional[float] = Field(None, description="V-band total magnitude (optional)")
+    IT: Optional[float] = Field(None, description="I-band total magnitude (optional)")
     
     # Metadata/Physical properties
     logM_HEC: float = Field(..., description="Log of stellar mass from HECATE")
@@ -81,10 +83,11 @@ class Observation(BaseModel):
     model_config = {
         "json_schema_extra": {
             "example": {
-                "T": 5.0, "WF1": 12.5, "WF2": 10.2, "WF3": 5.1, "WF4": 2.3,
-                "UT": 18.5, "BT": 13.2, "U": 14.5, "G": 13.8, "R": 13.5,
-                "I": 13.3, "Z": 13.2, "logM_HEC": 10.5, "logSFR_HEC": 0.5,
-                "METAL": 0.02, "AGN_HEC": "N"
+                "T": -3, "WF1": 11.5, "WF2": 11.5, "WF3": 11, "WF4": None,
+                "UT": 17, "BT": 15.6, "VT": None, "IT": None,
+                "U": 17.1, "G": 15.293, "R": 14.5,
+                "I": 14.4, "Z": 13.8, "logM_HEC": 10.5, "logSFR_HEC": -0.7,
+                "METAL": 8.6, "AGN_HEC": "Y"
             }
         }
     }
@@ -255,8 +258,8 @@ async def predict(observation: Observation):
         )
         
         # Ensure column order matches training
-        expected_cols = ['T', 'WF1', 'WF2', 'WF3', 'WF4', 'UT', 'BT', 'U', 'R', 'G', 'I', 'Z', 
-                         'logM_HEC', 'logSFR_HEC', 'METAL', 'AGN_HEC_N', 'AGN_HEC_Y', 
+        expected_cols = ['T', 'WF1', 'WF2', 'WF3', 'WF4', 'UT', 'BT', 'VT', 'IT', 'U', 'R', 'G', 'I', 'Z', 
+                         'logM_HEC', 'logSFR_HEC', 'METAL', 'AGN_HEC', 
                          'u-g', 'g-r', 'W3-UT', '(W3+UT)/W1']
         
         # If any are missing (like OHE columns), add them as 0
