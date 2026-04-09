@@ -1,4 +1,49 @@
 
+# Installation & Execution
+
+Follow these steps to set up the environment and run the complete machine learning pipeline.
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/dim-papach/AI-Handson-Assigments.git
+cd AI-Handson-Assigments/hw1
+```
+
+
+# Setup Virtual Environment
+
+## Using Poetry
+
+```bash
+poetry install
+```
+
+## Using venv
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+# Run the Pipeline
+
+## With Poetry
+
+```bash
+poetry run python hw1/src/main.py
+```
+
+## With venv
+
+Can also be used with poetry
+```bash
+./venv/bin/python hw1/src/main.py
+```
+
+# The Data
+
 For our project we are using the HECATE galaxy catalogue, which is a catalogue of galaxies (Kovlakas K., Zezas A., Andrews J. J., Basu-Zych A., Fragos T., Hornschemeier A., Kouroumpatzakis K., Lehmer B., Ptak. A (2021). “The Heraklion Extragalactic Catalogue (HECATE): a value added galaxy catalogue for multi-messenger astrophysics”. MNRAS in press.ADS link)
 
 You can download the catalogue from [Kaggle](https://www.kaggle.com/datasets/tanmayshukla05/hecate-galaxy-catalogue?resource=download) or from the original [source](https://hecate.ia.forth.gr/catalog.php), and it is stored in the `data/` folder as `HECATE.csv`.
@@ -450,53 +495,99 @@ We have created a NN with 3 hidden layers [128, 64, 32] with ReLU activation fun
 ![NN Evaluation Metrics](visuals/nn_metrics.png)
 ![NN Confusion Matrix](visuals/nn_confusion_matrix.png)
 
+
+
 # Best Model
 
 The pipeline automatically identifies and saves the overall "Best Model" by performing a head-to-head comparison between the optimal classical model (found via grid search) and the trained neural network. Both models are evaluated on the unseen test set using ROC-AUC as the primary metric (falling back to Accuracy if necessary). The winning model is persisted in the `/models` directory as `best_model.pkl` (for classical) or `best_model.pt` (for neural network), ensuring that the most reliable predictor is always available for subsequent inference or deployment.
 
+
+--- Classical Model Report ---
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      5403
+           1       0.70      0.85      0.77       112
+           2       0.65      0.69      0.67       305
+           3       0.83      0.76      0.79       533
+
+    accuracy                           0.96      6353
+   macro avg       0.79      0.83      0.81      6353
+weighted avg       0.96      0.96      0.96      6353
+
+
+--- Neural Network ---
+  Accuracy  : 0.9603
+  Precision : 0.9623
+  Recall    : 0.9603
+  F1-score  : 0.9608
+  ROC-AUC   : 0.9924
+
+--- Neural Network Report ---
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      5403
+           1       0.68      0.79      0.73       112
+           2       0.62      0.71      0.66       305
+           3       0.83      0.74      0.78       533
+
+    accuracy                           0.96      6353
+   macro avg       0.78      0.81      0.79      6353
+weighted avg       0.96      0.96      0.96      6353
+
+
+------------------------------
+Winner: Classical Model (Score: 0.9930 vs 0.9924)
+
 ![Final Comparison Metrics](visuals/final_comparison_metrics.png)
 ![Final Comparison Confusion Matrices](visuals/final_comparison_confusion_matrices.png)
 
+# Bonus: FastAPI Inference API
 
-# Installation & Execution
+The project includes a production-ready REST API built with **FastAPI** to serve the best-performing model. This allows for real-time predictions by sending photometric galaxy data as JSON.
 
-Follow these steps to set up the environment and run the complete machine learning pipeline.
+### Running the API
 
-### 1. Clone the Repository
+You can start the API server after installing the dependencies:
 
 ```bash
-git clone https://github.com/dim-papach/AI-Handson-Assigments.git
-cd AI-Handson-Assigments/hw1
+# Using Python directly (runs on http://0.0.0.0:8000)
+python src/api.py
+
+# Or using uvicorn manually
+uvicorn src.api:app --reload
+```
+
+### Interactive Documentation
+
+Once the server is running, you can explore the API and test predictions directly from your browser:
+- **Swagger UI**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+- **ReDoc**: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
+
+### Example Request
+
+You can test the `/predict` endpoint using `curl`:
+
+```bash
+curl -X 'POST' \
+  'http://127.0.0.1:8000/predict' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "T": -3,
+  "WF1": 11.5,
+  "WF2": 11.5,
+  "WF3": 11.0,
+  "UT": 17.0,
+  "U": 17.1,
+  "G": 15.293,
+  "R": 14.5,
+  "I": 14.4,
+  "Z": 13.8,
+  "logM_HEC": 10.5,
+  "logSFR_HEC": -0.7,
+  "METAL": 8.6,
+  "AGN_HEC": "Y"
+}'
 ```
 
 
-# Setup Virtual Environment
-
-## Using Poetry
-
-```bash
-poetry install
-```
-
-## Using venv
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-# Run the Pipeline
-
-## With Poetry
-
-```bash
-poetry run python hw1/src/main.py
-```
-
-## With venv
-
-Can also be used with poetry
-```bash
-./venv/bin/python hw1/src/main.py
-```
