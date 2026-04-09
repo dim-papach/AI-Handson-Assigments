@@ -76,10 +76,13 @@ def filter_error_ratios(df: pd.DataFrame, key_vars: List[str], err_vars: List[st
             ratio_mask &= (ratio > 3)
     
     # Drop the error columns, no longer usefull
-    df = df[ratio_mask].copy()
-    df = df.drop(columns=err_vars, errors='ignore')
+    df_filtered = df[ratio_mask].copy()
+    removed_count = len(df) - len(df_filtered)
+    print(f"Error Ratios Filtering Removed: {removed_count} rows")
     
-    return df
+    df_filtered = df_filtered.drop(columns=err_vars, errors='ignore')
+    
+    return df_filtered
 
 
 def select_metal_flag(df: pd.DataFrame, frac: float = 0.005, random_state: int = PipelineConfig.random_state) -> pd.DataFrame:
@@ -95,7 +98,12 @@ def select_metal_flag(df: pd.DataFrame, frac: float = 0.005, random_state: int =
     # Drop the FLAG_METAL column, no longer usefull
     df_valid = df_valid.drop(columns=['FLAG_METAL'])
     df_missing_reduced = df_missing_reduced.drop(columns=['FLAG_METAL'])
-    return pd.concat([df_valid, df_missing_reduced]).sort_index()
+    
+    result = pd.concat([df_valid, df_missing_reduced]).sort_index()
+    removed_count = len(df) - len(result)
+    print(f"Metalicity Flag Subsampling Removed: {removed_count} rows")
+    
+    return result
 
 
 def split_data(
@@ -241,9 +249,16 @@ def apply_iqr_capping(X: pd.DataFrame, bounds: Dict[str, Tuple[float, float]]) -
     Caps values across dataset subsets according to previously fit threshold bounds natively.
     """
     X_capped = X.copy()
+    rows_affected = pd.Series(False, index=X.index)
+    
     for col, (lower, upper) in bounds.items():
         if col in X_capped.columns:
+            # Track which rows are being capped
+            is_outside = (X_capped[col] < lower) | (X_capped[col] > upper)
+            rows_affected |= is_outside
             X_capped[col] = np.clip(X_capped[col], lower, upper)
+            
+    print(f"IQR Capping Applied: {rows_affected.sum()} rows modified")
     return X_capped
 
 

@@ -133,23 +133,30 @@ def fit_preprocessing_params(
         .pipe(apply_iqr_capping, bounds=iqr_bounds)
     )
 
-    scaler, num_cols = get_fitted_scaler(train_temp.drop(columns=[config.target_col]))
+    # 1. Fit Imputation Pipeline on UN-SCALED data
+    pipeline = build_preprocessing_pipeline(
+        train_temp.drop(columns=[config.target_col])
+    )
+    pipeline.fit(
+        train_temp.drop(columns=[config.target_col]),
+        train_temp[config.target_col],
+    )
+
+    # 2. Apply Imputation first
+    train_temp_imputed = train_temp.pipe(
+        apply_imputation, pipeline=pipeline, target_col=config.target_col
+    )
+
+    # 3. Filter Error Ratios AFTER imputation (SNR > 3 check)
+    train_temp_filtered = train_temp_imputed.pipe(
+        filter_error_ratios, key_vars=config.key_vars, err_vars=config.err_vars
+    )
+
+    # 4. Fit Scaler ONLY AFTER filtering and imputation
+    scaler, num_cols = get_fitted_scaler(train_temp_filtered.drop(columns=[config.target_col]))
 
     os.makedirs(config.models_dir, exist_ok=True)
     joblib.dump(scaler, os.path.join(config.models_dir, config.scaler_filename))
-
-    train_temp_scaled = train_temp.pipe(
-        apply_scaling, scaler=scaler, num_cols=num_cols, target_col=config.target_col
-    )
-
-    pipeline = build_preprocessing_pipeline(
-        train_temp_scaled.drop(columns=[config.target_col])
-    )
-    pipeline.fit(
-        train_temp_scaled.drop(columns=[config.target_col]),
-        train_temp_scaled[config.target_col],
-    )
-
     joblib.dump(pipeline, os.path.join(config.models_dir, "imputation_pipeline.pkl"))
     joblib.dump(iqr_bounds, os.path.join(config.models_dir, "iqr_bounds.pkl"))
 
@@ -195,14 +202,14 @@ def preprocess_split(
     return (
         df
         .pipe(drop_missing_targets, target_col=config.target_col)
-        .pipe(filter_error_ratios, key_vars=config.key_vars, err_vars=config.err_vars)
         .pipe(print_class_ratios, target_col=config.target_col, title=f"{split_name} (Before Encoding)")
         .pipe(apply_target_encoder, target_col=config.target_col, le=le)
         .pipe(print_class_ratios, target_col=config.target_col, title=f"{split_name} (After Encoding)")
         .pipe(apply_iqr_capping, bounds=iqr_bounds)
-        .pipe(save_outlier_histograms, prefix=split_name, out_dir=config.visuals_dir)
-        .pipe(apply_scaling, scaler=scaler, num_cols=num_cols, target_col=config.target_col)
         .pipe(apply_imputation, pipeline=pipeline, target_col=config.target_col)
+        .pipe(filter_error_ratios, key_vars=config.key_vars, err_vars=config.err_vars)
+        .pipe(apply_scaling, scaler=scaler, num_cols=num_cols, target_col=config.target_col)
+        .pipe(save_outlier_histograms, prefix=split_name, out_dir=config.visuals_dir)
         .pipe(compute_colors)
     )
 
