@@ -4,6 +4,7 @@ author: "Dimitris Papachristopoulos (math250018)"
 format: 
   gfm:
     fig-path: "visuals/readme_figures/"
+    variant: +yaml_metadata_block
 toc: true
 number-sections: true
 ---
@@ -206,6 +207,7 @@ plt.ylabel('Frequency')
 plt.grid(axis='y', alpha=0.3)
 plt.show()
 ```
+c
 
 With the flags being:
 

@@ -1,5 +1,14 @@
-# Understanding the HECATE Galaxy Catalogue and our Pipeline
-Dimitris Papachristopoulos (math250018)
+---
+title: Understanding the HECATE Galaxy Catalogue and our Pipeline
+author: Dimitris Papachristopoulos (math250018)
+format:
+  gfm:
+    fig-path: visuals/readme_figures/
+    variant: +yaml_metadata_block
+toc: true
+number-sections: true
+---
+
 
 - [<span class="toc-section-number">0.1</span> Dataset
   Description](#dataset-description)
@@ -383,6 +392,8 @@ plt.show()
 ![](README_files/figure-commonmark/cell-11-output-1.png)
 
 ![](README_files/figure-commonmark/cell-11-output-2.png)
+
+c
 
 With the flags being:
 
