@@ -1,0 +1,39 @@
+--- Training DecisionTree ---
+Best DecisionTree Validation Score (AUC fallback to Acc): 0.9895
+  Accuracy: 0.9599
+  Precision: 0.9614
+  Recall: 0.9599
+  F1-score: 0.9600
+  ROC-AUC: 0.9895
+
+--- Training LogisticRegression ---
+Best LogisticRegression Validation Score (AUC fallback to Acc): 0.9919
+  Accuracy: 0.9609
+  Precision: 0.9617
+  Recall: 0.9609
+  F1-score: 0.9610
+  ROC-AUC: 0.9919
+
+--- Training SVM ---
+Best SVM Validation Score (AUC fallback to Acc): 0.9926
+  Accuracy: 0.9625
+  Precision: 0.9653
+  Recall: 0.9625
+  F1-score: 0.9629
+  ROC-AUC: 0.9926
+
+--- Training RandomForest ---
+Best RandomForest Validation Score (AUC fallback to Acc): 0.9923
+  Accuracy: 0.9637
+  Precision: 0.9652
+  Recall: 0.9637
+  F1-score: 0.9641
+  ROC-AUC: 0.9923
+
+--- Training XGBoost ---
+Best XGBoost Validation Score (AUC fallback to Acc): 0.9930
+  Accuracy: 0.9650
+  Precision: 0.9667
+  Recall: 0.9650
+  F1-score: 0.9653
+  ROC-AUC: 0.9930
