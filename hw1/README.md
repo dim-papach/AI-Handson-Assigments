@@ -495,7 +495,7 @@ We have created a NN with 3 hidden layers [128, 64, 32] with ReLU activation fun
 ![NN Evaluation Metrics](visuals/nn_metrics.png)
 ![NN Confusion Matrix](visuals/nn_confusion_matrix.png)
 
-
+Even though the neural network has good metrics, the loss curves show that after the training and validation curves are not converging (last training epoch 11), which means that the model is overfitting. 
 
 # Best Model
 
