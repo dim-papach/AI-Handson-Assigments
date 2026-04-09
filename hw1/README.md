@@ -294,6 +294,44 @@ The reason for using this hybrid approach is to avoid the information loss that 
 ![PCA Scree Plot](visuals/pca_scree_plot.png)
 ![PCA 2D Projection](visuals/pca_2d_projection.png)
 
+| Feature | PC1 | PC2 | PC3 | PC4 | PC5 | PC6 | PC7 | PC8 | PC9 | PC10 | PC11 | PC12 | PC13 | PC14 | PC15 | PC16 | PC17 | PC18 | PC19 | PC20 | PC21 | PC22 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| T | 0.09 | -0.21 | 0.22 | 0.07 | 0.49 | 0.11 | 0.79 | 0.04 | -0.11 | -0.05 | 0.06 | -0.03 | 0.01 | 0.01 | -0.01 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| WF1 | 0.28 | -0.03 | -0.01 | 0.00 | 0.02 | 0.10 | -0.05 | 0.05 | -0.02 | 0.07 | -0.12 | 0.18 | 0.24 | -0.12 | -0.18 | 0.04 | -0.02 | 0.86 | 0.00 | -0.00 | 0.00 | -0.00 |
+| WF2 | 0.28 | -0.03 | -0.04 | 0.03 | 0.04 | 0.07 | -0.04 | 0.08 | -0.04 | 0.07 | -0.14 | 0.18 | 0.29 | -0.34 | 0.79 | -0.09 | 0.02 | -0.13 | -0.00 | 0.00 | -0.00 | -0.00 |
+| WF3 | 0.21 | 0.11 | -0.26 | 0.20 | 0.12 | 0.09 | -0.07 | -0.06 | -0.31 | 0.07 | -0.01 | 0.08 | 0.18 | -0.08 | -0.28 | -0.00 | 0.00 | -0.23 | 0.70 | 0.18 | -0.00 | -0.05 |
+| WF4 | 0.17 | 0.14 | -0.32 | 0.26 | 0.17 | -0.12 | 0.02 | 0.52 | 0.53 | 0.14 | 0.40 | -0.02 | -0.07 | 0.00 | -0.02 | 0.00 | 0.00 | -0.01 | -0.00 | 0.00 | -0.00 | 0.00 |
+| UT | 0.25 | 0.15 | -0.11 | -0.28 | 0.05 | -0.07 | 0.03 | -0.10 | 0.01 | -0.02 | 0.06 | -0.19 | 0.47 | -0.37 | -0.38 | 0.03 | 0.00 | -0.28 | -0.41 | -0.11 | 0.00 | 0.03 |
+| BT | 0.27 | 0.08 | -0.05 | -0.19 | 0.03 | -0.00 | -0.03 | -0.02 | -0.02 | -0.12 | 0.08 | -0.09 | 0.40 | 0.81 | 0.16 | 0.05 | 0.00 | -0.01 | -0.00 | 0.00 | 0.00 | -0.00 |
+| VT | 0.07 | 0.55 | 0.40 | 0.19 | -0.02 | -0.01 | 0.03 | 0.00 | -0.00 | -0.01 | -0.01 | 0.02 | -0.00 | -0.01 | -0.00 | -0.00 | -0.00 | 0.00 | -0.00 | -0.01 | -0.71 | 0.01 |
+| IT | 0.07 | 0.55 | 0.40 | 0.19 | -0.02 | -0.01 | 0.03 | 0.00 | -0.00 | -0.01 | -0.01 | 0.02 | -0.00 | -0.01 | -0.00 | -0.00 | -0.00 | 0.00 | 0.00 | 0.01 | 0.71 | -0.01 |
+| U | 0.25 | 0.15 | -0.12 | -0.29 | 0.09 | -0.05 | 0.04 | -0.08 | -0.00 | 0.06 | -0.08 | 0.09 | -0.32 | 0.03 | -0.00 | -0.30 | -0.12 | 0.01 | 0.05 | -0.37 | -0.00 | -0.66 |
+| R | 0.29 | 0.02 | -0.00 | -0.15 | 0.04 | 0.04 | -0.05 | 0.01 | -0.04 | -0.04 | -0.03 | -0.10 | -0.27 | 0.00 | -0.01 | -0.31 | -0.13 | 0.00 | 0.16 | -0.42 | 0.01 | 0.70 |
+| G | 0.28 | 0.06 | -0.04 | -0.21 | 0.04 | 0.01 | -0.02 | 0.01 | -0.05 | -0.14 | 0.01 | 0.02 | -0.29 | -0.01 | -0.01 | -0.31 | -0.13 | 0.01 | -0.20 | 0.78 | -0.01 | 0.06 |
+| I | 0.29 | 0.01 | 0.01 | -0.12 | 0.03 | 0.05 | -0.05 | 0.00 | -0.03 | -0.04 | -0.04 | -0.09 | -0.28 | -0.02 | 0.01 | 0.26 | 0.86 | -0.01 | -0.00 | 0.00 | -0.00 | -0.00 |
+| Z | 0.29 | -0.01 | 0.01 | -0.09 | 0.03 | 0.06 | -0.06 | 0.00 | -0.03 | -0.02 | -0.05 | -0.07 | -0.27 | -0.05 | 0.07 | 0.77 | -0.46 | -0.06 | 0.00 | -0.00 | 0.00 | 0.00 |
+| logM_HEC | -0.22 | 0.08 | 0.02 | -0.05 | 0.68 | 0.25 | -0.37 | -0.00 | 0.27 | -0.28 | -0.35 | 0.00 | 0.04 | -0.00 | -0.03 | -0.00 | 0.00 | -0.02 | -0.00 | 0.00 | -0.00 | 0.00 |
+| logSFR_HEC | -0.15 | -0.03 | 0.28 | -0.35 | 0.28 | 0.14 | -0.29 | 0.17 | -0.32 | 0.42 | 0.53 | 0.08 | 0.01 | -0.03 | 0.03 | 0.01 | 0.00 | 0.02 | 0.00 | -0.00 | 0.00 | -0.00 |
+| METAL | -0.11 | 0.04 | -0.01 | -0.10 | 0.10 | -0.56 | -0.02 | 0.59 | -0.38 | -0.04 | -0.37 | -0.14 | 0.03 | 0.01 | -0.02 | 0.03 | 0.00 | 0.02 | 0.00 | -0.00 | 0.00 | 0.00 |
+| AGN_HEC | -0.23 | 0.28 | -0.24 | -0.24 | -0.27 | 0.66 | 0.23 | 0.40 | -0.09 | -0.02 | -0.13 | -0.12 | 0.00 | -0.01 | 0.01 | 0.01 | 0.00 | 0.01 | 0.00 | -0.00 | 0.00 | 0.00 |
+| u-g | -0.16 | 0.25 | -0.23 | -0.20 | 0.13 | -0.16 | 0.21 | -0.25 | 0.17 | 0.64 | -0.31 | 0.19 | -0.03 | 0.12 | 0.03 | 0.11 | 0.05 | -0.01 | -0.02 | 0.12 | 0.00 | 0.22 |
+| g-r | -0.17 | 0.19 | -0.17 | -0.24 | 0.01 | -0.18 | 0.13 | -0.01 | -0.07 | -0.46 | 0.24 | 0.69 | -0.01 | -0.05 | 0.01 | 0.15 | 0.05 | 0.01 | 0.03 | -0.08 | 0.00 | 0.13 |
+| W3-UT | 0.08 | 0.02 | -0.26 | 0.49 | 0.13 | 0.18 | -0.12 | -0.00 | -0.43 | 0.11 | -0.06 | 0.25 | -0.13 | 0.18 | -0.08 | -0.02 | -0.00 | -0.09 | -0.52 | -0.14 | 0.00 | 0.04 |
+| (W3+UT)/W1 | -0.20 | 0.29 | -0.37 | 0.07 | 0.19 | -0.13 | 0.04 | -0.31 | -0.24 | -0.14 | 0.27 | -0.49 | -0.06 | -0.12 | 0.28 | 0.02 | -0.00 | 0.30 | 0.00 | -0.00 | 0.00 | -0.00 |
+
+
+### PCA Insights and Analysis
+
+The Exploratory PCA reveals several key insights about the structure of the HECATE dataset:
+
+1.  **Scree Plot Analysis**: The scree plot shows that the first principal component (PC1) explains approximately **67%** of the total variance, while the second (PC2) adds another **13%**. Collectively, the first two components capture over **80%** of the dataset's information. By the fifth component, we reach approximately **92%** cumulative explained variance, indicating that the dimensionality of the dataset can be significantly reduced with minimal information loss.
+
+2.  **Dominant Features**:
+    - **PC1 (67% variance)**: This component is heavily dominated by **apparent magnitudes** across multiple bands, specifically `I` (0.29), `R` (0.29), `Z` (0.29), `WF1` (0.28), and `WF2` (0.28). These features represent the overall brightness and scale of the galaxies.
+    - **PC2 (13% variance)**: This component is influenced primarily by **visual and total magnitudes**, with `VT` and `IT` contributing the highest weights (0.55). It is also shaped by **color indices** related to star formation, such as `(W3+UT)/W1` (0.29) and `u-g` (0.25). This suggests that PC2 captures the "spectral type" and dust-obscured activity rather than just absolute scale.
+
+3.  **2D Projection**: The 2D PCA projection (PC1 vs PC2) provides a visual map of the galaxy classes. While there is considerable overlap between the classes (Star-forming, Seyfert, LINER, and Composite), the projection shows some distinct density regions for different types. This separation suggests that the reduced feature space effectively preserves the most of the underlying physics needed for our classification task, even after reducing the original 22 dimensions down to just a few.
+
 # Classical Models
 
 We use 5 classical models to solve this problem:
