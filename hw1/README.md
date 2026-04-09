@@ -590,4 +590,6 @@ curl -X 'POST' \
 }'
 ```
 
+# Bonus Task 6
 
+I Created my own hyperparameter tuning for the classical models using a "DIY" grid inspired by GridsSearch, by using ParameterGrid from sklearn.model_selection, because i wanted to understand the process better and also I wanted to implement Early Stopping for XGBoost, which I was not able to do in GridSearch.
