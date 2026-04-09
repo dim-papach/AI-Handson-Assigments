@@ -356,6 +356,46 @@ We use 5 classical models to solve this problem:
 - Decision Tree
 - Xgboost
 
+--- Training DecisionTree ---
+Best DecisionTree Validation Score (AUC fallback to Acc): 0.9895
+  Accuracy: 0.9599
+  Precision: 0.9614
+  Recall: 0.9599
+  F1-score: 0.9600
+  ROC-AUC: 0.9895
+
+--- Training LogisticRegression ---
+Best LogisticRegression Validation Score (AUC fallback to Acc): 0.9919
+  Accuracy: 0.9609
+  Precision: 0.9617
+  Recall: 0.9609
+  F1-score: 0.9610
+  ROC-AUC: 0.9919
+
+--- Training SVM ---
+Best SVM Validation Score (AUC fallback to Acc): 0.9926
+  Accuracy: 0.9625
+  Precision: 0.9653
+  Recall: 0.9625
+  F1-score: 0.9629
+  ROC-AUC: 0.9926
+
+--- Training RandomForest ---
+Best RandomForest Validation Score (AUC fallback to Acc): 0.9923
+  Accuracy: 0.9637
+  Precision: 0.9652
+  Recall: 0.9637
+  F1-score: 0.9641
+  ROC-AUC: 0.9923
+
+--- Training XGBoost ---
+Best XGBoost Validation Score (AUC fallback to Acc): 0.9930
+  Accuracy: 0.9650
+  Precision: 0.9667
+  Recall: 0.9650
+  F1-score: 0.9653
+  ROC-AUC: 0.9930
+
 ![Classical Models Metrics Comparison](visuals/classical_models_metrics.png)
 ![Classical Models Confusion Matrices](visuals/classical_models_confusion_matrices.png)
 
@@ -364,6 +404,8 @@ We train all of the models using a grid of parameters and we evaluate them using
 The best model is the one with the highest ROC-AUC on the validation set.
 
 We use ROC-AUC as the main evaluation metric because it is robust to class imbalance and evaluates the model's ability to distinguish between classes across all possible classification thresholds, rather than just relying on a single fixed threshold (like 0.5). (we use One-vs-Rest for multiclass classification)
+
+The best model is XGBoost with a ROC-AUC of 0.9930. Also as seen from the confusion matrix, it is the best model in terms of correctly classifying the different classes. (Loses some samples on all the classes compared to the other models but not by much and is the most balanced model)
 
 ### Feature Importance vs PCA Loadings
 
