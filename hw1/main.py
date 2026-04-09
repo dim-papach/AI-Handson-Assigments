@@ -285,7 +285,8 @@ def run_data_ingestion_and_preprocessing(
             y_train,
             sampling_strategy=config.smote_sampling_strategy,
             k_neighbors=config.smote_k_neighbors,
-            random_state=config.smote_random_state
+            random_state=config.smote_random_state,
+            target_distribution=config.target_distribution
         )
         # Print ratios after SMOTE
         smote_df = X_train.assign(**{config.target_col: y_train})

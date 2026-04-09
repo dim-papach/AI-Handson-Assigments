@@ -429,7 +429,7 @@ def apply_smote(
     sampling_strategy: str = "auto",
     k_neighbors: int = 5,
     random_state: int = PipelineConfig.smote_random_state,
-    target_distribution: Optional[Dict[int, float]] = None,
+    target_distribution: Optional[Dict[int, float]] =None,
     max_increase: float = 0.10,
 ) -> Tuple[pd.DataFrame, pd.Series]:
     """
@@ -468,7 +468,7 @@ def apply_smote(
     Tuple[pd.DataFrame, pd.Series]
         The resampled feature matrix and target labels.
     """
-    if target_distribution is None:
+    if target_distribution is None or sum(target_distribution.values()) != 1.0:
         target_distribution = {0: 0.20, 1: 0.30, 2: 0.25, 3: 0.25}
 
     original_counts = y_train.value_counts().sort_index()
