@@ -1,14 +1,5 @@
----
-title: Understanding the HECATE Galaxy Catalogue and our Pipeline
-author: Dimitris Papachristopoulos (math250018)
-format:
-  gfm:
-    fig-path: visuals/readme_figures/
-    variant: +yaml_metadata_block
-toc: true
-number-sections: true
----
-
+# Understanding the HECATE Galaxy Catalogue and our Pipeline
+Dimitris Papachristopoulos (math250018)
 
 - [<span class="toc-section-number">0.1</span> Dataset
   Description](#dataset-description)
