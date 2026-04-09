@@ -319,6 +319,20 @@ The reason for using this hybrid approach is to avoid the information loss that 
 | W3-UT | 0.08 | 0.02 | -0.26 | 0.49 | 0.13 | 0.18 | -0.12 | -0.00 | -0.43 | 0.11 | -0.06 | 0.25 | -0.13 | 0.18 | -0.08 | -0.02 | -0.00 | -0.09 | -0.52 | -0.14 | 0.00 | 0.04 |
 | (W3+UT)/W1 | -0.20 | 0.29 | -0.37 | 0.07 | 0.19 | -0.13 | 0.04 | -0.31 | -0.24 | -0.14 | 0.27 | -0.49 | -0.06 | -0.12 | 0.28 | 0.02 | -0.00 | 0.30 | 0.00 | -0.00 | 0.00 | -0.00 |
 
+PC1 Dominant Features:
+  - I           : 0.2866
+  - R           : 0.2859
+  - Z           : 0.2854
+
+PC2 Dominant Features:
+  - IT          : 0.5462
+  - VT          : 0.5462
+  - (W3+UT)/W1  : 0.2929
+
+PC3 Dominant Features:
+  - IT          : 0.4004
+  - VT          : 0.4004
+  - (W3+UT)/W1  : -0.3707
 
 ### PCA Insights and Analysis
 
@@ -350,6 +364,41 @@ We train all of the models using a grid of parameters and we evaluate them using
 The best model is the one with the highest ROC-AUC on the validation set.
 
 We use ROC-AUC as the main evaluation metric because it is robust to class imbalance and evaluates the model's ability to distinguish between classes across all possible classification thresholds, rather than just relying on a single fixed threshold (like 0.5). (we use One-vs-Rest for multiclass classification)
+
+### Feature Importance vs PCA Loadings
+
+The following table shows the feature importance for the best classical model (e.g., XGBoost).
+
+| Feature | Importance |
+| :--- | :--- |
+| **AGN_HEC** | 0.6910 |
+| **(W3+UT)/W1** | 0.0813 |
+| **METAL** | 0.0747 |
+| **W3-UT** | 0.0238 |
+| **R** | 0.0119 |
+| **WF4** | 0.0114 |
+| **logSFR_HEC** | 0.0111 |
+| **WF3** | 0.0097 |
+| **logM_HEC** | 0.0096 |
+| **u-g** | 0.0095 |
+| **G** | 0.0082 |
+| **I** | 0.0081 |
+| **WF2** | 0.0070 |
+| **BT** | 0.0068 |
+| **Z** | 0.0065 |
+| **g-r** | 0.0062 |
+| **WF1** | 0.0056 |
+| **T** | 0.0053 |
+| **UT** | 0.0051 |
+| **U** | 0.0048 |
+| **VT** | 0.0024 |
+| **IT** | 0.0000 |
+
+Comparing the feature importance with our PCA findings reveals a clear distinction between data variance and predictive power:
+
+- **Brightness vs. Classification**: While **PC1 (67% variance)** is dominated by apparent magnitudes (`I`, `R`, `Z`, `WF1`, `WF2`), these features have relatively low importance (<1.2%) in the classical classification model. This indicates that while total brightness explains the most variance in the dataset, it is not the primary factor for identifying a galaxy's nuclear activity class.
+- **Activity Indicators**: The classical model relies overwhelmingly on **`AGN_HEC` (69.1%)**, which was also a significant contributor to **PC2**. This confirms that established activity adopted-classification labels are the most reliable predictors.
+- **Star Formation & Metallicity**: Both PCA and the classical model emphasize the importance of star-formation proxies like **`(W3+UT)/W1`** and physical properties like **`METAL`** (7.5% importance). These features capture the underlying physics necessary for distinguishing between star-forming and AGN-dominated systems.
 
 # Neural Network
 
