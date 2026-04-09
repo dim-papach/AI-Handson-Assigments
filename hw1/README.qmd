@@ -4,7 +4,6 @@ author: "Dimitris Papachristopoulos (math250018)"
 format: 
   gfm:
     fig-path: "visuals/readme_figures/"
-    variant: +yaml_metadata_block
 toc: true
 number-sections: true
 ---
