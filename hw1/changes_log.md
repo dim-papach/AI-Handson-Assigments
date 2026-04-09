@@ -70,11 +70,34 @@ Completed the mandatory coding requirements for Homework 1 Task 4 and Task 5. Su
 
 # 2026-04-09
 
-Implemented class ratio monitoring to verify data distribution consistency throughout the preprocessing pipeline and enhanced visual evaluations with explicit class name labeling across all models.
+Implemented class imbalance handling with SMOTE, stabilized the pipeline with class group filtering, and documented comprehensive PCA analysis results including detailed loading tables.
 
-## dev-00:23
-### Class ratio monitoring and plot labeling enhancements
-- **Class Ratio Monitoring**: Added `print_class_ratios` utility to `src/preprocessing.py` and integrated it into the pipeline to track class distributions before/after encoding and after inversion.
-- **Enhanced Visualizations**: Updated `train_classical_models` and `evaluate_nn_model` to accept the `LabelEncoder`, ensuring that confusion matrices and evaluation reports use actual class names instead of numeric indices.
-- **Refactored Evaluation API**: Unified `plot_model_performance` and `plot_nn_evaluation` to support dynamic class labeling, improving the interpretability of Task 4 results.
-- **Test Suite Updates**: Synchronized the entire test suite with the updated function signatures, ensuring comprehensive coverage for the new labeling and monitoring logic.
+## dev-00:45
+### SMOTE integration and visual layout optimization
+- Integrated `imbalanced-learn` into the pipeline, implementing SMOTE for handling class imbalance with configurable target distributions.
+- Refactored `src/evaluation.py` to use a 2x2 grid layout for model metrics and confusion matrices, improving readability.
+- Added `tests/test_main.py` updates to validate SMOTE integration and distribution consistency.
+
+## dev-04:04
+### Class group filtering and pipeline robustness
+- Implemented `drop_group` parameter in `PipelineConfig` to automatically filter out specific target labels (e.g., unknown classes).
+- Enhanced `src/preprocessing.py` with `drop_specific_group` function and refined the pipeline execution flow to ensure data integrity.
+- Stabilized the main entry point to handle edge cases in dataset filtering and class representation.
+
+## dev-21:09
+### PCA Analysis and README documentation
+- Documented PCA results in the README, including a scree plot analysis and a detailed feature loadings table for the first 22 components.
+- Interpreted PC1 and PC2, identifying brightness and star-formation proxies as the primary axes of variance.
+- Synchronized all visual artifacts in the `visuals/` directory with the latest pipeline run.
+
+# 2026-04-10
+
+Finalized the Homework 1 assignment by completing Task 1-4 and Task 5 (Bonus). Conducted a head-to-head comparison between classical and neural network models, implemented a FastAPI inference server, and refined documentation for model selection and training behavior.
+
+## dev-01:05
+### Model comparison, FastAPI integration, and final README polishing
+- **Model Comparison**: Formally designated XGBoost as the "Best Model" after achieving an ROC-AUC of 0.9930, outperforming the neural network on the test set.
+- **Task 5 (FastAPI)**: Added a comprehensive section to the README detailing how to run the REST API and test it with `curl` or Swagger UI.
+- **Training Insights**: Added detailed interpretations of the neural network's loss curves, noting signs of overfitting after epoch 11 due to limited training samples.
+- **Workflow & Environment**: Verified and documented environment setup for both Poetry and venv, ensuring cross-platform reproducibility.
+- **Code Refinement**: Synchronized `src/api.py` with the latest preprocessing pipeline to ensure consistent inference results.
