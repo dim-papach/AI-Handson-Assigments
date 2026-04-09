@@ -195,6 +195,7 @@ def preprocess_split(
     return (
         df
         .pipe(drop_missing_targets, target_col=config.target_col)
+        .pipe(filter_error_ratios, key_vars=config.key_vars, err_vars=config.err_vars)
         .pipe(print_class_ratios, target_col=config.target_col, title=f"{split_name} (Before Encoding)")
         .pipe(apply_target_encoder, target_col=config.target_col, le=le)
         .pipe(print_class_ratios, target_col=config.target_col, title=f"{split_name} (After Encoding)")
@@ -202,7 +203,6 @@ def preprocess_split(
         .pipe(save_outlier_histograms, prefix=split_name, out_dir=config.visuals_dir)
         .pipe(apply_scaling, scaler=scaler, num_cols=num_cols, target_col=config.target_col)
         .pipe(apply_imputation, pipeline=pipeline, target_col=config.target_col)
-        .pipe(filter_error_ratios, key_vars=config.key_vars, err_vars=config.err_vars)
         .pipe(compute_colors)
     )
 
