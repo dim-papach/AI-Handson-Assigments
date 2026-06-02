@@ -21,6 +21,9 @@ from src.preprocessing import (
     apply_scaling
 )
 
+# Import the RAG retrieval function
+from hw2.src.rag import retrieve_context
+
 # Load HW1 Model Artifacts globally
 MODELS_DIR = os.path.join(BASE_DIR, "models")
 try:
@@ -113,3 +116,14 @@ def predict_galaxy_class(
     prob_percent = probs[pred_idx] * 100
     
     return f"Prediction: {class_name} (probability: {prob_percent:.1f}%)"
+
+class RetrievalInput(BaseModel):
+    query: str = Field(description="The factual or conceptual question to ask the domain knowledge base")
+
+@tool("retrieve_domain_knowledge", args_schema=RetrievalInput)
+def retrieve_domain_knowledge(query: str) -> str:
+    """
+    Calls the RAG retrieval function to fetch factual or conceptual domain knowledge.
+    Use this tool when the user asks a factual or conceptual question about the domain literature, galaxy formation, or astrophysics concepts.
+    """
+    return retrieve_context(query)
