@@ -17,7 +17,7 @@ dependencies = [
 "seaborn",
 "kagglehub (>=1.0.0,<2.0.0)",
 "matplotlib",
-"scikit-learn",
+"scikit-learn (==1.7.2)",
 "torch",
 "pytest (>=9.0.2,<10.0.0)",
 "xgboost (>=3.2.0,<4.0.0)",

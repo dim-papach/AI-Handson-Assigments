@@ -11,6 +11,15 @@ Implemented a Retrieval-Augmented Generation (RAG) document ingestion pipeline. 
 - Saved embeddings to a persistent `ChromaDB` index on disk (`hw2/data/vector_store`).
 - Configured a `.gitignore` to prevent tracking of the large vector store and `.venv` directory.
 
+## dev-01:14
+### RAG Context Retrieval and HW1 Model Tool Integration
+- **Task 1.3:** Added `retrieve_context(query, k)` to `hw2/src/rag.py` to fetch and concatenate the most relevant chunks into a single string for the LangGraph agent.
+- **Deprecation Fixes:** Fixed `langchain_community` warnings by migrating to the standalone `langchain-chroma` package and configured the `logging` module to suppress harmless `MacExpertEncoding` warnings from `pypdf`.
+- **Model Migration:** Copied `best_model.pkl`, `scaler.pkl`, `iqr_bounds.pkl`, `label_encoder.pkl`, and `imputation_pipeline.pkl` from HW1 to `hw2/models/`.
+- **Environment Fix:** Downgraded `scikit-learn` via Poetry to `1.7.2` to resolve unpickling version mismatches without needing to retrain the HW1 model.
+- **Task 2:** Implemented `predict_galaxy_class` in `hw2/src/tools.py` using a strict Pydantic `GalaxyPredictionInput` schema for LangGraph. The tool dynamically constructs a Pandas DataFrame, applies the exact HW1 preprocessing pipeline (IQR, imputation, error filtering, colors, scaling), and outputs human-readable classification probabilities.
+
+
 # 2026-04-09
  
  Implemented functionality to drop specific class groups from the dataset, ensuring the pipeline is robust to dimension changes by automatically re-training models when mismatches occur. Expanded unit tests to cover the new filtering logic and configuration attributes.
