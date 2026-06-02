@@ -65,6 +65,18 @@ def get_vector_store():
         embedding_function=embeddings
     )
 
+def retrieve_context(query: str, k: int = 3) -> str:
+    """
+    Retrieves the top-k most relevant chunks for a given query and 
+    concatenates them into a single string to be passed to the LLM.
+    """
+    db = get_vector_store()
+    results = db.similarity_search(query, k=k)
+    
+    # Concatenate the content of the retrieved chunks into a single string
+    context = "\n\n---\n\n".join([doc.page_content for doc in results])
+    return context
+
 if __name__ == "__main__":
     # If this script is run directly, perform the ingestion
     ingest_documents()
