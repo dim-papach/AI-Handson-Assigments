@@ -6,11 +6,12 @@ from typing import Optional, Dict, Any
 from langchain_core.tools import tool
 from pydantic import BaseModel, Field
 
-# Add hw1 to sys.path so we can import its preprocessing modules
+# Add hw1 and root to sys.path so we can import modules
 import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPO_DIR = os.path.dirname(BASE_DIR)
 sys.path.append(os.path.join(REPO_DIR, "hw1"))
+sys.path.append(REPO_DIR)
 
 from src.config import PipelineConfig
 from src.preprocessing import (

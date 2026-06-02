@@ -1,4 +1,9 @@
 import os
+import sys
+
+# Ensure the root directory is in sys.path so 'hw2' module can be resolved
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
 from typing import Annotated, Literal, TypedDict
 from langchain_core.messages import SystemMessage, HumanMessage, AnyMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -16,8 +21,8 @@ if not api_key:
     api_key = "dummy_key_for_import"
 
 # 1. Initialize the LLM (Gemini)
-# We use gemini-1.5-flash as it is fast, free-tier eligible, and supports tools well.
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0, api_key=api_key)
+# We use gemini-2.5-flash as it is fast, free-tier eligible, and supports tools well.
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0, api_key=api_key)
 
 # 2. Bind the tools to the LLM
 tools = [retrieve_domain_knowledge, predict_galaxy_class]
@@ -93,8 +98,8 @@ if __name__ == "__main__":
     # Quick terminal testing
     import sys
     
-    if "GOOGLE_API_KEY" not in os.environ:
-        print("Please set GOOGLE_API_KEY environment variable first.")
+    if "GOOGLE_API_KEY" not in os.environ and "GEMINI_API_KEY" not in os.environ:
+        print("Please set GOOGLE_API_KEY or GEMINI_API_KEY environment variable first.")
         sys.exit(1)
         
     print("Testing Agent (type 'quit' to exit)...")
