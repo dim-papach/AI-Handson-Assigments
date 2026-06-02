@@ -1,0 +1,3 @@
+.venv/
+hw2/data/vector_store/
+hw2/data/documents/*.pdf

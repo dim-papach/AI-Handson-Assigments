@@ -1,3 +1,16 @@
+# 2026-06-03
+
+Implemented a Retrieval-Augmented Generation (RAG) document ingestion pipeline. Processed 8 PDF domain documents, generating over 5,000 vector chunks, and persisted them locally to avoid rebuilding the database on every startup.
+
+## dev-00:38
+### RAG Document Ingestion and Persistent Vector Store
+- Initialized `hw2` project structure including `main.py` and `src/` modules.
+- Added RAG dependencies via Poetry: `langchain`, `langchain-community`, `langchain-huggingface`, `chromadb`, `sentence-transformers`, and `pypdf`.
+- Implemented `hw2/src/rag.py` with `ingest_documents` using `RecursiveCharacterTextSplitter` and `Chroma` vector store.
+- Successfully loaded, chunked (size 1000, overlap 200), and embedded 1321 document pages using the local `all-MiniLM-L6-v2` model.
+- Saved embeddings to a persistent `ChromaDB` index on disk (`hw2/data/vector_store`).
+- Configured a `.gitignore` to prevent tracking of the large vector store and `.venv` directory.
+
 # 2026-04-09
  
  Implemented functionality to drop specific class groups from the dataset, ensuring the pipeline is robust to dimension changes by automatically re-training models when mismatches occur. Expanded unit tests to cover the new filtering logic and configuration attributes.
