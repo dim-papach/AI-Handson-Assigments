@@ -1,9 +1,11 @@
 import os
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python"
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 
 # Setup paths relative to the script location
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
