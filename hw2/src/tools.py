@@ -1,5 +1,6 @@
 import os
 import joblib
+import math
 import pandas as pd
 import numpy as np
 from typing import Optional, Dict, Any
@@ -128,3 +129,89 @@ def retrieve_domain_knowledge(query: str) -> str:
     Use this tool when the user asks a factual or conceptual question about the domain literature, galaxy formation, or astrophysics concepts.
     """
     return retrieve_context(query)
+
+class DatasetStatsInput(BaseModel):
+    column: str = Field(description="The name of the column in the dataset to get statistics for (e.g. 'T', 'METAL', 'CLASS_SP', 'logM_HEC')")
+
+@tool("dataset_stats", args_schema=DatasetStatsInput)
+def dataset_stats(column: str) -> str:
+    """
+    Returns summary statistics for any numerical or categorical column in the HECATE galaxy dataset.
+    Use this tool when the user asks for dataset statistics, averages, or distributions for specific features.
+    Input: column name as a string.
+    """
+    dataset_path = os.path.join(REPO_DIR, "hw1", "data", "HECATE.csv")
+    if not os.path.exists(dataset_path):
+        return "Error: Dataset file not found."
+        
+    try:
+        # Load only the requested column to save time/memory
+        df = pd.read_csv(dataset_path, usecols=[column])
+        
+        # Check if numeric
+        if pd.api.types.is_numeric_dtype(df[column]):
+            desc = df[column].describe()
+            stats_str = (
+                f"Statistics for {column}:\n"
+                f"Count: {int(desc['count'])}\n"
+                f"Mean: {desc['mean']:.4f}\n"
+                f"Std: {desc['std']:.4f}\n"
+                f"Min: {desc['min']}\n"
+                f"25%: {desc['25%']}\n"
+                f"50% (Median): {desc['50%']}\n"
+                f"75%: {desc['75%']}\n"
+                f"Max: {desc['max']}"
+            )
+            return stats_str
+        else:
+            # Categorical value counts
+            counts = df[column].value_counts().to_dict()
+            return f"Value counts for categorical column {column}:\n{counts}"
+    except ValueError:
+        return f"Error: Column '{column}' not found in the dataset. Please provide a valid column name."
+    except Exception as e:
+        return f"Error retrieving statistics: {str(e)}"
+
+class CalculatorInput(BaseModel):
+    expression: str = Field(description="A mathematical expression to evaluate (e.g. '3.14 * (5**2)', '10 / 2.54'). You can use standard python math functions like log10, exp, sqrt.")
+
+@tool("calculator", args_schema=CalculatorInput)
+def calculator(expression: str) -> str:
+    """
+    Evaluates a mathematical expression or unit conversion calculation.
+    Use this tool when you need to perform calculations, convert units, or evaluate numerical formulas.
+    """
+    try:
+        # Create a safe dictionary with math functions
+        safe_dict = {k: v for k, v in math.__dict__.items() if not k.startswith('_')}
+        result = eval(expression, {"__builtins__": None}, safe_dict)
+        return f"Calculation Result: {result}"
+    except Exception as e:
+        return f"Error evaluating expression: {str(e)}"
+
+class CSVLookupInput(BaseModel):
+    query: str = Field(description="A pandas query string to filter the dataset (e.g. 'T > 5 and AGN_HEC == \"Y\"'). Note: categorical values must be in quotes.")
+    max_results: int = Field(default=5, description="Maximum number of rows to return (default 5).")
+
+@tool("csv_lookup", args_schema=CSVLookupInput)
+def csv_lookup(query: str, max_results: int = 5) -> str:
+    """
+    Queries the HECATE dataset to find specific rows matching the given criteria.
+    Use this when the user asks for examples of galaxies with specific properties or wants to look up specific data points.
+    """
+    dataset_path = os.path.join(REPO_DIR, "hw1", "data", "HECATE.csv")
+    if not os.path.exists(dataset_path):
+        return "Error: Dataset file not found."
+    try:
+        df = pd.read_csv(dataset_path)
+        filtered_df = df.query(query)
+        
+        if filtered_df.empty:
+            return "No matching records found for the given query."
+        
+        # We only return the requested max_results, converting to a list of dicts for readability
+        res = filtered_df.head(max_results).to_dict(orient="records")
+        return f"Found {len(filtered_df)} matches. Showing top {min(len(res), max_results)}:\n{res}"
+    except Exception as e:
+        return f"Error executing query: {str(e)}"
+

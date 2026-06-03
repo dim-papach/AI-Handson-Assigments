@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 
 # Ensure the root directory is in sys.path so 'hw2' module can be resolved
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -12,8 +13,13 @@ from langgraph.prebuilt import ToolNode
 from langgraph.checkpoint.memory import MemorySaver
 
 # Import the tools we built
-from hw2.src.tools import predict_galaxy_class, retrieve_domain_knowledge
-
+from hw2.src.tools import (
+    predict_galaxy_class, 
+    retrieve_domain_knowledge, 
+    dataset_stats,
+    calculator,
+    csv_lookup
+)
 # Ensure the user has their API key set
 api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
 if not api_key:
@@ -21,11 +27,11 @@ if not api_key:
     api_key = "dummy_key_for_import"
 
 # 1. Initialize the LLM (Gemini)
-# We use gemini-2.5-flash as it is fast, free-tier eligible, and supports tools well.
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0, api_key=api_key)
+# We use gemini-2.0-flash to avoid the very strict 20-request free-tier limit of the 2.5 version.
+llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0, api_key=api_key)
 
 # 2. Bind the tools to the LLM
-tools = [retrieve_domain_knowledge, predict_galaxy_class]
+tools = [retrieve_domain_knowledge, predict_galaxy_class, dataset_stats, calculator, csv_lookup]
 llm_with_tools = llm.bind_tools(tools)
 
 # 3. Define the Agent Logic Node
@@ -34,9 +40,12 @@ def call_model(state: MessagesState):
     # We prepend a system message to guide the agent's behavior
     system_prompt = (
         "You are a helpful astrophysics AI assistant specializing in galaxy formation and nuclear activity. "
-        "You have access to two tools:\n"
+        "You have access to five tools:\n"
         "1. retrieve_domain_knowledge: Use this to answer factual or conceptual questions about the domain.\n"
         "2. predict_galaxy_class: Use this to predict the nuclear activity class of a galaxy given numerical features.\n"
+        "3. dataset_stats: Use this to get summary statistics or distributions for any column in the HECATE dataset.\n"
+        "4. calculator: Use this to evaluate mathematical expressions or perform unit conversions.\n"
+        "5. csv_lookup: Use this to look up specific galaxies or subsets of rows from the dataset matching criteria.\n"
         "You MUST use these tools when appropriate. Do not guess information. "
         "Maintain a conversational tone and use previous context from the session memory if the user asks a follow-up question."
     )
@@ -92,7 +101,37 @@ def invoke_agent(message: str, session_id: str) -> str:
         config=config
     )
     
-    return final_state["messages"][-1].content
+    content = final_state["messages"][-1].content
+    if isinstance(content, list):
+        text_parts = []
+        for part in content:
+            if isinstance(part, dict) and "text" in part:
+                text_parts.append(part["text"])
+            elif isinstance(part, str):
+                text_parts.append(part)
+        return "\n".join(text_parts)
+    
+    return str(content)
+
+async def stream_agent(message: str, session_id: str):
+    """
+    Asynchronously invokes the agent and yields tokens as Server-Sent Events (SSE).
+    """
+    config = {"configurable": {"thread_id": session_id}}
+    
+    # Use astream_events to get LLM streaming chunks
+    async for event in app.astream_events(
+        {"messages": [HumanMessage(content=message)]},
+        config=config,
+        version="v2"
+    ):
+        kind = event["event"]
+        if kind == "on_chat_model_stream":
+            content = event["data"]["chunk"].content
+            if content:
+                # SSE format: data: <content>\n\n
+                yield f"data: {json.dumps({'token': content})}\n\n"
+
 
 if __name__ == "__main__":
     # Quick terminal testing

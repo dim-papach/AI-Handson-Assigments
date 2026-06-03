@@ -2,6 +2,31 @@
 
 Implemented a Retrieval-Augmented Generation (RAG) document ingestion pipeline. Processed 8 PDF domain documents, generating over 5,000 vector chunks, and persisted them locally to avoid rebuilding the database on every startup.
 
+## dev-22:02
+### Agent Tool Expansion and Streaming Support (Tasks 5 & 6)
+- **Task 5 (Additional Tools):**
+  - Added `dataset_stats` tool in `hw2/src/tools.py` to fetch summary statistics and value counts directly from the HECATE dataset.
+  - Implemented `calculator` tool for evaluating numerical expressions and unit conversions using Python's `math` module.
+  - Implemented `csv_lookup` tool using Pandas `query()` to allow the agent to filter and retrieve specific galaxy records.
+  - Bound all new tools to the `gemini-2.0-flash` LangGraph agent and updated the system prompt to instruct the agent on their specific use-cases.
+- **Task 6 (Streaming Output):**
+  - Added `stream_agent` async generator in `hw2/src/agent.py` using LangGraph's `.astream_events(version="v2")` to yield real-time LLM tokens.
+  - Implemented a `POST /chat/stream` endpoint in `hw2/src/api.py` utilizing FastAPI's `StreamingResponse` to serve tokens as Server-Sent Events (SSE).
+
+## dev-01:42
+### Conversational Agent (Task 3) and REST API (Task 4)
+- **Task 3 (Conversational Agent):**
+  - Created `hw2/src/agent.py` using `langgraph` for state graph coordination.
+  - Linked the RAG retrieval function as a `@tool` (`retrieve_domain_knowledge`) and the galaxy classifier (`predict_galaxy_class`).
+  - Set up `ChatGoogleGenerativeAI` bound with tools using model `"gemini-2.5-flash"`.
+  - Added session history tracking using LangGraph's `MemorySaver()` for cross-turn memory.
+  - Resolved `sys.path` import issues to support executing scripts from the repository root.
+  - Fixed a response structure validation issue (where Gemini returned a list of dictionary blocks instead of a string) by introducing extraction logic.
+- **Task 4 (REST API Integration):**
+  - Implemented `hw2/src/api.py` with FastAPI exposing a `POST /chat` endpoint and a `GET /health` endpoint.
+  - Modified `hw2/main.py` as the uvicorn entrypoint to launch the server.
+  - Verified the API using curl requests, successfully validating output structure and end-to-end tool calling.
+
 ## dev-00:38
 ### RAG Document Ingestion and Persistent Vector Store
 - Initialized `hw2` project structure including `main.py` and `src/` modules.
