@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from hw2.src.agent import invoke_agent, stream_agent
+from hw2.src.config import LLM_PROVIDER, validate_api_key
 
 app = FastAPI(
     title="HECATE Astrophysics Agent API",
@@ -29,12 +30,9 @@ async def chat(payload: ChatRequest):
     Maintains conversation memory across turns within a session (session_id).
     """
     try:
-        # Check API key presence dynamically
-        if "GOOGLE_API_KEY" not in os.environ and "GEMINI_API_KEY" not in os.environ:
-            raise HTTPException(
-                status_code=500,
-                detail="Google/Gemini API key is not configured on the server."
-            )
+        is_valid, msg = validate_api_key()
+        if not is_valid:
+            raise HTTPException(status_code=500, detail=msg)
             
         result = invoke_agent(payload.message, payload.session_id)
         return ChatResponse(response=result)
@@ -47,16 +45,13 @@ async def chat_stream(payload: ChatRequest):
     Streams the agent's response token-by-token using Server-Sent Events (SSE).
     """
     try:
-        # Check API key presence dynamically
-        if "GOOGLE_API_KEY" not in os.environ and "GEMINI_API_KEY" not in os.environ:
-            raise HTTPException(
-                status_code=500,
-                detail="Google/Gemini API key is not configured on the server."
-            )
+        is_valid, msg = validate_api_key()
+        if not is_valid:
+            raise HTTPException(status_code=500, detail=msg)
             
         return StreamingResponse(
             stream_agent(payload.message, payload.session_id),
-            media_type="text/event-stream"
+            media_type="text/plain"
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

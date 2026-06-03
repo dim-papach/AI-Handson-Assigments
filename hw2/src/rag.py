@@ -12,6 +12,8 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 
+from hw2.src.config import CHUNK_SIZE, CHUNK_OVERLAP, RETRIEVAL_K
+
 # Setup paths relative to the script location
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS_DIR = os.path.join(BASE_DIR, "data", "documents")
@@ -34,11 +36,10 @@ def ingest_documents():
 
     print(f"Loaded {len(documents)} document pages.")
 
-    # Chunk the documents
-    # 1000 chunk size with 200 overlap is standard for PDFs to maintain context
+    # Chunk the documents using configuration parameters
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=200,
+        chunk_size=CHUNK_SIZE,
+        chunk_overlap=CHUNK_OVERLAP,
         add_start_index=True
     )
     
@@ -72,7 +73,7 @@ def get_vector_store():
         embedding_function=embeddings
     )
 
-def retrieve_context(query: str, k: int = 3) -> str:
+def retrieve_context(query: str, k: int = RETRIEVAL_K) -> str:
     """
     Retrieves the top-k most relevant chunks for a given query and 
     concatenates them into a single string to be passed to the LLM.

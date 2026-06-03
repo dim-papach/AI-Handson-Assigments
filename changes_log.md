@@ -2,6 +2,19 @@
 
 Implemented a Retrieval-Augmented Generation (RAG) document ingestion pipeline. Processed 8 PDF domain documents, generating over 5,000 vector chunks, and persisted them locally to avoid rebuilding the database on every startup.
 
+## dev-23:11
+### Agent Execution Environment Fixes and Stream Formatting
+- **Subtask (Environment Configuration):**
+  - Added `langchain-groq` and `python-dotenv` dependencies to `pyproject.toml`.
+  - Updated `hw2/src/config.py` to correctly load environment variables from `.env` using `load_dotenv()`.
+  - Monkeypatched `socket.getaddrinfo` in `hw2/src/config.py` to force IPv4 resolution, completely resolving an issue where the agent would hang for minutes waiting for IPv6 timeouts on outbound HTTP requests.
+  - Upgraded the Groq LLM model configuration from a decommissioned model to `llama-3.3-70b-versatile` to fix invalid JSON tool-call string generation.
+- **Subtask (JSON Serialization Fix):**
+  - Modified `hw2/src/tools.py` Pydantic models to replace `np.nan` default parameter values with `None`. This prevented a `ValueError: Out of range float values are not JSON compliant: nan` when LangChain serialized the tool schemas.
+- **Subtask (Stream Output Formatting):**
+  - Refactored `stream_agent` in `hw2/src/agent.py` to yield raw response chunks instead of SSE-formatted JSON strings.
+  - Updated the API endpoint in `hw2/src/api.py` to serve with `media_type="text/plain"` to enable smooth, unformatted terminal streaming output for the client.
+
 ## dev-22:02
 ### Agent Tool Expansion and Streaming Support (Tasks 5 & 6)
 - **Task 5 (Additional Tools):**

@@ -7,7 +7,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 
 from typing import Annotated, Literal, TypedDict
 from langchain_core.messages import SystemMessage, HumanMessage, AnyMessage
-from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.graph import StateGraph, START, END, MessagesState
 from langgraph.prebuilt import ToolNode
 from langgraph.checkpoint.memory import MemorySaver
@@ -20,15 +19,10 @@ from hw2.src.tools import (
     calculator,
     csv_lookup
 )
-# Ensure the user has their API key set
-api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
-if not api_key:
-    print("Warning: GOOGLE_API_KEY or GEMINI_API_KEY environment variable is missing!")
-    api_key = "dummy_key_for_import"
+from hw2.src.config import LLM_PROVIDER, get_llm, validate_api_key
 
-# 1. Initialize the LLM (Gemini)
-# We use gemini-2.0-flash to avoid the very strict 20-request free-tier limit of the 2.5 version.
-llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0, api_key=api_key)
+# 1. Initialize the LLM Dynamically based on config
+llm = get_llm()
 
 # 2. Bind the tools to the LLM
 tools = [retrieve_domain_knowledge, predict_galaxy_class, dataset_stats, calculator, csv_lookup]
@@ -129,19 +123,20 @@ async def stream_agent(message: str, session_id: str):
         if kind == "on_chat_model_stream":
             content = event["data"]["chunk"].content
             if content:
-                # SSE format: data: <content>\n\n
-                yield f"data: {json.dumps({'token': content})}\n\n"
+                # Yield raw text for smooth terminal streaming
+                yield content
 
 
 if __name__ == "__main__":
     # Quick terminal testing
     import sys
     
-    if "GOOGLE_API_KEY" not in os.environ and "GEMINI_API_KEY" not in os.environ:
-        print("Please set GOOGLE_API_KEY or GEMINI_API_KEY environment variable first.")
+    is_valid, msg = validate_api_key()
+    if not is_valid:
+        print(msg)
         sys.exit(1)
         
-    print("Testing Agent (type 'quit' to exit)...")
+    print(f"Testing Agent with {LLM_PROVIDER} (type 'quit' to exit)...")
     session = "test_session_1"
     
     while True:

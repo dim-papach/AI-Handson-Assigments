@@ -48,13 +48,13 @@ CLASS_NAMES = {
 class GalaxyPredictionInput(BaseModel):
     T: float = Field(description="Numerical Hubble-type")
     WF1: float = Field(description="3.3μm-band apparent magnitude")
-    WF2: Optional[float] = Field(default=np.nan, description="4.6μm-band apparent magnitude")
-    WF3: Optional[float] = Field(default=np.nan, description="12μm-band apparent magnitude")
-    WF4: Optional[float] = Field(default=np.nan, description="22μm-band apparent magnitude")
+    WF2: Optional[float] = Field(default=None, description="4.6μm-band apparent magnitude")
+    WF3: Optional[float] = Field(default=None, description="12μm-band apparent magnitude")
+    WF4: Optional[float] = Field(default=None, description="22μm-band apparent magnitude")
     UT: float = Field(description="Total U-band apparent magnitude")
-    BT: Optional[float] = Field(default=np.nan, description="B-band apparent magnitude")
-    VT: Optional[float] = Field(default=np.nan, description="V-band apparent magnitude")
-    IT: Optional[float] = Field(default=np.nan, description="I-band apparent magnitude")
+    BT: Optional[float] = Field(default=None, description="B-band apparent magnitude")
+    VT: Optional[float] = Field(default=None, description="V-band apparent magnitude")
+    IT: Optional[float] = Field(default=None, description="I-band apparent magnitude")
     U: float = Field(description="u-band SDSS apparent magnitude")
     R: float = Field(description="r-band SDSS apparent magnitude")
     G: float = Field(description="g-band SDSS apparent magnitude")
@@ -69,8 +69,8 @@ class GalaxyPredictionInput(BaseModel):
 def predict_galaxy_class(
     T: float, WF1: float, UT: float, U: float, R: float, G: float, I: float, Z: float,
     logM_HEC: float, logSFR_HEC: float, METAL: float, AGN_HEC: str,
-    WF2: float = np.nan, WF3: float = np.nan, WF4: float = np.nan,
-    BT: float = np.nan, VT: float = np.nan, IT: float = np.nan
+    WF2: Optional[float] = None, WF3: Optional[float] = None, WF4: Optional[float] = None,
+    BT: Optional[float] = None, VT: Optional[float] = None, IT: Optional[float] = None
 ) -> str:
     """
     Predicts the nuclear activity classification of a galaxy (star-forming, Seyfert, LINER, composite).
@@ -79,8 +79,8 @@ def predict_galaxy_class(
     """
     # 1. Create DataFrame
     input_dict = {
-        'T': T, 'WF1': WF1, 'WF2': WF2, 'WF3': WF3, 'WF4': WF4,
-        'UT': UT, 'BT': BT, 'VT': VT, 'IT': IT, 'U': U, 'R': R, 'G': G, 'I': I, 'Z': Z,
+        'T': T, 'WF1': WF1, 'WF2': np.nan if WF2 is None else WF2, 'WF3': np.nan if WF3 is None else WF3, 'WF4': np.nan if WF4 is None else WF4,
+        'UT': UT, 'BT': np.nan if BT is None else BT, 'VT': np.nan if VT is None else VT, 'IT': np.nan if IT is None else IT, 'U': U, 'R': R, 'G': G, 'I': I, 'Z': Z,
         'logM_HEC': logM_HEC, 'logSFR_HEC': logSFR_HEC, 'METAL': METAL, 'AGN_HEC': AGN_HEC
     }
     df = pd.DataFrame([input_dict])
