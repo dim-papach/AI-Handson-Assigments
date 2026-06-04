@@ -192,12 +192,14 @@ def calculator(expression: str) -> str:
 class CSVLookupInput(BaseModel):
     query: str = Field(description="A pandas query string to filter the dataset (e.g. 'T > 5 and AGN_HEC == \"Y\"'). Note: categorical values must be in quotes.")
     max_results: int = Field(default=5, description="Maximum number of rows to return (default 5).")
+    sort_by: Optional[str] = Field(default=None, description="Optional column name to sort the results by (e.g., 'D' for distance).")
+    ascending: bool = Field(default=True, description="If sorting, whether to sort in ascending order (default True). True finds the minimum/closest, False finds the maximum.")
 
 @tool("csv_lookup", args_schema=CSVLookupInput)
-def csv_lookup(query: str, max_results: int = 5) -> str:
+def csv_lookup(query: str, max_results: int = 5, sort_by: Optional[str] = None, ascending: bool = True) -> str:
     """
-    Queries the HECATE dataset to find specific rows matching the given criteria.
-    Use this when the user asks for examples of galaxies with specific properties or wants to look up specific data points.
+    Queries the HECATE dataset to find specific rows matching the given criteria, optionally sorting the results.
+    Use this when the user asks for examples of galaxies with specific properties, or wants to find the 'closest', 'largest', 'highest', etc.
     """
     dataset_path = os.path.join(REPO_DIR, "hw1", "data", "HECATE.csv")
     if not os.path.exists(dataset_path):
@@ -208,6 +210,9 @@ def csv_lookup(query: str, max_results: int = 5) -> str:
         
         if filtered_df.empty:
             return "No matching records found for the given query."
+            
+        if sort_by and sort_by in filtered_df.columns:
+            filtered_df = filtered_df.sort_values(by=sort_by, ascending=ascending)
         
         # We only return the requested max_results, converting to a list of dicts for readability
         res = filtered_df.head(max_results).to_dict(orient="records")

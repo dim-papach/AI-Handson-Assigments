@@ -1,3 +1,24 @@
+# 2026-06-05
+
+Completed HW2: Astrophysics Conversational AI Agent. Finalized the RAG, Tools, and LangGraph integration, resolving multiple bugs with IPv6 networking, dataset schema mappings, and LLM rate limits. Created standalone testing scripts and extensively documented the project in the README.
+
+## dev-01:32
+
+### Finalizing HW2 Agent Integration and Documentation
+
+- **Subtask (Tool Expansion & Fixes):**
+  - Updated the `csv_lookup` tool to accept `sort_by` and `ascending` parameters, enabling the agent to fulfill requests for "closest" or "largest" galaxies.
+  - Provided explicit HECATE dataset schema metadata (`CLASS_SP` and `D` columns) directly into the agent's `system_prompt` so the LLM writes correct Pandas queries.
+  - Re-ingested the PDF documents into the ChromaDB vector store to remove duplicated chunks caused by redundant ingestion runs.
+- **Subtask (Agent Stability & Configuration):**
+  - Restored the `socket.getaddrinfo` IPv4 monkeypatch in `hw2/src/config.py` and elevated its import order in `hw2/src/agent.py` to ensure it executes before `sentence-transformers` initiates broken IPv6 network connections.
+  - Migrated `LLM_PROVIDER` back to `gemini` (specifically `gemini-2.5-flash`) to bypass Groq's 100,000 token daily quota limit which caused rate limit crashes.
+  - Killed zombie uvicorn background processes holding port 8000 to unblock the user's FastAPI startup.
+- **Subtask (Testing & Documentation):**
+  - Created `hw2/src/test_rag.py` to test ChromaDB retrieval entirely independently of the LLM.
+  - Created `hw2/src/test_prediction.py` to test the HW1 XGBoost predictive model and preprocessing pipeline in isolation.
+  - Comprehensively updated `hw2/README.md` to fulfill the assignment rubric, providing raw terminal outputs demonstrating the standalone tools and the interactive conversation memory of the LangGraph agent.
+
 # 2026-06-03
 
 Implemented a Retrieval-Augmented Generation (RAG) document ingestion pipeline. Processed 8 PDF domain documents, generating over 5,000 vector chunks, and persisted them locally to avoid rebuilding the database on every startup.

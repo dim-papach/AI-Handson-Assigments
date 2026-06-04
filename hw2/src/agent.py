@@ -40,6 +40,9 @@ def call_model(state: MessagesState):
         "3. dataset_stats: Use this to get summary statistics or distributions for any column in the HECATE dataset.\n"
         "4. calculator: Use this to evaluate mathematical expressions or perform unit conversions.\n"
         "5. csv_lookup: Use this to look up specific galaxies or subsets of rows from the dataset matching criteria.\n"
+        "IMPORTANT DATASET SCHEMA:\n"
+        "- The nuclear activity classification column is 'CLASS_SP' (0 = star forming, 1 = Seyfert, 2 = LINER, 3 = composite). Use exact case.\n"
+        "- The distance column is 'D'.\n"
         "You MUST use these tools when appropriate. Do not guess information. "
         "Maintain a conversational tone and use previous context from the session memory if the user asks a follow-up question."
     )

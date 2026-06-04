@@ -16,7 +16,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 
 # LLM Provider Configuration
 # Supported providers: "gemini", "openai", "anthropic", "groq"
-LLM_PROVIDER = "groq"  # Defaulting to groq to avoid Gemini rate limits
+LLM_PROVIDER = "gemini"  # Switched to gemini because Groq hit 100,000 tokens/day limit
 
 # RAG Configuration
 CHUNK_SIZE = 1000
@@ -39,7 +39,7 @@ def get_llm():
     """Instantiates and returns the appropriate LLM based on LLM_PROVIDER."""
     if LLM_PROVIDER == "gemini":
         api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or "dummy"
-        return ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0, api_key=api_key)
+        return ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0, api_key=api_key)
     elif LLM_PROVIDER == "openai":
         from langchain_openai import ChatOpenAI
         api_key = os.environ.get("OPENAI_API_KEY") or "dummy"

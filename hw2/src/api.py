@@ -51,7 +51,7 @@ async def chat_stream(payload: ChatRequest):
             
         return StreamingResponse(
             stream_agent(payload.message, payload.session_id),
-            media_type="text/plain"
+            media_type="text/event-stream"
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
