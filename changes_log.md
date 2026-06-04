@@ -28,6 +28,18 @@ Completed HW2: Astrophysics Conversational AI Agent. Finalized the RAG, Tools, a
   - Extracted and embedded the Mermaid graph visualization for the agent directly into the README.
   - Added a detailed explanation of how the LLM decides which tool to use by parsing Python Pydantic schemas via LangChain's `bind_tools()` and combining them with the System Prompt guidelines.
 
+## dev-02:35
+
+### API Stability and Installation Docs
+
+- **Subtask (Streaming API Fixes):**
+  - Resolved `curl: (18) transfer closed` error by modifying `hw2/src/api.py` `media_type` from `text/event-stream` to `text/plain`.
+  - Fixed an `AttributeError` in `hw2/src/agent.py` by ensuring `stream_agent` safely extracts raw text chunks from Gemini responses (which periodically return lists instead of strings) before yielding to FastAPI.
+  - Successfully validated all 4 interactive test queries against the `/chat/stream` REST endpoint.
+- **Subtask (Installation Docs):**
+  - Generated a raw `requirements.txt` from the Poetry dependency tree using `pip freeze`.
+  - Added a secondary installation and execution path to `hw2/README.md` allowing users to deploy the project using standard Python `venv` instead of Poetry.
+
 # 2026-06-03
 
 Implemented a Retrieval-Augmented Generation (RAG) document ingestion pipeline. Processed 8 PDF domain documents, generating over 5,000 vector chunks, and persisted them locally to avoid rebuilding the database on every startup.

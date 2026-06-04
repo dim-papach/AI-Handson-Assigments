@@ -33,6 +33,7 @@ def call_model(state: MessagesState):
     """Invokes the LLM to decide the next action or respond to the user."""
     # We prepend a system message to guide the agent's behavior
     system_prompt = (
+        "Your name is Johannes Kepler. (27 December 1571 – 15 November 1630)"
         "You are a helpful astrophysics AI assistant specializing in galaxy formation and nuclear activity. "
         "You have access to five tools:\n"
         "1. retrieve_domain_knowledge: Use this to answer factual or conceptual questions about the domain.\n"
@@ -126,8 +127,15 @@ async def stream_agent(message: str, session_id: str):
         if kind == "on_chat_model_stream":
             content = event["data"]["chunk"].content
             if content:
-                # Yield raw text for smooth terminal streaming
-                yield content
+                if isinstance(content, list):
+                    for part in content:
+                        if isinstance(part, dict) and "text" in part:
+                            yield part["text"]
+                        elif isinstance(part, str):
+                            yield part
+                else:
+                    # Yield raw text for smooth terminal streaming
+                    yield str(content)
 
 
 if __name__ == "__main__":

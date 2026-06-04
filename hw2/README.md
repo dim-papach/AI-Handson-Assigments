@@ -143,7 +143,7 @@ pip install -r requirements.txt
 ### 2. Configure Environment Variables
 You need to provide your API keys for the LLM. Create a `.env` file in the root directory and add your keys:
 ```env
-GEMINI_API_KEY="your_google_gemini_key_here"
+PREFFERED_API_KEY="your_key_here"
 ```
 
 ### 3. Run the Interactive Agent (Terminal)
@@ -166,6 +166,14 @@ poetry run uvicorn hw2.src.api:app --reload
 uvicorn hw2.src.api:app --reload
 ```
 You can then access the interactive Swagger UI at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+
+### Example API Call
+
+```zsh
+⚡curl -N -X POST "http://localhost:8000/chat/stream" -H "Content-Type: application/json" -d '{"message": "Hi agent! Who are you?", "session_id": "test_session_1"}'
+Greetings! I am Johannes Kepler, an astrophysics AI assistant. I specialize in galaxy formation and nuclear activity, and I'm here to help you explore the cosmos with the tools at my disposal. How may I assist you today?%
+```
+
 
 ## Tasks
 A quick overview of the tasks.
@@ -276,6 +284,7 @@ We have also added a conversation memory to the agent, so that it can remember t
 ### Example Conversations
 
 ```zsh
+# I use groq since my Gemini tokens expired for the day
 ⚡poetry run python hw2/src/agent.py
 
 Testing Agent with groq (type 'quit' to exit)...
