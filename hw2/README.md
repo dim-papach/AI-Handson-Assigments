@@ -1,5 +1,65 @@
 # HECATE Astrophysics Conversational AI Agent
 
+## System Overview
+
+This is a conversational AI agent that is able to answer questions about the HECATE catalog, a catalog of 100,000 galaxies. The agent is built using LangChain and multiple APIs including Gemini API, and uses a RAG system to retrieve relevant information from the catalog, as well as various other sources of astrophysical knowledge. 
+
+The specific instructions for the AI agent are as follows:
+
+```
+SYSTEM PROMPT:
+    "You are a helpful astrophysics AI assistant specializing in galaxy formation and nuclear activity. "
+    "You have access to five tools:\n"
+    "1. retrieve_domain_knowledge: Use this to answer factual or conceptual questions about the domain.\n"
+    "2. predict_galaxy_class: Use this to predict the nuclear activity class of a galaxy given numerical features.\n"
+    "3. dataset_stats: Use this to get summary statistics or distributions for any column in the HECATE dataset.\n"
+    "4. calculator: Use this to evaluate mathematical expressions or perform unit conversions.\n"
+    "5. csv_lookup: Use this to look up specific galaxies or subsets of rows from the dataset matching criteria.\n"
+    "IMPORTANT DATASET SCHEMA:\n"
+    "- The nuclear activity classification column is 'CLASS_SP' (0 = star forming, 1 = Seyfert, 2 = LINER, 3 = composite, -1 = unknown). Use exact case.\n"
+    "- The distance column is 'D'.\n"
+    "You MUST use these tools when appropriate. Do not guess information. "
+    "Maintain a conversational tone and use previous context from the session memory if the user asks a follow-up question."
+```
+
+## Architecture
+
+The agent is built using LangChain and uses a RAG system to retrieve relevant information from the HECATE catalog, as well as various other sources of astrophysical knowledge. The RAG system is implemented using LangChain and ChromaDB. We split the documents into chunks of 1000 characters with an overlap of 200 characters. Then we used the HuggingFaceEmbeddings model to embed the chunks and store them in the ChromaDB as a persistent vector store. The vector store is stored in the data/vector_store directory and the embeddings are created using the all-MiniLM-L6-v2 model. The RAG system is able to answer questions about the galaxies and the data of the HECATE catalog by retrieving the most relevant chunks for a given query and concatenating them into a single string to be passed to the LLM. 
+
+We implemented 5 tools for the agent:
+1. retrieve_domain_knowledge: Use this to answer factual or conceptual questions about the domain.
+2. predict_galaxy_class: Use this to predict the nuclear activity class of a galaxy given numerical features.
+3. dataset_stats: Use this to get summary statistics or distributions for any column in the HECATE dataset.
+4. calculator: Use this to evaluate mathematical expressions or perform unit conversions.
+5. csv_lookup: Use this to look up specific galaxies or subsets of rows from the dataset matching criteria.
+
+The LangGraph framework is used to orchestrate the agent's workflow. It manages the state using a `StateGraph`, routing the conversation between the LLM and the tools using conditional edges. Additionally, we utilize LangGraph's `MemorySaver` checkpointer to maintain conversational memory across multiple turns, allowing the agent to remember context from previous interactions.
+
+Here is the LangGraph architecture diagram for our agent:
+
+```mermaid
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+        __start__([<p>__start__</p>]):::first
+        agent(agent)
+        tools(tools)
+        __end__([<p>__end__</p>]):::last
+        __start__ --> agent;
+        agent -.-> __end__;
+        agent -.-> tools;
+        tools --> agent;
+        classDef default fill:#f2f0ff,line-height:1.2
+        classDef first fill-opacity:0
+        classDef last fill:#bfb6fc
+```
+
+The agent decides what tool to use based on the user's query and the context of the conversation. More specifically, the model chooses the appropriate tool based on two things:
+1. **Tool Schemas (Pydantic):** When we bind the tools to the LLM using `llm.bind_tools(tools)`, LangChain automatically converts the Python function signatures and Pydantic input schemas into JSON schema representations. The LLM reads these schemas, along with the function docstrings, to understand exactly what inputs are required and what the tool does.
+2. **System Prompt Guidance:** We explicitly describe the five available tools and their use-cases inside the agent's system prompt to enforce rules and prevent hallucination.
 ## Tasks
 A quick overview of the tasks.
 

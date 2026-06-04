@@ -19,6 +19,15 @@ Completed HW2: Astrophysics Conversational AI Agent. Finalized the RAG, Tools, a
   - Created `hw2/src/test_prediction.py` to test the HW1 XGBoost predictive model and preprocessing pipeline in isolation.
   - Comprehensively updated `hw2/README.md` to fulfill the assignment rubric, providing raw terminal outputs demonstrating the standalone tools and the interactive conversation memory of the LangGraph agent.
 
+## dev-01:43
+
+### Architecture Documentation
+
+- **Subtask (LangGraph Architecture):**
+  - Documented the LangGraph state machine flow (`StateGraph`, conditional edges, `MemorySaver`) inside `hw2/README.md`.
+  - Extracted and embedded the Mermaid graph visualization for the agent directly into the README.
+  - Added a detailed explanation of how the LLM decides which tool to use by parsing Python Pydantic schemas via LangChain's `bind_tools()` and combining them with the System Prompt guidelines.
+
 # 2026-06-03
 
 Implemented a Retrieval-Augmented Generation (RAG) document ingestion pipeline. Processed 8 PDF domain documents, generating over 5,000 vector chunks, and persisted them locally to avoid rebuilding the database on every startup.
