@@ -39,6 +39,8 @@ Completed HW2: Astrophysics Conversational AI Agent. Finalized the RAG, Tools, a
 - **Subtask (Installation Docs):**
   - Generated a raw `requirements.txt` from the Poetry dependency tree using `pip freeze`.
   - Added a secondary installation and execution path to `hw2/README.md` allowing users to deploy the project using standard Python `venv` instead of Poetry.
+- **Subtask (Git Tracking):**
+  - Removed `hw2/data/documents/*.pdf` from `.gitignore` to ensure the 12 astrophysics knowledge base PDFs are properly tracked and uploaded to the remote repository.
 
 # 2026-06-03
 
