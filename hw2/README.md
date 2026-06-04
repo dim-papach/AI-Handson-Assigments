@@ -60,6 +60,113 @@ graph TD;
 The agent decides what tool to use based on the user's query and the context of the conversation. More specifically, the model chooses the appropriate tool based on two things:
 1. **Tool Schemas (Pydantic):** When we bind the tools to the LLM using `llm.bind_tools(tools)`, LangChain automatically converts the Python function signatures and Pydantic input schemas into JSON schema representations. The LLM reads these schemas, along with the function docstrings, to understand exactly what inputs are required and what the tool does.
 2. **System Prompt Guidance:** We explicitly describe the five available tools and their use-cases inside the agent's system prompt to enforce rules and prevent hallucination.
+
+## Knowledge Base
+
+I have chosen 12 pdf files from the domain of astrophysics to be used as a knowledge base for the RAG system. From those files 2 are wikipedia articles, 2 are publicly available books and 8 are research papers. One of the papers is the paper that introduced the HECATE catalog, the catalog that our agent is using and one is the original paper for the de Vaucouleurs classification scheme, which is a common way to classify galaxies from 1959 (I believe you should probably check out since astrophotography was not yet a thing back then and he had to draw the galaxies by hand).
+
+## HW1 Model Integration
+
+We used the model that we built in the previous homework assignment to predict the nuclear activity class of a galaxy. The model was XGBoost trained on the HECATE dataset. We also caried over the pipeline to process the data. We put the model and the pipeline in the tools directory and exposed them as a tool called predict_galaxy_class, which can be used to predict the nuclear activity class of a galaxy given numerical features.
+
+## Example conversations
+
+### RAG Example
+
+```zsh
+⚡poetry run python hw2/src/agent.py                                                         
+
+Testing Agent with gemini (type 'quit' to exit)...
+
+You: According to the literature, what is the de Vaucouleurs classification scheme?
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|███████████████████████████████████████████████████████| 103/103 [00:00<00:00, 9151.85it/s]
+
+Agent: The de Vaucouleurs classification scheme is a comprehensive notation system for classifying galaxies, building upon the revised Mt. Wilson-Palomar scheme. It incorporates additional galaxy types and subtypes suggested by work from Harvard, Lick, and Mt. Stromlo.
+
+This scheme uses a three-dimensional representation to classify galaxies, accounting for objects with mixed characteristics and the progressive divergence and convergence of different galaxy sequences. The four main classes are ellipticals (E), lenticulars (SO), spirals (S), and irregulars (I). Within these, it further distinguishes between ordinary families (SA) and barred families (SB), as well as S-shaped varieties (S(s)) and ringed varieties (S(r)). The scheme highlights a continuous transition between these types, with the separation between sequences being most pronounced at the SO/a transition stage between lenticulars and spirals, and diminishing at the elliptical and irregular ends.
+
+You: According to the literature, what is the Main Sequence of galaxies?
+Loading weights: 100%|███████████████████████████████████████████████████████| 103/103 [00:00<00:00, 9373.46it/s]
+
+Agent: The Main Sequence (MS) of star-forming galaxies (SFGs) is a fundamental relationship in astrophysics, representing a tight correlation between a galaxy's star formation rate (SFR) and its stellar mass (M⋆). This relationship has been observed to exist from redshift 0 up to approximately 6, making it a crucial tool for understanding galaxy evolution.
+```
+
+### Prediction Example
+
+
+```zsh
+AI-Handson-Assigments on  dev [!] 
+⚡poetry run python hw2/src/agent.py
+
+Testing Agent with gemini (type 'quit' to exit)...
+
+You: predict the nuclear activity class for a galaxy with T=6.0, WF1=12.5, UT=14.2, U=15.1, R=14.3, G=14.8, I=14.0, Z=13.9, logM_HEC=10.5, logSFR_HEC=0.5, METAL=0.02, and AGN_HEC=Y.
+IQR Capping Applied: 1 rows modified
+Error Ratios Filtering Removed: 0 rows
+
+Agent: Based on the provided data, the galaxy is predicted to be a Seyfert galaxy with a probability of 98.2%.
+
+You: predict the nuclear activity class for a galaxy with T=6.0, WF1=12.5, UT=14.2, U=15.1, R=14.3, G=14.8, I=14.                                                                        
+
+Agent: I can help you with that! However, I need a few more parameters to predict the nuclear activity class. Please provide values for:
+*   `G` (g-band SDSS apparent magnitude)
+*   `I` (i-band SDSS apparent magnitude)
+*   `Z` (z-band SDSS apparent magnitude)
+*   `logM_HEC` (Logarithm of total stellar mass)
+*   `logSFR_HEC` (Logarithm of star-formation rate)
+*   `METAL` (Metallicity)
+*   `AGN_HEC` (Adopted activity classification: 'Y', 'N', or '?')
+
+You: predict the nuclear activity class for a galaxy with T=10, WF1=12.5, UT=14.2, U=15.1, R=14.3, G=14.8, I=19.0, Z=13.9, logM_HEC=10.5, logSFR_HEC=0.15, METAL=0.03, and AGN_HEC=N.
+IQR Capping Applied: 1 rows modified
+Error Ratios Filtering Removed: 0 rows
+
+Agent: Based on the information you provided, the galaxy is predicted to be star-forming with a probability of 100%.
+```
+## Installation and Execution
+
+### 1. Install Dependencies
+
+**Using Poetry (Recommended):**
+```bash
+poetry install
+```
+
+**Using venv:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 2. Configure Environment Variables
+You need to provide your API keys for the LLM. Create a `.env` file in the root directory and add your keys:
+```env
+GEMINI_API_KEY="your_google_gemini_key_here"
+```
+
+### 3. Run the Interactive Agent (Terminal)
+To test the agent directly in your terminal with conversational memory:
+```bash
+# With Poetry:
+poetry run python hw2/src/agent.py
+
+# With venv:
+python hw2/src/agent.py
+```
+
+### 4. Run the FastAPI Server
+To launch the REST API endpoints (`/chat` and `/chat/stream`), run:
+```bash
+# With Poetry:
+poetry run uvicorn hw2.src.api:app --reload
+
+# With venv:
+uvicorn hw2.src.api:app --reload
+```
+You can then access the interactive Swagger UI at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+
 ## Tasks
 A quick overview of the tasks.
 
