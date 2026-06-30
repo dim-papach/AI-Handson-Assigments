@@ -1,3 +1,22 @@
+# 2026-06-30
+
+Initial implementation of Baseline RAG, data preparation scripts, and adding OpenSearch dependencies.
+
+## dev-22:15
+
+### Add Final_HW Baseline RAG Implementation
+Initial implementation of Baseline RAG and data preparation scripts
+
+- **Subtask (Dependencies)**
+  - Added `datasets` and `opensearch-py` to `pyproject.toml` and updated `poetry.lock`.
+- **Subtask (Baseline RAG Setup)**
+  - Added baseline RAG implementation in `Final_HW/src/baseline_rag.py`.
+  - Added data preparation script in `Final_HW/src/prepare_data.py`.
+  - Included `docker-compose.yml` for OpenSearch configuration.
+- **Subtask (Data & Documentation)**
+  - Added corpus, eval set, and train pairs to `Final_HW/data/`.
+  - Added `Generative AI.pdf` to `Final_HW/`.
+
 # 2026-06-05
 
 Completed HW2: Astrophysics Conversational AI Agent. Finalized the RAG, Tools, and LangGraph integration, resolving multiple bugs with IPv6 networking, dataset schema mappings, and LLM rate limits. Created standalone testing scripts and extensively documented the project in the README.
