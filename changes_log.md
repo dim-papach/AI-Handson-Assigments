@@ -1,6 +1,16 @@
 # 2026-06-30
 
-Initial implementation of Baseline RAG, data preparation scripts, and adding OpenSearch dependencies.
+Initial implementation of Baseline RAG, data preparation scripts, and adding OpenSearch dependencies. Added Git LFS for dataset tracking.
+
+## dev-22:35
+
+### Add Git LFS tracking for dataset
+Configured Git LFS to track `*.jsonl` files and added the large `corpus.jsonl` dataset to the repository.
+
+- **Subtask (Git LFS)**
+  - Initialized Git LFS.
+  - Added `.gitattributes` to track `*.jsonl` files.
+  - Removed `corpus.jsonl` from `.gitignore` and re-added it to Git.
 
 ## dev-22:15
 
