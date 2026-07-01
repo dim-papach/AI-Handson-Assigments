@@ -1,0 +1,17 @@
+{
+  "question": "The design team for role playing game Black Crusade featured the work of this designer who was the lead developer for what game?",
+  "gold_answer": "Dark Heresy",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Black Crusade game designer lead developer\")",
+      "query": "Black Crusade game designer lead developer",
+      "observation": "- Ross Watson (game designer): Ross Watson (born May 22, 1975) is a designer of computer, miniature and role-playing games and a writer in various genres. Watson worked on the Warhammer 40,000 Roleplay line as the Lead Developer for Dark Heresy, was the lead designer for Rogue Trader and Deathwatch, a\n- Black Crusade (role-playing game): Black Crusade is a role-playing game published in 2011 that uses the \"Warhammer 40,000 Roleplay\" system.\n- Zero (game engine): Zero is a proprietary game engine created by Pandemic Studios. It was used first in the game \"\" and later used in several \"Star Wars\" games including the popular \"Battlefront\" series. \"Battlezone II: Combat Commander\" and \"Dark Reign 2\" both feature an in-engine editor accessible"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The previous retrieval identified Ross Watson as a designer who worked on the Warhammer 40,000 Roleplay line, which Black Crusade uses. It also states that Ross Watson was the Lead Developer for Dark Heresy.\nAnswer: Dark Heresy"
+    }
+  ],
+  "final_answer": "Dark Heresy"
+}

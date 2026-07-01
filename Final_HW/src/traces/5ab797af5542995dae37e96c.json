@@ -1,0 +1,17 @@
+{
+  "question": "In what year was Shin Hyun-joon in the successful South Korean comey sequel?",
+  "gold_answer": "2005",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Shin Hyun-joon successful South Korean comedy sequel\")",
+      "query": "Shin Hyun-joon successful South Korean comedy sequel",
+      "observation": "- Shin Hyun-joon (actor): Shin Hyun-joon (Hangul: \uc2e0\ud604\uc900 ; born October 28, 1968) is a South Korean actor. He is best known for his roles in \"Barefoot Ki-bong\", \"Stairway to Heaven\" and the \"Marrying the Mafia\" sequels, and as the photographer in the popular music video \"Because I'm A Girl\" by KISS. In t\n- Marrying the Mafia II: Marrying the Mafia II is a 2005 South Korean film, the sequel to \"Marrying the Mafia\" (2002). It was the most successful comedy film in South Korea the year of its release; its over 5 million tickets sold represented more than 10% of the population and contributed to the third\n- Kim Hyun-joong discography: During 2005-2010, Kim has had two solo songs from SS501 albums: \"Rize Up\" from \"Kokoro\", and \"Please Be Nice To Me\" from \"SS501 Solo Collection\". In 2008, he released \"Thank You\" digital single, a theme song from \"We Got Married\" and was also included in SS501 mini album "
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The previous retrieval states that Shin Hyun-joon is known for his roles in the \"Marrying the Mafia\" sequels, and \"Marrying the Mafia II\" was a successful South Korean comedy film released in 2005. This directly answers the question.\nAnswer: 2005"
+    }
+  ],
+  "final_answer": "2005"
+}

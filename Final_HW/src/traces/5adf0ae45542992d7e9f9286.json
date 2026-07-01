@@ -1,0 +1,17 @@
+{
+  "question": "Where was the film set in which the daughter of Shashi Kapoor, along side Sarat Pujari and Navni Parihar, set?",
+  "gold_answer": "Orissa",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"film starring Sanjana Kapoor Sarat Pujari Navni Parihar\")",
+      "query": "film starring Sanjana Kapoor Sarat Pujari Navni Parihar",
+      "observation": "- Aranyaka (film): Aranyaka (A Trip Into the Jungle) is a 1994 Indian Hindi drama film directed by Apurba Kishore Bir. The film stars Sarat Pujari, Navni Parihar, Sanjana Kapoor and Mohan Gokhale in lead roles. Based on a short story \"Aranyaka\" by Manoj Das, the film is set in rural Orissa, where a fo\n- Navni Parihar: Navni Parihar (born 22 March 1966) is an Indian film and television actress. Navni Parihar acted in the film \"Rabba Main Kya Karoon\" in 2013 starring Arshad Warsi. Navni is married to Animesh. Navni is also playing an important role in \"Bani - Ishq Da Kalma\", which was earlier titled \n- Sanjana Kapoor: Sanjna Kapoor (born 27 November 1967) is an Indian theatre personality and former Indian film actress of British and Indian descent. She is the daughter of Shashi Kapoor and the late Jennifer Kendal. She ran the Prithvi Theatre in Mumbai from 1993. to February 2012."
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The film in question is \"Aranyaka\" (1994), which stars Sanjana Kapoor (daughter of Shashi Kapoor), Sarat Pujari, and Navni Parihar. The provided information states that this film is set in rural Orissa.\nAnswer: The film \"Aranyaka\" was set in rural Orissa."
+    }
+  ],
+  "final_answer": "The film \"Aranyaka\" was set in rural Orissa."
+}

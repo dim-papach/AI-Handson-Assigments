@@ -1,0 +1,17 @@
+{
+  "question": "To which aircraft carrier was the VMF-213 Marine Fighting Squadron assigned to durning World War II?",
+  "gold_answer": "USS Essex",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"VMF-213 aircraft carrier World War II\")",
+      "query": "VMF-213 aircraft carrier World War II",
+      "observation": "- VMF-213: Marine Fighting Squadron 213 (VMF-213) was a reserve fighter squadron in the United States Marine Corps. Nicknamed the \"Hell Hawks\", the squadron fought during World War II in the Philippines and at the battles of Iwo Jima and Okinawa. With its assignment to the USS Essex (CV-9) and \"Air Gr\n- Benham-class destroyer: The \"Benham\" class of ten destroyers was built for the United States Navy (USN). They were part of a series of USN destroyers limited to 1,500 tons standard displacement by the London Naval Treaty and built in the 1930s. The class was laid down in 1936-1937 and all were commi\n- USS Essex (CV-9): USS \"Essex\" (CV/CVA/CVS-9) was an aircraft carrier and the lead ship of the 24-ship \"Essex\" class built for the United States Navy during World War II. She was the fourth US Navy ship to bear the name. Commissioned in December 1942, \"Essex\" participated in several campaigns in the "
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The observation directly states that VMF-213 was assigned to the USS Essex (CV-9).\nAnswer: The VMF-213 Marine Fighting Squadron was assigned to the USS Essex (CV-9) during World War II."
+    }
+  ],
+  "final_answer": "The VMF-213 Marine Fighting Squadron was assigned to the USS Essex (CV-9) during World War II."
+}

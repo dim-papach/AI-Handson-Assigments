@@ -1,0 +1,17 @@
+{
+  "question": "Dean Mills Reservoir is on the slopes of the hill located in what town?",
+  "gold_answer": "Rivington Moor",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Dean Mills Reservoir location\")",
+      "query": "Dean Mills Reservoir location",
+      "observation": "- Dean Mills Reservoir: Dean Mills Reservoir is a small water reservoir to the north of the town of Bolton, Greater Manchester located high on the slopes of Winter Hill.\n- Broad Bay (New Hampshire): Broad Bay is a 431 acre freshwater lake located in Carroll County in eastern New Hampshire, United States, in the towns of Freedom and Ossipee. Broad Bay is part of a chain of four lakes with identical water levels, due to a dam located downstream in Effingham Falls. Upstr\n- Red Rock River (Montana): The Red Rock River is a roughly 70 mi river in southwestern Montana in the United States. Its drainage basin covers over 1548 mi2 . Its furthest tributary, Hell Roaring Creek, originates in the Beaverhead National Forest within a few hundred meters of the North American Con"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The first result directly answers the question, stating that Dean Mills Reservoir is located to the north of the town of Bolton.\nAnswer: Bolton"
+    }
+  ],
+  "final_answer": "Bolton"
+}

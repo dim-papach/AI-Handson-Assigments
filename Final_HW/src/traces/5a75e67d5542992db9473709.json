@@ -1,0 +1,17 @@
+{
+  "question": "What was a series of battles during the Revolutionary War, for control of New York City and the state of New Jersey, fought on October 28, 1776 near White Plains, New York?",
+  "gold_answer": "New York and New Jersey campaign",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"series of battles Revolutionary War October 28 1776 White Plains New York\")",
+      "query": "series of battles Revolutionary War October 28 1776 White Plains New York",
+      "observation": "- Battle of White Plains: The Battle of White Plains was a battle in the New York and New Jersey campaign of the American Revolutionary War fought on October 28, 1776, near White Plains, New York. Following the retreat of George Washington's Continental Army northward from New York City, British Gener\n- New York and New Jersey campaign: The New York and New Jersey campaign was a series of battles for control of New York City and the state of New Jersey in the American Revolutionary War between British forces under General Sir William Howe and the Continental Army under General George Washington in \n- 10th Continental Regiment: The 10th Continental Regiment was a unit of the Connecticut Line in the 1776 establishment of the Continental Army. It began as Parson's Connecticut Regiment (also known as the 6th Connecticut Provincial Regiment), which was part of the 1775 establishment, and was commande"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The question asks for a series of battles during the Revolutionary War for control of New York City and New Jersey, including a battle fought on October 28, 1776, near White Plains, New York. The \"New York and New Jersey campaign\" is described as a \"series of battles for control of New York City and the state of New Jersey\" and the \"Battle of White Plains\" (fought on October 28, 1776, near White Plains) is explicitly stated to be part of this campaign. Therefore, the campaign is the answer.\nAnswer: The New York and New Jersey campaign."
+    }
+  ],
+  "final_answer": "The New York and New Jersey campaign."
+}

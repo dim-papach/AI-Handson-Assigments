@@ -1,0 +1,17 @@
+{
+  "question": "Vanessa Bley is what person who organizes and often finances concerts, plays, or operas, performing a role?",
+  "gold_answer": "impresario",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Vanessa Bley role organizer financier concerts plays operas\")",
+      "query": "Vanessa Bley role organizer financier concerts plays operas",
+      "observation": "- Impresario: An impresario (from the Italian \"impresa\", \"an enterprise or undertaking\") is a person who organizes and often finances concerts, plays, or operas, performing a role similar to that of an artist manager or a film or television producer. The term originated in the social and economic worl\n- Teatro Regio Ducal: The Teatro Regio Ducal (Italian, \"Royal Ducal Theatre\") was the opera house in Milan from 26 December 1717 until 25 February 1776, when it was burned down following a carnival gala. Many famous composers and their operas are associated with it, including the premieres of Mozart's\n- James Olds (bass-baritone): James Andrew Olds (born 20 February 1986) is an Australian bass-baritone. He has performed with Opera Australia, Diva Opera, Musica Viva, London Contemporary Opera and was a Young Artist with Pacific Opera. Olds had over 100 performances with the Opera Australia chorus be"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The definition of \"Impresario\" from the retrieval results perfectly matches the description of the person in the question: \"a person who organizes and often finances concerts, plays, or operas, performing a role\".\nAnswer: Impresario"
+    }
+  ],
+  "final_answer": "Impresario"
+}

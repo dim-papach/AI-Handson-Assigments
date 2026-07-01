@@ -1,0 +1,17 @@
+{
+  "question": "Used to This was included on the streaming version of the album released in 2017 on what label?",
+  "gold_answer": "A1 Recordings",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Used to This 2017 streaming album label\")",
+      "query": "Used to This 2017 streaming album label",
+      "observation": "- Used to This: \"Used to This\" is a song by American rapper Future. It was released on November 4, 2016, by Freebandz and Epic Records, as the intended first single from his upcoming fourteenth mixtape \"Beast Mode 2\" (2017), however, it was later included on the streaming version of \"Future\" (2017). T\n- Adult Alternative Songs: Adult Alternative Songs, also known as Triple A, is a record chart currently published by \"Billboard\" that ranks the most popular songs on adult album alternative radio stations. The 30-position chart is formulated based on each song's weekly radio spins, as measured by Niel\n- Capitol Records: Capitol Records, LLC (also referred to simply as Capitol and Hollywood and Vine) is an American major record label which operates as a division of the Capitol Music Group. The label was founded as the first West Coast-based record label in the United States in 1942 by industry insid"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The song \"Used to This\" was released by Freebandz and Epic Records. It was later included on the streaming version of the album \"Future\" (2017). Therefore, the album was released on these labels.\nAnswer: Freebandz and Epic Records"
+    }
+  ],
+  "final_answer": "Freebandz and Epic Records"
+}

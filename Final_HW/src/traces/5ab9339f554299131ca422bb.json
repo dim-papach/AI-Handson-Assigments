@@ -1,0 +1,17 @@
+{
+  "question": "The 2009 Fort Hood mass shooting was committed by who?",
+  "gold_answer": "Nidal Hasan",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"who committed 2009 Fort Hood mass shooting\")",
+      "query": "who committed 2009 Fort Hood mass shooting",
+      "observation": "- 2009 Fort Hood shooting: On November 5, 2009, a mass shooting took place at Fort Hood, near Killeen, Texas. Nidal Hasan, a U.S. Army major and psychiatrist, fatally shot 13 people and injured more than 30 others. The shooting was the worst mass shooting on an American military base.\n- Michael Mulligan: Colonel Michael Mulligan is a prosecutor in the United States Army notable for serving as the lead prosecutor in the courts-martial of Hasan Akbar and of Nidal Malik Hasan, the sole accused in the November 2009 Fort Hood shooting.\n- Nidal Hasan: Nidal Malik Hasan (born September 8, 1970) is an American convicted of fatally shooting 13 people and injuring more than 30 others in the Fort Hood mass shooting on November 5, 2009. Hasan was a United States Army Medical Corps psychiatrist who admitted to the shootings at his court-mar"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The retrieved information clearly states that Nidal Hasan committed the 2009 Fort Hood mass shooting.\nAnswer: Nidal Hasan"
+    }
+  ],
+  "final_answer": "Nidal Hasan"
+}

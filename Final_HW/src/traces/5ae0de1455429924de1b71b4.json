@@ -1,0 +1,17 @@
+{
+  "question": "The American restaurant chain, the Original House of Pies, is also responsible for an American chain of fruit drink beverage stores with an eponymous beverage consisting of what?",
+  "gold_answer": "orange juice",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Original House of Pies fruit drink chain eponymous beverage\")",
+      "query": "Original House of Pies fruit drink chain eponymous beverage",
+      "observation": "- Orange Julius: Orange Julius is an American chain of fruit drink beverage stores. It has been in business since the late 1920s. The eponymous beverage is a mixture of ice, orange juice, sweetener, milk, powdered egg whites and vanilla flavoring, similar to a morir so\u00f1ando or orange Creamsicle.\n- House of Pies: The Original House of Pies is an American restaurant chain, started c. 1965 by Al Lapin Jr., an early franchise system designer also responsible for International House of Pancakes, Copper Penny Coffee Shops, Orange Julius, and others.\n- Juice: Juice is a beverage made from the extraction or pressing out of the natural liquid contained in fruit and vegetables. It can also refer to liquids that are flavored with these or other biological food sources such as meat and seafood (e.g., clam juice). Juice is commonly consumed as a beverag"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The Original House of Pies was started by Al Lapin Jr., who was also responsible for Orange Julius. The eponymous beverage of Orange Julius is a mixture of ice, orange juice, sweetener, milk, powdered egg whites, and vanilla flavoring.\nAnswer: The eponymous beverage consists of a mixture of ice, orange juice, sweetener, milk, powdered egg whites, and vanilla flavoring."
+    }
+  ],
+  "final_answer": "The eponymous beverage consists of a mixture of ice, orange juice, sweetener, milk, powdered egg whites, and vanilla flavoring."
+}

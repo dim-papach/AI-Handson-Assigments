@@ -1,0 +1,23 @@
+{
+  "question": "The standard that defines Svalbard and Jan Mayen is similar to what standard that originated in the United Nations Statistics Division?",
+  "gold_answer": "UN M.49 standard",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"standard that defines Svalbard and Jan Mayen\")",
+      "query": "standard that defines Svalbard and Jan Mayen",
+      "observation": "- Svalbard and Jan Mayen: Svalbard and Jan Mayen (Norwegian: \"Svalbard og Jan Mayen\" , ISO 3166-1 alpha-2: SJ, ISO 3166-1 alpha-3: SJM, ISO 3166-1 numeric: 744) is a statistical designation defined by ISO 3166-1 of two parts of Norway under separate jurisdictions\u2014Svalbard and Jan Mayen. While the two \n- ISO 3166-2:SJ: ISO 3166-2:SJ is the entry for Svalbard and Jan Mayen in ISO 3166-2, part of the ISO 3166 standard published by the International Organization for Standardization (ISO). The standard defines codes for names of principal subdivisions of all countries coded in ISO 3166-1. Svalbard and J\n- .sj: .sj is the Internet country code top-level domain (ccTLD) reserved for the designation Svalbard and Jan Mayen. The domain name registry is Norid, but .sj is not open for registration. The issuing of the domain was based on the ISO 3166 designation of Svalbard and Jan Mayen, which consists of tw"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"ISO 3166 United Nations Statistics Division\")",
+      "query": "ISO 3166 United Nations Statistics Division",
+      "observation": "- ISO 3166-1 numeric: ISO 3166-1 numeric (or numeric-3) codes are three-digit country codes defined in ISO 3166-1, part of the ISO 3166 standard published by the International Organization for Standardization (ISO), to represent countries, dependent territories, and special areas of geographical inter\n- United Nations Statistics Division: The United Nations Statistics Division (UNSD), formerly the United Nations Statistical Office, serves under the United Nations Department of Economic and Social Affairs (DESA) as the central mechanism within the Secretariat of the United Nations to supply the stat\n- .sj: .sj is the Internet country code top-level domain (ccTLD) reserved for the designation Svalbard and Jan Mayen. The domain name registry is Norid, but .sj is not open for registration. The issuing of the domain was based on the ISO 3166 designation of Svalbard and Jan Mayen, which consists of tw"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The ISO 3166 standard, which defines Svalbard and Jan Mayen, is related to the United Nations Statistics Division. The UNSD maintains the M49 standard, which provides codes for countries and areas for statistical use, and ISO 3166-1 numeric codes are derived from it.\n\nAnswer: The standard that defines Svalbard and Jan Mayen (ISO 3166) is similar to the M49 standard from the United Nations Statistics Division."
+    }
+  ],
+  "final_answer": "The standard that defines Svalbard and Jan Mayen (ISO 3166) is similar to the M49 standard from the United Nations Statistics Division."
+}

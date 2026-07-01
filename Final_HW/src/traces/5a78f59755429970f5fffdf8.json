@@ -1,0 +1,23 @@
+{
+  "question": "Who can play more instruments, Michael Monroe or Alison Goldfrapp?",
+  "gold_answer": "Michael Monroe",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Michael Monroe instruments\")",
+      "query": "Michael Monroe instruments",
+      "observation": "- Michael Monroe: Matti Antero Kristian Fagerholm (born 17 June 1962 in Helsinki), best known by his stage name, Michael Monroe, is a Finnish rock musician and multi-instrumentalist who rose to fame as the vocalist for the glam punk band Hanoi Rocks, and has served as the frontman for all-star side pr\n- Fender Hot Rod DeVille: The Fender Hot Rod DeVille is a combo tube guitar amplifier manufactured and sold by Fender. It was introduced in 1996 as part of Fender's Hot Rod line of amplifiers, and since then has been in continuous production. The Hot Rod DeVille is a modified version of the earlier Fe\n- Electronic music: Electronic music is music that employs electronic musical instruments, digital instruments and circuitry-based music technology. An electronic musician is a musician who composes or performs such music. In general, a distinction can be made between sound produced using electromecha"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Alison Goldfrapp instruments\")",
+      "query": "Alison Goldfrapp instruments",
+      "observation": "- Alison Goldfrapp: Alison Elizabeth Margaret Goldfrapp (born 13 May 1966) is an English musician and record producer, best known as the lead vocalist of the electronic music duo Goldfrapp.\n- Anymore (Goldfrapp song): \"Anymore\" is a song performed by English group Goldfrapp from their seventh studio album \"Silver Eye\" (2017). It was released as a CD single and digital download on 23 January 2017 through Mute Records. The song was written and produced by Alison Goldfrapp and William Owen \n- Seventh Tree: Seventh Tree is the fourth studio album by English electronic music duo Goldfrapp, released on 22 February 2008 by Mute Records. It was named after a dream Alison Goldfrapp had about a \"very large tree\". Taking inspiration from paganism and surreal English children's books, Goldfrapp d"
+    },
+    {
+      "type": "fallback",
+      "content": "Michael Monroe can play more instruments, as he is described as a multi-instrumentalist, while Alison Goldfrapp is primarily known as a vocalist and producer."
+    }
+  ],
+  "final_answer": "Michael Monroe can play more instruments, as he is described as a multi-instrumentalist, while Alison Goldfrapp is primarily known as a vocalist and producer."
+}

@@ -1,0 +1,23 @@
+{
+  "question": "Who had the best singles ranking, Roberta Vinci or Jorge Lozano?",
+  "gold_answer": "Roberta Vinci",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Roberta Vinci best singles ranking\")",
+      "query": "Roberta Vinci best singles ranking",
+      "observation": "- Roberta Vinci: Roberta Vinci (] ; born 18 February 1983) is an Italian tennis player. Up until 6 April 2015, she held the position of World No. 1 in doubles, while reaching a career-high of World No. 7 in singles in May 2016. She is the fourth Italian woman to have reached the top 10 in singles, tog\n- Flavia Pennetta: Flavia Pennetta (] ; born 25 February 1982) is a retired Italian professional tennis player and Grand Slam-champion in both singles and doubles. She became Italy's first top-10 female singles player on 17 August 2009 and the first Italian to be ranked world No. 1 in doubles on 28 Fe\n- List of number-one dance singles of 2010 (U.S.): Beyonc\u00e9 and Katy Perry were the only artists to achieve three number one songs in 2010; the former with \"Why Don't You Love Me\", \"Telephone\", a collaboration with Lady Gaga featuring Beyonc\u00e9, and \"Video Phone\", another collaboration between the two, b"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Jorge Lozano best singles ranking\")",
+      "query": "Jorge Lozano best singles ranking",
+      "observation": "- Jorge Lozano: Jorge Lozano (born 17 May 1963 in San Luis Potos\u00ed) is a retired professional tennis player from Mexico. He reached his highest doubles ranking of World No. 4 in August 1988. His highest singles ranking was World No. 51, achieved the following month. During his career, he won two mixed \n- 1988 Volvo International \u2013 Doubles: Jorge Lozano and Todd Witsken won in the final 6\u20133, 7\u20136 against Pieter Aldrich and Danie Visser.\n- 1994 Athens International \u2013 Doubles: Horacio de la Pe\u00f1a and Jorge Lozano were the defending champions, but did not participate this year."
+    },
+    {
+      "type": "answer",
+      "content": "Thought: I have the best singles rankings for both Roberta Vinci and Jorge Lozano. Roberta Vinci's best singles ranking was World No. 7, and Jorge Lozano's best singles ranking was World No. 51. I can now compare them.\nAnswer: Roberta Vinci had the best singles ranking with World No. 7, compared to Jorge Lozano's World No. 51."
+    }
+  ],
+  "final_answer": "Roberta Vinci had the best singles ranking with World No. 7, compared to Jorge Lozano's World No. 51."
+}

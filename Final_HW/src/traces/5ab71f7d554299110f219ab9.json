@@ -1,0 +1,17 @@
+{
+  "question": "What broadcasting company did both Andrew Collins and Stuart Maconie of Collins and Maconie's Hit Parade both work together from 1194 to 1197?",
+  "gold_answer": "BBC",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Andrew Collins Stuart Maconie Collins and Maconie's Hit Parade broadcasting company 1994-1997\")",
+      "query": "Andrew Collins Stuart Maconie Collins and Maconie's Hit Parade broadcasting company 1994-1997",
+      "observation": "- Collins and Maconie's Hit Parade: Collins and Maconie's Hit Parade was a radio programme that aired from May 1994 to June 1997. There were 74 hour-long episodes and it was broadcast on BBC Radio 1. It starred Andrew Collins and Stuart Maconie.\n- Stuart Maconie: Stuart Maconie (born 13 August 1960) is an English radio DJ and television presenter, writer, journalist, and critic working in the field of pop music and popular culture. He is currently a presenter on BBC Radio 6 Music, where he hosts an afternoon show five times a week (Monday\u2013Fri\n- Hit parade: A hit parade is a ranked list of the most popular recordings at a given point in time, usually determined by sales and/or airplay. The term originated in the 1930s; \"Billboard\" magazine published its first music hit parade on January 4, 1936. It has also been used by broadcast programs w"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The observation states that \"Collins and Maconie's Hit Parade\" was broadcast on BBC Radio 1 from May 1994 to June 1997.\nAnswer: BBC Radio 1"
+    }
+  ],
+  "final_answer": "BBC Radio 1"
+}

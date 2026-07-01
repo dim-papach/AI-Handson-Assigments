@@ -1,0 +1,29 @@
+{
+  "question": "What type of film is Jordan Roberts 2017 film release?",
+  "gold_answer": "3D computer-animated comedy",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Jordan Roberts 2017 film genre\")",
+      "query": "Jordan Roberts 2017 film genre",
+      "observation": "- Jordan Roberts (writer): Jordan Roberts (born Bruce Robert Jordan; June 19, 1957) is an American screenwriter and film director, known for co-writing the screenplays for the Academy Award-winning animated Disney film \"Big Hero 6\" (2014), for which he was nominated for the Annie Award for Writing in \n- Jordan Vogt-Roberts: Jordan Charles Vogt-Roberts (born September 22, 1984) is an American film and television director and screenwriter. His feature directorial debut, \"The Kings of Summer\", screened at the 2013 Sundance Film Festival, where it was nominated for the Grand Jury Prize, and also at the\n- You're Not You: You're Not You is a 2014 American drama film directed by George C. Wolfe and written by Jordan Roberts and Shana Feste, based on a novel of the same name by Michelle Wildgen. The film stars Hilary Swank, Emmy Rossum and Josh Duhamel."
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Jordan Roberts filmography 2017\")",
+      "query": "Jordan Roberts filmography 2017",
+      "observation": "- Jordan Roberts (writer): Jordan Roberts (born Bruce Robert Jordan; June 19, 1957) is an American screenwriter and film director, known for co-writing the screenplays for the Academy Award-winning animated Disney film \"Big Hero 6\" (2014), for which he was nominated for the Annie Award for Writing in \n- Jordan Vogt-Roberts: Jordan Charles Vogt-Roberts (born September 22, 1984) is an American film and television director and screenwriter. His feature directorial debut, \"The Kings of Summer\", screened at the 2013 Sundance Film Festival, where it was nominated for the Grand Jury Prize, and also at the\n- Guardians of the Galaxy Vol. 2: Guardians of the Galaxy Vol. 2 is a 2017 American superhero film based on the Marvel Comics superhero team Guardians of the Galaxy, produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures. It is the sequel to 2014's \"Guardians of the Galaxy\" "
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Jordan Roberts director film 2017\")",
+      "query": "Jordan Roberts director film 2017",
+      "observation": "- Jordan Roberts (writer): Jordan Roberts (born Bruce Robert Jordan; June 19, 1957) is an American screenwriter and film director, known for co-writing the screenplays for the Academy Award-winning animated Disney film \"Big Hero 6\" (2014), for which he was nominated for the Annie Award for Writing in \n- Jordan Vogt-Roberts: Jordan Charles Vogt-Roberts (born September 22, 1984) is an American film and television director and screenwriter. His feature directorial debut, \"The Kings of Summer\", screened at the 2013 Sundance Film Festival, where it was nominated for the Grand Jury Prize, and also at the\n- Guardians of the Galaxy Vol. 2: Guardians of the Galaxy Vol. 2 is a 2017 American superhero film based on the Marvel Comics superhero team Guardians of the Galaxy, produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures. It is the sequel to 2014's \"Guardians of the Galaxy\" "
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The previous searches did not yield a 2017 film by Jordan Roberts. The results consistently show his work on \"Big Hero 6\" (2014) and \"You're Not You\" (2014). There is no mention of a 2017 film associated with him in the provided observations. It's possible he did not have a film release in 2017, or the information is not available in the current context. Given the repeated negative results, I will conclude that there is no readily available information about a 2017 film release by Jordan Roberts.\nAnswer: Information about a 2017 film release by Jordan Roberts is not available in the provided context."
+    }
+  ],
+  "final_answer": "Information about a 2017 film release by Jordan Roberts is not available in the provided context."
+}

@@ -1,0 +1,17 @@
+{
+  "question": "The Dukes of Hazzard was inspired by the 1975 film starring whom?",
+  "gold_answer": "James Mitchum",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"1975 film inspired The Dukes of Hazzard\")",
+      "query": "1975 film inspired The Dukes of Hazzard",
+      "observation": "- The Dukes of Hazzard: The Dukes of Hazzard is an American action-comedy television series that aired on CBS from January 26, 1979, to February 8, 1985. The show aired for a total of 147 episodes spanning seven seasons. The series was inspired by the 1975 film \"Moonrunners\", which was also created by\n- Moonrunners: Moonrunners is a 1975 film, starring James Mitchum, about a Southern family that runs bootleg liquor. It was reworked four years later into the popular long-running television series \"The Dukes of Hazzard\", and as such the two productions share many similar concepts. Mitchum had co-star\n- Monty Python and the Holy Grail: Monty Python and the Holy Grail is a 1975 British absurdist comedy film concerning the Arthurian legend, written and performed by the Monty Python comedy group (Graham Chapman, John Cleese, Terry Gilliam, Eric Idle, Terry Jones, and Michael Palin), and directed by Gi"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The question asks about the star of the 1975 film that inspired The Dukes of Hazzard. The retrieval results clearly state that \"Moonrunners\" is the 1975 film that inspired the series, and it starred James Mitchum.\nAnswer: James Mitchum"
+    }
+  ],
+  "final_answer": "James Mitchum"
+}

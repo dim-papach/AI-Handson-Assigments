@@ -1,0 +1,35 @@
+{
+  "question": "What do Lavinia Greenlaw and N\u00e2z\u0131m Hikmet have in common?",
+  "gold_answer": "poet and novelist",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Lavinia Greenlaw profession\")",
+      "query": "Lavinia Greenlaw profession",
+      "observation": "- Ruth Bader Ginsburg: Ruth Bader Ginsburg (born Joan Ruth Bader; March 15, 1933) is an Associate Justice of the Supreme Court of the United States. Ginsburg was appointed by President Bill Clinton and took the oath of office on August 10, 1993. She is the second female justice to be confirmed to the \n- Best Female Tennis Player ESPY Award: The Best Female Tennis Player ESPY Award has been presented annually since 1993 to the professional female tennis player adjudged to be the best in a given calendar year.\n- Martina Navratilova: Martina Navratilova (Czech: \"Martina Navr\u00e1tilov\u00e1\" ] ; born Martina \u0160ubertov\u00e1 ] ; October 18, 1956) is a former Czechoslovak and later American tennis player and coach. In 2005, \"Tennis\" magazine selected her as the greatest female tennis player for the years 1965 through 2005 an"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Lavinia Greenlaw known for\")",
+      "query": "Lavinia Greenlaw known for",
+      "observation": "- Ruth Bader Ginsburg: Ruth Bader Ginsburg (born Joan Ruth Bader; March 15, 1933) is an Associate Justice of the Supreme Court of the United States. Ginsburg was appointed by President Bill Clinton and took the oath of office on August 10, 1993. She is the second female justice to be confirmed to the \n- Best Female Tennis Player ESPY Award: The Best Female Tennis Player ESPY Award has been presented annually since 1993 to the professional female tennis player adjudged to be the best in a given calendar year.\n- Mahalia Jackson: Mahalia Jackson ( ; October 26, 1911 \u2013 January 27, 1972) was an American gospel singer. Possessing a powerful contralto voice, she was referred to as \"The Queen of Gospel\". She became one of the most influential gospel singers in the world and was heralded internationally as a singe"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Lavinia Greenlaw\")",
+      "query": "Lavinia Greenlaw",
+      "observation": "- Lavinia Greenlaw: Lavinia Greenlaw (born 30 July 1962) is an English poet and novelist. Her most recent work is \"A Double Sorrow: A Version of Troilus and Criseyde\", which was shortlisted for the Costa Poetry Award in 2014.\n- Best Female Tennis Player ESPY Award: The Best Female Tennis Player ESPY Award has been presented annually since 1993 to the professional female tennis player adjudged to be the best in a given calendar year.\n- Ruth Bader Ginsburg: Ruth Bader Ginsburg (born Joan Ruth Bader; March 15, 1933) is an Associate Justice of the Supreme Court of the United States. Ginsburg was appointed by President Bill Clinton and took the oath of office on August 10, 1993. She is the second female justice to be confirmed to the "
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"N\u00e2z\u0131m Hikmet profession\")",
+      "query": "N\u00e2z\u0131m Hikmet profession",
+      "observation": "- N\u00e2z\u0131m Hikmet: N\u00e2z\u0131m Hikmet Ran (15 January 1902 \u2013 3 June 1963), commonly known as N\u00e2z\u0131m Hikmet (] ) was a Turkish poet, playwright, novelist, screenwriter, director and memoirist. He was acclaimed for the \"lyrical flow of his statements\". Described as a \"romantic communist\" and \"romantic revolutiona\n- International Nazim Hikmet Poetry Award: The International Nazim Hikmet Poetry Award is an award created in memory of Turkish poet N\u00e2z\u0131m Hikmet Ran. The medal is awarded every two years to world poets and writers.\n- Mehmed Ali Pasha (marshal): M\u00fc\u015fir Mehmed Ali Pasha (November 18, 1827 \u2013 September 7, 1878) was a German-born Ottoman soldier. He was the grandfather of the Turkish statesman Ali Fuat Cebesoy, and the great-grandfather of famous poets N\u00e2z\u0131m Hikmet and Oktay R\u0131fat Horozcu and the socialist activist, l"
+    },
+    {
+      "type": "fallback",
+      "content": "Lavinia Greenlaw and N\u00e2z\u0131m Hikmet are both poets and novelists."
+    }
+  ],
+  "final_answer": "Lavinia Greenlaw and N\u00e2z\u0131m Hikmet are both poets and novelists."
+}

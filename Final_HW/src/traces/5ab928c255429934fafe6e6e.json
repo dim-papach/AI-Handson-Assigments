@@ -1,0 +1,17 @@
+{
+  "question": "Die Nacht was composed by German composer, Richard Strauss. What other well known operas did he compose?",
+  "gold_answer": "Der Rosenkavalier",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Richard Strauss well-known operas\")",
+      "query": "Richard Strauss well-known operas",
+      "observation": "- Richard Strauss: Richard Georg Strauss (11 June 1864 \u2013 8 September 1949) was a leading German composer of the late Romantic and early modern eras. He is known for his operas, which include \"Der Rosenkavalier\", \"Elektra\", \"Die Frau ohne Schatten\" and \"Salome\"; his Lieder, especially his \"Four Last So\n- Der Rosenkavalier: Der Rosenkavalier (The Knight of the Rose or The Rose-Bearer), Op. 59, is a comic opera in three acts by Richard Strauss to an original German libretto by Hugo von Hofmannsthal. It is loosely adapted from the novel \"Les amours du chevalier de Faublas\" by Louvet de Couvrai and Moli\n- Wein, Weib und Gesang: Strauss' works at this age displays the Waltz King at the height of his creative powers, and it was no less evident in this waltz with its 137-bar introduction, combining tranquil melodies with superb orchestration. Its admirers include the famous opera composer Richard Wagner"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The retrieval results explicitly list several well-known operas by Richard Strauss: \"Der Rosenkavalier\", \"Elektra\", \"Die Frau ohne Schatten\", and \"Salome\".\nAnswer: Richard Strauss also composed the well-known operas Der Rosenkavalier, Elektra, Die Frau ohne Schatten, and Salome."
+    }
+  ],
+  "final_answer": "Richard Strauss also composed the well-known operas Der Rosenkavalier, Elektra, Die Frau ohne Schatten, and Salome."
+}

@@ -1,0 +1,23 @@
+{
+  "question": "Brad Budde played professionally for a team in the NFL that was founded in 1960 as the Dallas Texans by who?",
+  "gold_answer": "Lamar Hunt",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"who founded dallas Texans 1960\")",
+      "query": "who founded dallas Texans 1960",
+      "observation": "- Kansas City Chiefs: The Kansas City Chiefs are a professional American football team based in Kansas City, Missouri. The Chiefs compete in the National Football League (NFL) as a member club of the league's American Football Conference (AFC) West division. The team was founded in 1960 as the Dallas \n- 1960 NFL expansion draft: The 1960 NFL expansion draft was the first National Football League (NFL) draft in which a new expansion team, named the Dallas Rangers, selected its initial players. The NFL awarded Dallas, Texas a franchise to compete for revenue with Lamar Hunt's Dallas Texans of the ups\n- History of the Kansas City Chiefs: The following is a detailed history of the Kansas City Chiefs, a professional American football franchise that began play in 1960 as the Dallas Texans. The team was a charter member of the American Football League (AFL), and now is currently part of the National Fo"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Lamar Hunt founded Dallas Texans\")",
+      "query": "Lamar Hunt founded Dallas Texans",
+      "observation": "- Kansas City Chiefs: The Kansas City Chiefs are a professional American football team based in Kansas City, Missouri. The Chiefs compete in the National Football League (NFL) as a member club of the league's American Football Conference (AFC) West division. The team was founded in 1960 as the Dallas \n- Foolish Club: The Foolish Club was the self-imposed name taken by the owners of the eight original franchises of the American Football League (AFL). When Texas oil magnates Lamar Hunt and Bud Adams, Jr. were refused entry to the established NFL in 1959, they contacted other businessmen to form an ei\n- 1960 NFL expansion draft: The 1960 NFL expansion draft was the first National Football League (NFL) draft in which a new expansion team, named the Dallas Rangers, selected its initial players. The NFL awarded Dallas, Texas a franchise to compete for revenue with Lamar Hunt's Dallas Texans of the ups"
+    },
+    {
+      "type": "answer",
+      "content": "Answer: Lamar Hunt"
+    }
+  ],
+  "final_answer": "Lamar Hunt"
+}

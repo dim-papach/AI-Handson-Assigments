@@ -1,0 +1,17 @@
+{
+  "question": "The Zapruder film shows President John F. Kennedy's motorcade as it passed through a plaza that was named aNational Historic Landmark in what year? ",
+  "gold_answer": "1993",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Dealey Plaza National Historic Landmark year\")",
+      "query": "Dealey Plaza National Historic Landmark year",
+      "observation": "- Dealey Plaza: Dealey Plaza , in the historic West End district of downtown Dallas, Texas (U.S.), is the location of the assassination of John F. Kennedy on November 22, 1963. The Dealey Plaza Historic District was named a National Historic Landmark in 1993 to preserve Dealey Plaza, street rights-of-\n- Woolworth Building: The Woolworth Building, at 233 Broadway, Manhattan, New York City, designed by architect Cass Gilbert and constructed between 1910 and 1912, is an early US skyscraper. The original site for the building was purchased by F. W. Woolworth and his real estate agent Edward J. Hogan by\n- Monticello: Monticello was the primary plantation of Thomas Jefferson, the third President of the United States, who began designing and building Monticello at age 26 after inheriting land from his father. Located just outside Charlottesville, Virginia, in the Piedmont region, the plantation was ori"
+    },
+    {
+      "type": "answer",
+      "content": "Answer: 1993"
+    }
+  ],
+  "final_answer": "1993"
+}

@@ -1,0 +1,23 @@
+{
+  "question": "During the 2012-13 Blackppol F.C. season, their top scorer was what English professional footballer who plays as wither an attacking midfielder, winger, or forward for Premier League club Huddersfield Town?",
+  "gold_answer": "Thomas Christopher Ince",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Blackpool F.C. top scorer 2012-13 season\")",
+      "query": "Blackpool F.C. top scorer 2012-13 season",
+      "observation": "- 2012\u201313 Blackpool F.C. season: The 2012\u201313 season was Blackpool F.C.' s second-consecutive season in the Football League Championship, the second tier of English professional football, and their 104th overall season in the Football League. They finished in 15th position. Tom Ince was the club's top \n- PFA Young Player of the Year: The Professional Footballers' Association Young Player of the Year (often called the PFA Young Player of the Year, or simply the Young Player of the Year) is an annual award given to the player aged 23 or under at the start of the season who is adjudged to have been the\n- 2012\u201313 Arsenal F.C. season: The 2012\u201313 season was Arsenal Football Club's 21st season in the Premier League and 93rd consecutive season in the top flight of English football. Arsenal participated in the Premier League and the UEFA Champions League, after finishing third in the previous Premier Lea"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Tom Ince Huddersfield Town\")",
+      "query": "Tom Ince Huddersfield Town",
+      "observation": "- Tom Ince: Thomas Christopher Ince (born 30 January 1992) is an English professional footballer who plays as either an attacking midfielder, winger or a forward for Premier League club Huddersfield Town.\n- 2012\u201313 Blackpool F.C. season: The 2012\u201313 season was Blackpool F.C.' s second-consecutive season in the Football League Championship, the second tier of English professional football, and their 104th overall season in the Football League. They finished in 15th position. Tom Ince was the club's top \n- PFA Young Player of the Year: The Professional Footballers' Association Young Player of the Year (often called the PFA Young Player of the Year, or simply the Young Player of the Year) is an annual award given to the player aged 23 or under at the start of the season who is adjudged to have been the"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The first retrieval identified Tom Ince as Blackpool F.C.'s top scorer during the 2012-13 season. The second retrieval confirmed that Tom Ince is an English professional footballer who plays as either an attacking midfielder, winger, or forward for Premier League club Huddersfield Town. This matches all the criteria in the question.\nAnswer: Tom Ince"
+    }
+  ],
+  "final_answer": "Tom Ince"
+}

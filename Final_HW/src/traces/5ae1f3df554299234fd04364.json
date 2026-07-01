@@ -1,0 +1,11 @@
+{
+  "question": "When did the  American rock singer  which performed  Recorded covers died ",
+  "gold_answer": "at age 27",
+  "trace": [
+    {
+      "type": "answer",
+      "content": "Thought: The question asks for the death date of \"the American rock singer which performed Recorded covers\". This description is too general as many American rock singers have performed recorded covers. To answer this, I need a specific name. Since the question uses \"the\", it implies a specific person, but doesn't provide a name. I need to clarify or find out who the user might be referring to. Without a specific name, I cannot provide a death date. I will state that the question is too vague.\nAnswer: The question is too vague as many American rock singers have performed recorded covers. Please specify which singer you are referring to."
+    }
+  ],
+  "final_answer": "The question is too vague as many American rock singers have performed recorded covers. Please specify which singer you are referring to."
+}

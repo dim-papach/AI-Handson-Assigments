@@ -1,0 +1,17 @@
+{
+  "question": "Which English crime writer wrote the 2005 psychological thriller \"The Devil's Feather\"?",
+  "gold_answer": "Minette Walters",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"author of The Devil's Feather\")",
+      "query": "author of The Devil's Feather",
+      "observation": "- The Devil's Feather: The Devil's Feather is a 2005 psychological thriller novel by British author Minette Walters.\n- Ernest Hemingway: Ernest Miller Hemingway (July 21, 1899 \u2013 July 2, 1961) was an American novelist, short story writer, and journalist. His economical and understated style had a strong influence on 20th-century fiction, while his life of adventure and his public image influenced later generations. H\n- James Joyce: James Augustine Aloysius Joyce (2 February 1882 \u2013 13 January 1941) was an Irish novelist, short story writer, and poet. He contributed to the modernist avant-garde and is regarded as one of the most influential and important authors of the 20th century. Joyce is best known for \"Ulysses\""
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The observation clearly states that \"The Devil's Feather\" is a 2005 psychological thriller novel by British author Minette Walters. The question asks for the English crime writer who wrote it. Minette Walters is a British author, which aligns with \"English,\" and she is known for crime fiction, which aligns with \"crime writer.\"\nAnswer: Minette Walters"
+    }
+  ],
+  "final_answer": "Minette Walters"
+}

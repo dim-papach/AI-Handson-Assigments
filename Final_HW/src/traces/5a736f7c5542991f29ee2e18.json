@@ -1,0 +1,17 @@
+{
+  "question": "Which legal, autonomous North American tribal government signed its constitution in Oklahoma on September 6, 1839?",
+  "gold_answer": "The Cherokee Nation",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"North American tribal government signed constitution Oklahoma September 6 1839\")",
+      "query": "North American tribal government signed constitution Oklahoma September 6 1839",
+      "observation": "- Cherokee National Holiday: The Cherokee National Holiday is an annual event held each Labor Day weekend in Tahlequah, Oklahoma. The event celebrates the September 6, 1839 signing of the Constitution of the Cherokee Nation in Oklahoma after the Trail of Tears Indian removal ended.\n- Cherokee Nation (1794\u20131907): The Cherokee Nation (\u13e3\u13b3\u13a9\u13af \u13a0\u13f0\u13b5, pronounced \"Tsalagihi Ayeli\") from 1794\u20131907 was a legal, autonomous, tribal government in North America recognized from 1794 to 1907. Often referred to simply as \"\"The Nation\"\" by its inhabitants, it should not be confused with what is kno\n- Menominee Restoration Act: The Menominee Restoration Act, signed by President of the United States Richard Nixon on December 22, 1973, returned federally recognized sovereignty to the Menominee Indian Tribe of Wisconsin. It also restored tribal supervision over property and members, as well as feder"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The observations clearly state that the Cherokee Nation signed its constitution in Oklahoma on September 6, 1839, and that it was a legal, autonomous tribal government.\nAnswer: The Cherokee Nation."
+    }
+  ],
+  "final_answer": "The Cherokee Nation."
+}

@@ -1,0 +1,17 @@
+{
+  "question": "The Reverend Jesse Bushyhead was a member of a Cherokee faction led by a chief born in what year?",
+  "gold_answer": "1790",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Reverend Jesse Bushyhead Cherokee faction chief\")",
+      "query": "Reverend Jesse Bushyhead Cherokee faction chief",
+      "observation": "- Jesse Bushyhead: The Reverend Jesse Bushyhead (1804\u20131844) was a Cherokee religious and political leader. He was born near the present-day town of Cleveland, Tennessee. His Cherokee name was \"Unaduti\". As a young man, he was ordained a Baptist minister. A member of the John Ross faction of the Cherok\n- Ned Christie: Ned Christie (December 14, 1852 \u2013 November 3, 1892), also known as NeDe WaDe in Cherokee, was a Cherokee statesman. Ned was a member of the executive council in the Cherokee Nation senate, and served as one of three advisers to Chief Dennis Bushyhead. He was notable for holding off Ame\n- John Ross (Cherokee chief): John Ross (October 3, 1790 \u2013 August 1, 1866), also known as Koo-wi-s-gu-wi (meaning in Cherokee: \"Mysterious Little White Bird\"), was the Principal Chief of the Cherokee Nation from 1828\u20131866, serving longer in this position than any other person. Described as the Moses o"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The Reverend Jesse Bushyhead was a member of the John Ross faction. John Ross was born in 1790.\nAnswer: 1790"
+    }
+  ],
+  "final_answer": "1790"
+}

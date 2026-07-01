@@ -1,0 +1,17 @@
+{
+  "question": "In what century did this Native warrior and chief, whose brother Tenskwatawa led the Tippecanoe order of battle, become the primary leader of a large, multi tribal confederacy?",
+  "gold_answer": "nineteenth",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"When did Tecumseh become the primary leader of a multi-tribal confederacy?\")",
+      "query": "When did Tecumseh become the primary leader of a multi-tribal confederacy?",
+      "observation": "- Tecumseh: Native American Shawnee warrior and chief, who became the primary leader of a large, multi-tribal confederacy in the early years of the nineteenth century. Born in the Ohio Country (present-day Ohio), and growing up during the American Revolutionary War and the Northwest Indian War, Tecums\n- Tecumseh's Confederacy: Tecumseh's Confederacy was a group of Native Americans in the Old Northwest that began to form in the early 19th century around the teaching of Tenskwatawa (The Prophet). The confederation grew over several years and came to include several thousand warriors. Shawnee leader T\n- Battle of Tippecanoe: The Battle of Tippecanoe ( ) was fought on November 7, 1811, in what is now Battle Ground, Indiana, between American forces led by Governor William Henry Harrison of the Indiana Territory and Native American warriors associated with the Shawnee leader Tecumseh. Tecumseh and his"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The retrieval results indicate that Tecumseh became the primary leader of a multi-tribal confederacy in the early years of the nineteenth century. The nineteenth century spans from 1801 to 1900.\nAnswer: 19th century"
+    }
+  ],
+  "final_answer": "19th century"
+}

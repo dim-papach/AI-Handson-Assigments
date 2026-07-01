@@ -1,0 +1,17 @@
+{
+  "question": "When did the 2005 Ladbrokes.com World Darts Championship begin?",
+  "gold_answer": "the day after Christmas Day",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"2005 Ladbrokes.com World Darts Championship start date\")",
+      "query": "2005 Ladbrokes.com World Darts Championship start date",
+      "observation": "- 2005 PDC World Darts Championship: The 2005 Ladbrokes.com World Darts Championship, sponsored by Ladbrokes, was held at the Circus Tavern, Purfleet and started on Boxing Day, 2004. Phil Taylor went on to clinch his 12th World Championship (10 in the PDC, 2 in the BDO) with a 7-4 final victory over M\n- 2006 PDC World Darts Championship: The 2006 Ladbrokes.com World Darts Championship was the 13th World Championship organised by the Professional Darts Corporation (PDC) since it separated from the British Darts Organisation (BDO). It was held from 19 December 2005 to 2 January 2006 at the Circus Tav\n- Premier League Darts: Premier League Darts is a darts tournament which launched on 20 January 2005 on Sky Sports. The league is now played weekly from February to May, having originally started as a fortnightly fixture. The tournament originally featured seven players and now sees ten of the biggest"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The observation clearly states that the 2005 Ladbrokes.com World Darts Championship started on Boxing Day, 2004.\nAnswer: The 2005 Ladbrokes.com World Darts Championship began on Boxing Day, 2004."
+    }
+  ],
+  "final_answer": "The 2005 Ladbrokes.com World Darts Championship began on Boxing Day, 2004."
+}

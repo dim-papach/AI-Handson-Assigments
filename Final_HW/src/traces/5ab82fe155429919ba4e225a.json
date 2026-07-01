@@ -1,0 +1,17 @@
+{
+  "question": "What is the name of one the Italian Navy's new warship?",
+  "gold_answer": "PPA, Pattugliatore Polivalente d'Altura",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Italian Navy new warship names\")",
+      "query": "Italian Navy new warship names",
+      "observation": "- PPA, Pattugliatori Polivalenti d'Altura: PPA, Pattugliatore Polivalente d'Altura (Offshore Multipurpose Patrol Ship) is a new Frigate class of the Italian Navy.<br>\n- Italian Navy: The Italian Navy (Italian: \"Marina Militare\" , \"Military Navy\"; abbreviated as MM) is the maritime defence force of the Italian Republic. It is one of the four branches of Italian Armed Forces and was formed in 1946 from what remained of the \"Regia Marina\" (Royal Navy) after World War \n- HMS Queen Elizabeth (R08): HMS \"Queen Elizabeth\" is the lead ship of the \"Queen Elizabeth\"-class of supercarrier, the largest warship ever built for the Royal Navy of the United Kingdom and capable of carrying up to 40 aircraft. The ship was named by Queen Elizabeth II in July 2014, began sea trials"
+    },
+    {
+      "type": "answer",
+      "content": "Answer: One of the Italian Navy's new warships is the PPA, Pattugliatori Polivalenti d'Altura."
+    }
+  ],
+  "final_answer": "One of the Italian Navy's new warships is the PPA, Pattugliatori Polivalenti d'Altura."
+}

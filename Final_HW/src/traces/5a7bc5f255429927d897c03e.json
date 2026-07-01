@@ -1,0 +1,17 @@
+{
+  "question": "Luther: The Calling is based on the BBC crime drama comprising six episodes that were run in which year?",
+  "gold_answer": "2010",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Luther BBC crime drama first aired year\")",
+      "query": "Luther BBC crime drama first aired year",
+      "observation": "- Luther (TV series): Luther is a British crime drama programme starring Idris Elba as the title character, DCI John Luther. Written by Neil Cross, the first season, comprising six episodes, ran in May and June 2010. A second season of four episodes aired on BBC One in June and July 2011. A third seri\n- Paranoid (TV series): Paranoid is a British crime drama which began broadcasting on ITV, on 22 September 2016, and streaming internationally on Netflix, in 2016. The eight-part series focuses on a group of detectives working for the fictional Woodmere police, in the UK, who are attempting to solve t\n- Sherlock (TV series): Sherlock is a crime drama television series based on Sir Arthur Conan Doyle's Sherlock Holmes detective stories. Created by Steven Moffat and Mark Gatiss, it stars Benedict Cumberbatch as Sherlock Holmes and Martin Freeman as Doctor John Watson. Thirteen episodes have been prod"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The retrieved information directly states that the first season of \"Luther,\" comprising six episodes, ran in May and June 2010.\nAnswer: 2010"
+    }
+  ],
+  "final_answer": "2010"
+}

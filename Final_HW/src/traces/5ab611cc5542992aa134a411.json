@@ -1,0 +1,23 @@
+{
+  "question": "What professions did S. Sylvan Simon and Danny Cannon have in common?",
+  "gold_answer": "director and producer",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"S. Sylvan Simon professions\")",
+      "query": "S. Sylvan Simon professions",
+      "observation": "- S. Sylvan Simon: S. Sylvan Simon (March 9, 1910 \u2013 May 17, 1951) was an American stage/film director and producer.\n- Archduchess Elisabeth Franziska of Austria (1892\u20131930): Archduchess Elisabeth Franziska of Austria (1892\u20131930)\n- Giuseppe Verdi: Giuseppe Fortunino Francesco Verdi (] ; 9 or 10 October 1813 \u2013 27 January 1901) was an Italian opera composer."
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Danny Cannon professions\")",
+      "query": "Danny Cannon professions",
+      "observation": "- Danny Cannon: John Danny Cannon (born 1968 in Luton, England) is a British film and television writer, director and producer.\n- Phoenix (1998 film): Phoenix is a 1998 American crime film directed by British director Danny Cannon and starring Ray Liotta. Liotta plays a cop whose gambling debt leaves him indebted to the underworld and desperate to find a way out without compromising his principles.\n- Nick Cannon: Nicholas Scott \"Nick\" Cannon (born October 8, 1980) is an American rapper, actor, comedian, director, screenwriter, film producer, entrepreneur, record producer, radio and television personality. On television, Cannon began as a teenager on \"All That\" before going on to host \"The Nick C"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: Both S. Sylvan Simon and Danny Cannon were film directors and producers.\nAnswer: Both S. Sylvan Simon and Danny Cannon were film directors and producers."
+    }
+  ],
+  "final_answer": "Both S. Sylvan Simon and Danny Cannon were film directors and producers."
+}

@@ -1,0 +1,17 @@
+{
+  "question": "What offence were opening batsman Khalid Latif and 5 other cricketers suspended for, in February 2017?",
+  "gold_answer": "spot-fixing",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Khalid Latif suspended February 2017 offence\")",
+      "query": "Khalid Latif suspended February 2017 offence",
+      "observation": "- Khalid Latif (cricketer): Khalid Latif (Urdu: \u200e ), (born 4 November 1985 in Karachi) is a Pakistani cricketer. A right-handed opening batsman, Latif captained Pakistan in the 2004 U-19 Cricket World Cup win and the 2010 Asian Games bronze medal win. In 2017, the Pakistan Cricket Board banned Latif f\n- 2017 Pakistan Super League spot-fixing scandal: The 2017 Pakistan Super League spot-fixing scandal arose in February 2017 when the Pakistan Cricket Board (PCB) suspended cricketers under its anti-corruption code in an ongoing investigation backed by International Cricket Council (ICC)'s Anti-Corrupt\n- Homosexuality in India: Homosexuality is mostly a taboo subject in Indian civil society and for the government. Section 377 of the Indian Penal Code makes sex with persons of the same gender punishable by law. On 2 July 2009, in \"Naz Foundation v. Govt. of NCT of Delhi\", the Delhi High Court held th"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The observation \"2017 Pakistan Super League spot-fixing scandal\" directly mentions cricketers being suspended in February 2017 under an anti-corruption code. The first observation states Khalid Latif was banned by the Pakistan Cricket Board in 2017. This strongly indicates the offence was related to spot-fixing.\n\nAnswer: Khalid Latif and 5 other cricketers were suspended for their involvement in the 2017 Pakistan Super League spot-fixing scandal."
+    }
+  ],
+  "final_answer": "Khalid Latif and 5 other cricketers were suspended for their involvement in the 2017 Pakistan Super League spot-fixing scandal."
+}

@@ -1,3 +1,22 @@
+# 2026-07-01
+
+Updated RAG script to use Gemini 2.5 Flash, improved dataset sampling, and added accelerate dependency.
+
+## dev-19:55
+
+### Refine RAG Scripts and Dependencies
+Update Gemini model configuration, improve data sampling logic, and update dependencies.
+
+- **Subtask (Baseline RAG Configuration)**
+  - Updated model from `gemini-2.0-flash` to `gemini-2.5-flash` in `Final_HW/src/baseline_rag.py`.
+  - Updated API key env var to `GEMINI_API_KEY`.
+  - Fixed `.env` loading to point directly to `ROOT.parent / ".env"`.
+- **Subtask (Data Preparation Improvements)**
+  - Refactored `Final_HW/src/prepare_data.py` to sample train and eval questions first.
+  - Filtered corpus generation to only include passages that appear in the sampled questions to reduce size.
+- **Subtask (Dependencies)**
+  - Added `accelerate` to `pyproject.toml` and updated `poetry.lock`.
+
 # 2026-06-30
 
 Initial implementation of Baseline RAG, data preparation scripts, and adding OpenSearch dependencies. Added Git LFS for dataset tracking.

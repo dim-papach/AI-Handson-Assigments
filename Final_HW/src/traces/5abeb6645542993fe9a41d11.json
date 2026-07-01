@@ -1,0 +1,11 @@
+{
+  "question": "National Strategy for Homeland Security was a response to the events that partially took place at what Arlington County, Virginia location?",
+  "gold_answer": "Pentagon",
+  "trace": [
+    {
+      "type": "answer",
+      "content": "Thought: The National Strategy for Homeland Security was a response to the September 11, 2001 attacks. One of the locations attacked on that day was in Arlington County, Virginia. I need to identify that specific location.\nAnswer: The Pentagon"
+    }
+  ],
+  "final_answer": "The Pentagon"
+}

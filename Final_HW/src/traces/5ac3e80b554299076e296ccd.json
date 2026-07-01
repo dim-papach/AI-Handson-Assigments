@@ -1,0 +1,17 @@
+{
+  "question": "What sport is featured in the film in which Kwon Yu-ri made her film debut ?",
+  "gold_answer": "swimming",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Kwon Yu-ri film debut\")",
+      "query": "Kwon Yu-ri film debut",
+      "observation": "- Kwon Yu-ri: Kwon Yu-ri (born December 5, 1989), better known by the mononym Yuri, is a South Korean singer and actress. She debuted as a member of girl group Girls' Generation in August 2007, who went on to be one of the best-selling artists in South Korea and one of South Korea's most popular girl \n- Kwon Yul (actor): Kwon Se-in (born June 29, 1982), better known as Kwon Yul actor. He made his acting debut with a leading role in the 2007 high school sitcom \"Mackerel Run\". Kwon is best known for his roles as Seo Ji-seok on the daily soap opera \"Angel's Revenge\" (2014), in the blockbuster period f\n- No Breathing: No Breathing () is a 2013 South Korean sports film set in the world of competitive swimming, starring Seo In-guk, Lee Jong-suk and Kwon Yuri. The film was released in theaters on October 30, 2013."
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The previous retrieval indicates that \"No Breathing\" is a 2013 South Korean sports film starring Kwon Yuri, and it is set in the world of competitive swimming. This film is listed in the context of her acting career and film debut. Therefore, the sport featured is competitive swimming.\nAnswer: Competitive swimming"
+    }
+  ],
+  "final_answer": "Competitive swimming"
+}

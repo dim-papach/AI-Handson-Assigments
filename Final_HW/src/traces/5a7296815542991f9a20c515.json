@@ -1,0 +1,17 @@
+{
+  "question": "Who brewed the first espresso coffee in space, Patrick Baudry or Samantha Cristoforetti?",
+  "gold_answer": "Samantha Cristoforetti",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"who brewed first espresso in space\")",
+      "query": "who brewed first espresso in space",
+      "observation": "- ISSpresso: ISSpresso is the first espresso coffee machine designed for use in space, produced for the International Space Station by Argotec and Lavazza in a public-private partnership with the Italian Space Agency (ASI). The first espresso coffee was drunk in space by astronaut Samantha Cristoforet\n- Samantha Cristoforetti: Samantha Cristoforetti (] ; born 26 April 1977 in Milan) is an Italian European Space Agency astronaut, Italian Air Force pilot and engineer. She holds the record for the longest uninterrupted spaceflight of a European astronaut (199 days, 16 hours), and until June 2017 held \n- Espresso machine: An espresso machine brews coffee by forcing pressurized water near boiling point through a \"puck\" of ground coffee and a filter in order to produce a thick, concentrated coffee called espresso. The first machine for making espresso was built and patented in 1884 by Angelo Moriondo "
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The retrieval results explicitly state that \"The first espresso coffee was drunk in space by astronaut Samantha Cristoforetti\". This directly answers the question, indicating that Samantha Cristoforetti was the one who brewed and drank the first espresso in space.\nAnswer: Samantha Cristoforetti brewed the first espresso coffee in space."
+    }
+  ],
+  "final_answer": "Samantha Cristoforetti brewed the first espresso coffee in space."
+}

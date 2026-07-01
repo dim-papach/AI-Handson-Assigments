@@ -1,0 +1,23 @@
+{
+  "question": "Which band is from England, Fireflight or Dirty Pretty Things?",
+  "gold_answer": "Dirty Pretty Things",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Fireflight origin\")",
+      "query": "Fireflight origin",
+      "observation": "- Fireflight: Fireflight is an American Christian rock band formed in Eustis, Florida in 1999. The band is signed by Flicker Records. They have played in ShoutFest, Revelation Generation, and have been featured on The Scars Remain tour with Disciple, Family Force 5, and Decyfer Down. While touring, th\n- Agni (missile): The Agni missile (Sanskrit: \u0905\u0917\u094d\u0928\u093f, \"Agn\u012b\", \"fire\"; also the Hindu God of Fire) is a family of medium to intercontinental range ballistic missiles developed by India, named after one of the five elements of nature. Agni Missiles are long range, nuclear weapons capable surface to surfa\n- V-2 rocket: The V-2 (German: \"Vergeltungswaffe 2\" , \"Retribution Weapon 2\"), technical name Aggregat 4 (A4), was the world's first long-range guided ballistic missile. The missile with a liquid-propellant rocket engine was developed during the Second World War in Germany as a \"vengeance weapon\", ass"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Dirty Pretty Things origin\")",
+      "query": "Dirty Pretty Things origin",
+      "observation": "- Dirty Pretty Things (band): Dirty Pretty Things were an English band fronted by Carl Bar\u00e2t, a member of The Libertines. The formation of the band was announced in September 2005, after a dispute between Bar\u00e2t and Pete Doherty led to the breakup of The Libertines in 2004. Bar\u00e2t had worked with Vertig\n- Bang Bang You're Dead (song): \"Bang Bang You're Dead\" is a song by the band Dirty Pretty Things. It was released as a single on 24 April 2006 and was the first to be released from the band's debut album \"Waterloo to Anywhere\". It proved very successful, charting at #5 on the UK Singles Chart (see 20\n- Wondering (Dirty Pretty Things song): \"Wondering\" is a song by the band Dirty Pretty Things. It was released as a single on 15 October 2006 and was the third to be released from the band's debut album \"Waterloo to Anywhere\". Early versions of the song generally sported the title \"If You Were Wonderi"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: I have retrieved information for both bands. Fireflight is an American band, while Dirty Pretty Things is an English band. Therefore, Dirty Pretty Things is the band from England.\nAnswer: Dirty Pretty Things"
+    }
+  ],
+  "final_answer": "Dirty Pretty Things"
+}

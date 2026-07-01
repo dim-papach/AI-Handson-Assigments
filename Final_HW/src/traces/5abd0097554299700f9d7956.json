@@ -1,0 +1,17 @@
+{
+  "question": "What is the scentific name of the butterfly that is widespread in the seventh-largest country in the world?",
+  "gold_answer": "I. helicon",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Thought: The seventh-largest country in the world is India. I need to find a widespread butterfly in India and its scientific name.\nAction: retrieve(\"widespread butterfly in India scientific name\")",
+      "query": "widespread butterfly in India scientific name",
+      "observation": "- Ionolyce: Ionolyce is a small genus of butterflies in the family Lycaenidae. \"I. helicon\" is widespread in the Indoaustralasian region (India to the Malay Archipelago. \"I selkon\"and \"I.brunnescens\" are both endemic to the Solomon Islands.\n- List of birds of India: This is a list of the bird species of India and includes extant and recently extinct species recorded within the political limits of the Republic of India as defined by the Indian government are known to have around 1266 species as of 2016, of which sixty-one are endemic to t\n- Stapeliae: The genera of plants within the tribe Stapeliae are all to varying degrees stem succulents. Many of the species resemble cacti, though are not closely related, as an example of convergent evolution. The stems are often angular, mostly four-angled in cross-section, but in some species ther"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The first result mentions \"Ionolyce helicon\" as a butterfly widespread in the Indoaustralasian region, which includes India. This seems to be the scientific name I'm looking for.\nAnswer: Ionolyce helicon"
+    }
+  ],
+  "final_answer": "Ionolyce helicon"
+}

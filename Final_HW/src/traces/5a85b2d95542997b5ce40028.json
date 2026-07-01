@@ -1,0 +1,17 @@
+{
+  "question": "Who was known by his stage name Aladin and helped organizations improve their performance as a consultant?",
+  "gold_answer": "Eenasul Fateh",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Aladin stage name consultant performance improvement\")",
+      "query": "Aladin stage name consultant performance improvement",
+      "observation": "- Eenasul Fateh: Eenasul Fateh (Bengali: \u0988\u09a8\u09be\u09b8\u09c1\u09b2 \u09ab\u09be\u09a4\u09c7\u09b9 ; born 3 April 1959), also known by his stage name Aladin, is a Bangladeshi-British cultural practitioner, magician, live artist and former international management consultant.\n- Competency-based performance management: Performance management is about achieving results in a manner that is consistent with organizational expectations. Integrating competencies within the performance management process supports the provision of feedback to employees not only on \"what\" they have \n- Ballet master: Ballet Master (also \"Balletmaster\", \"Ballet Mistress\" [increasingly archaic English language use], \"Premier Ma\u00eetre de ballet\" or \"Premier Ma\u00eetre de ballet en Chef\") is the term used for an employee of a ballet company who is responsible for the level of competence of the dancers in th"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The first search result directly answers the question by identifying Eenasul Fateh as the person known by the stage name Aladin and as a former international management consultant.\nAnswer: Eenasul Fateh, also known by his stage name Aladin, was a Bangladeshi-British cultural practitioner, magician, live artist, and former international management consultant."
+    }
+  ],
+  "final_answer": "Eenasul Fateh, also known by his stage name Aladin, was a Bangladeshi-British cultural practitioner, magician, live artist, and former international management consultant."
+}

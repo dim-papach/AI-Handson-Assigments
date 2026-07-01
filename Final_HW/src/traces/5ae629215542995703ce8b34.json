@@ -1,0 +1,23 @@
+{
+  "question": "What South Australian capital held UFC Fight Night 65 in May of 2015?",
+  "gold_answer": "Adelaide",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"South Australian capital\")",
+      "query": "South Australian capital",
+      "observation": "- History of Adelaide: This article details the History of Adelaide from the first human activity in the region to the 20th century. Adelaide is a planned city founded in 1836 and the capital of South Australia.\n- Glenelg, South Australia: Glenelg is a popular beach-side suburb of the South Australian capital of Adelaide. Located on the shore of Holdfast Bay in Gulf St Vincent, it has become a popular tourist destination due to its beach and many attractions, home to several hotels and dozens of restaurants.\n- Hindley Street, Adelaide: Hindley Street is located in the north-west quarter of the centre of Adelaide, the capital of South Australia. It runs between King William Street and West Terrace. The street was named after British parliamentarian and social reformist, Charles Hindley."
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"UFC Fight Night 65 Adelaide May 2015\")",
+      "query": "UFC Fight Night 65 Adelaide May 2015",
+      "observation": "- UFC Fight Night: Miocic vs. Hunt: UFC Fight Night: Miocic vs. Hunt (also known as UFC Fight Night 65) was a mixed martial arts event held on 10 May 2015 at the Adelaide Entertainment Centre in Adelaide, Australia.\n- Floyd Mayweather Jr. vs. Manny Pacquiao: Floyd Mayweather Jr. vs. Manny Pacquiao, billed as \"The Fight of the Century\", or the \"Battle for Greatness\", was a professional boxing match between undefeated five-division world champion Floyd Mayweather Jr. and eight-division world champion Manny Pacquiao\n- UFC Fight Night 6: UFC Fight Night: Sanchez vs. Parisyan (also known as UFC Fight Night 6) was a mixed martial arts event held by the Ultimate Fighting Championship on August 17, 2006. The event took place at the Red Rock Resort Spa and Casino in Las Vegas, Nevada, and was broadcast live on Spike TV"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The first retrieval identified Adelaide as the capital of South Australia. The second retrieval confirmed that UFC Fight Night 65 was held in Adelaide in May 2015.\nAnswer: Adelaide"
+    }
+  ],
+  "final_answer": "Adelaide"
+}

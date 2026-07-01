@@ -1,0 +1,23 @@
+{
+  "question": "Korea University College of Education is based in the city that ranks what in the world by terms of size?",
+  "gold_answer": "16th",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Korea University College of Education location\")",
+      "query": "Korea University College of Education location",
+      "observation": "- Korea University College of Education: The College of Education is one of the undergraduate colleges at Korea University in Seoul, South Korea. It is considered to be one of the leading schools of education in the country.\n- Korea University College of Medicine: Korea University College of Medicine is the medical school of Korea University. It is located in Seoul, South Korea. As one of the oldest medical schools in South Korea, it has been historically regarded as one of the country's top medical schools. In the 2013 Q\n- Korea University Station: Korea University Station is a subway station on the Seoul Subway Line 6. This station is located in front of the main entrance of Korea University. One of the exits is connected directly to the campus. City of Seoul has a plan to develop campus town in front of main entranc"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Seoul city size rank\")",
+      "query": "Seoul city size rank",
+      "observation": "- Seoul: Seoul ( ; \uc11c\uc6b8; ] ), officially the Seoul Special Metropolitan City \u2013 is the capital and largest metropolis of the Republic of Korea (commonly known as South Korea). Seoul is the world's 16th largest city, and forms the heart of the Seoul Capital Area, which includes the surrounding Incheon met\n- Seoul World Cup Stadium: The Seoul World Cup Stadium, also known as Sangam Stadium, is a stadium used mostly for association football matches. The venue is located in 240, World Cup-ro, Mapo-gu, Seoul, South Korea. It was built for the 2002 FIFA World Cup and opened in November 2001. It is currently\n- Tumen, Jilin: Tumen is a county-level city in Yanbian Korean Autonomous Prefecture, eastern Jilin province, Northeast China. Of its 136,000 inhabitants, approximately 78,000 (or 57%) are of Korean descent. The two official languages are Chinese and Korean. Tumen is separated from Namyang of North Ha"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The Korea University College of Education is located in Seoul. Seoul is the world's 16th largest city.\nAnswer: 16th"
+    }
+  ],
+  "final_answer": "16th"
+}

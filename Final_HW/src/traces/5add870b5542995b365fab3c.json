@@ -1,0 +1,23 @@
+{
+  "question": "Which actor starred in both \"The Best Years of Our Lives\" in 1946 and \"The Crowded Sky\" in 1960?",
+  "gold_answer": "Carver Dana Andrews",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"cast of The Best Years of Our Lives 1946\")",
+      "query": "cast of The Best Years of Our Lives 1946",
+      "observation": "- Till the End of Time (film): Till the End of Time is a 1946 drama film directed by Edward Dmytryk and starring Dorothy McGuire, Guy Madison, Robert Mitchum, and Bill Williams. Released the same year as but preceding the better known \"The Best Years of Our Lives\", it covers much the same topic: the a\n- Julie Harris (actress): Julia Ann \"Julie\" Harris (December 2, 1925 \u2013 August 24, 2013) was an American stage, screen, and television actress. A 10-time Tony Award nominee and five-time winner, she won for \"I Am a Camera\" (1952), \"The Lark\" (1956), \"Forty Carats\" (1969), \"The Last of Mrs. Lincoln\" (19\n- Dana Andrews: Carver Dana Andrews (January 1, 1909 \u2013 December 17, 1992) was an American film actor and a major Hollywood star during the 1940s. He continued acting in less prestigious roles into the 1980s. The role for which he received the most praise, was as war veteran Fred Derry in \"The Best Yea"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Dana Andrews The Crowded Sky 1960\")",
+      "query": "Dana Andrews The Crowded Sky 1960",
+      "observation": "- The Crowded Sky: The Crowded Sky is a 1960 Technicolor drama film directed by Joseph Pevney, starring Dana Andrews, Rhonda Fleming and Efrem Zimbalist Jr. The film is based on the novel of the same name by Hank Searls.\n- Dana Andrews: Carver Dana Andrews (January 1, 1909 \u2013 December 17, 1992) was an American film actor and a major Hollywood star during the 1940s. He continued acting in less prestigious roles into the 1980s. The role for which he received the most praise, was as war veteran Fred Derry in \"The Best Yea\n- Julie Andrews: Dame Julia Elizabeth \"Julie\" Andrews, {'1': \", '2': \", '3': \", '4': \"} (\"n\u00e9e\" Wells; born 1 October 1935) is an English actress, singer, and author. Andrews, a child actress and singer, appeared on the West End in 1948 and made her Broadway debut in \"The Boy Friend\" (1954). She rose t"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The first retrieval confirmed Dana Andrews starred in \"The Best Years of Our Lives\" (1946). The second retrieval confirmed Dana Andrews also starred in \"The Crowded Sky\" (1960). Therefore, Dana Andrews is the actor who starred in both films.\nAnswer: Dana Andrews"
+    }
+  ],
+  "final_answer": "Dana Andrews"
+}

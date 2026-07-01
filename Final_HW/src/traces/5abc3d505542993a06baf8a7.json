@@ -1,0 +1,23 @@
+{
+  "question": "Which is founded by a president, University of Washington or University of Virginia?",
+  "gold_answer": "University of Virginia",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"who founded University of Washington\")",
+      "query": "who founded University of Washington",
+      "observation": "- University of Washington: The University of Washington (commonly referred to as UW, simply Washington, or informally \"U-Dub\") is a large, public flagship research university in Seattle, Washington, established in 1861.\n- The Washington Papers: The Washington Papers, also known as The Papers of George Washington\",\" is a project dedicated to the publication of comprehensive letterpress and digital editions of George and Martha Washington\u2019s papers. Founded at the University of Virginia in 1968 as the Papers of George W\n- 1923 Washington Huskies football team: The 1923 Washington Huskies football team was an American football team that represented the University of Washington during the 1923 college football season. In its third season under head coach Enoch Bagshaw, the team compiled a 10\u20131\u20131 record, finished in sec"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"who founded University of Virginia\")",
+      "query": "who founded University of Virginia",
+      "observation": "- University of Virginia: The University of Virginia (U.Va. or UVA), frequently referred to simply as Virginia, is a public research university and the flagship for the Commonwealth of Virginia. Founded in 1819 by Declaration of Independence author Thomas Jefferson, UVA is known for its historic found\n- Jefferson Memorial: The Jefferson Memorial is a presidential memorial in Washington, D.C., dedicated to Thomas Jefferson (1743\u20131826), one of the most important of the American Founding Fathers as the main drafter and writer of the Declaration of Independence, member of the Continental Congress, gove\n- Edwin Alderman: Edwin Anderson Alderman (May 15, 1861\u00a0\u2013 April 30, 1931) served as the President of three universities. The University of Virginia's Alderman Library is named after him, as is Edwin A. Alderman Elementary School in Wilmington and Alderman dorm at the University of North Carolina at Ch"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The University of Virginia was founded by Thomas Jefferson, who was a president. The University of Washington was established in 1861, with no mention of a president as its founder.\nAnswer: University of Virginia"
+    }
+  ],
+  "final_answer": "University of Virginia"
+}

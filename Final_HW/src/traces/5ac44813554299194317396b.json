@@ -1,0 +1,17 @@
+{
+  "question": "Parafield, South Australia is very near the airport and what campus of the University of South Australia?",
+  "gold_answer": "Mawson Lakes",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"University of South Australia campus near Parafield airport\")",
+      "query": "University of South Australia campus near Parafield airport",
+      "observation": "- Parafield Airport: Parafield Airport (ICAO: YPPF) is on the edge of the residential suburb of Parafield, South Australia, 18 km north of the Adelaide city centre and adjacent to the Mawson Lakes campus of the University of South Australia. It is Adelaide's second airport and the fifth busiest airpor\n- Parafield, South Australia: Parafield is a non-residential suburb of Adelaide approximately 15 km to 18 km north of the CBD. The suburb is essentially contiguous with Parafield Airport. There are airport related businesses in the terminal and hangar area of the airport, and a general commercial area\n- Para Hills West, South Australia: Para Hills West is a suburb of Adelaide, South Australia, and is within the City of Salisbury. It is on the eastern side of Main North Road, opposite Parafield Airport. The other boundaries are McIntyre Road, Bridge Road and Maxwell Road."
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The observation directly states that Parafield Airport is adjacent to the Mawson Lakes campus of the University of South Australia. Since Parafield, South Australia is essentially contiguous with Parafield Airport, it is also near the Mawson Lakes campus.\nAnswer: Mawson Lakes campus"
+    }
+  ],
+  "final_answer": "Mawson Lakes campus"
+}

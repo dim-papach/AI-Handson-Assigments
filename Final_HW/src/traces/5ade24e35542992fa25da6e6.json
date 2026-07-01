@@ -1,0 +1,23 @@
+{
+  "question": "Mamie Gummer played the role of Nancy Crozier on the TV series airing on what network?",
+  "gold_answer": "CBS",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Mamie Gummer Nancy Crozier TV series network\")",
+      "query": "Mamie Gummer Nancy Crozier TV series network",
+      "observation": "- Mamie Gummer: Mary Willa \"Mamie\" Gummer (born August 3, 1983) is an American actress. She starred in the title role of The CW series \"Emily Owens, M.D.\" (2012\u201313), and played the recurring role of Nancy Crozier on \"The Good Wife\" (2010\u201315). She has also appeared in the films \"Evening\" (2007), \"Side \n- The Bitch Is Back (Veronica Mars): \"The Bitch Is Back\" is the series finale of the American mystery television series \"Veronica Mars\", the twentieth and final episode of the show's third season, and the 64th episode overall. Co-written by series creator Rob Thomas and executive producer Diane Ruggie\n- Fashion Queens: Fashion Queens is an American fashion-based talk show that aired on Bravo. The series premiered on March 17, 2013, with a three-week trail run. \"Fashion Queens\" is hosted by Bevy Smith, Derek J, and Lawrence Washington. Derek J and Lawrence Washington have both made several appearanc"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"The Good Wife TV series network\")",
+      "query": "The Good Wife TV series network",
+      "observation": "- The Good Wife: The Good Wife is an American legal and political drama television series that aired on CBS from September 22, 2009, to May 8, 2016. The series focuses on Alicia Florrick, the wife of the Cook County State's Attorney, who returns to her career in law after the events of a public sex an\n- The CW: The CW Television Network (commonly referred to as just The CW) is an American English-language broadcast television network that is operated by The CW Network, LLC, a limited liability joint venture between CBS Corporation, the former owners of United Paramount Network (UPN), and Warner Bro\n- CBS This Morning: CBS This Morning is an American morning television program that is broadcast on CBS. The program, which shares its title with a more traditionally formatted morning program that aired on the network from 1987 to 1999, airs Monday through Saturdays from 7:00 to 9:00\u00a0a.m. in all time"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The first retrieval identified that Mamie Gummer played Nancy Crozier on \"The Good Wife\". The second retrieval states that \"The Good Wife\" aired on CBS.\nAnswer: CBS"
+    }
+  ],
+  "final_answer": "CBS"
+}

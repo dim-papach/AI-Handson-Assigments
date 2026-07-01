@@ -1,0 +1,23 @@
+{
+  "question": "Mis'ry's Comin' Aroun is by an American librettist that won how many Tony Awards? ",
+  "gold_answer": "eight Tony Awards",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Mis'ry's Comin' Aroun librettist\")",
+      "query": "Mis'ry's Comin' Aroun librettist",
+      "observation": "- Mis'ry's Comin' Aroun: Mis'ry's Comin' Aroun is a once-neglected song from the 1927 musical \"Show Boat\" by Jerome Kern and Oscar Hammerstein II. It was cut from the production during the Washington D.C. tryout on the orders of producer Florenz Ziegfeld, supposedly because it was one of the factors t\n- Stephen Sondheim: Stephen Joshua Sondheim ( ; born March 22, 1930) is an American composer and lyricist known for more than a half-century of contributions to musical theatre. Sondheim has received an Academy Award, eight Tony Awards (more than any other composer, including a Special Tony Award for \n- Gian Carlo Menotti: Gian Carlo Menotti (] ; July 7, 1911 \u2013 February 1, 2007) was an Italian-American composer and librettist. Although he often referred to himself as an American composer, he kept his Italian citizenship. He wrote the classic Christmas opera \"Amahl and the Night Visitors\", along wit"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Oscar Hammerstein II Tony Awards\")",
+      "query": "Oscar Hammerstein II Tony Awards",
+      "observation": "- Oscar Hammerstein II: Oscar Greeley Clendenning Hammerstein II ( ; July 12, 1895 \u2013 August 23, 1960) was an American librettist, theatrical producer, and (usually uncredited) theatre director of musicals for almost forty years. Hammerstein won eight Tony Awards and two Academy Awards for Best Origina\n- Carousel (musical): Carousel is the second musical by the team of Richard Rodgers (music) and Oscar Hammerstein II (book and lyrics). The 1945 work was adapted from Ferenc Moln\u00e1r's 1909 play \"Liliom\", transplanting its Budapest setting to the Maine coastline. The story revolves around carousel barke\n- 90th Academy Awards: The 90th Academy Awards ceremony, presented by the Academy of Motion Picture Arts and Sciences (AMPAS), will honor the best films of 2017 and will take place on March 4, 2018, at the Dolby Theatre in Hollywood, Los Angeles, California, at 5:30 p.m. PST. The ceremony was schedule"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The first retrieve call identified Oscar Hammerstein II as the librettist for \"Mis'ry's Comin' Aroun\". The second retrieve call states that Oscar Hammerstein II won eight Tony Awards.\nAnswer: Eight"
+    }
+  ],
+  "final_answer": "Eight"
+}

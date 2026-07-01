@@ -1,0 +1,17 @@
+{
+  "question": "Who was attempting to regain the British throne until the Raids on Lachaber and Shiramore shut down his operations?",
+  "gold_answer": "Charles Edward Stuart",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Raids on Lochaber and Shiramore who was attempting to regain British throne\")",
+      "query": "Raids on Lochaber and Shiramore who was attempting to regain British throne",
+      "observation": "- Raids on Lochaber and Shiramore: The Raids on Lochaber and Shiramore took place in the Scottish Highlands between 22 May and 31 August 1746 and were part of the closing operations of the British-Hanoverian Government to bring to an end the Jacobite rising of 1745. Sometimes referred to as the \"moppi\n- Jacobite rising of 1745: The Jacobite rising of 1745 (Scottish Gaelic: \"Bliadhna The\u00e0rlaich\" ] , \"The Year of Charles\") was the attempt by Charles Edward Stuart to regain the British throne for the exiled House of Stuart. The rising occurred during the War of the Austrian Succession, when most of th\n- Edward II of England: Edward II (25 April 1284 \u2013 21 September 1327), also called Edward of Caernarfon, was King of England from 1307 until he was deposed in January 1327. The fourth son of Edward I, Edward became the heir to the throne following the death of his older brother Alphonso. Beginning in "
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The Raids on Lochaber and Shiramore were part of the operations to end the Jacobite rising of 1745. The Jacobite rising of 1745 was an attempt by Charles Edward Stuart to regain the British throne. Therefore, Charles Edward Stuart was the person attempting to regain the throne.\nAnswer: Charles Edward Stuart"
+    }
+  ],
+  "final_answer": "Charles Edward Stuart"
+}

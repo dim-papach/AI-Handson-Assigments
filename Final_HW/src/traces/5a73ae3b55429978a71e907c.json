@@ -1,0 +1,23 @@
+{
+  "question": "Japanese destroyer Oite participated in what conflict that ended with the surrender of the American forces to the Empire of Japan?",
+  "gold_answer": "Battle of Wake Island",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Japanese destroyer Oite conflict surrender American forces\")",
+      "query": "Japanese destroyer Oite conflict surrender American forces",
+      "observation": "- Japanese destroyer Oite (1924): The Japanese destroyer \"Oite\" (\u8ffd\u98a8 , \"Tail Wind\" ) was one of nine \"Kamikaze\"-class destroyers built for the Imperial Japanese Navy during the 1920s.During the Pacific War, she participated in the Battle of Wake Island in December 1941 and the occupations of New Guinea\n- Japanese Instrument of Surrender: The Japanese Instrument of Surrender was the written agreement that formalized the surrender of the Empire of Japan, marking the end of World War II. It was signed by representatives from the Empire of Japan, the United States of America, the Republic of China, the \n- Japanese destroyer Yayoi (1925): The Japanese destroyer \"Yayoi\" (\u5f25\u751f , \"March\" ) was one of twelve \"Mutsuki\"-class destroyer s built for the Imperial Japanese Navy (IJN) during the 1920s. During the Pacific War, she participated in the Battle of Wake Island in December 1941 and the occupations of New"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Battle of Wake Island outcome surrender\")",
+      "query": "Battle of Wake Island outcome surrender",
+      "observation": "- Battle of Wake Island: The Battle of Wake Island began simultaneously with the attack on Pearl Harbor naval/air bases in Hawaii and ended on 23rd December 1941, with the surrender of the American forces to the Empire of Japan. It was fought on and around the atoll formed by Wake Island and its minor\n- Second Boer War: The Second Boer War (Dutch: \"Tweede Boerenoorlog\" , Afrikaans: \"Tweede Vryheidsoorlog\" , \"Second Freedom War\"), known variously as the Boer War, Anglo-Boer War, South African War or Anglo-Boer South African War, started on 11 October 1899 and ended on 31 May 1902. Britain defeated t\n- Battle of Fallen Timbers: The Battle of Fallen Timbers (August 20, 1794) was the final battle of the Northwest Indian War, a struggle between Native American tribes affiliated with the Western Confederacy, including support from the British led by Captain Alexander McKillop, against the United State"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The Japanese destroyer Oite participated in the Battle of Wake Island, which ended with the surrender of American forces to the Empire of Japan.\nAnswer: The Battle of Wake Island."
+    }
+  ],
+  "final_answer": "The Battle of Wake Island."
+}

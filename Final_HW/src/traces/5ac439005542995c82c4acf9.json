@@ -1,0 +1,17 @@
+{
+  "question": "where was the 2006 Commonwealth Games that Mmoloki Nogeng won a bronze medal at held?",
+  "gold_answer": "Melbourne, Australia",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"where were the 2006 Commonwealth Games held?\")",
+      "query": "where were the 2006 Commonwealth Games held?",
+      "observation": "- Scotland at the 2006 Commonwealth Games: The Commonwealth Games Council for Scotland announced on 3 November 2005 that Scotland would be sending 166 athletes (104 men and 62 women) to compete in the 2006 Commonwealth Games in Melbourne, Australia, supported by 70 officials. This is a smaller team th\n- Boxing at the 2006 Commonwealth Games: Boxing at the 2006 Commonwealth Games was held at the Melbourne Exhibition Centre. It was one of the male-only sports at the Commonwealth Games, the other being Rugby Sevens.\n- Joanna Fargus: Joanna Lindsay Fargus (born 3 January 1982) is a British-Australian former swimmer who specialised in the 200-metre backstroke. In this event she won a gold medal at the 2006 Commonwealth Games in Melbourne, and at the European Short Course Swimming Championships 2000 and a bronze med"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The observation states multiple times that the 2006 Commonwealth Games were held in Melbourne, Australia.\nAnswer: The 2006 Commonwealth Games were held in Melbourne, Australia."
+    }
+  ],
+  "final_answer": "The 2006 Commonwealth Games were held in Melbourne, Australia."
+}

@@ -1,0 +1,17 @@
+{
+  "question": "What was the other single from Eric Stewart and Graham Gouldman's band's 1975 album, besides \"I'm Not in Love\"?",
+  "gold_answer": "Life Is a Minestrone",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"10cc The Original Soundtrack singles\")",
+      "query": "10cc The Original Soundtrack singles",
+      "observation": "- The Original Soundtrack: The Original Soundtrack is the third studio album by the English art rock band 10cc. It was released in 1975 and peaked at number four on the UK Albums Chart. \"The Original Soundtrack\" includes the singles \"Life Is a Minestrone\", and \"I'm Not in Love\", the band's most popula\n- I'm Not in Love: \"I'm Not in Love\" is a song by English group 10cc, written by band members Eric Stewart and Graham Gouldman. It is notable for its innovative and distinctive backing track, composed mostly of the band's multitracked vocals. Released in the UK in May 1975 as the second single from th\n- How Dare You! (album): How Dare You! is the fourth album by British band 10cc. Released in 1976, it included UK hit singles \"I'm Mandy Fly Me\" and \"Art for Art's Sake\". It was also the last 10cc album by the original line-up of Eric Stewart, Graham Gouldman, Kevin Godley, and Lol Creme, with the lat"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The previous retrieval identified the band as 10cc and the album as \"The Original Soundtrack\". It also listed the singles from that album as \"Life Is a Minestrone\" and \"I'm Not in Love\". The question asks for the other single besides \"I'm Not in Love\".\nAnswer: The other single from 10cc's 1975 album \"The Original Soundtrack\" was \"Life Is a Minestrone\"."
+    }
+  ],
+  "final_answer": "The other single from 10cc's 1975 album \"The Original Soundtrack\" was \"Life Is a Minestrone\"."
+}

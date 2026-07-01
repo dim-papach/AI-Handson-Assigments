@@ -1,0 +1,17 @@
+{
+  "question": "What is the international football competition for women that Liu Ailing played in the 1991,1995, 1999 editions?",
+  "gold_answer": "international football competition",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Liu Ailing FIFA Women's World Cup 1991 1995 1999\")",
+      "query": "Liu Ailing FIFA Women's World Cup 1991 1995 1999",
+      "observation": "- Liu Ailing: Liu Ailing (; born June 2, 1967) is a Chinese former footballer who played for the China national team at the 1991, 1995 and 1999 editions of the FIFA Women's World Cup. She won a silver medal at the 1996 Atlanta Olympics and participated at the 2000 Sydney Olympics. A playmaking midfiel\n- FIFA Women's World Cup: The FIFA Women's World Cup is an international football competition contested by the senior women's national teams of the members of \"F\u00e9d\u00e9ration Internationale de Football Association\" (FIFA), the sport's global governing body. The competition has been held every four years s\n- Gambia women's national football team: The Gambia women's national football team represents the Gambia in international football competition. The team, however, has not competed in a match recognised by FIFA, the sport's international governing body, despite that organised women's football has been "
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The observation clearly states that Liu Ailing played for the China national team at the 1991, 1995, and 1999 editions of the FIFA Women's World Cup. The FIFA Women's World Cup is also described as an international football competition for women. This directly answers the question.\nAnswer: The FIFA Women's World Cup."
+    }
+  ],
+  "final_answer": "The FIFA Women's World Cup."
+}

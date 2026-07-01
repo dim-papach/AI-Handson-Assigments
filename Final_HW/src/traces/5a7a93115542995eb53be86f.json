@@ -1,0 +1,23 @@
+{
+  "question": "What waltz was composed by \"The Waltz King\" in 1844?",
+  "gold_answer": "Sinngedichte",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"waltz composed by Johann Strauss I in 1844\")",
+      "query": "waltz composed by Johann Strauss I in 1844",
+      "observation": "- Sinngedichte: Sinngedichte (\"Poems of the Senses\" or \"Epigrams\"), Op. 1, is a waltz composed by Johann Strauss II in 1844 for his debut as a composer at Dommayer's Casino in Vienna. The waltz was played along with several other compositions that Strauss had written for the occasion, such as the walt\n- Wiener Carneval: Wiener Carneval (\"Viennese Carnival\"), opus 3, is a waltz composed by Johann Strauss I in 1828. The waltz was intended as a contribution to the carnival of 1828 Johann Strauss appeared as leader of a group of musicians at the balls at the Kettenbr\u00fccke in Leopoldstadt. The fourth wal\n- Johann Strauss II: Johann Strauss II (October 25, 1825 \u2013 June 3, 1899), also known as Johann Strauss Jr., the Younger, the Son (German: \"Sohn\" ), Johann Baptist Strauss, was an Austrian composer of light music, particularly dance music and operettas. He composed over 500 waltzes, polkas, quadrilles,"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"who is known as The Waltz King\")",
+      "query": "who is known as The Waltz King",
+      "observation": "- Wayne King: Wayne King (February 16, 1901 \u2013 July 16, 1985) was an American musician, songwriter, singer and orchestra leader with a long association with both NBC And CBS. He was sometimes referred to as the Waltz King because much of his most popular music involved waltzes; \"The Waltz You Saved For\n- Johann Strauss (disambiguation): Johann Strauss II (1825\u20131899) or Johann Strauss Jr. was an Austrian composer, known as the \"Waltz King\".\n- Johann Strauss II: Johann Strauss II (October 25, 1825 \u2013 June 3, 1899), also known as Johann Strauss Jr., the Younger, the Son (German: \"Sohn\" ), Johann Baptist Strauss, was an Austrian composer of light music, particularly dance music and operettas. He composed over 500 waltzes, polkas, quadrilles,"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The \"Waltz King\" is Johann Strauss II. The first retrieval states that \"Sinngedichte\" is a waltz composed by Johann Strauss II in 1844.\nAnswer: Sinngedichte"
+    }
+  ],
+  "final_answer": "Sinngedichte"
+}

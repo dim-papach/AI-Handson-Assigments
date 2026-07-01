@@ -1,0 +1,17 @@
+{
+  "question": "What is the nickname of the WWII battleship at the Fall River Heritage State Park?",
+  "gold_answer": "Big Mamie",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"WWII battleship Fall River Heritage State Park nickname\")",
+      "query": "WWII battleship Fall River Heritage State Park nickname",
+      "observation": "- Fall River Heritage State Park: Fall River Heritage State Park is a history-themed public recreation area on the Taunton River in Fall River, Massachusetts. The state park encompasses 14 acre beside the Charles M. Braga Jr. Memorial Bridge on Battleship Cove, home of the World War II battleship USS \n- Battleship Cove: Battleship Cove is a nonprofit maritime museum and war memorial in Fall River, Massachusetts. Featuring the world's largest collection of World War II naval vessels, it is home to the highly decorated battleship USS\u00a0\"Massachusetts\" . It is located at the heart of the waterfront at t\n- USS Massachusetts (BB-59): USS \"Massachusetts\" (BB-59), known as \"Big Mamie\" to her crewmembers during World War II, was a battleship of the second \"South Dakota\" class. She was the seventh ship of the United States Navy to be named in honor of the sixth state, and one of two ships of her class (alo"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The Fall River Heritage State Park is home to Battleship Cove, which features the USS Massachusetts (BB-59). The USS Massachusetts (BB-59) was known as \"Big Mamie\" to her crewmembers during World War II.\nAnswer: The nickname of the WWII battleship USS Massachusetts (BB-59) at the Fall River Heritage State Park is \"Big Mamie\"."
+    }
+  ],
+  "final_answer": "The nickname of the WWII battleship USS Massachusetts (BB-59) at the Fall River Heritage State Park is \"Big Mamie\"."
+}

@@ -1,0 +1,17 @@
+{
+  "question": "When was the rock band to which Pre-Creedence name was changed active? ",
+  "gold_answer": "1960s and early 1970s",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"When was Creedence Clearwater Revival active?\")",
+      "query": "When was Creedence Clearwater Revival active?",
+      "observation": "- Creedence Clearwater Revival: Creedence Clearwater Revival, often informally abbreviated to Creedence or CCR, was an American rock band active in the late 1960s and early 1970s.\n- Pre-Creedence: Pre-Creedence is a compilation album by The Golliwogs which changed its name to Creedence Clearwater Revival (CCR) in 1968. This album was released in 1975 after the band had disbanded.\n- Eagles (band): The Eagles are an American rock band formed in Los Angeles in 1971. The founding members were Glenn Frey (lead guitar, lead vocals), Don Henley (drums, lead vocals), Bernie Leadon (guitars, vocals) and Randy Meisner (bass guitar, vocals). With five number-one singles, six Grammy Award"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The question asks for the active period of the rock band to which the name \"Pre-Creedence\" was changed. The observation states that \"Pre-Creedence\" is a compilation album by The Golliwogs, which changed its name to Creedence Clearwater Revival (CCR) in 1968. It also states that Creedence Clearwater Revival was active in the late 1960s and early 1970s.\nAnswer: Creedence Clearwater Revival was active in the late 1960s and early 1970s."
+    }
+  ],
+  "final_answer": "Creedence Clearwater Revival was active in the late 1960s and early 1970s."
+}

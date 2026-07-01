@@ -1,0 +1,23 @@
+{
+  "question": "Who is younger, Billy Idol or Ray Wilson?",
+  "gold_answer": "Raymond Wilson",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Billy Idol birth date\")",
+      "query": "Billy Idol birth date",
+      "observation": "- Billy Idol: William Michael Albert Broad (born 30 November 1955), known professionally as Billy Idol, is an English musician, singer, songwriter, and actor. He first achieved fame in the 1970s as a member of the punk rock band Generation X. Subsequently, he embarked on a solo career which led to int\n- Billy Idol (album): Billy Idol is the eponymous debut studio album by English rock vocalist Billy Idol, released on 16 July 1982 by Chrysalis Records. After the breakup of the band Generation X and the release of his first solo extended play, \"Don't Stop\" (1981), Idol began working on his debut albu\n- Idol Songs: 11 of the Best: Idol Songs: 11 of the Best is a compilation album by English rock vocalist Billy Idol, released in 1988. It comprises all the singles released from his first three albums, \"Billy Idol\", \"Rebel Yell\" and \"Whiplash Smile\", plus the live version of \"Mony Mony\" and re-recorde"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Ray Wilson birth date\")",
+      "query": "Ray Wilson birth date",
+      "observation": "- Ray Wilson (musician): Raymond Wilson (born 8 September 1968) is a Scottish musician, best known as vocalist in the post-grunge band Stiltskin, and in Genesis from 1996 to 1998.\n- An Audience and Ray Wilson: An Audience and Ray Wilson is a live acoustic album by Ray Wilson released in 2006 prior to his reforming of Stiltskin. The recording comes from a live performance given by Ray Wilson on 18 May 2003 in the Agnieszka Osiecka studio of Polish Radio in Warsaw. According to t\n- Owen Wilson: Owen Cunningham Wilson (born November 18, 1968) is an American actor, producer, screenwriter and comedian. He has had a long association with filmmaker Wes Anderson, with whom he shared writing and acting credits for \"Bottle Rocket\" (1996) and \"The Royal Tenenbaums\" (2001), the latter o"
+    },
+    {
+      "type": "fallback",
+      "content": "Ray Wilson is younger, born on September 8, 1968, while Billy Idol was born on November 30, 1955."
+    }
+  ],
+  "final_answer": "Ray Wilson is younger, born on September 8, 1968, while Billy Idol was born on November 30, 1955."
+}

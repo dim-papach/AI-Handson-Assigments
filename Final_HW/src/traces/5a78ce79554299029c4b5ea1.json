@@ -1,0 +1,17 @@
+{
+  "question": "Jacques Coghen is a direct ancestor to the spouse of which Belgian Queen?",
+  "gold_answer": "Queen Mathilde",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Jacques Coghen descendants\")",
+      "query": "Jacques Coghen descendants",
+      "observation": "- Jacques Coghen: Count Jacques Andres Coghen (31 October 1791 in Brussels \u2013 15 May 1858 in Brussels) was the second Minister of Finance of the Kingdom of Belgium (1831-1832), and a direct ancestor of the current King, Philippe of Belgium.\n- Dutch monarchs family tree: The following is a family tree for the Princes of Orange, a line which culminated in the Dutch monarchy with the accession of Prince William VI to the newly created throne of the Netherlands in 1815. Dates given are those of birth and death; for Princes of Orange (shown i\n- Wilhelm, German Crown Prince: Wilhelm, German Crown Prince (German: \"Kronprinz Wilhelm von Preu\u00dfen\" ; 6 May 1882 \u2013 20 July 1951) , full name Friedrich Wilhelm Victor August Ernst, was the eldest child of the future German Emperor Wilhelm II and his wife Empress Augusta Victoria, and the last Crown P"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The initial search result states that Jacques Coghen is a direct ancestor of the current King, Philippe of Belgium. King Philippe is the spouse of the current Belgian Queen, Mathilde. Therefore, Jacques Coghen is a direct ancestor to the spouse of Queen Mathilde.\nAnswer: Queen Mathilde"
+    }
+  ],
+  "final_answer": "Queen Mathilde"
+}

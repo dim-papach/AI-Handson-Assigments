@@ -1,0 +1,17 @@
+{
+  "question": "The 2017 Los Angeles Chargers season was the first season under which coach that began his professional coaching career with the Denver Broncos in 2000?",
+  "gold_answer": "Anthony Lynn",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Los Angeles Chargers head coach 2017 season\")",
+      "query": "Los Angeles Chargers head coach 2017 season",
+      "observation": "- 2017 Los Angeles Chargers season: The 2017 Los Angeles Chargers season is the franchise's 48th season in the National Football League (NFL), the 58th overall and the first under head coach Anthony Lynn. It will also be the Chargers' first season in Los Angeles since their inaugural 1960 season, when\n- Anthony Lynn: Anthony Ray Lynn (born December 21, 1968) is a former American football running back and current head coach for the Los Angeles Chargers of the NFL. Lynn began his professional coaching career with the Denver Broncos in 2000 as a special teams assistant, then the offensive coordinator \n- 1960 Los Angeles Chargers season: The 1960 Los Angeles Chargers season was the team's inaugural season, also the first season of the American Football League (AFL). Head coach Sid Gillman led the Chargers to the AFL Western Division title with a 10\u20134 record, in the team's only season in Los Angeles "
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The question asks for the coach of the 2017 Los Angeles Chargers season who began his professional coaching career with the Denver Broncos in 2000. The observation states that the head coach for the 2017 season was Anthony Lynn. It also states that Anthony Lynn began his professional coaching career with the Denver Broncos in 2000 as a special teams assistant. This directly answers the question.\nAnswer: Anthony Lynn"
+    }
+  ],
+  "final_answer": "Anthony Lynn"
+}

@@ -1,0 +1,17 @@
+{
+  "question": "Which two Swiss attractions were the cause of the \"grand hotels\" in which Jakob Ragaz worked on? ",
+  "gold_answer": "skiing and mountaineering",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Jakob Ragaz grand hotels Swiss attractions\")",
+      "query": "Jakob Ragaz grand hotels Swiss attractions",
+      "observation": "- Jakob Ragaz: Jakob Ragaz (29 September 1846 - 27 May 1922) was a Swiss architect. He is best known for his work on a series of \"grand hotels\" built in connection with the Swiss tourism boom during the second half of the nineteenth century.\n- Tourism in Switzerland: Tourists are drawn to Switzerland's Alpine climate and landscapes, in particular for skiing and mountaineering.\n- Ettaler Manndl: The mountain is a popular destination for hiking and in Winter, skiing is also possible. A cable car (the Laberbergbahn) brings visitors up to just below the summit of the Laber, from where a variety of footpaths lead. There is also a restaurant at the top cable car station."
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The information provided states that Jakob Ragaz worked on grand hotels due to the Swiss tourism boom, and that tourists are drawn to Switzerland's Alpine climate and landscapes, \"in particular for skiing and mountaineering.\" These two activities are the specific attractions that caused the boom and the subsequent need for grand hotels.\nAnswer: Skiing and mountaineering."
+    }
+  ],
+  "final_answer": "Skiing and mountaineering."
+}

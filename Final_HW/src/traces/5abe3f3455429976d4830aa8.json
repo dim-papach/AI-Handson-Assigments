@@ -1,0 +1,17 @@
+{
+  "question": "What company started the urban complex development that included the highrise building, The Harmon?",
+  "gold_answer": "MGM Resorts International",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"company started urban complex development The Harmon\")",
+      "query": "company started urban complex development The Harmon",
+      "observation": "- The Harmon: The Harmon was a highrise building at the CityCenter development in Paradise, Nevada. The tower was designed by Foster + Partners as a non-gaming boutique hotel, and was to be operated by Andrew Sasson's The Light Group upon completion. The building featured an elliptical layout and high\n- CityCenter: CityCenter (also known as CityCenter Las Vegas) is a 16797000 sqft mixed-use, urban complex on 76 acre located on the Las Vegas Strip in Paradise, Nevada. The project was started by MGM Resorts International; Dubai World became a joint partner during the project's construction phase. It \n- Central Park Tower: Central Park Tower (also known as the Nordstrom Tower and 225 West 57th Street, its address) is a supertall mixed-use commercial/residential project being developed by the Extell Development Company and Shanghai Municipal Investment Group in Midtown Manhattan, New York City. The "
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The Harmon was part of the CityCenter development. The CityCenter project was started by MGM Resorts International.\nAnswer: MGM Resorts International"
+    }
+  ],
+  "final_answer": "MGM Resorts International"
+}

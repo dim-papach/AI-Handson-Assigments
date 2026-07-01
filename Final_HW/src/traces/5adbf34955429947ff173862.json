@@ -1,0 +1,17 @@
+{
+  "question": "Is Karjiang a mountain and Sherpi Kangri a mountain peak?",
+  "gold_answer": "yes",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Is Karjiang a mountain? Is Sherpi Kangri a mountain peak?\")",
+      "query": "Is Karjiang a mountain? Is Sherpi Kangri a mountain peak?",
+      "observation": "- Sherpi Kangri: Sherpi Kangri is a mountain peak in the Karakoram Range. It lies five km south of Ghent Kangri (7,380 m) and ten km northwest of Saltoro Kangri (7,742 m).\n- Karjiang: Karjiang is a mountain in Tibet, located near the Bhutan\u2013China border. The highest peak of the Karjiang group is Karjiang I or Karjiang South, with an elevation of 7221 m ; it remains unclimbed. Other peaks include Karjiang North (7196 m), Karjiang II/Central (7045 m), Karjiang III or Tapt\n- Saser Kangri: Saser Kangri (or Sasir Kangri) is a mountain in India. It is the highest peak in the Saser Muztagh, the easternmost subrange of the Karakoram range. Sasir Kangri is located within Jammu and Kashmir, the northernmost state of India."
+    },
+    {
+      "type": "answer",
+      "content": "Answer: Yes, Karjiang is a mountain and Sherpi Kangri is a mountain peak."
+    }
+  ],
+  "final_answer": "Yes, Karjiang is a mountain and Sherpi Kangri is a mountain peak."
+}

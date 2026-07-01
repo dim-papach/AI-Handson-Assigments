@@ -1,0 +1,17 @@
+{
+  "question": "The Waterloo Vase has been used as a garden ornament at whose residence and administrative headquarters?",
+  "gold_answer": "reigning monarch of the United Kingdom",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Waterloo Vase garden ornament residence administrative headquarters\")",
+      "query": "Waterloo Vase garden ornament residence administrative headquarters",
+      "observation": "- Waterloo Vase: The Waterloo Vase is a great urn, 15ft (5m) high and weighing 20 tons, fashioned from a single piece of Carrara marble. Since 1906, it has been used as a garden ornament in the garden of Buckingham Palace, London.\n- Buckingham Palace: Buckingham Palace ( ) is the London residence and administrative headquarters of the reigning monarch of the United Kingdom. Located in the City of Westminster, the palace is often at the centre of state occasions and royal hospitality. It has been a focal point for the British pe\n- Smith Square: Smith Square is a square in the Westminster district of London, just south of the Palace of Westminster. The centre of the square is occupied by St John's, Smith Square, a Baroque church now used as a concert hall. Most of the square is now taken up by offices and the location means th"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The Waterloo Vase has been used as a garden ornament at Buckingham Palace, which is identified as the London residence and administrative headquarters of the reigning monarch of the United Kingdom.\nAnswer: The reigning monarch of the United Kingdom."
+    }
+  ],
+  "final_answer": "The reigning monarch of the United Kingdom."
+}

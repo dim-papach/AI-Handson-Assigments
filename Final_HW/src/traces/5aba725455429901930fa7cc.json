@@ -1,0 +1,17 @@
+{
+  "question": "The community that contains Downtown Summerlin occupies how many acres?",
+  "gold_answer": "22,500 acres",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"community that contains Downtown Summerlin acreage\")",
+      "query": "community that contains Downtown Summerlin acreage",
+      "observation": "- Downtown Summerlin: Downtown Summerlin is the name for a 400 acre area in the center of Summerlin. The area is bounded by Sahara Avenue to the south, CC 215 to the west, Charleston Boulevard on the north and Town Center Drive to the east. Downtown Summerlin includes the like named shopping center, O\n- Summerlin, Nevada: Summerlin is an affluent planned community in the Las Vegas Valley of Nevada. It lies at the edge of the Spring Mountains and Red Rock Canyon, on the western periphery of Las Vegas, Nevada in unincorporated Clark County. The community occupies 22,500 acres and includes a variety o\n- Downtown Summerlin (shopping center): Downtown Summerlin shopping center, initially developed as The Shops at Summerlin Centre, is an outdoor business, entertainment, fashion and retail district that is part of a mixed-use development Downtown Summerlin within the affluent community of Summerlin, Ne"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The information provided clearly states that Summerlin is the community that contains Downtown Summerlin, and Summerlin occupies 22,500 acres.\nAnswer: The community that contains Downtown Summerlin, which is Summerlin, occupies 22,500 acres."
+    }
+  ],
+  "final_answer": "The community that contains Downtown Summerlin, which is Summerlin, occupies 22,500 acres."
+}

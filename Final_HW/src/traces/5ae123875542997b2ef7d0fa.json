@@ -1,0 +1,23 @@
+{
+  "question": "The 2003 South Australian National Football League Grand Final saw the Central District Bulldogs defeat a football club whose home base is currently known as what?",
+  "gold_answer": "City Mazda Stadium",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"2003 SANFL Grand Final\")",
+      "query": "2003 SANFL Grand Final",
+      "observation": "- 2003 SANFL Grand Final: The 2003 South Australian National Football League (SANFL) Grand Final saw the Central District Bulldogs defeat West Adelaide by 34 points to claim the clubs third premiership victory.\n- 2007 SANFL Grand Final: The 2007 South Australian National Football League (SANFL) Grand Final saw the Central District Bulldogs defeat North Adelaide by 65 points to claim the clubs sixth premiership victory.\n- 2004 SANFL Grand Final: The 2004 South Australian National Football League (SANFL) Grand Final saw the Central District Bulldogs defeat Woodville-West Torrens by 125 points to claim the clubs fourth premiership victory."
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"West Adelaide Football Club home base\")",
+      "query": "West Adelaide Football Club home base",
+      "observation": "- West Adelaide Football Club: West Adelaide Football Club is an Australian rules football club in the South Australian National Football League (SANFL). Commonly known as The Bloods and Westies, the club's home base is Richmond Oval (currently known as City Mazda Stadium under a sponsorship agreement\n- 2004 AFL Grand Final: The 2004 AFL Grand Final was an Australian rules football game contested between the Port Adelaide Football Club and the Brisbane Lions, held at the Melbourne Cricket Ground in Melbourne on 25 September 2004. It was the 108th annual Grand Final of the Australian Football League\n- Melbourne Cricket Ground: The Melbourne Cricket Ground (MCG), also known simply as \"The G\", is an Australian sports stadium located in Yarra Park, Melbourne, Victoria. Home to the Melbourne Cricket Club, it is the 10th-largest stadium in the world, the largest in Australia, the largest in the Southe"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The 2003 SANFL Grand Final saw the Central District Bulldogs defeat West Adelaide. The home base of the West Adelaide Football Club is Richmond Oval, which is currently known as City Mazda Stadium.\nAnswer: City Mazda Stadium"
+    }
+  ],
+  "final_answer": "City Mazda Stadium"
+}

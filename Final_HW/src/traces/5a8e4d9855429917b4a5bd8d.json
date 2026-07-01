@@ -1,0 +1,17 @@
+{
+  "question": " Worldview Entertainment is an American independent motion picture company that produced a 2015 mystery thriller film based on a novel by who?",
+  "gold_answer": "Tom Rob",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Worldview Entertainment 2015 mystery thriller film\")",
+      "query": "Worldview Entertainment 2015 mystery thriller film",
+      "observation": "- Worldview Entertainment: Worldview Entertainment is an American independent motion picture company that finances and produces theatrical quality feature films for worldwide distribution. The company was founded in 2007 and is based in New York City. Worldview has produced films including \"Child 44\",\n- Dark Places (2015 film): Dark Places is a 2015 mystery thriller film directed by Gilles Paquet-Brenner. The screenplay, by Paquet-Brenner, is based on Gillian Flynn's 2009 novel of the same name. It stars Charlize Theron, Christina Hendricks, Nicholas Hoult, and Chlo\u00eb Grace Moretz.\n- Child 44 (film): Child 44 is a 2015 mystery thriller film directed by Daniel Espinosa, written by Richard Price, and based on Tom Rob Smith's 2008 novel of the same name. The film stars an ensemble cast featuring Tom Hardy, Gary Oldman, Noomi Rapace, Joel Kinnaman, Paddy Considine, Jason Clarke, and"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The previous retrieval identified \"Child 44\" as a 2015 mystery thriller film produced by Worldview Entertainment. It also states that \"Child 44\" is based on Tom Rob Smith's 2008 novel.\nAnswer: Tom Rob Smith"
+    }
+  ],
+  "final_answer": "Tom Rob Smith"
+}

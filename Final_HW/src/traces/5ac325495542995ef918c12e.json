@@ -1,0 +1,17 @@
+{
+  "question": "Which region of Ghana was the city where Akrofuom is located? ",
+  "gold_answer": "Ashanti Region of Ghana",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Akrofuom region Ghana\")",
+      "query": "Akrofuom region Ghana",
+      "observation": "- Akrofuom (Ghana parliament constituency): Akrofuom is one of the constituencies represented in the Parliament of Ghana. It elects one Member of Parliament (MP) by the first past the post system of election. Akrofuom is located in the Obuasi Municipal district of the Ashanti Region of Ghana.\n- Western Region (Ghana): The Western Region is located in south Ghana, spreads from the Ivory Coast border in the west to the Central region in the east, includes the capital and large twin city of Sekondi-Takoradi on the coast, coastal Axim, and a hilly inland area including Elubo. It includes Ghana\n- Accra: Accra is the capital and most populous city of Ghana, with an estimated urban population of 2.27 million as of 2012 . It is also the capital of the Greater Accra Region and of the Accra Metropolis District, with which it is conterminous. Accra is furthermore the anchor of a larger metropolita"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The first observation directly states the region where Akrofuom is located.\nAnswer: Akrofuom is located in the Ashanti Region of Ghana."
+    }
+  ],
+  "final_answer": "Akrofuom is located in the Ashanti Region of Ghana."
+}

@@ -1,0 +1,17 @@
+{
+  "question": "What episode did Mona Penelope Simpson  on the animated show \"The Simpsons\"die?",
+  "gold_answer": "\"Mona Leaves-a\"",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Mona Simpson death episode The Simpsons\")",
+      "query": "Mona Simpson death episode The Simpsons",
+      "observation": "- Mona Leaves-a: \"Mona Leaves-a\" is the nineteenth episode of \"The Simpsons\"<nowiki>'</nowiki> nineteenth season. It originally aired on the Fox network in the United States on May 11, 2008. The episode features the death of Homer's mother, Mona Simpson. Homer is reunited with his mother, Mona, but is\n- Mona Simpson (The Simpsons): Mona Penelope Simpson (n\u00e9e Olsen) is a recurring fictional character in the animated television series \"The Simpsons\". She has been voiced by several actresses, including Maggie Roswell, Tress MacNeille, Pamela Hayden, and most prominently, Glenn Close. Glenn Close's per\n- My Mother the Carjacker: \"My Mother the Carjacker\" is the second episode of \"The Simpsons\"<nowiki>'</nowiki> fifteenth season. It first aired on the Fox network in the United States on November 9, 2003. Homer receives a cryptic message in the newspaper informing him to come to a certain place at mid"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The retrieval results clearly state that Mona Simpson died in the episode \"Mona Leaves-a\".\nAnswer: Mona Penelope Simpson died in the episode \"Mona Leaves-a\", which is the nineteenth episode of The Simpsons' nineteenth season."
+    }
+  ],
+  "final_answer": "Mona Penelope Simpson died in the episode \"Mona Leaves-a\", which is the nineteenth episode of The Simpsons' nineteenth season."
+}

@@ -1,0 +1,23 @@
+{
+  "question": "What type of structure does 277 Park Avenue and 126 Madison Avenue have in common?",
+  "gold_answer": "building",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"277 Park Avenue building type\")",
+      "query": "277 Park Avenue building type",
+      "observation": "- 277 Park Avenue: 277 Park Avenue is an office building in the Midtown Manhattan neighborhood of New York City. It stands on the east side of Park Avenue between East 47th and 48th Streets; it is 687 ft tall, with 50 floors.\n- Central Park Tower: Central Park Tower (also known as the Nordstrom Tower and 225 West 57th Street, its address) is a supertall mixed-use commercial/residential project being developed by the Extell Development Company and Shanghai Municipal Investment Group in Midtown Manhattan, New York City. The \n- Park Avenue Viaduct: The Park Avenue Viaduct is a roadway in the Manhattan borough of New York City that carries Park Avenue from East 40th to 46th Streets around Grand Central Terminal and the MetLife Building, then through the Helmsley Building; all three buildings lie across the line of the avenu"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"126 Madison Avenue building type\")",
+      "query": "126 Madison Avenue building type",
+      "observation": "- 126 Madison Avenue: 126 Madison Avenue (also known as 15 East 30th Street) is a proposed residential skyscraper under development by Fosun Property in NoMad, Manhattan, New York City. The building will rise 47 stories or 730 feet, and is expected to be completed by 2018. J.D. Carisle Development Cor\n- Metropolitan Life Insurance Company Tower: The Metropolitan Life Insurance Company Tower, colloquially known as the Met Life Tower, is a landmark skyscraper located on Madison Avenue near the intersection with East 23rd Street, across from Madison Square Park in Manhattan, New York City. Designed by\n- Metropolitan Life North Building: The Metropolitan Life North Building, now known as Eleven Madison, is a 30-story art deco skyscraper on Madison Square Park in Manhattan, New York City, at 11-25 Madison Avenue. The building is bordered by East 24th Street, Madison Avenue, East 25th Street and Park "
+    },
+    {
+      "type": "answer",
+      "content": "Thought: 277 Park Avenue is described as an office building and is 687 ft tall with 50 floors. 126 Madison Avenue is described as a proposed residential skyscraper and will rise 730 feet with 47 stories. Both are tall, multi-story buildings, which are generally classified as skyscrapers.\n\nAnswer: Both 277 Park Avenue and 126 Madison Avenue are skyscrapers."
+    }
+  ],
+  "final_answer": "Both 277 Park Avenue and 126 Madison Avenue are skyscrapers."
+}

@@ -1,0 +1,23 @@
+{
+  "question": "What Hong Kong actor born in 1980 will star in \"Heart and Greed\"?",
+  "gold_answer": "Bosco Wong Chung-chak",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Hong Kong actor born in 1980 in Heart and Greed cast\")",
+      "query": "Hong Kong actor born in 1980 in Heart and Greed cast",
+      "observation": "- Heart and Greed: Heart and Greed () is an upcoming 2017 drama produced by TVB and Tencent Penguin Pictures. It is the third installment of the Heart of Greed series following Moonlight Resonance. It stars Louise Lee, Ha Yu, Michelle Yim, Susanna Kwan, Bosco Wong, Vincent Wong, Sharon Chan, Eliza Sam\n- Nick Cheung: Nick Cheung Ka-fai (; born 2 December 1964) is a Hong Kong actor. He is a former Royal Hong Kong Police officer for four years, but he left the job after his request to be transferred to the criminal investigation department was turned down. He then worked for Danny Lee's film productio\n- Andy Lau: Andy Lau Tak-wah, BBS, MH, JP (, born 27 September 1961) is a Hong Kong actor, singer, lyricist and film producer. He has been one of Hong Kong's most commercially successful film actors since the mid-1980s, performing in more than 160 films while maintaining a successful singing career at"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Bosco Wong birth year\")",
+      "query": "Bosco Wong birth year",
+      "observation": "- Bosco Wong: Bosco Wong Chung-chak (, born 13 December 1980) is a Hong Kong actor under TVB management and singer under East Asia Music.\n- Kim Bo-mi: Kim Bo-mi (born May 15, 1987) is a South Korean actress. Kim began studying ballet when she was in 11 years old, and she later enrolled in Dance at Sejong University, with Ballet as her major subject. Then in 2008, she appeared in the cable show \"Star Replication Project 2%\", which led to\n- Yoo Seung-ho: Yoo Seung-ho (; born 17 August 1993) is a South Korean actor who rose to fame as a child actor in the film \"The Way Home\" (2002). After his two-year mandatory military service, he headlined the legal drama \"\" (2015) and historical films \"The Magician\" (2015), \"\" (2016), as well as hist"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The first retrieval result for \"Heart and Greed: Heart and Greed\" lists Bosco Wong as one of the stars. The second retrieval result for \"Bosco Wong birth year\" confirms that Bosco Wong was born on December 13, 1980. This matches all the criteria in the question.\nAnswer: Bosco Wong"
+    }
+  ],
+  "final_answer": "Bosco Wong"
+}

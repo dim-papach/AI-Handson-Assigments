@@ -1,0 +1,17 @@
+{
+  "question": "Who was an American senior operations officer for the Central Intelligence Agency for 30 years and worked for Eclipse Group?",
+  "gold_answer": "Duane \"Dewy\" Clarridge",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"American senior operations officer Central Intelligence Agency 30 years Eclipse Group\")",
+      "query": "American senior operations officer Central Intelligence Agency 30 years Eclipse Group",
+      "observation": "- Duane Clarridge: Duane Ramsdell \"Dewey\" Clarridge (April 16, 1932 \u2013 April 9, 2016) was an American senior operations officer for the Central Intelligence Agency (CIA) and supervisor for more than 30 years. Clarridge was the chief of the Latin American division from 1981 to 1987 and a key figure in t\n- Eclipse Group: Eclipse Group was a private intelligence agency run by former CIA officer Duane \"Dewy\" Clarridge, who was also the founding director of the CIA Counterterrorist Center. Until May 2010, Eclipse Group received funding from the US Government; it then relied on private donors. As of 2011,\n- Intelligence Star: The Intelligence Star is an award given by the Central Intelligence Agency to its officers for \"voluntary acts of courage performed under hazardous conditions or for outstanding achievements or services rendered with distinction under conditions of grave risk\". The award citation "
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The retrieved information directly identifies Duane Clarridge as an American senior operations officer for the Central Intelligence Agency for over 30 years and the person who ran Eclipse Group.\nAnswer: Duane Clarridge"
+    }
+  ],
+  "final_answer": "Duane Clarridge"
+}

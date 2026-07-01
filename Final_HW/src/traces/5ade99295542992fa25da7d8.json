@@ -1,0 +1,23 @@
+{
+  "question": "What foundation do scholars give for the likelihood of collaboration on a William Shakespeare Play written between 1588 and 1593?",
+  "gold_answer": "linguistic analysis",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"scholarly foundation for Shakespeare collaboration 1588-1593\")",
+      "query": "scholarly foundation for Shakespeare collaboration 1588-1593",
+      "observation": "- Titus Andronicus: Titus Andronicus is a tragedy by William Shakespeare, believed to have been written between 1588 and 1593, probably in collaboration with George Peele. It is thought to be Shakespeare's first tragedy, and is often seen as his attempt to emulate the violent and bloody revenge plays \n- Authorship of Titus Andronicus: The authorship of \"Titus Andronicus\" has been debated since the late 17th century. \"Titus Andronicus\", probably written between 1588 and 1593, appeared in three quarto editions from 1594 to 1601 with no named author. It was first published under William Shakespeare's \n- Revenge tragedy: Revenge tragedy (less commonly referred to as revenge drama, revenge play, or tragedy of blood) defines a genre of plays made popular in early modern England. Ashley H. Thorndike formally established this genre in his seminal 1902 article \"The Relations of Hamlet to Contemporary Rev"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"evidence for collaboration on Titus Andronicus Shakespeare 1588-1593\")",
+      "query": "evidence for collaboration on Titus Andronicus Shakespeare 1588-1593",
+      "observation": "- Titus Andronicus: Titus Andronicus is a tragedy by William Shakespeare, believed to have been written between 1588 and 1593, probably in collaboration with George Peele. It is thought to be Shakespeare's first tragedy, and is often seen as his attempt to emulate the violent and bloody revenge plays \n- Authorship of Titus Andronicus: The authorship of \"Titus Andronicus\" has been debated since the late 17th century. \"Titus Andronicus\", probably written between 1588 and 1593, appeared in three quarto editions from 1594 to 1601 with no named author. It was first published under William Shakespeare's \n- William Shakespeare's collaborations: Like most playwrights of his period, William Shakespeare did not always write alone. A number of his surviving plays are collaborative, or were revised by others after their original composition, although the exact number is open to debate. Some of the following"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The provided observations indicate that scholars believe \"Titus Andronicus,\" written between 1588 and 1593, was likely a collaboration, specifically with George Peele. The broader foundation for this likelihood is that William Shakespeare, like most playwrights of his period, did not always write alone and that collaboration was a common practice.\nAnswer: Scholars base the likelihood of collaboration on plays like \"Titus Andronicus,\" written between 1588 and 1593, on the common practice of playwrights of that period, including Shakespeare, not always writing alone."
+    }
+  ],
+  "final_answer": "Scholars base the likelihood of collaboration on plays like \"Titus Andronicus,\" written between 1588 and 1593, on the common practice of playwrights of that period, including Shakespeare, not always writing alone."
+}

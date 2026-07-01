@@ -1,0 +1,17 @@
+{
+  "question": "When does the universe, Earth, and all life on Earth were created as believed by an organization which commissioned The Voyage That Shook The World?",
+  "gold_answer": "10,000 years ago",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"who commissioned The Voyage That Shook The World\")",
+      "query": "who commissioned The Voyage That Shook The World",
+      "observation": "- The Voyage that Shook the World: The Voyage That Shook The World is a 2009 dramatised documentary film commissioned by Creation Ministries International, a Christian Young Earth creationist organisation, and produced by Fathom Media. It was released to mark the 200th anniversary of Charles Darwin's \n- John Cabot: John Cabot (Italian: \"Giovanni Caboto\" , Venetian: \"Zuan Chabotto\" ; c. 1450 \u2013 c. 1500) was a Venetian navigator and explorer whose 1497 discovery of the coast of North America under the commission of Henry VII of England was the first European exploration of the mainland of North Americ\n- Second voyage of James Cook: The second voyage of James Cook 1772\u20131775, commissioned by the British government with advice from the Royal Society, was designed to circumnavigate the globe as far south as possible to finally determine whether there was any great southern landmass, or Terra Australis."
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The organization that commissioned \"The Voyage That Shook The World\" is Creation Ministries International, which is a \"Christian Young Earth creationist organisation.\" Young Earth creationism holds that the universe, Earth, and all life on Earth were created by God in six literal 24-hour days, approximately 6,000 to 10,000 years ago.\nAnswer: Creation Ministries International, a Young Earth creationist organization, believes the universe, Earth, and all life on Earth were created by God in six literal 24-hour days approximately 6,000 to 10,000 years ago."
+    }
+  ],
+  "final_answer": "Creation Ministries International, a Young Earth creationist organization, believes the universe, Earth, and all life on Earth were created by God in six literal 24-hour days approximately 6,000 to 10,000 years ago."
+}

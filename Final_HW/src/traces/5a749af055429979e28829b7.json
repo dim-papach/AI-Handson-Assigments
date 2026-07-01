@@ -1,0 +1,23 @@
+{
+  "question": "Which Walt Disney film was produced first, The Apple Dumpling Gang or Something Wicked This Way Comes?",
+  "gold_answer": "The Apple Dumpling Gang",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"The Apple Dumpling Gang production year\")",
+      "query": "The Apple Dumpling Gang production year",
+      "observation": "- The Apple Dumpling Gang (film): The Apple Dumpling Gang is a 1975 American comedy-western film produced by Walt Disney Productions about a slick gambler named Russell Donovan (Bill Bixby) who is duped into taking care of a group of orphans who eventually strike gold during the California Gold Rush.\n- The Apple Dumpling Gang Rides Again: The Apple Dumpling Gang Rides Again is a 1979 American comedy-western film produced by Walt Disney Productions and a sequel to \"The Apple Dumpling Gang\" (1975), starring the comedy duo of Tim Conway and Don Knotts reprising their respective roles as Amos and Theo\n- Gun Shy (TV series): Gun Shy is an American sitcom that was shown on CBS from March 15 to April 19, 1983. The series, produced by Walt Disney Productions, was based on its popular comedy-western films: \"The Apple Dumpling Gang\" and \"The Apple Dumpling Gang Rides Again\"."
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Something Wicked This Way Comes production year\")",
+      "query": "Something Wicked This Way Comes production year",
+      "observation": "- Something Wicked This Way Comes (film): Something Wicked This Way Comes is a 1983 American horror fantasy film directed by Jack Clayton and produced by Walt Disney Productions from a screenplay written by Ray Bradbury, based on his novel of the same name. The novel's title was taken directly from a \n- Something Wicked This Way Comes (novel): Something Wicked This Way Comes is a 1962 dark fantasy novel by Ray Bradbury. It is about 13-year-old best friends, Jim Nightshade and William Halloway, and their nightmarish experience with a traveling carnival that comes to their Midwestern town one October\n- Something Wicked This Way Comes (Ugly Betty): \"Something Wicked This Way Comes\" is the sixth episode in season two of the dramedy series \"Ugly Betty\", and the 29th episode in the series, which aired on November 1, 2007. The episode was written by Henry Alonso Myers and directed by Wendey Stanzler. T"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: I have found the production years for both films. \"The Apple Dumpling Gang\" was produced in 1975, and \"Something Wicked This Way Comes\" was produced in 1983. I can now determine which was produced first.\nAnswer: The Apple Dumpling Gang was produced first."
+    }
+  ],
+  "final_answer": "The Apple Dumpling Gang was produced first."
+}

@@ -14,8 +14,6 @@ from opensearchpy import OpenSearch, helpers
 from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
 
-load_dotenv(ROOT.parent / ".env") if (ROOT.parent / ".env").exists() else load_dotenv()
-
 # ── constants ─────────────────────────────────────────────────────────────────
 EMBEDDER_ID  = "BAAI/bge-small-en-v1.5"
 INDEX_NAME   = "corpus_config_a"
@@ -24,6 +22,7 @@ BATCH_SIZE   = 256
 RANDOM_STATE = 42
 
 ROOT     = Path(__file__).parent.parent
+load_dotenv(ROOT.parent / ".env")
 DATA_DIR = ROOT / "data"
 RES_DIR  = ROOT / "results"
 RES_DIR.mkdir(exist_ok=True)
@@ -155,9 +154,9 @@ def run() -> None:
     build_index(client, embedder)
 
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.0-flash",
+        model="gemini-2.5-flash",
         temperature=0,
-        google_api_key=os.getenv("GOOGLE_API_KEY"),
+        google_api_key=os.getenv("GEMINI_API_KEY"),
     )
 
     with open(EVAL_PATH) as f:

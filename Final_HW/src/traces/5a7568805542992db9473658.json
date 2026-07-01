@@ -1,0 +1,23 @@
+{
+  "question": "What aviator participated to the Transatlantic flight organized by the \"heir apparent\" to Italian dictator Benito Mussolini?",
+  "gold_answer": "Antonio Lippi",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Italo Balbo transatlantic flight aviators\")",
+      "query": "Italo Balbo transatlantic flight aviators",
+      "observation": "- Antonio Lippi: Antonio Lippi (1900\u20131957) was an Italian aviator. He participated to the Transatlantic flight organized by Italo Balbo and awarded with the Medaglia d'Oro to aeronautic valor of Regia Aeronautica.\n- Italo Balbo: Italo Balbo (Ferrara, 6 June 1896 \u2013 Tobruk, 28 June 1940) was an Italian Blackshirt (\"Camicie Nere\", or CCNN) leader who served as Italy's Marshal of the Air Force (\"Maresciallo dell'Aria\"), Governor-General of Libya, Commander-in-Chief of Italian North Africa (\"Africa Settentrionale It\n- Albert Lee Ueltschi: Albert Lee \"Al\" Ueltschi (May 15, 1917 \u2013 October 18, 2012) is considered the father of modern flight training and was the founder of FlightSafety International. Ueltschi was once personal pilot to Juan Trippe and an associate to Charles Lindbergh. On July 21, 2001, he was enshri"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Italo Balbo heir apparent Mussolini\")",
+      "query": "Italo Balbo heir apparent Mussolini",
+      "observation": "- Italo Balbo: Italo Balbo (Ferrara, 6 June 1896 \u2013 Tobruk, 28 June 1940) was an Italian Blackshirt (\"Camicie Nere\", or CCNN) leader who served as Italy's Marshal of the Air Force (\"Maresciallo dell'Aria\"), Governor-General of Libya, Commander-in-Chief of Italian North Africa (\"Africa Settentrionale It\n- Italian Co-belligerent Navy: The Italian Co-Belligerent Navy (Marina Cobelligerante Italiana), or Navy of the South (Marina del Sud) or Royal Navy (Regia Marina), was the navy of the Italian royalist forces fighting on the side of the Allies in southern Italy after the Allied armistice with Italy in\n- Vittorio Mussolini: Vittorio Mussolini (27 September 1916 \u2013 12 June 1997) was an Italian film critic and producer. He was also the second son of Italian dictator Benito Mussolini. However, he was the first officially acknowledged son of Mussolini, with his second wife Rachele; his older half-brother"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The question asks for an aviator who participated in a transatlantic flight organized by the \"heir apparent\" to Benito Mussolini.\nObservation 1 states that Antonio Lippi participated in a Transatlantic flight organized by Italo Balbo.\nObservation 2 provides information about Italo Balbo and Vittorio Mussolini, Benito Mussolini's son. While Vittorio Mussolini was Benito's son, the question specifically links the \"heir apparent\" to the organizer of a transatlantic flight. Italo Balbo is the only person mentioned as organizing such a flight. Therefore, for the purpose of this question, Italo Balbo is implied to be the \"heir apparent\" who organized the flight.\nAntonio Lippi is the aviator who participated in Italo Balbo's transatlantic flight.\nAnswer: Antonio Lippi"
+    }
+  ],
+  "final_answer": "Antonio Lippi"
+}

@@ -1,0 +1,17 @@
+{
+  "question": "What publisher published Anthony Doerr's Pulitzer Prize fiction novel?",
+  "gold_answer": "Scribner",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Anthony Doerr Pulitzer Prize novel publisher\")",
+      "query": "Anthony Doerr Pulitzer Prize novel publisher",
+      "observation": "- Anthony Doerr: Anthony Doerr (born October 27, 1973) is an American author of novels and short stories. He gained widespread recognition for his 2014 novel \"All the Light We Cannot See\", which won the Pulitzer Prize for Fiction.\n- All the Light We Cannot See: All the Light We Cannot See is a novel written by American author Anthony Doerr, published by Scribner on May 6, 2014. It won the 2015 Pulitzer Prize for Fiction and the 2015 Andrew Carnegie Medal for Excellence in Fiction.\n- Pulitzer Prize for Fiction: The Pulitzer Prize for Fiction is one of the seven American Pulitzer Prizes that are annually awarded for Letters, Drama, and Music. It recognizes distinguished fiction by an American author, preferably dealing with American life, published during the preceding calendar y"
+    },
+    {
+      "type": "answer",
+      "content": "Answer: Scribner"
+    }
+  ],
+  "final_answer": "Scribner"
+}

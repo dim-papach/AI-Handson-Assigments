@@ -1,0 +1,17 @@
+{
+  "question": "Which is the Oil Capital of China, Chaoyang District, Shantou, or Daqing?",
+  "gold_answer": "Daqing",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Oil Capital of China\")",
+      "query": "Oil Capital of China",
+      "observation": "- Daqing: Daqing (; formerly romanized as Taching) is a prefecture-level city in the west of Heilongjiang province, People's Republic of China. The name literally means \"Great Celebration\". Daqing is known as the Oil Capital of China and has experienced a phenomenal boom since oil was discovered at th\n- Beibu Gulf Economic Rim: The Beibu Gulf Economic Rim or Beibu Economic Belt () also known as Gulf of Tonkin Economic Belt in (Vietnamese: V\u00e0nh \u0111ai kinh t\u1ebf v\u1ecbnh B\u1eafc B\u1ed9) defines the economic region or rim surrounding around China's southwestern coastal region and cities around the Gulf of Tonkin. The \n- Wuhan: Wuhan ( ) is the capital of Hubei province, China, and is the most populous city in Central China. It lies in the eastern Jianghan Plain at the intersection of the middle reaches of the Yangtze and Han rivers. Arising out of the conglomeration of three cities, Wuchang, Hankou, and Hanyang, Wu"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The retrieval results clearly state that Daqing is known as the Oil Capital of China. The other options, Chaoyang District and Shantou, are not mentioned in relation to this title.\nAnswer: Daqing"
+    }
+  ],
+  "final_answer": "Daqing"
+}

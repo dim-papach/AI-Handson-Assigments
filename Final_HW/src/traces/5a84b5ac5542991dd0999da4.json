@@ -1,0 +1,17 @@
+{
+  "question": "Which Bulldog includes breeds such as \"Standard\" and \"Classic,\" the French Bulldog or the American Bulldog?",
+  "gold_answer": "American Bulldog",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"American Bulldog Standard Classic\")",
+      "query": "American Bulldog Standard Classic",
+      "observation": "- American Bulldog: The American Bulldog is a breed of utility dog. There are two specific types of American Bulldog, Standard and Classic; additionally, there are also mixes of the two types.\n- Bulldog: The Bulldog is a medium-sized breed of dog commonly referred to as the English Bulldog or British Bulldog. Other scent-hound breeds include the Small Greek Domestic Dog, Irish Wolfhound, Bluetick Coonhound, Finnish Lapphund, and the Basset Hound. The Bulldog is a muscular, hefty dog with a \n- American Pit Bull Terrier: The American Pit Bull Terrier (APBT) is a dog breed. It is a medium-sized, solidly-built, intelligent, short-haired dog whose early ancestors came from the British Isles. When compared with the English Staffordshire Bull Terrier (another breed within the type commonly call"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The retrieval result clearly states that the American Bulldog has \"Standard\" and \"Classic\" types. This directly answers the question.\nAnswer: The American Bulldog."
+    }
+  ],
+  "final_answer": "The American Bulldog."
+}

@@ -1,0 +1,17 @@
+{
+  "question": "The Battle of Nanchang was fought between the Chinese Nationals and what ground-based armed force of Japan?",
+  "gold_answer": "Imperial Japanese Army",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Battle of Nanchang Japanese ground force\")",
+      "query": "Battle of Nanchang Japanese ground force",
+      "observation": "- Battle of Nanchang: The Battle of Nanchang () was a major battle between the Chinese National Revolutionary Army and the Japanese Imperial Japanese Army in the Second Sino-Japanese War. It was the first major conflict to occur following the Battle of Wuhan.\n- Imperial Japanese Army: The Imperial Japanese Army (IJA; \u5927\u65e5\u672c\u5e1d\u570b\u9678\u8ecd \"Dai-Nippon Teikoku Rikugun\"; \"Army of the Greater Japanese Empire\") was the official ground-based armed force of the Empire of Japan from 1868 to 1945. It was controlled by the Imperial Japanese Army General Staff Office and the Minis\n- Japanese Instrument of Surrender: The Japanese Instrument of Surrender was the written agreement that formalized the surrender of the Empire of Japan, marking the end of World War II. It was signed by representatives from the Empire of Japan, the United States of America, the Republic of China, the "
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The retrieval results explicitly state that the Battle of Nanchang was fought between the Chinese National Revolutionary Army and the Japanese Imperial Japanese Army, and that the Imperial Japanese Army was the official ground-based armed force of the Empire of Japan.\nAnswer: The Imperial Japanese Army."
+    }
+  ],
+  "final_answer": "The Imperial Japanese Army."
+}

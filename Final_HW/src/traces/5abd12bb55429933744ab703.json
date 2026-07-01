@@ -1,0 +1,23 @@
+{
+  "question": "Conrad Anker located the body of a mountaineer who took part it the first three British expeditions to which mountain?",
+  "gold_answer": "Mount Everest",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Conrad Anker found body mountaineer first three British expeditions\")",
+      "query": "Conrad Anker found body mountaineer first three British expeditions",
+      "observation": "- Conrad Anker: Conrad Anker (born November 27, 1962) is an American rock climber, mountaineer, and author. He is famous for his challenging ascents in the high Himalaya and Antarctica. He is the team leader of The North Face climbing team. In 1999 he located George Mallory's body on Everest as a memb\n- Mallory and Irvine Research Expedition: The goal of the Mallory and Irvine Research Expedition of 1999 was to discover evidence of whether George Mallory and Andrew Irvine had been the first to summit Mount Everest in their attempt of 8\u20139 June 1924. The expedition was organized by regular Everest ex\n- 2007 Altitude Everest expedition: The 2007 Altitude Everest expedition, led by the American climber Conrad Anker, arrived at Base Camp below the north face of Everest in May 2007 and retraced the last journey of British climber George Mallory. On 8 June 1924, Mallory, along with his climbing partner"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"George Mallory British Everest expeditions\")",
+      "query": "George Mallory British Everest expeditions",
+      "observation": "- George Mallory: George Herbert Leigh Mallory (18 June 1886 \u2013 8 or 9 June 1924) was an English mountaineer who took part in the first three British expeditions to Mount Everest, in the early 1920s.\n- 2007 Altitude Everest expedition: The 2007 Altitude Everest expedition, led by the American climber Conrad Anker, arrived at Base Camp below the north face of Everest in May 2007 and retraced the last journey of British climber George Mallory. On 8 June 1924, Mallory, along with his climbing partner\n- Mallory and Irvine Research Expedition: The goal of the Mallory and Irvine Research Expedition of 1999 was to discover evidence of whether George Mallory and Andrew Irvine had been the first to summit Mount Everest in their attempt of 8\u20139 June 1924. The expedition was organized by regular Everest ex"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The information from the previous steps clearly indicates that Conrad Anker located George Mallory's body on Mount Everest, and George Mallory took part in the first three British expeditions to Mount Everest.\nAnswer: Mount Everest"
+    }
+  ],
+  "final_answer": "Mount Everest"
+}

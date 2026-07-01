@@ -1,0 +1,23 @@
+{
+  "question": "What was the population in 2010 of the town where The Stelljes House is located ?",
+  "gold_answer": "810",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"The Stelljes House location\")",
+      "query": "The Stelljes House location",
+      "observation": "- Stelljes House: The Stelljes House is a historic house on New Hampshire Route 31 in Goshen, New Hampshire. This 1-1/2 story Cape style house was built c. 1800, and is one of the oldest of a cluster of plank-frame houses in Goshen. The framing is three-inch planking attached to sills, which rests on \n- George Sturges House: The George Sturges House is a single-family house, designed by architect Frank Lloyd Wright and built for George D. Sturges in the Brentwood Heights neighborhood of Brentwood, Los Angeles, California. Designed and built in 1939, the one-story residence is fairly small, 1,200 sq\n- Shotgun house: A \"shotgun house\" is a narrow rectangular domestic residence, usually no more than about 12 feet (3.5 m) wide, with rooms arranged one behind the other and doors at each end of the house. It was the most popular style of house in the Southern United States from the end of the American"
+    },
+    {
+      "type": "thought_action",
+      "content": "Thought: The Stelljes House is located in Goshen, New Hampshire. I need to find the population of Goshen, New Hampshire in 2010.\nAction: retrieve(\"population of Goshen New Hampshire 2010\")",
+      "query": "population of Goshen New Hampshire 2010",
+      "observation": "- Goshen, New Hampshire: Goshen is a town in Sullivan County, New Hampshire, United States. The population was 810 at the 2010 census.\n- Orange County, New York: Orange County is a county located in the U.S. state of New York. As of the 2010 census, the population was 372,813. The county seat is Goshen. This county was first created in 1683 and reorganized with its present boundaries in 1798.\n- Dover, New Hampshire: Dover is a city in Strafford County, New Hampshire, United States. The population was 29,987 at the 2010 census, the largest in the New Hampshire Seacoast region. The population was estimated at 31,153 in 2016. It is the county seat of Strafford County, and home to Wentworth-Do"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The Stelljes House is in Goshen, New Hampshire. The population of Goshen, New Hampshire in 2010 was 810.\nAnswer: The population of Goshen, New Hampshire in 2010 was 810."
+    }
+  ],
+  "final_answer": "The population of Goshen, New Hampshire in 2010 was 810."
+}

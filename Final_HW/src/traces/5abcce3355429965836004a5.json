@@ -1,0 +1,17 @@
+{
+  "question": "When was the novella written whose film adaptation was played during the Christmas season of \"Afternoon movie\" and contained the character of Ebenezer Scrooge?",
+  "gold_answer": "1843",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"When was A Christmas Carol written?\")",
+      "query": "When was A Christmas Carol written?",
+      "observation": "- A Christmas Carol (1938 film): A Christmas Carol is a 1938 American film adaptation of Charles Dickens's 1843 novella of the same name, starring Reginald Owen as Ebenezer Scrooge, an elderly miser who learns the error of his ways on Christmas Eve after visitations by four spirits.\n- A Christmas Carol (1984 film): A Christmas Carol is a 1984 British-American made-for-television film adaptation of Charles Dickens' famous 1843 novella of the same name. The film is directed by Clive Donner, who had been an editor of the 1951 film \"Scrooge\", and stars George C. Scott as Ebenezer Scr\n- A Christmas Carol (1908 film): A Christmas Carol is a 1908 silent film produced by Essanay Studios in Chicago, and the first American film adaptation of Charles Dickens' famous 1843 novella of the same name. Tom Ricketts stars as Ebenezer Scrooge in the film, which is considered lost."
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The previous retrieval results clearly state that Charles Dickens's novella \"A Christmas Carol\" was written in 1843.\nAnswer: The novella \"A Christmas Carol\" was written in 1843."
+    }
+  ],
+  "final_answer": "The novella \"A Christmas Carol\" was written in 1843."
+}

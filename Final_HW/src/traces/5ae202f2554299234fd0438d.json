@@ -1,0 +1,35 @@
+{
+  "question": "Hndrxx features a guest appearance by what Canadian singer?",
+  "gold_answer": "The Weeknd",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Hndrxx guest appearance Canadian singer\")",
+      "query": "Hndrxx guest appearance Canadian singer",
+      "observation": "- Hndrxx: Hndrxx (stylized as HNDRXX and pronounced \"Hendrix\") is the sixth studio album by American rapper Future. It was released on February 24, 2017, by A1 Recordings, Freebandz and Epic Records. It followed the release of Future's fifth eponymously titled album, \"Future\" (2017), by one week, and \n- Selfish (Future song): \"Selfish\" is a song by American rapper Future for his sixth studio album, \"Hndrxx\" (2017), featuring Barbadian singer Rihanna, the song was released as the lead single from \"Hndrxx\" on February 28, 2017. The track was produced by Detail, Major Seven and Mantra.\n- Celine Dion: Celine Dion, {'1': \", '2': \", '3': \", '4': \"} ( ; ] ; born C\u00e9line Marie Claudette Dion; 30 March 1968) is a Canadian singer and businesswoman. Born into a large family from Charlemagne, Quebec, Dion emerged as a teen star in the French-speaking world after her manager and future husband"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Hndrxx album guest features\")",
+      "query": "Hndrxx album guest features",
+      "observation": "- Hndrxx: Hndrxx (stylized as HNDRXX and pronounced \"Hendrix\") is the sixth studio album by American rapper Future. It was released on February 24, 2017, by A1 Recordings, Freebandz and Epic Records. It followed the release of Future's fifth eponymously titled album, \"Future\" (2017), by one week, and \n- Selfish (Future song): \"Selfish\" is a song by American rapper Future for his sixth studio album, \"Hndrxx\" (2017), featuring Barbadian singer Rihanna, the song was released as the lead single from \"Hndrxx\" on February 28, 2017. The track was produced by Detail, Major Seven and Mantra.\n- Pie (song): \"Pie\" is a song by American rapper Future, featuring American singer Chris Brown. It was released on June 25, 2017 as the second single from Future's sixth studio album, \"HNDRXX\" (2017). The song was written by Future and Brown along with its producers, Detail and D. A. Doman."
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Hndrxx album full tracklist guest features\")",
+      "query": "Hndrxx album full tracklist guest features",
+      "observation": "- Hndrxx: Hndrxx (stylized as HNDRXX and pronounced \"Hendrix\") is the sixth studio album by American rapper Future. It was released on February 24, 2017, by A1 Recordings, Freebandz and Epic Records. It followed the release of Future's fifth eponymously titled album, \"Future\" (2017), by one week, and \n- Selfish (Future song): \"Selfish\" is a song by American rapper Future for his sixth studio album, \"Hndrxx\" (2017), featuring Barbadian singer Rihanna, the song was released as the lead single from \"Hndrxx\" on February 28, 2017. The track was produced by Detail, Major Seven and Mantra.\n- You da Baddest: \"You da Baddest\" is a song by American rapper Future featuring Trinidadian rapper Nicki Minaj. It was released on July 28, 2017 as the fourth single from Future's sixth studio album, \"HNDRXX\" (2017). The song was written by Future and Minaj along with producer Detail and Andre Price,"
+    },
+    {
+      "type": "thought_action",
+      "content": "Thought: I have performed three retrievals, and none of them indicate a Canadian singer as a guest feature on the album \"Hndrxx\". The listed features are Rihanna (Barbadian), Chris Brown (American), and Nicki Minaj (Trinidadian). Celine Dion is mentioned as a Canadian singer, but not in relation to the album. It's possible there isn't a Canadian singer featured, or my searches haven't found it yet. I will try one more search to confirm the full list of features.\n\nAction: retrieve(\"Hndrxx album all guest artists\")",
+      "query": "Hndrxx album all guest artists",
+      "observation": "- Hndrxx: Hndrxx (stylized as HNDRXX and pronounced \"Hendrix\") is the sixth studio album by American rapper Future. It was released on February 24, 2017, by A1 Recordings, Freebandz and Epic Records. It followed the release of Future's fifth eponymously titled album, \"Future\" (2017), by one week, and \n- Selfish (Future song): \"Selfish\" is a song by American rapper Future for his sixth studio album, \"Hndrxx\" (2017), featuring Barbadian singer Rihanna, the song was released as the lead single from \"Hndrxx\" on February 28, 2017. The track was produced by Detail, Major Seven and Mantra.\n- You da Baddest: \"You da Baddest\" is a song by American rapper Future featuring Trinidadian rapper Nicki Minaj. It was released on July 28, 2017 as the fourth single from Future's sixth studio album, \"HNDRXX\" (2017). The song was written by Future and Minaj along with producer Detail and Andre Price,"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: My previous searches for guest appearances on the album \"Hndrxx\" have only yielded Rihanna (Barbadian), Chris Brown (American), and Nicki Minaj (Trinidadian). No Canadian singer has been mentioned as a guest feature. Therefore, it appears there is no Canadian singer featured on the album.\nAnswer: There is no Canadian singer listed as a guest appearance on the album Hndrxx based on the provided information."
+    }
+  ],
+  "final_answer": "There is no Canadian singer listed as a guest appearance on the album Hndrxx based on the provided information."
+}

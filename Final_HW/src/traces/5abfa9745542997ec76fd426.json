@@ -1,0 +1,11 @@
+{
+  "question": "Young Sheldon, the tv series that follows the character Sheldon Cooper at the age of 9, is a spin-off from what prequel?",
+  "gold_answer": "\"The Big Bang Theory\"",
+  "trace": [
+    {
+      "type": "answer",
+      "content": "Thought: The question states that \"Young Sheldon\" is a spin-off. It also mentions that \"Young Sheldon\" follows Sheldon Cooper at age 9. This implies that the show it spun off from is the original series featuring an older Sheldon Cooper. I need to identify the original series from which \"Young Sheldon\" is a spin-off.\nAnswer: The Big Bang Theory"
+    }
+  ],
+  "final_answer": "The Big Bang Theory"
+}

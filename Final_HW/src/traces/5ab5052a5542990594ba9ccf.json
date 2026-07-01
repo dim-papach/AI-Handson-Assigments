@@ -1,0 +1,23 @@
+{
+  "question": "Who did a new permanent member on the fourteenth season of  So You Think You Can Dance play in High School Musical?",
+  "gold_answer": "Gabriella Montez",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"new permanent member season 14 So You Think You Can Dance\")",
+      "query": "new permanent member season 14 So You Think You Can Dance",
+      "observation": "- So You Think You Can Dance (U.S. season 14): So You Think You Can Dance, an American dance competition show, returned for its fourteenth season on Monday, June 12, 2017. The new season's judge panel once again features series creator Nigel Lythgoe (who also serves as executive producer), as well as \n- Mira Quien Baila (U.S. season 4): \u00a1Mira Quien Baila! (also known as Mira Quien Baila 2013 and Mira Quien Baila 4) debuted on Univision on September 15, 2013 at 8pm/7c. The TV series is the Spanish version of British version \"Strictly Come Dancing\" and American version \"Dancing with the Stars\". Ten c\n- Dancing with the Stars (U.S. TV series): Dancing with the Stars is an American dance competition television series that premiered on June 1, 2005, on ABC. It is the US version of the UK series \"Strictly Come Dancing\". The show is hosted by Tom Bergeron, alongside Erin Andrews, who became co-host in "
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"So You Think You Can Dance season 14 new permanent judge\")",
+      "query": "So You Think You Can Dance season 14 new permanent judge",
+      "observation": "- So You Think You Can Dance (U.S. season 14): So You Think You Can Dance, an American dance competition show, returned for its fourteenth season on Monday, June 12, 2017. The new season's judge panel once again features series creator Nigel Lythgoe (who also serves as executive producer), as well as \n- Mira Quien Baila (U.S. season 4): \u00a1Mira Quien Baila! (also known as Mira Quien Baila 2013 and Mira Quien Baila 4) debuted on Univision on September 15, 2013 at 8pm/7c. The TV series is the Spanish version of British version \"Strictly Come Dancing\" and American version \"Dancing with the Stars\". Ten c\n- Strictly Come Dancing: Strictly Come Dancing (informally known as Strictly) is a British television dance contest, featuring contestants, celebrities, and other people, from all walks of life, with professional dance partners competing in a ballroom and Latin dance competition. Each couple is scored"
+    },
+    {
+      "type": "fallback",
+      "content": ""
+    }
+  ],
+  "final_answer": ""
+}

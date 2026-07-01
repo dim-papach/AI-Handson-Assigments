@@ -1,0 +1,17 @@
+{
+  "question": "The Little River Railroad is operated between Maryville and what pioneer Appalachian and resort community?",
+  "gold_answer": "Elkmont, Tennessee",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Little River Railroad route Maryville\")",
+      "query": "Little River Railroad route Maryville",
+      "observation": "- Little River Railroad (Tennessee): The Little River Railroad is a historic class III railroad that operated between Maryville and Elkmont, Tennessee during the period 1901 to 1939.\n- Enola Branch: The Enola Branch is a railroad segment of the Port Road Branch and it was a rail line; the Enola Branch railroad segment and the rest of the Port Road Branch is owned and operated by the Norfolk Southern Railway in the U.S. state of Pennsylvania. The railroad segment runs from Washingt\n- Portsmouth, Great Falls and Conway Railroad: The Portsmouth, Great Falls and Conway Railroad (PGF&C) (later known as the Conway Branch of the Boston and Maine Railroad) is a former rail line between Rollinsford and Intervale, New Hampshire, in the United States. At Rollinsford, the line connected to"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The retrieval result states that the Little River Railroad operated between Maryville and Elkmont, Tennessee. Elkmont is the pioneer Appalachian and resort community in question.\nAnswer: Elkmont"
+    }
+  ],
+  "final_answer": "Elkmont"
+}

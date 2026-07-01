@@ -1,0 +1,17 @@
+{
+  "question": "Trautmann is an upcoming British-German biographical film, starring German actor David Kross as a german footballer who played in which position ?",
+  "gold_answer": "goalkeeper",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Bert Trautmann football position\")",
+      "query": "Bert Trautmann football position",
+      "observation": "- Bert Trautmann: Bernhard Carl \"Bert\" Trautmann OBE (22 October 1923 \u2013 19 July 2013) was a German professional footballer who played as a goalkeeper for Manchester City from 1949 to 1964.\n- Trautmann (film): Trautmann is an upcoming British-German biographical film, starring German actor David Kross as the footballer Bert Trautmann. Although the subject of the film was a sportsman, the film has been described as \"not primarily a sports film\" but instead a drama.\n- Andreas Trautmann: Andreas Trautmann (born 21 May 1959 in Dresden) is a former German footballer who played as a midfielder. Trautmann spent much of his career with Dynamo Dresden, for whom he played 270 games in the DDR-Oberliga (the third most for the club, behind Hans-J\u00fcrgen D\u00f6rner and Reinhard H"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The question asks about the position of the German footballer Bert Trautmann, who is the subject of the film \"Trautmann\". The retrieval results clearly state that Bert Trautmann played as a goalkeeper.\nAnswer: Goalkeeper"
+    }
+  ],
+  "final_answer": "Goalkeeper"
+}

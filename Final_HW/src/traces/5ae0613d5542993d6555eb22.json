@@ -1,0 +1,17 @@
+{
+  "question": "Castle Hill is a plantation near what primary residence of Thomas Jefferson?",
+  "gold_answer": "Monticello",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Thomas Jefferson primary residence\")",
+      "query": "Thomas Jefferson primary residence",
+      "observation": "- Monticello: Monticello was the primary plantation of Thomas Jefferson, the third President of the United States, who began designing and building Monticello at age 26 after inheriting land from his father. Located just outside Charlottesville, Virginia, in the Piedmont region, the plantation was ori\n- Thomas Jefferson Foundation: The Thomas Jefferson Foundation, originally known as the Thomas Jefferson Memorial Foundation, is a private, nonprofit 501(c)3 corporation founded in 1923 to purchase and maintain Monticello, the primary plantation of Thomas Jefferson, the third President of the United S\n- Castle Hill (Virginia): Castle Hill (Virginia) is an historic, privately owned, 600-acre (243 ha) plantation located at the foot of the Southwest Mountains in Albemarle County, Virginia, near Monticello and the city of Charlottesville, and is recognized by the Virginia Landmarks Register and the Nat"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The previous retrieval clearly states that Monticello was the primary plantation of Thomas Jefferson and that Castle Hill is located near Monticello.\nAnswer: Monticello"
+    }
+  ],
+  "final_answer": "Monticello"
+}

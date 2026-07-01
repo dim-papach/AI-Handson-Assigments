@@ -1,0 +1,23 @@
+{
+  "question": "This team which is moving from Oakland, California to Las Vegas Nevada with share its stadium with what college?",
+  "gold_answer": "University of Nevada, Las Vegas",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"NFL team moving from Oakland to Las Vegas stadium sharing college\")",
+      "query": "NFL team moving from Oakland to Las Vegas stadium sharing college",
+      "observation": "- Oakland Raiders relocation to Las Vegas: The Oakland Raiders relocation to Las Vegas was a successful effort by the owner of the Oakland Raiders (Mark Davis) to relocate the American football club from its current and longtime home of Oakland, California to Las Vegas, Nevada. The team is scheduled t\n- 2017 Oakland Raiders season: The 2017 Oakland Raiders season is the 58th overall season of the Oakland Raiders franchise, the franchise's 48th season in the National Football League, their 24th season since their return to Oakland, and the third under head coach Jack Del Rio. The Raiders are looking\n- Los Angeles Chargers: The Los Angeles Chargers are a professional American football team based in the Greater Los Angeles Area. The Chargers compete in the National Football League (NFL) as a member club of the league's American Football Conference (AFC) West division. The team was founded on August"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Las Vegas Raiders stadium sharing college\")",
+      "query": "Las Vegas Raiders stadium sharing college",
+      "observation": "- Las Vegas Stadium: Las Vegas Stadium is the working name for a domed stadium under construction in Paradise, Nevada for the Las Vegas Raiders of the National Football League (NFL) and the UNLV Rebels football team from the University of Nevada, Las Vegas (UNLV). It is located on about 62 acres west \n- Oakland Raiders relocation to Las Vegas: The Oakland Raiders relocation to Las Vegas was a successful effort by the owner of the Oakland Raiders (Mark Davis) to relocate the American football club from its current and longtime home of Oakland, California to Las Vegas, Nevada. The team is scheduled t\n- Texas Tech Red Raiders football: The Texas Tech Red Raiders football program is a college football team that represents Texas Tech University (variously \"Texas Tech\" or \"TTU\"). The team competes, as a member of the Big 12 Conference, which is a Division I Football Bowl Subdivision (formerly Division"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The Las Vegas Stadium, which will be home to the Las Vegas Raiders, will also be shared with the UNLV Rebels football team from the University of Nevada, Las Vegas.\nAnswer: The University of Nevada, Las Vegas (UNLV) Rebels football team."
+    }
+  ],
+  "final_answer": "The University of Nevada, Las Vegas (UNLV) Rebels football team."
+}

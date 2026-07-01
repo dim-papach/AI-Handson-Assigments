@@ -1,0 +1,17 @@
+{
+  "question": "In what year was the most famous statute at Po Lin Monastery built?",
+  "gold_answer": "Tian Tan Buddha",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Po Lin Monastery most famous statue built year\")",
+      "query": "Po Lin Monastery most famous statue built year",
+      "observation": "- Buddhism in Hong Kong: Buddhism is a major religion in Hong Kong and has been greatly influential in the traditional culture of its populace. Among the most prominent Buddhist temples in the city there are the Chi Lin Nunnery in Diamond Hill, built in the Tang Dynasty's architectural style; the Po L\n- Tian Tan Buddha: Tian Tan Buddha, also known as the Big Buddha, is a large bronze statue of Buddha Shakyamuni, completed in 1993, and located at Ngong Ping, Lantau Island, in Hong Kong. The statue is sited near Po Lin Monastery and symbolises the harmonious relationship between man and nature, peopl\n- Po Lin Monastery: Po Lin Monastery is a Buddhist monastery, located on Ngong Ping Plateau, on Lantau Island, Hong Kong."
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The previous retrieval identified the Tian Tan Buddha (Big Buddha) as a large bronze statue completed in 1993, located near Po Lin Monastery. This statue is highly likely to be the \"most famous statute\" referred to in the question due to its prominence and proximity to the monastery.\nAnswer: 1993"
+    }
+  ],
+  "final_answer": "1993"
+}

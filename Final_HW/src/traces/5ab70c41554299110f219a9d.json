@@ -1,0 +1,17 @@
+{
+  "question": "What is the name of the physician who studied the cause of the 1854 Broad Street cholera outbreak in London, England?",
+  "gold_answer": "John Snow",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"physician 1854 Broad Street cholera outbreak\")",
+      "query": "physician 1854 Broad Street cholera outbreak",
+      "observation": "- 1854 Broad Street cholera outbreak: The Broad Street cholera outbreak (or Golden Square outbreak) was a severe outbreak of cholera that occurred in 1854 near Broad Street (now Broadwick Street) in the Soho district of London, England. This outbreak, which killed 616 people, is best known for the phy\n- John Snow: John Snow (15 March 1813 \u2013 16 June 1858) was an English physician and a leader in the adoption of anaesthesia and medical hygiene. He is considered one of the fathers of modern epidemiology, in part because of his work in tracing the source of a cholera outbreak in Soho, London, in 1854. \n- The Ghost Map: The Ghost Map: The Story of London's Most Terrifying Epidemic\u00a0\u2013 and How it Changed Science, Cities and the Modern World is a book by Steven Berlin Johnson in which he describes the most intense outbreak of cholera in Victorian London (See 1854 Broad Street cholera outbreak) The book i"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The retrieval results directly identify John Snow as the physician who studied the 1854 Broad Street cholera outbreak.\nAnswer: John Snow"
+    }
+  ],
+  "final_answer": "John Snow"
+}

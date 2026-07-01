@@ -1,0 +1,23 @@
+{
+  "question": "What genre did the writer whose novel was based on \"I'll Take Manhattan\" writes?",
+  "gold_answer": "romance genre",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"novel based on I'll Take Manhattan\")",
+      "query": "novel based on I'll Take Manhattan",
+      "observation": "- I'll Take Manhattan (miniseries): I'll Take Manhattan is a 1987 American television miniseries, adapted from Judith Krantz's novel of the same name. Screened by CBS, it tells the story of the wealthy Amberville family, who run their own publishing company in New York. After Zachary Amberville, the p\n- Blonde (novel): Blonde is a bestselling 2000 historical novel by Joyce Carol Oates that chronicles the inner life of Marilyn Monroe, though Oates insists that the novel is a work of fiction that should not be regarded as a biography. It was a finalist of the Pulitzer Prize (2001) and the National Bo\n- Catching Fire: Catching Fire is a 2009 science fiction young adult novel by the American novelist Suzanne Collins, the second book in \"The Hunger Games trilogy\". As the sequel to the 2008 bestseller \"The Hunger Games\", it continues the story of Katniss Everdeen and the post-apocalyptic nation of Pan"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Judith Krantz novel genre\")",
+      "query": "Judith Krantz novel genre",
+      "observation": "- Judith Krantz: Judith \"Judy\" Krantz (n\u00e9e Tarcher) (born January 9, 1928) is a Jewish-American novelist who writes in the romance genre. Her works include \"Scruples\", \"Princess Daisy\", and \"Till We Meet Again\".\n- Absurdist fiction: Absurdist fiction is a genre of fictional narrative (traditionally, literary fiction), most often in the form of a novel, play, poem, or film, that focuses on the experiences of characters in situations where they cannot find any inherent purpose in life, most often represented by\n- Pulitzer Prize for Fiction: The Pulitzer Prize for Fiction is one of the seven American Pulitzer Prizes that are annually awarded for Letters, Drama, and Music. It recognizes distinguished fiction by an American author, preferably dealing with American life, published during the preceding calendar y"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The novel \"I'll Take Manhattan\" was written by Judith Krantz. Judith Krantz is known for writing in the romance genre.\nAnswer: The writer, Judith Krantz, writes in the romance genre."
+    }
+  ],
+  "final_answer": "The writer, Judith Krantz, writes in the romance genre."
+}

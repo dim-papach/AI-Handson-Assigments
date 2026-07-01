@@ -1,0 +1,17 @@
+{
+  "question": "Who founded gaming company which owns and operates the Red Rock Resort?",
+  "gold_answer": "Frank Fertitta, Jr.",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"who owns Red Rock Resort\")",
+      "query": "who owns Red Rock Resort",
+      "observation": "- Red Rock Casino, Resort &amp; Spa: Red Rock Resort is a hotel and casino. It is owned and operated by Station Casinos on 70 acre located in Downtown Summerlin in the village of Summerlin Centre in Summerlin, Nevada. Located on Charleston Boulevard, at the interchange of Clark County 215 and some dis\n- Station Casinos: Station Casinos is a gaming company based in the Las Vegas suburb of Summerlin, Nevada, founded by Frank Fertitta, Jr. Station Casinos, along with Affinity Gaming, Boyd Gaming, and American Casino & Entertainment Properties, dominate the locals casino market in Las Vegas. The compan\n- Monte Carlo Resort and Casino: The Monte Carlo Resort and Casino is a megaresort hotel and casino on the Las Vegas Strip in Paradise, Nevada, United States. The hotel, with a height of 360 ft , has 32 floors, featuring a 102000 sqft casino floor with 1,400 slot machines, 60 table games, and 15 poker"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The Red Rock Resort is owned and operated by Station Casinos. Station Casinos was founded by Frank Fertitta, Jr.\nAnswer: Frank Fertitta, Jr. founded the gaming company which owns and operates the Red Rock Resort."
+    }
+  ],
+  "final_answer": "Frank Fertitta, Jr. founded the gaming company which owns and operates the Red Rock Resort."
+}

@@ -1,0 +1,23 @@
+{
+  "question": "Who is the American actress that stars in the movie \"Innocesnce\" and is best known for her role as Alexandra Cabot in a long-running NBC series?",
+  "gold_answer": "Stephanie Caroline March",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Alexandra Cabot NBC series\")",
+      "query": "Alexandra Cabot NBC series",
+      "observation": "- Stephanie March: Stephanie Caroline March (born (1974--) 23, 1974 ) is an American actress. She is best known for her role as Alexandra Cabot in the long-running NBC series, \"\".\n- Conviction (2006 TV series): Conviction is an American television drama on NBC that debuted as a mid-season replacement on Friday, March 3, 2006. The cast includes Stephanie March reprising her \"\" role as Alexandra Cabot. In the series, Cabot returns to New York City and becomes a Bureau Chief ADA s\n- Made in Chelsea (series 13): The thirteenth series of Made in Chelsea, a British structured-reality television programme began airing on 20 March 2017 on E4 and concluded on 29 May 2017 following eleven episodes. Ahead of the series, cast members Binky Felstead and Josh \"JP\" Patterson announced they"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Stephanie March Innocence movie\")",
+      "query": "Stephanie March Innocence movie",
+      "observation": "- Innocence (2013 film): Innocence is a 2013 American horror drama film directed by Hilary Brougher, who co-wrote the film with Tristine Skyler. The movie is based on the 2000 novel of the same name by Jane Mendelsohn. It had its world premiere on 26 October, 2013 at the Austin Film Festival and recei\n- Stephanie March: Stephanie Caroline March (born (1974--) 23, 1974 ) is an American actress. She is best known for her role as Alexandra Cabot in the long-running NBC series, \"\".\n- Conviction (2006 TV series): Conviction is an American television drama on NBC that debuted as a mid-season replacement on Friday, March 3, 2006. The cast includes Stephanie March reprising her \"\" role as Alexandra Cabot. In the series, Cabot returns to New York City and becomes a Bureau Chief ADA s"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The first retrieval identified Stephanie March as the actress known for playing Alexandra Cabot in a long-running NBC series. The second retrieval confirmed that Stephanie March starred in the 2013 film \"Innocence\". Both pieces of information align with the question.\nAnswer: Stephanie March"
+    }
+  ],
+  "final_answer": "Stephanie March"
+}

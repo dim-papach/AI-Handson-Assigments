@@ -1,0 +1,23 @@
+{
+  "question": "The southern terminus of State Route 102 is located in a town on the southwestern side of an island know to locals as what?",
+  "gold_answer": "the backside",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"State Route 102 southern terminus\")",
+      "query": "State Route 102 southern terminus",
+      "observation": "- Maine State Route 102: State Route 102 is a north-south state highway located on Mount Desert Island in eastern Maine. As of 2007, its southern terminus is located at an intersection with State Route 102A in Tremont on the southern part of the island. Its northern terminus is at intersection with St\n- Tennessee State Route 102: State Route\u00a0102 (SR\u00a0102) is a 18.56 mi state highway that exists entirely within Rutherford County, Tennessee. Its southern terminus is in Almaville, an unincorporated community in the western part of the county, at SR\u00a096. Its northern terminus is in Smyrna.\n- Vermont Route 102: Vermont Route\u00a0102 (VT\u00a0102) is a north\u2013south state highway in Essex County, Vermont, in the United States. It follows the west bank of the Connecticut River and parallels U.S. Route\u00a03 (US\u00a03), which is routed along the river's east bank in New Hampshire. The southern terminus of the"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Mount Desert Island local name\")",
+      "query": "Mount Desert Island local name",
+      "observation": "- Acadia National Park: Acadia National Park is a United States National Park located in the state of Maine, near Bar Harbor. It reserves much of Mount Desert Island, and associated smaller islands, off the Atlantic coast. Initially created as the Sieur de Monts National Monument in 1916, the park was\n- Tremont, Maine: Tremont is a town in Hancock County, Maine, United States. It is located on the southwestern side of Mount Desert Island, known to locals as \"the backside.\"\n- Hawaii (island): Hawai\u02bbi ( ; ] ) is the largest island located in the U.S. state of Hawaii. It is the largest and the southeastern-most of the Hawaiian Islands, a chain of volcanic islands in the North Pacific Ocean. With an area of 4028 sqmi , it is larger than all of the other islands in the archi"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The question asks for the local name of the island where the southern terminus of State Route 102 is located. The first retrieval identified that Maine State Route 102 has its southern terminus in Tremont on Mount Desert Island. The second retrieval states that Tremont is on the southwestern side of Mount Desert Island, which is known to locals as \"the backside.\"\nAnswer: The backside"
+    }
+  ],
+  "final_answer": "The backside"
+}

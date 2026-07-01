@@ -1,0 +1,17 @@
+{
+  "question": "What was the name of a land where Maria Anna of Spain's husband was king?",
+  "gold_answer": "Hungary",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Maria Anna of Spain husband\")",
+      "query": "Maria Anna of Spain husband",
+      "observation": "- Maria Anna of Spain: Maria Anna of Spain (18 August 1606 \u2013 13 May 1646), was by birth Infanta of Spain and by marriage Holy Roman Empress and Queen of Hungary and Bohemia as the wife of Ferdinand III, Holy Roman Emperor.\n- Portrait of Maria Anna: The Portrait of Maria Anna is a 1630 portrait of Maria Anna of Spain by Diego Vel\u00e1zquez. It is now in the Prado.\n- Archduchess Maria Anna of Austria (1882\u20131940): Archduchess \"Maria Anna\" Isabelle Epiphanie Eugenie Gabriele of Austria, full German name: \"Maria Anna Isabelle Epiphanie Eugenie Gabriele, Erzherzogin von \u00d6sterreich\" (6 January 1882, Linz, Upper Austria, Austria\u2013Hungary \u2013 25 February 1940, Lausanne, V"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: Maria Anna of Spain's husband was Ferdinand III. The previous observation states that she was \"Queen of Hungary and Bohemia\" as his wife. This means Ferdinand III was king of Hungary and Bohemia.\nAnswer: Hungary and Bohemia"
+    }
+  ],
+  "final_answer": "Hungary and Bohemia"
+}

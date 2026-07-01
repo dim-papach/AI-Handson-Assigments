@@ -1,0 +1,17 @@
+{
+  "question": "Back Home is a children's historical novel adapted into a TV drama starring what English actress born in 1946?",
+  "gold_answer": "Hayley Catherine Rose Vivien Mills",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Back Home TV drama adaptation cast English actress born 1946\")",
+      "query": "Back Home TV drama adaptation cast English actress born 1946",
+      "observation": "- Back Home (novel): Back Home is a children's historical novel by Michelle Magorian, first published in 1984. The novel was adapted into a TV drama, \"Back Home\" (1990), starring Hayley Mills and Haley Carr, and again in 2001 starring Sarah Lancashire, Stephanie Cole and Jessica Fox.\n- Hayley Mills: Hayley Catherine Rose Vivien Mills (born 18 April 1946) is an English actress. The daughter of Sir John Mills and Mary Hayley Bell, and younger sister of actress Juliet Mills, Mills began her acting career as a child and was hailed as a promising newcomer, winning the BAFTA Award for M\n- Penelope Wilton: Dame Penelope Alice Wilton, (born 3 June 1946) is an English actress. She is known for starring opposite Richard Briers in the BBC sitcom \"Ever Decreasing Circles\" (1984\u201389); playing Homily in \"The Borrowers\" (1992) and \"The Return of the Borrowers\" (1993); and for her role as Isobe"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The retrieval results indicate that the 1990 TV drama adaptation of \"Back Home\" starred Hayley Mills. Hayley Mills is an English actress born on April 18, 1946, which matches all the criteria in the question.\nAnswer: Hayley Mills"
+    }
+  ],
+  "final_answer": "Hayley Mills"
+}

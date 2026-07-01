@@ -1,0 +1,17 @@
+{
+  "question": "What philosophy related to creationism is Paul Nelson noted for?",
+  "gold_answer": "intelligent design",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Paul Nelson creationism philosophy\")",
+      "query": "Paul Nelson creationism philosophy",
+      "observation": "- Paul Nelson (creationist): Paul A. Nelson (born 1958) is an American philosopher of science noted for his advocacy of young earth creationism and intelligent design.\n- Ontogenetic depth: Ontogenetic depth is an idea proposed in February 2003 by Paul Nelson, an American philosopher of science, young Earth creationist and intelligent design advocate; he is employed by the Discovery Institute.\n- Michael P. Nelson: Michael Paul Nelson is an environmental scholar, writer, teacher, speaker, and consultant who holds the Ruth H. Spaniol Chair in Natural Resources and is a Professor of environmental philosophy and ethics at Oregon State University. He also serves as the Lead Principal Investigato"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The search result clearly states that Paul Nelson is noted for his advocacy of young earth creationism and intelligent design.\nAnswer: Paul Nelson is noted for his advocacy of young earth creationism and intelligent design."
+    }
+  ],
+  "final_answer": "Paul Nelson is noted for his advocacy of young earth creationism and intelligent design."
+}

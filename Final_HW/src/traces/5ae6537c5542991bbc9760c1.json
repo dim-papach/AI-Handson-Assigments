@@ -1,0 +1,17 @@
+{
+  "question": "Who produced the 2004 major release sequel of Shrek 2?",
+  "gold_answer": "Andrew Adamson",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"who produced shrek 2 2004\")",
+      "query": "who produced shrek 2 2004",
+      "observation": "- Shrek 2: Shrek 2 is a 2004 American computer-animated fantasy film produced by DreamWorks Animation and directed by Andrew Adamson, Kelly Asbury and Conrad Vernon. It is the sequel to 2001's \"Shrek\", with Mike Myers, Eddie Murphy and Cameron Diaz reprising their respective voice roles of Shrek, Donk\n- Shrek 2 (video game): Shrek 2 (also known as Shrek 2: The Game and ported for the PC as Shrek 2: Team Action at Beenox) is a 2004 action-adventure video game published by Activision and released in 2004. The game was developed by Luxoflux for the PlayStation 2, Xbox and GameCube, while a version for\n- Shrek the Third: Shrek the Third is a 2007 American computer-animated fantasy comedy film and the third installment in the \"Shrek\" franchise, produced by DreamWorks Animation. It is the sequel to 2004's \"Shrek 2\", and is the first in the series to be distributed by Paramount Pictures , which acquire"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The first search result directly answers the question, stating that \"Shrek 2\" was produced by DreamWorks Animation.\nAnswer: DreamWorks Animation"
+    }
+  ],
+  "final_answer": "DreamWorks Animation"
+}

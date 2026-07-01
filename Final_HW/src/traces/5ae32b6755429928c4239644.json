@@ -1,0 +1,17 @@
+{
+  "question": "Wendy Ayche was featured in 2016 in an annual production created by Youtube and what other organization?",
+  "gold_answer": "Portal A Interactive",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Wendy Ayche 2016 annual production Youtube\")",
+      "query": "Wendy Ayche 2016 annual production Youtube",
+      "observation": "- Wengie: Wendy Ayche (born January 9 1986) known professionally as Wengie, is an Australian YouTube personality and vlogger. She was born in Guangzhou, China. She got the nickname \"Wengie\" at a dance class when two people gave her a nickname inspired by her Chinese name, W\u00e9n Ji\u00e9. Since starting her c\n- Web television: Web television content includes web series such as \"Red vs. Blue\" (2003\u2013present), \"Husbands\" (2011\u2013present), \"The Lizzie Bennet Diaries\" (2012\u20132013), \"Video Game High School\" (2012\u20132014), \"Carmilla\" (2014\u20132016), and \"Teenagers\" (2014\u2013present), among hundreds of others; original minis\n- YouTube Rewind: YouTube Rewind is a video series produced and created by YouTube and Portal A Interactive. These videos are an overview and recap of each year's viral videos, events, memes, and music. Each year, the number of YouTube celebrities featured in the video, as well as the presentation of "
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The initial search result for \"YouTube Rewind\" states that it is a video series produced and created by YouTube and Portal A Interactive, and features YouTube celebrities. Wendy Ayche is a YouTube personality, making it highly likely that the annual production she was featured in is YouTube Rewind, and the other organization is Portal A Interactive.\nAnswer: Portal A Interactive"
+    }
+  ],
+  "final_answer": "Portal A Interactive"
+}

@@ -1,0 +1,17 @@
+{
+  "question": "What kind of game is The Park a spin-off of? ",
+  "gold_answer": "massively multiplayer online role-playing video game",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"The Park game spin-off of\")",
+      "query": "The Park game spin-off of",
+      "observation": "- The Park (video game): The Park is a first-person psychological horror adventure game developed and published by Funcom. The game was released via Steam on October 27, 2015 and is a spin-off of an earlier Funcom game, \"The Secret World\". It was released for PlayStation 4 and Xbox One on May 3, 2016.\n- Theme Park Inc: Theme Park Inc. (also known as SimCoaster in the United States and Theme Park Manager in Australia) is a construction and management simulation video game. It is the last game of the Theme Park series that started with \"Theme Park\" in 1994 and continued with \"Theme Park World\" in 199\n- Toy Story 2: Buzz Lightyear to the Rescue: Toy Story 2: Buzz Lightyear to the Rescue (also known as Disney Pixar's Action Game: Toy Story 2) is a platform game based on Pixar's computer animated movie \"Toy Story 2\" and is the sequel to the first \"Toy Story\" video game. It was released for the Ninten"
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The observation clearly states that \"The Park\" is a spin-off of \"The Secret World\".\nAnswer: The Park is a spin-off of The Secret World."
+    }
+  ],
+  "final_answer": "The Park is a spin-off of The Secret World."
+}

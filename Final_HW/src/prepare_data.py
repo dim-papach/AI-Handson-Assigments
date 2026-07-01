@@ -12,9 +12,10 @@ import random
 from pathlib import Path
 from datasets import load_dataset
 
-RANDOM_STATE = 42
-TRAIN_PAIRS    = 5000
-EVAL_QUESTIONS = 500
+RANDOM_STATE    = 42
+TRAIN_QUESTIONS = 2500   # source questions for train pairs (each gives ~2 pairs → ~5000 pairs)
+TRAIN_PAIRS     = 5000
+EVAL_QUESTIONS  = 500
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 DATA_DIR.mkdir(exist_ok=True)
@@ -31,26 +32,36 @@ def main():
     ds_train = load_dataset("hotpotqa/hotpot_qa", "distractor", split="train")
     ds_val   = load_dataset("hotpotqa/hotpot_qa", "distractor", split="validation")
 
-    # ── corpus ────────────────────────────────────────────────────────────────
-    print("Building corpus …")
+    # ── collect sampled question ids first so corpus is filtered ─────────────
+    print("Sampling train/eval questions …")
+    all_train = list(ds_train)
+    all_val   = list(ds_val)
+
+    random.shuffle(all_train)
+    random.shuffle(all_val)
+
+    sampled_train = all_train[:TRAIN_QUESTIONS]
+    sampled_val   = all_val[:EVAL_QUESTIONS]
+
+    # ── corpus: only passages that appear in sampled questions ────────────────
+    print("Building filtered corpus …")
     corpus: dict[str, str] = {}
 
-    for split in (ds_train, ds_val):
-        for ex in split:
-            for title, sentences in zip(ex["context"]["title"], ex["context"]["sentences"]):
-                pid = title.replace(" ", "_")
-                if pid not in corpus:
-                    corpus[pid] = build_passage_text(title, sentences)
+    for ex in sampled_train + sampled_val:
+        for title, sentences in zip(ex["context"]["title"], ex["context"]["sentences"]):
+            pid = title.replace(" ", "_")
+            if pid not in corpus:
+                corpus[pid] = build_passage_text(title, sentences)
 
     with open(DATA_DIR / "corpus.jsonl", "w") as f:
         for pid, text in corpus.items():
             f.write(json.dumps({"passage_id": pid, "text": text}) + "\n")
     print(f"  corpus: {len(corpus):,} passages → data/corpus.jsonl")
 
-    # ── train pairs (train split only — no eval leakage) ─────────────────────
+    # ── train pairs (sampled train only — no eval leakage) ───────────────────
     print("Building training pairs …")
     train_pairs = []
-    for ex in ds_train:
+    for ex in sampled_train:
         supporting_titles = set(ex["supporting_facts"]["title"])
         for title, sentences in zip(ex["context"]["title"], ex["context"]["sentences"]):
             if title in supporting_titles:
@@ -68,13 +79,10 @@ def main():
             f.write(json.dumps(pair) + "\n")
     print(f"  train pairs: {len(train_pairs):,} → data/train_pairs.jsonl")
 
-    # ── eval set (validation split only) ─────────────────────────────────────
+    # ── eval set (sampled val only) ───────────────────────────────────────────
     print("Building eval set …")
-    val_list = list(ds_val)
-    random.shuffle(val_list)
-
     eval_set = []
-    for ex in val_list[:EVAL_QUESTIONS]:
+    for ex in sampled_val:
         supporting_ids = [t.replace(" ", "_") for t in ex["supporting_facts"]["title"]]
         eval_set.append({
             "question_id": ex["id"],

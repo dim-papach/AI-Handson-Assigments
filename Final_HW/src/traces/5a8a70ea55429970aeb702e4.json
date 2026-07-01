@@ -1,0 +1,17 @@
+{
+  "question": " VEU, the American television channel owned by Golden West Broadcasting was similar to a defunct television servied owned by who?",
+  "gold_answer": "National Subscription Television",
+  "trace": [
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"VEU Golden West Broadcasting similar defunct television service\")",
+      "query": "VEU Golden West Broadcasting similar defunct television service",
+      "observation": "- VEU: VEU (Video Entertainment Unlimited) was an American subscription television channel owned by Golden West Broadcasting. The channel was similar to ONTV, another scrambled UHF service, and was carried by many stations including KAUT-TV in Oklahoma City, WVEU in Atlanta and KNBN in the Dallas/Fort\n- ONTV (pay TV): ONTV (later known as ON Subscription Television from 1983 until its shutdown in 1985) is a defunct American subscription television service that was owned by National Subscription Television, a joint venture between Oak Industries (a manufacturer of satellite and pay television decode\n- Saturday Night Live Korea: Saturday Night Live Korea (; abbreviated as SNL Korea or SNLK ()) is a South Korean late-night live television sketch comedy and variety television program broadcast on general service cable channel tvN. It is adapted from the long-running American TV show \"Saturday Night "
+    },
+    {
+      "type": "answer",
+      "content": "Thought: The previous retrieval states that VEU was similar to ONTV, and ONTV was owned by National Subscription Television, a joint venture between Oak Industries. Therefore, the defunct television service similar to VEU was ONTV, owned by Oak Industries.\nAnswer: VEU was similar to ONTV, which was owned by Oak Industries."
+    }
+  ],
+  "final_answer": "VEU was similar to ONTV, which was owned by Oak Industries."
+}
