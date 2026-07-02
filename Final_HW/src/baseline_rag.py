@@ -14,7 +14,7 @@ from opensearchpy import OpenSearch, helpers
 from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
 
-# ── constants ─────────────────────────────────────────────────────────────────
+# Constants
 EMBEDDER_ID  = "BAAI/bge-small-en-v1.5"
 INDEX_NAME   = "corpus_config_a"
 TOP_K        = 5
@@ -32,8 +32,9 @@ EVAL_PATH    = DATA_DIR / "eval_set.jsonl"
 OUTPUT_PATH  = RES_DIR / "config_a_outputs.jsonl"
 
 
-# ── OpenSearch client ─────────────────────────────────────────────────────────
+# OpenSearch client
 def get_client() -> OpenSearch:
+    """Initialize and return an OpenSearch client."""
     return OpenSearch(
         hosts=[{"host": os.getenv("OPENSEARCH_HOST", "localhost"), "port": 9200}],
         use_ssl=False,
@@ -42,8 +43,12 @@ def get_client() -> OpenSearch:
     )
 
 
-# ── index building ────────────────────────────────────────────────────────────
+# Index building
 def build_index(client: OpenSearch, embedder: SentenceTransformer) -> None:
+    """
+    Build the OpenSearch index if it does not exist, and populate it with
+    embedded passages from the corpus.
+    """
     if client.indices.exists(index=INDEX_NAME):
         print(f"Index '{INDEX_NAME}' already exists — skipping build.")
         return
@@ -103,13 +108,17 @@ def build_index(client: OpenSearch, embedder: SentenceTransformer) -> None:
     print(f"Indexed {len(passages):,} passages into '{INDEX_NAME}'.")
 
 
-# ── retrieval ─────────────────────────────────────────────────────────────────
+# Retrieval
 def retrieve(
     query: str,
     embedder: SentenceTransformer,
     client: OpenSearch,
     k: int = TOP_K,
 ) -> list[dict]:
+    """
+    Retrieve the top-k most relevant passages for a given query using
+    cosine similarity in OpenSearch.
+    """
     q_emb = embedder.encode([query], normalize_embeddings=True)[0].tolist()
     resp  = client.search(
         index=INDEX_NAME,
@@ -122,7 +131,7 @@ def retrieve(
     return [hit["_source"] for hit in resp["hits"]["hits"]]
 
 
-# ── generation ────────────────────────────────────────────────────────────────
+# Generation
 PROMPT_TEMPLATE = """\
 Answer the question using ONLY the passages below.
 Be concise — one sentence or a short phrase.
@@ -134,13 +143,15 @@ Question: {question}
 Answer:"""
 
 def generate_answer(question: str, passages: list[dict], llm: ChatGoogleGenerativeAI) -> str:
+    """Generate an answer using the provided LLM based on retrieved passages."""
     context = "\n\n".join(f"[{i+1}] {p['text']}" for i, p in enumerate(passages))
     msg     = PROMPT_TEMPLATE.format(context=context, question=question)
     return llm.invoke(msg).content.strip()
 
 
-# ── main ──────────────────────────────────────────────────────────────────────
+# Main
 def run() -> None:
+    """Execute the Baseline RAG pipeline across the evaluation set."""
     # load already-answered questions to avoid re-calling the API
     done: set[str] = set()
     if OUTPUT_PATH.exists():

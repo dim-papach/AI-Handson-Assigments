@@ -2,6 +2,15 @@
 
 Updated README documentation on HotpotQA benchmark and upgraded project dependencies.
 
+## dev-19:48
+
+### Clean up and standardize Python scripts
+Standardized comments and added docstrings across all Python files in `Final_HW/src/`.
+
+- **Subtask (Code Quality)**
+  - Replaced `# ──` style section dividers with standard `#` comments in all files (`agent.py`, `baseline_rag.py`, `evaluate.py`, `improved_retrieval.py`, `prepare_data.py`).
+  - Added descriptive docstrings to functions and classes to document parameters and behavior.
+
 ## dev-19:42
 
 ### Update Evaluation Logic and README

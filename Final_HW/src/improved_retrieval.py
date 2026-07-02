@@ -20,7 +20,7 @@ from tqdm import tqdm
 ROOT     = Path(__file__).parent.parent
 load_dotenv(ROOT.parent / ".env")
 
-# ── constants ─────────────────────────────────────────────────────────────────
+# Constants
 BASE_EMBEDDER_ID   = "BAAI/bge-small-en-v1.5"
 RERANKER_ID        = "BAAI/bge-reranker-base"
 INDEX_NAME         = "corpus_config_b"
@@ -44,8 +44,9 @@ EVAL_PATH   = DATA_DIR / "eval_set.jsonl"
 OUTPUT_PATH = RES_DIR / "config_b_outputs.jsonl"
 
 
-# ── helpers ───────────────────────────────────────────────────────────────────
+# Helpers
 def get_client() -> OpenSearch:
+    """Initialize and return an OpenSearch client."""
     return OpenSearch(
         hosts=[{"host": os.getenv("OPENSEARCH_HOST", "localhost"), "port": 9200}],
         use_ssl=False,
@@ -78,6 +79,10 @@ def recall_at_k(embedder: SentenceTransformer, client: OpenSearch, index: str, k
 
 
 def build_index(client: OpenSearch, embedder: SentenceTransformer, index_name: str) -> None:
+    """
+    Build the OpenSearch index if it does not exist, and populate it with
+    embedded passages from the corpus.
+    """
     if client.indices.exists(index=index_name):
         print(f"Index '{index_name}' already exists — skipping build.")
         return
@@ -131,8 +136,12 @@ def build_index(client: OpenSearch, embedder: SentenceTransformer, index_name: s
     print(f"Indexed {len(passages):,} passages into '{index_name}'.")
 
 
-# ── Task 3a: fine-tune bi-encoder ─────────────────────────────────────────────
+# Task 3a: Fine-tune bi-encoder
 def fine_tune() -> None:
+    """
+    Fine-tune the base bi-encoder using MultipleNegativesRankingLoss on the HotpotQA
+    training pairs.
+    """
     if (MODEL_DIR / "config.json").exists():
         print("Fine-tuned model already exists — skipping training.")
         return
@@ -174,13 +183,17 @@ def fine_tune() -> None:
     print(f"Recall@5 AFTER  fine-tuning: {r5_after:.3f}  (Δ = {r5_after - r5_before:+.3f})")
 
 
-# ── Task 3b: retrieve + rerank ────────────────────────────────────────────────
+# Task 3b: Retrieve + rerank
 def retrieve_and_rerank(
     query: str,
     embedder: SentenceTransformer,
     reranker: CrossEncoder,
     client: OpenSearch,
 ) -> list[dict]:
+    """
+    Retrieve top-k candidates using the bi-encoder, then re-rank them using the
+    cross-encoder to return the best passages.
+    """
     q_emb = embedder.encode([query], normalize_embeddings=True)[0].tolist()
     resp  = client.search(
         index=INDEX_NAME,
@@ -197,7 +210,7 @@ def retrieve_and_rerank(
     return [p for _, p in ranked[:TOP_K_RERANK]]
 
 
-# ── generation ────────────────────────────────────────────────────────────────
+# Generation
 PROMPT_TEMPLATE = """\
 Answer the question using ONLY the passages below.
 Be concise — one sentence or a short phrase.
@@ -209,12 +222,14 @@ Question: {question}
 Answer:"""
 
 def generate_answer(question: str, passages: list[dict], llm: ChatGoogleGenerativeAI) -> str:
+    """Generate an answer using the provided LLM based on retrieved passages."""
     context = "\n\n".join(f"[{i+1}] {p['text']}" for i, p in enumerate(passages))
     return llm.invoke(PROMPT_TEMPLATE.format(context=context, question=question)).content.strip()
 
 
-# ── main ──────────────────────────────────────────────────────────────────────
+# Main
 def run() -> None:
+    """Execute the Improved Retrieval pipeline across the evaluation set."""
     done: set[str] = set()
     if OUTPUT_PATH.exists():
         with open(OUTPUT_PATH) as f:

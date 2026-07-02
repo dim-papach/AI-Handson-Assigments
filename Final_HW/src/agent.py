@@ -18,7 +18,7 @@ from tqdm import tqdm
 ROOT     = Path(__file__).parent.parent
 load_dotenv(ROOT.parent / ".env")
 
-# ── constants ─────────────────────────────────────────────────────────────────
+# Constants
 EMBEDDER_PATH  = ROOT / "models" / "finetuned_embedder"
 BASE_EMBEDDER  = "BAAI/bge-small-en-v1.5"
 RERANKER_ID    = "BAAI/bge-reranker-base"
@@ -38,8 +38,9 @@ EVAL_PATH   = DATA_DIR / "eval_set.jsonl"
 OUTPUT_PATH = RES_DIR / "config_c_outputs.jsonl"
 
 
-# ── helpers ───────────────────────────────────────────────────────────────────
+# Helpers
 def get_client() -> OpenSearch:
+    """Initialize and return an OpenSearch client."""
     return OpenSearch(
         hosts=[{"host": os.getenv("OPENSEARCH_HOST", "localhost"), "port": 9200}],
         use_ssl=False,
@@ -70,7 +71,7 @@ def retrieve_tool(
     return [p for _, p in ranked[:TOP_K_RERANK]]
 
 
-# ── ReAct prompts ─────────────────────────────────────────────────────────────
+# ReAct prompts
 SYSTEM_PROMPT = """\
 You are a question-answering agent with access to a retrieval tool.
 To answer a question you can call retrieve() one or more times.
@@ -110,7 +111,7 @@ def parse_answer(text: str) -> str | None:
     return None
 
 
-# ── agent loop ────────────────────────────────────────────────────────────────
+# Agent loop
 def run_agent(
     question: str,
     embedder: SentenceTransformer,
@@ -118,6 +119,10 @@ def run_agent(
     client: OpenSearch,
     llm: ChatGoogleGenerativeAI,
 ) -> dict:
+    """
+    Execute the iterative ReAct loop for a given question, allowing the agent to
+    retrieve information multiple times before formulating a final answer.
+    """
     history      = ""
     trace_steps  = []
     final_answer = ""
@@ -182,8 +187,9 @@ def run_agent(
     }
 
 
-# ── main ──────────────────────────────────────────────────────────────────────
+# Main
 def run() -> None:
+    """Execute the iterative-retrieval agent pipeline across the evaluation set."""
     done: set[str] = set()
     if OUTPUT_PATH.exists():
         with open(OUTPUT_PATH) as f:

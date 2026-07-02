@@ -32,12 +32,14 @@ RAGAS_PATH      = RES_DIR / "ragas_scores.json"
 RAGAS_SAMPLE    = 50   # number of questions for RAGAS (API calls are expensive)
 
 
-# ── 5.1 retrieval metrics ─────────────────────────────────────────────────────
+# 5.1 Retrieval metrics
 def recall_at_k(retrieved: list[str], relevant: list[str], k: int) -> float:
+    """Calculate Recall@k for a single query."""
     return float(any(r in retrieved[:k] for r in relevant))
 
 
 def mrr_at_k(retrieved: list[str], relevant: list[str], k: int) -> float:
+    """Calculate Mean Reciprocal Rank@k for a single query."""
     for rank, pid in enumerate(retrieved[:k], start=1):
         if pid in relevant:
             return 1.0 / rank
@@ -45,6 +47,7 @@ def mrr_at_k(retrieved: list[str], relevant: list[str], k: int) -> float:
 
 
 def evaluate_retrieval(output_path: Path) -> dict:
+    """Evaluate retrieval performance (Recall and MRR) over the entire output file."""
     if not output_path.exists():
         return {"Recall@5": None, "Recall@10": None, "MRR@10": None, "n": 0}
 
@@ -71,8 +74,9 @@ def evaluate_retrieval(output_path: Path) -> dict:
     }
 
 
-# ── 5.2 HotpotQA official metrics ────────────────────────────────────────────
+# 5.2 HotpotQA official metrics
 def normalize(text: str) -> str:
+    """Normalize text by lowercasing, removing articles, and stripping punctuation."""
     text = text.lower()
     text = re.sub(r"\b(a|an|the)\b", " ", text)
     text = "".join(c for c in text if c not in string.punctuation)
@@ -80,10 +84,12 @@ def normalize(text: str) -> str:
 
 
 def exact_match(pred: str, gold: str) -> float:
+    """Check if the normalized prediction exactly matches the normalized gold answer."""
     return float(normalize(pred) == normalize(gold))
 
 
 def token_f1(pred: str, gold: str) -> float:
+    """Calculate the token-level F1 score between prediction and gold answer."""
     pred_t  = normalize(pred).split()
     gold_t  = normalize(gold).split()
     common  = Counter(pred_t) & Counter(gold_t)
@@ -114,6 +120,7 @@ def supporting_facts_scores(retrieved: list[str], relevant: list[str]) -> tuple[
 
 
 def evaluate_official(output_path: Path) -> dict:
+    """Evaluate HotpotQA official metrics (EM and F1) over the entire output file."""
     if not output_path.exists():
         return {"Answer EM": None, "Answer F1": None,
                 "SF EM": None, "SF F1": None,
@@ -159,8 +166,9 @@ def evaluate_official(output_path: Path) -> dict:
     }
 
 
-# ── 5.3 RAGAS ────────────────────────────────────────────────────────────────
+# 5.3 RAGAS
 def evaluate_ragas(output_path: Path, config_name: str) -> dict | None:
+    """Evaluate generation and retrieval quality using RAGAS."""
     try:
         import sys, types
         # langchain-community >=0.4 removed chat_models.vertexai; stub it so ragas doesn't crash
@@ -239,8 +247,9 @@ def evaluate_ragas(output_path: Path, config_name: str) -> dict | None:
     return scores
 
 
-# ── main ──────────────────────────────────────────────────────────────────────
+# Main
 def main() -> None:
+    """Calculate all evaluation metrics for all configurations and save results."""
     rows = []
     best_config, best_f1, best_path = None, -1.0, None
 

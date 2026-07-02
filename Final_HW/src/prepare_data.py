@@ -28,11 +28,16 @@ def build_passage_text(title: str, sentences: list[str]) -> str:
 
 
 def main():
+    """
+    Main execution logic for data preparation.
+    Loads the HotpotQA distractor dataset, samples train/validation questions,
+    and builds the filtered corpus, training pairs, and evaluation set.
+    """
     print("Loading HotpotQA …")
     ds_train = load_dataset("hotpotqa/hotpot_qa", "distractor", split="train")
     ds_val   = load_dataset("hotpotqa/hotpot_qa", "distractor", split="validation")
 
-    # ── collect sampled question ids first so corpus is filtered ─────────────
+    # Collect sampled question ids first so corpus is filtered
     print("Sampling train/eval questions …")
     all_train = list(ds_train)
     all_val   = list(ds_val)
@@ -43,7 +48,7 @@ def main():
     sampled_train = all_train[:TRAIN_QUESTIONS]
     sampled_val   = all_val[:EVAL_QUESTIONS]
 
-    # ── corpus: only passages that appear in sampled questions ────────────────
+    # Corpus: only passages that appear in sampled questions
     print("Building filtered corpus …")
     corpus: dict[str, str] = {}
 
@@ -58,7 +63,7 @@ def main():
             f.write(json.dumps({"passage_id": pid, "text": text}) + "\n")
     print(f"  corpus: {len(corpus):,} passages → data/corpus.jsonl")
 
-    # ── train pairs (sampled train only — no eval leakage) ───────────────────
+    # Train pairs: sampled train only (no eval leakage)
     print("Building training pairs …")
     train_pairs = []
     for ex in sampled_train:
@@ -79,7 +84,7 @@ def main():
             f.write(json.dumps(pair) + "\n")
     print(f"  train pairs: {len(train_pairs):,} → data/train_pairs.jsonl")
 
-    # ── eval set (sampled val only) ───────────────────────────────────────────
+    # Eval set: sampled val only
     print("Building eval set …")
     eval_set = []
     for ex in sampled_val:
