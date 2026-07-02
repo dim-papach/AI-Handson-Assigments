@@ -1,3 +1,19 @@
+# 2026-07-02
+
+Updated README documentation on HotpotQA benchmark and upgraded project dependencies.
+
+## dev-18:55
+
+### Documentation and Dependencies Update
+Documented HotpotQA evaluation strategy and added Ragas/VertexAI dependencies.
+
+- **Subtask (Documentation)**
+  - Expanded `Final_HW/README.md` with details on the HotpotQA benchmark, multi-hop reasoning, and sentence-level supporting facts.
+- **Subtask (Dependencies)**
+  - Upgraded `datasets` to `>=4.0.0`.
+  - Added `ragas` and `langchain-google-vertexai` to `pyproject.toml`.
+  - Updated `poetry.lock`.
+
 # 2026-07-01
 
 Updated RAG script to use Gemini 2.5 Flash, improved dataset sampling, and added accelerate dependency.
