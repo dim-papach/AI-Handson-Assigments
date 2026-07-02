@@ -1,10 +1,10 @@
 """
-Task 1 — Data preparation for HotpotQA (distractor setting).
+Task 1: Data preparation for HotpotQA (distractor setting).
 
 Outputs:
-  data/corpus.jsonl       — all unique passages from the knowledge base
-  data/train_pairs.jsonl  — (query, positive_passage) pairs from train split
-  data/eval_set.jsonl     — held-out evaluation questions + answers
+  data/corpus.jsonl       - all unique passages from the knowledge base
+  data/train_pairs.jsonl  - (query, positive_passage) pairs from train split
+  data/eval_set.jsonl     - held-out evaluation questions + answers
 """
 
 import json

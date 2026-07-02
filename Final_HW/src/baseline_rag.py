@@ -1,5 +1,5 @@
 """
-Configuration A — Baseline RAG
+Configuration A: Baseline RAG
 Off-the-shelf embedder (BAAI/bge-small-en-v1.5) + top-k HNSW retrieval via OpenSearch.
 Generator: Google Gemini (via langchain-google-genai), temperature=0.
 """
@@ -17,7 +17,8 @@ from tqdm import tqdm
 # Constants
 EMBEDDER_ID  = "BAAI/bge-small-en-v1.5"
 INDEX_NAME   = "corpus_config_a"
-TOP_K        = 5
+TOP_K        = 5    # passages passed to the generator
+RECALL_K     = 10   # passages stored for Recall@10 / MRR@10 (must be a real top-10 window)
 BATCH_SIZE   = 256
 RANDOM_STATE = 42
 
@@ -34,7 +35,6 @@ OUTPUT_PATH  = RES_DIR / "config_a_outputs.jsonl"
 
 # OpenSearch client
 def get_client() -> OpenSearch:
-    """Initialize and return an OpenSearch client."""
     return OpenSearch(
         hosts=[{"host": os.getenv("OPENSEARCH_HOST", "localhost"), "port": 9200}],
         use_ssl=False,
@@ -45,12 +45,8 @@ def get_client() -> OpenSearch:
 
 # Index building
 def build_index(client: OpenSearch, embedder: SentenceTransformer) -> None:
-    """
-    Build the OpenSearch index if it does not exist, and populate it with
-    embedded passages from the corpus.
-    """
     if client.indices.exists(index=INDEX_NAME):
-        print(f"Index '{INDEX_NAME}' already exists — skipping build.")
+        print(f"Index '{INDEX_NAME}' already exists, skipping build.")
         return
 
     dim = embedder.get_sentence_embedding_dimension()
@@ -81,7 +77,7 @@ def build_index(client: OpenSearch, embedder: SentenceTransformer) -> None:
     with open(CORPUS_PATH) as f:
         passages = [json.loads(line) for line in f]
 
-    print(f"Embedding {len(passages):,} passages (CPU — this takes a while) …")
+    print(f"Embedding {len(passages):,} passages (CPU, this takes a while) ...")
     texts      = [p["text"] for p in passages]
     embeddings = embedder.encode(
         texts,
@@ -113,12 +109,10 @@ def retrieve(
     query: str,
     embedder: SentenceTransformer,
     client: OpenSearch,
-    k: int = TOP_K,
+    k: int = RECALL_K,
 ) -> list[dict]:
-    """
-    Retrieve the top-k most relevant passages for a given query using
-    cosine similarity in OpenSearch.
-    """
+    # default k is RECALL_K, not TOP_K: run() needs the full ranking for Recall@10/MRR@10,
+    # and slices it down to TOP_K before it ever reaches the generator.
     q_emb = embedder.encode([query], normalize_embeddings=True)[0].tolist()
     resp  = client.search(
         index=INDEX_NAME,
@@ -158,7 +152,7 @@ def run() -> None:
         with open(OUTPUT_PATH) as f:
             for line in f:
                 done.add(json.loads(line)["question_id"])
-        print(f"Resuming — {len(done)} questions already answered.")
+        print(f"Resuming, {len(done)} questions already answered.")
 
     embedder = SentenceTransformer(EMBEDDER_ID)
     client   = get_client()
@@ -178,14 +172,16 @@ def run() -> None:
             if item["question_id"] in done:
                 continue
 
-            passages = retrieve(item["question"], embedder, client)
-            answer   = generate_answer(item["question"], passages, llm)
+            passages = retrieve(item["question"], embedder, client)  # top-RECALL_K, ranked
+            context_passages = passages[:TOP_K]
+            answer   = generate_answer(item["question"], context_passages, llm)
 
             result = {
                 "question_id":           item["question_id"],
                 "question":              item["question"],
                 "predicted_answer":      answer,
-                "retrieved_passage_ids": [p["passage_id"] for p in passages],
+                "retrieved_passage_ids": [p["passage_id"] for p in passages],          # top-RECALL_K, for Recall@5/10
+                "context_passage_ids":   [p["passage_id"] for p in context_passages],  # top-TOP_K, what the generator saw
                 "gold_answer":           item.get("answer", ""),
                 "supporting_passage_ids": item.get("supporting_passage_ids", []),
             }

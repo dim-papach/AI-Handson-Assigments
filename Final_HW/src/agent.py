@@ -1,5 +1,5 @@
 """
-Configuration C — Iterative-Retrieval Agent (ReAct loop)
+Configuration C: Iterative-Retrieval Agent (ReAct loop)
 Built on top of Config B's retrieval pipeline.
 Saves execution traces to src/traces/.
 """
@@ -15,18 +15,15 @@ from sentence_transformers import SentenceTransformer
 from sentence_transformers.cross_encoder import CrossEncoder
 from tqdm import tqdm
 
+import improved_retrieval as cfg_b
+
 ROOT     = Path(__file__).parent.parent
 load_dotenv(ROOT.parent / ".env")
 
 # Constants
-EMBEDDER_PATH  = ROOT / "models" / "finetuned_embedder"
-BASE_EMBEDDER  = "BAAI/bge-small-en-v1.5"
-RERANKER_ID    = "BAAI/bge-reranker-base"
-INDEX_NAME     = "corpus_config_b"
-TOP_K_RETRIEVE = 20
-TOP_K_RERANK   = 3
-MAX_STEPS      = 5
-RANDOM_STATE   = 42
+MAX_STEPS    = 5
+RECALL_K     = 10  # reranked ids logged per retrieve() call, for retrieval-quality metrics
+RANDOM_STATE = 42
 
 DATA_DIR   = ROOT / "data"
 RES_DIR    = ROOT / "results"
@@ -55,20 +52,13 @@ def retrieve_tool(
     reranker: CrossEncoder,
     client: OpenSearch,
 ) -> list[dict]:
-    """The agent's single tool: retrieve(query) -> list[passage]."""
-    q_emb = embedder.encode([query], normalize_embeddings=True)[0].tolist()
-    resp  = client.search(
-        index=INDEX_NAME,
-        body={
-            "size":  TOP_K_RETRIEVE,
-            "query": {"knn": {"embedding": {"vector": q_emb, "k": TOP_K_RETRIEVE}}},
-            "_source": ["passage_id", "text"],
-        },
-    )
-    candidates = [hit["_source"] for hit in resp["hits"]["hits"]]
-    scores     = reranker.predict([(query, p["text"]) for p in candidates])
-    ranked     = sorted(zip(scores, candidates), key=lambda x: x[0], reverse=True)
-    return [p for _, p in ranked[:TOP_K_RERANK]]
+    """
+    The agent's single tool: retrieve(query) -> list[passage].
+    Delegates to Configuration B's retrieve_and_rerank(), unchanged, and returns the
+    full reranked list; the caller slices TOP_K_RERANK passages for the agent to read
+    and RECALL_K passage ids for retrieval-quality metrics.
+    """
+    return cfg_b.retrieve_and_rerank(query, embedder, reranker, client)
 
 
 # ReAct prompts
@@ -126,7 +116,8 @@ def run_agent(
     history      = ""
     trace_steps  = []
     final_answer = ""
-    retrieved_ids: list[str] = []
+    retrieved_ids: list[str] = []  # top-RECALL_K per call, for Recall@5/10
+    context_ids:   list[str] = []  # top-TOP_K_RERANK per call, what the agent actually read
 
     system = SYSTEM_PROMPT.format(max_steps=MAX_STEPS)
 
@@ -160,9 +151,11 @@ def run_agent(
         # check for retrieval action
         query = parse_action(response)
         if query and step < MAX_STEPS:
-            passages     = retrieve_tool(query, embedder, reranker, client)
-            retrieved_ids.extend(p["passage_id"] for p in passages)
-            observation  = "\n".join(f"- {p['text'][:300]}" for p in passages)
+            ranked        = retrieve_tool(query, embedder, reranker, client)
+            context_passages = ranked[:cfg_b.TOP_K_RERANK]
+            retrieved_ids.extend(p["passage_id"] for p in ranked[:RECALL_K])
+            context_ids.extend(p["passage_id"] for p in context_passages)
+            observation  = "\n".join(f"- {p['text'][:300]}" for p in context_passages)
             trace_steps.append({
                 "type":        "thought_action",
                 "content":     response,
@@ -174,7 +167,7 @@ def run_agent(
                 f"Observation: {observation}\n\n"
             )
         else:
-            # no valid action or budget exhausted — take best guess
+            # no valid action, or budget exhausted: take best guess
             final_answer = response.replace("Thought:", "").strip()
             trace_steps.append({"type": "fallback", "content": response})
             break
@@ -183,6 +176,7 @@ def run_agent(
         "final_answer": final_answer,
         "trace":        trace_steps,
         "retrieved_ids": list(dict.fromkeys(retrieved_ids)),
+        "context_ids":   list(dict.fromkeys(context_ids)),
         "steps_used":   len([s for s in trace_steps if s["type"] == "thought_action"]),
     }
 
@@ -195,12 +189,17 @@ def run() -> None:
         with open(OUTPUT_PATH) as f:
             for line in f:
                 done.add(json.loads(line)["question_id"])
-        print(f"Resuming — {len(done)} questions already answered.")
+        print(f"Resuming, {len(done)} questions already answered.")
 
-    embedder_path = str(EMBEDDER_PATH) if (EMBEDDER_PATH / "config.json").exists() else BASE_EMBEDDER
-    embedder = SentenceTransformer(embedder_path)
-    reranker = CrossEncoder(RERANKER_ID)
+    # Config C is built directly on Config B: fine-tune and index are reused if
+    # already present, and built from scratch otherwise, so this script can be run
+    # on its own without requiring improved_retrieval.py to have been run first.
+    cfg_b.fine_tune()
     client   = get_client()
+    embedder_path = str(cfg_b.MODEL_DIR) if (cfg_b.MODEL_DIR / "config.json").exists() else cfg_b.BASE_EMBEDDER_ID
+    embedder = SentenceTransformer(embedder_path)
+    cfg_b.build_index(client, embedder, cfg_b.INDEX_NAME)
+    reranker = CrossEncoder(cfg_b.RERANKER_ID)
 
     llm = ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
@@ -223,6 +222,7 @@ def run() -> None:
                 "question":               item["question"],
                 "predicted_answer":       result_agent["final_answer"],
                 "retrieved_passage_ids":  result_agent["retrieved_ids"],
+                "context_passage_ids":    result_agent["context_ids"],
                 "gold_answer":            item.get("answer", ""),
                 "supporting_passage_ids": item.get("supporting_passage_ids", []),
                 "steps_used":             result_agent["steps_used"],

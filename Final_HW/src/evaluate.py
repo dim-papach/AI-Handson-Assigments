@@ -1,5 +1,5 @@
 """
-Task 5 — Evaluation
+Task 5: Evaluation
 5.1 Universal retrieval metrics: Recall@5, Recall@10, MRR@10
 5.2 HotpotQA official metrics: Answer EM/F1, Supporting Facts EM/F1, Joint EM/F1
 5.3 RAGAS: Faithfulness, Context Precision, Context Recall (best config only)
@@ -133,14 +133,19 @@ def evaluate_official(output_path: Path) -> dict:
             item      = json.loads(line)
             pred      = item.get("predicted_answer", "")
             gold      = item.get("gold_answer", "")
-            retrieved = item.get("retrieved_passage_ids", [])
+            # Supporting Facts approximates "the evidence the system actually used," so it
+            # must read context_passage_ids (what was shown to the generator), not the wider
+            # retrieved_passage_ids window kept for Recall@5/10; same reasoning as the RAGAS
+            # contexts fix above. Falls back to retrieved_passage_ids for older output rows
+            # that predate the context_passage_ids field.
+            evidence  = item.get("context_passage_ids", item.get("retrieved_passage_ids", []))
             relevant  = item.get("supporting_passage_ids", [])
             if not gold:
                 continue
 
             a_em  = exact_match(pred, gold)
             a_f1  = token_f1(pred, gold)
-            s_em, s_f1 = supporting_facts_scores(retrieved, relevant)
+            s_em, s_f1 = supporting_facts_scores(evidence, relevant)
 
             ans_em.append(a_em)
             ans_f1.append(a_f1)
@@ -201,11 +206,13 @@ def evaluate_ragas(output_path: Path, config_name: str) -> dict | None:
     with open(output_path) as f:
         items = [json.loads(line) for line in f][:RAGAS_SAMPLE]
 
+    # RAGAS must see exactly the passages the generator was given, not the wider
+    # retrieved_passage_ids window kept for Recall@5/10, so we read context_passage_ids.
     data = {
         "question":     [i["question"] for i in items],
         "answer":       [i["predicted_answer"] for i in items],
         "contexts":     [
-            [id_to_text[pid] for pid in i.get("retrieved_passage_ids", []) if pid in id_to_text] or [""]
+            [id_to_text[pid] for pid in i.get("context_passage_ids", i.get("retrieved_passage_ids", [])) if pid in id_to_text] or [""]
             for i in items
         ],
         "ground_truth": [i["gold_answer"] for i in items],
@@ -276,18 +283,22 @@ def main() -> None:
         writer.writerows(rows)
     print(f"\nComparison table saved to {TABLE_PATH}")
 
-    # RAGAS on best config
-    print(f"\nRunning RAGAS on best config ({best_config}) …")
-    ragas_scores = evaluate_ragas(best_path, best_config)
-    if ragas_scores:
-        with open(RAGAS_PATH, "w") as f:
-            json.dump(ragas_scores, f, indent=2)
-        print(f"  Faithfulness={ragas_scores['faithfulness']}  "
-              f"Context Precision={ragas_scores['context_precision']}  "
-              f"Context Recall={ragas_scores['context_recall']}")
-        print(f"  RAGAS scores saved to {RAGAS_PATH}")
+    # RAGAS on best config (cached: RAGAS calls an LLM judge, so skip if already computed)
+    if RAGAS_PATH.exists():
+        print(f"\nRAGAS scores already exist at {RAGAS_PATH}, skipping "
+              f"(delete the file to force a recompute).")
     else:
-        print("  RAGAS skipped.")
+        print(f"\nRunning RAGAS on best config ({best_config}) ...")
+        ragas_scores = evaluate_ragas(best_path, best_config)
+        if ragas_scores:
+            with open(RAGAS_PATH, "w") as f:
+                json.dump(ragas_scores, f, indent=2)
+            print(f"  Faithfulness={ragas_scores['faithfulness']}  "
+                  f"Context Precision={ragas_scores['context_precision']}  "
+                  f"Context Recall={ragas_scores['context_recall']}")
+            print(f"  RAGAS scores saved to {RAGAS_PATH}")
+        else:
+            print("  RAGAS skipped.")
 
 
 if __name__ == "__main__":

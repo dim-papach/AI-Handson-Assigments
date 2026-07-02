@@ -1,8 +1,8 @@
 """
-Configuration B — Improved Retrieval
+Configuration B: Improved Retrieval
 Fine-tuned bi-encoder (BAAI/bge-small-en-v1.5) + cross-encoder reranking.
-Step 1: fine_tune()  — trains and saves models/finetuned_embedder/
-Step 2: run()        — builds index with fine-tuned embedder, reranks, generates answers
+Step 1: fine_tune(), trains and saves models/finetuned_embedder/
+Step 2: run(), builds index with fine-tuned embedder, reranks, generates answers
 """
 
 import json
@@ -12,7 +12,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from opensearchpy import OpenSearch, helpers
-from sentence_transformers import SentenceTransformer, InputExample, losses, evaluation
+from sentence_transformers import SentenceTransformer, InputExample, losses
 from sentence_transformers.cross_encoder import CrossEncoder
 from torch.utils.data import DataLoader
 from tqdm import tqdm
@@ -25,7 +25,8 @@ BASE_EMBEDDER_ID   = "BAAI/bge-small-en-v1.5"
 RERANKER_ID        = "BAAI/bge-reranker-base"
 INDEX_NAME         = "corpus_config_b"
 TOP_K_RETRIEVE     = 20   # bi-encoder fetches top-20
-TOP_K_RERANK       = 3    # cross-encoder keeps top-3
+TOP_K_RERANK       = 3    # passages shown to the generator after reranking
+RECALL_K           = 10   # reranked ids stored for Recall@10 / MRR@10 (real top-10 window)
 BATCH_SIZE_EMBED   = 256
 BATCH_SIZE_TRAIN   = 8
 EPOCHS             = 2
@@ -84,7 +85,7 @@ def build_index(client: OpenSearch, embedder: SentenceTransformer, index_name: s
     embedded passages from the corpus.
     """
     if client.indices.exists(index=index_name):
-        print(f"Index '{index_name}' already exists — skipping build.")
+        print(f"Index '{index_name}' already exists, skipping build.")
         return
 
     dim = embedder.get_sentence_embedding_dimension()
@@ -143,7 +144,7 @@ def fine_tune() -> None:
     training pairs.
     """
     if (MODEL_DIR / "config.json").exists():
-        print("Fine-tuned model already exists — skipping training.")
+        print("Fine-tuned model already exists, skipping training.")
         return
 
     print("Loading training pairs …")
@@ -191,8 +192,11 @@ def retrieve_and_rerank(
     client: OpenSearch,
 ) -> list[dict]:
     """
-    Retrieve top-k candidates using the bi-encoder, then re-rank them using the
-    cross-encoder to return the best passages.
+    Retrieve top-k candidates using the bi-encoder, then re-rank all of them with the
+    cross-encoder. Returns the full reranked list (up to TOP_K_RETRIEVE); callers slice
+    the first TOP_K_RERANK passages for generation context and the first RECALL_K
+    passage ids for retrieval-quality metrics, so Recall@10 reflects a real top-10
+    window instead of the (much smaller) generator context.
     """
     q_emb = embedder.encode([query], normalize_embeddings=True)[0].tolist()
     resp  = client.search(
@@ -207,7 +211,7 @@ def retrieve_and_rerank(
 
     scores  = reranker.predict([(query, p["text"]) for p in candidates])
     ranked  = sorted(zip(scores, candidates), key=lambda x: x[0], reverse=True)
-    return [p for _, p in ranked[:TOP_K_RERANK]]
+    return [p for _, p in ranked]
 
 
 # Generation
@@ -235,7 +239,7 @@ def run() -> None:
         with open(OUTPUT_PATH) as f:
             for line in f:
                 done.add(json.loads(line)["question_id"])
-        print(f"Resuming — {len(done)} questions already answered.")
+        print(f"Resuming, {len(done)} questions already answered.")
 
     embedder = SentenceTransformer(str(MODEL_DIR) if (MODEL_DIR / "config.json").exists() else BASE_EMBEDDER_ID)
     reranker = CrossEncoder(RERANKER_ID)
@@ -256,14 +260,16 @@ def run() -> None:
             if item["question_id"] in done:
                 continue
 
-            passages = retrieve_and_rerank(item["question"], embedder, reranker, client)
-            answer   = generate_answer(item["question"], passages, llm)
+            ranked            = retrieve_and_rerank(item["question"], embedder, reranker, client)
+            context_passages  = ranked[:TOP_K_RERANK]
+            answer            = generate_answer(item["question"], context_passages, llm)
 
             result = {
                 "question_id":            item["question_id"],
                 "question":               item["question"],
                 "predicted_answer":       answer,
-                "retrieved_passage_ids":  [p["passage_id"] for p in passages],
+                "retrieved_passage_ids":  [p["passage_id"] for p in ranked[:RECALL_K]],       # for Recall@5/10
+                "context_passage_ids":    [p["passage_id"] for p in context_passages],        # what the generator saw
                 "gold_answer":            item.get("answer", ""),
                 "supporting_passage_ids": item.get("supporting_passage_ids", []),
             }
