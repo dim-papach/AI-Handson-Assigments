@@ -7,9 +7,20 @@ Step 2: run(), builds index with fine-tuned embedder, reranks, generates answers
 
 import json
 import os
+import random
+import socket
 from pathlib import Path
 
+import torch
 from dotenv import load_dotenv
+
+# Force IPv4 resolution to prevent connection hangs on hosts with broken IPv6
+# (same fix as hw2/src/config.py)
+_old_getaddrinfo = socket.getaddrinfo
+def _ipv4_getaddrinfo(*args, **kwargs):
+    return [res for res in _old_getaddrinfo(*args, **kwargs) if res[0] == socket.AF_INET]
+socket.getaddrinfo = _ipv4_getaddrinfo
+
 from langchain_google_genai import ChatGoogleGenerativeAI
 from opensearchpy import OpenSearch, helpers
 from sentence_transformers import SentenceTransformer, InputExample, losses
@@ -146,6 +157,9 @@ def fine_tune() -> None:
     if (MODEL_DIR / "config.json").exists():
         print("Fine-tuned model already exists, skipping training.")
         return
+
+    random.seed(RANDOM_STATE)
+    torch.manual_seed(RANDOM_STATE)
 
     print("Loading training pairs …")
     with open(TRAIN_PATH) as f:

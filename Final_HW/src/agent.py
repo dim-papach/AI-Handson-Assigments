@@ -6,7 +6,15 @@ Saves execution traces to src/traces/.
 
 import json
 import os
+import socket
 from pathlib import Path
+
+# Force IPv4 resolution to prevent connection hangs on hosts with broken IPv6
+# (same fix as hw2/src/config.py)
+_old_getaddrinfo = socket.getaddrinfo
+def _ipv4_getaddrinfo(*args, **kwargs):
+    return [res for res in _old_getaddrinfo(*args, **kwargs) if res[0] == socket.AF_INET]
+socket.getaddrinfo = _ipv4_getaddrinfo
 
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -86,6 +94,15 @@ Question: {question}
 
 {history}"""
 
+FORCE_ANSWER_TEMPLATE = """\
+Question: {question}
+
+{history}
+You have used your retrieval budget and must stop searching now.
+Based only on what you've seen above, give your best final answer.
+Output only:
+Answer: <concise answer>"""
+
 
 def parse_action(text: str) -> str | None:
     """Extract query from 'Action: retrieve("<query>")' or None."""
@@ -99,6 +116,26 @@ def parse_answer(text: str) -> str | None:
         if line.strip().lower().startswith("answer:"):
             return line.split(":", 1)[1].strip()
     return None
+
+
+def _invoke(system: str, prompt: str, llm: ChatGoogleGenerativeAI) -> str:
+    """Call the LLM with retry/backoff; Gemini occasionally drops the connection mid-session."""
+    import time
+    for attempt in range(4):
+        try:
+            raw = llm.invoke([
+                {"role": "system", "content": system},
+                {"role": "user",   "content": prompt},
+            ]).content
+            break
+        except Exception:
+            if attempt == 3:
+                raise
+            time.sleep(5 * (attempt + 1))
+    return (
+        "".join(c if isinstance(c, str) else c.get("text", "") for c in raw)
+        if isinstance(raw, list) else raw
+    ).strip()
 
 
 # Agent loop
@@ -167,9 +204,18 @@ def run_agent(
                 f"Observation: {observation}\n\n"
             )
         else:
-            # no valid action, or budget exhausted: take best guess
-            final_answer = response.replace("Thought:", "").strip()
-            trace_steps.append({"type": "fallback", "content": response})
+            # no valid action, or budget exhausted: force one last, explicit
+            # "answer now" call instead of returning the raw (possibly unexecuted
+            # Action: ...) text verbatim.
+            force_prompt = FORCE_ANSWER_TEMPLATE.format(question=question, history=history)
+            forced       = _invoke(system, force_prompt, llm)
+            forced_answer = parse_answer(forced)
+            if forced_answer:
+                final_answer = forced_answer
+                trace_steps.append({"type": "forced_answer", "content": forced})
+            else:
+                final_answer = response.replace("Thought:", "").strip()
+                trace_steps.append({"type": "fallback", "content": response})
             break
 
     return {

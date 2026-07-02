@@ -17,11 +17,19 @@ closest — treat those results as best-effort, not authoritative.
 
 import argparse
 import os
+import socket
 import sys
 from pathlib import Path
 
 # make sibling modules importable when running as a script
 sys.path.insert(0, str(Path(__file__).parent))
+
+# Force IPv4 resolution to prevent connection hangs on hosts with broken IPv6
+# (same fix as hw2/src/config.py)
+_old_getaddrinfo = socket.getaddrinfo
+def _ipv4_getaddrinfo(*args, **kwargs):
+    return [res for res in _old_getaddrinfo(*args, **kwargs) if res[0] == socket.AF_INET]
+socket.getaddrinfo = _ipv4_getaddrinfo
 
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
