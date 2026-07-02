@@ -259,51 +259,109 @@ poetry run python Final_HW/src/query.py -q "YOUR QUESTION" --config B
 **Example 1 — simple factual (birthplace)**
 
 ```bash
-poetry run python Final_HW/src/query.py \
+⚡poetry run python Final_HW/src/query.py \
+  -q "Where was Christopher Nolan born?" \
+  --config A --show-passages
+
+────────────────────────────────────────────────────────────
+Config A  |  Where was Christopher Nolan born?
+────────────────────────────────────────────────────────────
+Loading Config A (off-the-shelf embedder) …
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|█████████████████████████████████████████████████████| 199/199 [00:00<00:00, 11338.73it/s]
+Index 'corpus_config_a' already exists, skipping build.
+
+Answer: The passages do not state where Christopher Nolan was born.
+
+Retrieved passages:
+  [1] Jeremy_Theobald
+      Jeremy Theobald: Jeremy Theobald is a British actor best known for his portrayal of "The Young Man", the main character in Christopher Nolan's 1998 major picture debut "Following", and for which Theobald was also a producer, Filming was scheduled around their day jobs. Jonathan Romney, writing in th…
+
+  [2] Paul_Franklin_(visual_effects_supervisor)
+      Paul Franklin (visual effects supervisor): Paul J. Franklin is an English visual effects supervisor who has worked with visual effects since the 1990s. He is known for his long-running working relationship with director Christopher Nolan which dates back to "Batman Begins" (2005). Franklin won the A…
+
+  [3] Brian_O'Nolan
+      Brian O'Nolan: Brian O'Nolan (Irish: "Brian Ó Nualláin" ; 5 October 1911 – 1 April 1966) was an Irish novelist, playwright and satirist, considered a major figure in twentieth century Irish literature. Born in Strabane, County Tyrone, he is regarded as a key figure in postmodern literature. His Engl…
+
+  [4] The_Prestige_(film)
+      The Prestige (film): The Prestige is a 2006 British-American mystery thriller film directed by Christopher Nolan, from a screenplay adapted by Nolan and his brother Jonathan from Christopher Priest's 1995 novel of the same name. Its story follows Robert Angier and Alfred Borden, rival stage magician…
+
+  [5] Batman_Begins
+      Batman Begins: Batman Begins is a 2005 superhero film based on the DC Comics character Batman, co-written and directed by Christopher Nolan and starring Christian Bale, Michael Caine, Liam Neeson, Katie Holmes, Gary Oldman, Cillian Murphy, Tom Wilkinson, Rutger Hauer, Ken Watanabe and Morgan Freeman…
+
+⚡poetry run python Final_HW/src/query.py \
   -q "Where was Christopher Nolan born?" \
   --config B --show-passages
-```
 
-Expected output (approximately):
-
-```
 ────────────────────────────────────────────────────────────
 Config B  |  Where was Christopher Nolan born?
 ────────────────────────────────────────────────────────────
 Loading Config B (fine-tuned embedder + cross-encoder reranker) …
+Loading weights: 100%|██████████████████████████████████████████████████████| 199/199 [00:00<00:00, 7099.01it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|█████████████████████████████████████████████████████| 201/201 [00:00<00:00, 11421.34it/s]
+Index 'corpus_config_b' already exists, skipping build.
 
-Answer: Christopher Nolan was born in London, England.
+Answer: The passages do not provide information about where Christopher Nolan was born.
 
 Retrieved passages:
-  [1] Christopher Nolan
-      Christopher Nolan: Christopher Edward Nolan CBE is a British-American film director…
+  [1] The_Prestige_(film)
+      The Prestige (film): The Prestige is a 2006 British-American mystery thriller film directed by Christopher Nolan, from a screenplay adapted by Nolan and his brother Jonathan from Christopher Priest's 1995 novel of the same name. Its story follows Robert Angier and Alfred Borden, rival stage magician…
 
-  [2] Inception
-      Inception: Inception is a 2010 science fiction action film written and directed by
-      Christopher Nolan…
+  [2] The_Dark_Knight_(film)
+      The Dark Knight (film): The Dark Knight is a 2008 superhero film directed, co-produced, and co-written by Christopher Nolan. Featuring the DC Comics character Batman, the film is the second part of Nolan's "The Dark Knight Trilogy" and a sequel to 2005's "Batman Begins", starring an ensemble cast in…
+
+  [3] Tom_Hardy
+      Tom Hardy: (born 15 September 1977) is an English actor and producer. His motion picture debut was in Ridley Scott's 2001 action film "Black Hawk Down". Hardy's other notable films include the science fiction film "" (2002), the crime film "RocknRolla" (2008), biographical psychological drama "Brons…
+
+⚡poetry run python Final_HW/src/query.py \
+  -q "Where was Christopher Nolan born?" \
+  --config C --show-passages
+
+────────────────────────────────────────────────────────────
+Config C  |  Where was Christopher Nolan born?
+────────────────────────────────────────────────────────────
+Loading Config C (ReAct agent) …
+Loading weights: 100%|█████████████████████████████████████████████████████| 199/199 [00:00<00:00, 11638.98it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|█████████████████████████████████████████████████████| 201/201 [00:00<00:00, 10582.37it/s]
+Index 'corpus_config_b' already exists, skipping build.
+
+Answer: Christopher Nolan was born in Westminster, London, England.
+Retrieve calls used: 1
+
+Retrieved passage IDs (10 total across all steps):
+  The_Prestige_(film)
+  Tom_Hardy
+  Jeremy_Theobald
+  Batman_Begins
+  The_Dark_Knight_(film)
+  Stanley_Kubrick
+  Paul_Franklin_(visual_effects_supervisor)
+  Clayton_Watson
+  North_Shore_(Massachusetts)
+  Columbus_Circle_(Syracuse,_New_York)
 ```
 
 **Example 2 — astronomy (southern-hemisphere constellation)**
 
 ```bash
-poetry run python Final_HW/src/query.py \
+⚡poetry run python Final_HW/src/query.py \
   -q "What is the most famous constellation visible only from the southern hemisphere?" \
   --config C
-```
 
-Expected output (approximately):
-
-```
 ────────────────────────────────────────────────────────────
 Config C  |  What is the most famous constellation visible only from the southern hemisphere?
 ────────────────────────────────────────────────────────────
 Loading Config C (ReAct agent) …
+Loading weights: 100%|█████████████████████████████████████████████████████| 199/199 [00:00<00:00, 11933.52it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|█████████████████████████████████████████████████████| 201/201 [00:00<00:00, 10139.09it/s]
+Index 'corpus_config_b' already exists, skipping build.
 
-Answer: Crux (the Southern Cross)
-Retrieve calls used: 2
+Answer: The most famous constellation visible only from the southern hemisphere is Crux, also known as the Southern Cross.
+Retrieve calls used: 1
 ```
-
-Config C is useful for questions that need chaining two facts together. Here the agent issues a first `retrieve()` call for the constellation, then a follow-up for visibility constraints if the first hit didn't settle it.
 
 ### Installation and execution
 
