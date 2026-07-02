@@ -1,0 +1,7 @@
+{
+  "config": "Config B",
+  "faithfulness": 0.88,
+  "context_precision": 0.4067,
+  "context_recall": 0.6,
+  "n_samples": 50
+}
