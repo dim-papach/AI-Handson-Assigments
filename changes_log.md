@@ -2,6 +2,17 @@
 
 Updated README documentation on HotpotQA benchmark and upgraded project dependencies.
 
+## dev-19:42
+
+### Update Evaluation Logic and README
+Updated `evaluate.py` for Ragas v0.2+ compatibility and expanded README with Configurations B/C details.
+
+- **Subtask (Evaluation Logic)**
+  - Updated `Final_HW/src/evaluate.py` to fetch passage text from `corpus.jsonl` rather than just passing IDs to the Ragas contexts.
+  - Added a `_mean` helper function to handle `ragas` versions >= 0.2 which return lists instead of scalars for evaluation metrics.
+- **Subtask (Documentation)**
+  - Expanded `Final_HW/README.md` with detailed sections on Configuration B, Configuration C, evaluation results, findings, error analysis, and installation instructions.
+
 ## dev-18:55
 
 ### Documentation and Dependencies Update

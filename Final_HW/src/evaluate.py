@@ -172,6 +172,7 @@ def evaluate_ragas(output_path: Path, config_name: str) -> dict | None:
         from ragas.metrics import faithfulness, context_precision, context_recall
         from ragas.llms import LangchainLLMWrapper
         from ragas.embeddings import LangchainEmbeddingsWrapper
+        from ragas.run_config import RunConfig
         from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
         from datasets import Dataset
     except ImportError as e:
@@ -181,13 +182,24 @@ def evaluate_ragas(output_path: Path, config_name: str) -> dict | None:
     if not output_path.exists():
         return None
 
+    # build passage_id → text lookup from corpus
+    corpus_path = ROOT / "data" / "corpus.jsonl"
+    id_to_text: dict[str, str] = {}
+    with open(corpus_path) as f:
+        for line in f:
+            p = json.loads(line)
+            id_to_text[p["passage_id"]] = p["text"]
+
     with open(output_path) as f:
         items = [json.loads(line) for line in f][:RAGAS_SAMPLE]
 
     data = {
-        "question":  [i["question"] for i in items],
-        "answer":    [i["predicted_answer"] for i in items],
-        "contexts":  [[i.get("retrieved_passage_ids", [])[0]] if i.get("retrieved_passage_ids") else [""] for i in items],
+        "question":     [i["question"] for i in items],
+        "answer":       [i["predicted_answer"] for i in items],
+        "contexts":     [
+            [id_to_text[pid] for pid in i.get("retrieved_passage_ids", []) if pid in id_to_text] or [""]
+            for i in items
+        ],
         "ground_truth": [i["gold_answer"] for i in items],
     }
 
@@ -202,17 +214,26 @@ def evaluate_ragas(output_path: Path, config_name: str) -> dict | None:
     ))
 
     print(f"  Running RAGAS on {RAGAS_SAMPLE} samples …")
+    run_cfg = RunConfig(timeout=180, max_retries=3, max_wait=60, max_workers=4)
     result = ragas_evaluate(
         Dataset.from_dict(data),
         metrics=[faithfulness, context_precision, context_recall],
         llm=llm,
         embeddings=emb,
+        run_config=run_cfg,
     )
+    def _mean(val) -> float:
+        """ragas >=0.2 returns per-sample lists; older versions return a scalar."""
+        if isinstance(val, list):
+            vals = [v for v in val if v is not None]
+            return sum(vals) / len(vals) if vals else float("nan")
+        return float(val)
+
     scores = {
         "config":            config_name,
-        "faithfulness":      round(result["faithfulness"], 4),
-        "context_precision": round(result["context_precision"], 4),
-        "context_recall":    round(result["context_recall"], 4),
+        "faithfulness":      round(_mean(result["faithfulness"]), 4),
+        "context_precision": round(_mean(result["context_precision"]), 4),
+        "context_recall":    round(_mean(result["context_recall"]), 4),
         "n_samples":         RAGAS_SAMPLE,
     }
     return scores
