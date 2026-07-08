@@ -15,9 +15,9 @@
       "observation": "- So You Think You Can Dance (U.S. season 14): So You Think You Can Dance, an American dance competition show, returned for its fourteenth season on Monday, June 12, 2017. The new season's judge panel once again features series creator Nigel Lythgoe (who also serves as executive producer), as well as \n- Mira Quien Baila (U.S. season 4): \u00a1Mira Quien Baila! (also known as Mira Quien Baila 2013 and Mira Quien Baila 4) debuted on Univision on September 15, 2013 at 8pm/7c. The TV series is the Spanish version of British version \"Strictly Come Dancing\" and American version \"Dancing with the Stars\". Ten c\n- Strictly Come Dancing: Strictly Come Dancing (informally known as Strictly) is a British television dance contest, featuring contestants, celebrities, and other people, from all walks of life, with professional dance partners competing in a ballroom and Latin dance competition. Each couple is scored"
     },
     {
-      "type": "fallback",
-      "content": ""
+      "type": "forced_answer",
+      "content": "Answer: The provided information does not identify a new permanent member on the fourteenth season of So You Think You Can Dance."
     }
   ],
-  "final_answer": ""
+  "final_answer": "The provided information does not identify a new permanent member on the fourteenth season of So You Think You Can Dance."
 }

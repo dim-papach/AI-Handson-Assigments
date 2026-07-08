@@ -16,8 +16,8 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The Japanese destroyer Oite participated in the Battle of Wake Island, which ended with the surrender of American forces to the Empire of Japan.\nAnswer: The Battle of Wake Island."
+      "content": "Thought: The first retrieval states that the Japanese destroyer Oite participated in the Battle of Wake Island. The second retrieval confirms that the Battle of Wake Island ended with the surrender of American forces to the Empire of Japan.\nAnswer: The Japanese destroyer Oite participated in the Battle of Wake Island."
     }
   ],
-  "final_answer": "The Battle of Wake Island."
+  "final_answer": "The Japanese destroyer Oite participated in the Battle of Wake Island."
 }

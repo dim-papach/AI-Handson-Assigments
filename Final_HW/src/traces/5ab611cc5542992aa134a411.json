@@ -6,17 +6,23 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"S. Sylvan Simon professions\")",
       "query": "S. Sylvan Simon professions",
-      "observation": "- S. Sylvan Simon: S. Sylvan Simon (March 9, 1910 \u2013 May 17, 1951) was an American stage/film director and producer.\n- Archduchess Elisabeth Franziska of Austria (1892\u20131930): Archduchess Elisabeth Franziska of Austria (1892\u20131930)\n- Giuseppe Verdi: Giuseppe Fortunino Francesco Verdi (] ; 9 or 10 October 1813 \u2013 27 January 1901) was an Italian opera composer."
+      "observation": "- Marie Curie: Marie Sk\u0142odowska Curie ( ; ] ; ] ; 7 November 18674 July 1934; born Maria Salomea Sk\u0142odowska; ] ) was a Polish and naturalized-French physicist and chemist who conducted pioneering research on radioactivity. She was the first woman to win a Nobel Prize, the first person and only woman t\n- Archduchess Elisabeth Franziska of Austria (1892\u20131930): Archduchess Elisabeth Franziska of Austria (1892\u20131930)\n- Francis Bacon: Francis Bacon, 1st Viscount St Alban, {'1': \", '2': \", '3': \", '4': \"} ( ; 22 January 15619 April 1626) was an English philosopher, statesman, scientist, jurist, orator, and author. He served both as Attorney General and as Lord Chancellor of England. After his death, he remained extr"
     },
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Danny Cannon professions\")",
-      "query": "Danny Cannon professions",
-      "observation": "- Danny Cannon: John Danny Cannon (born 1968 in Luton, England) is a British film and television writer, director and producer.\n- Phoenix (1998 film): Phoenix is a 1998 American crime film directed by British director Danny Cannon and starring Ray Liotta. Liotta plays a cop whose gambling debt leaves him indebted to the underworld and desperate to find a way out without compromising his principles.\n- Nick Cannon: Nicholas Scott \"Nick\" Cannon (born October 8, 1980) is an American rapper, actor, comedian, director, screenwriter, film producer, entrepreneur, record producer, radio and television personality. On television, Cannon began as a teenager on \"All That\" before going on to host \"The Nick C"
+      "content": "Action: retrieve(\"S. Sylvan Simon occupation\")",
+      "query": "S. Sylvan Simon occupation",
+      "observation": "- S. Sylvan Simon: S. Sylvan Simon (March 9, 1910 \u2013 May 17, 1951) was an American stage/film director and producer.\n- Simon Gault: Simon Gault is a New Zealand celebrity chef, entrepreneur, food writer and television personality, known for appearing as a celebrity chef judge on Masterchef NZ.\n- Giuseppe Verdi: Giuseppe Fortunino Francesco Verdi (] ; 9 or 10 October 1813 \u2013 27 January 1901) was an Italian opera composer."
+    },
+    {
+      "type": "thought_action",
+      "content": "Thought: I have found the professions for S. Sylvan Simon. Now I need to find the professions for Danny Cannon.\nAction: retrieve(\"Danny Cannon occupation\")",
+      "query": "Danny Cannon occupation",
+      "observation": "- Danny Cannon: John Danny Cannon (born 1968 in Luton, England) is a British film and television writer, director and producer.\n- Nick Cannon: Nicholas Scott \"Nick\" Cannon (born October 8, 1980) is an American rapper, actor, comedian, director, screenwriter, film producer, entrepreneur, record producer, radio and television personality. On television, Cannon began as a teenager on \"All That\" before going on to host \"The Nick C\n- Doreen Cannon: Doreen Cannon (21 October 1930) was born and raised in New York City. She trained as an actress at the HB Studio in Manhattan for over 10 years with the famous Uta Hagen and Herbert Berghof. Her contemporaries and fellow students were Peter Falk, Geraldine Page, Sandy Dennis, Maureen "
     },
     {
       "type": "answer",
-      "content": "Thought: Both S. Sylvan Simon and Danny Cannon were film directors and producers.\nAnswer: Both S. Sylvan Simon and Danny Cannon were film directors and producers."
+      "content": "Thought: S. Sylvan Simon was a film director and producer. Danny Cannon is a film and television writer, director, and producer. The common professions are director and producer.\nAnswer: Both S. Sylvan Simon and Danny Cannon were film directors and producers."
     }
   ],
   "final_answer": "Both S. Sylvan Simon and Danny Cannon were film directors and producers."

@@ -6,18 +6,12 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"Martin Amis birth date\")",
       "query": "Martin Amis birth date",
-      "observation": "- Martin Adams: Martin Adams (born 4 June 1956) is an English professional darts player. Nicknamed Wolfie, he is a three-time BDO World Champion and three-time World Masters champion. He represents Cambridgeshire at county darts level and was the captain of England from 1993/94 to 2013, the longest an\n- Martin Short: Martin Hayter Short {'1': \", '2': \", '3': \", '4': \"} (born March 26, 1950) is a Canadian-American actor and comedian. He is known for his work on the television programs \"SCTV\" and \"Saturday Night Live\". He has starred in comedy films, such as \"Three Amigos\" (1986), \"Innerspace\" (1987)\n- Chris Martin: Christopher Anthony John Martin (born 2 March 1977) is an English singer, songwriter, musician, record producer and philanthropist. He is best known as the lead singer and co-founder of the British rock band Coldplay. Born in Whitestone, near Exeter in Devon, Martin went to University "
-    },
-    {
-      "type": "thought_action",
-      "content": "Action: retrieve(\"Martin Amis son of Kingsley Amis birth date\")",
-      "query": "Martin Amis son of Kingsley Amis birth date",
-      "observation": "- Kingsley Amis: Sir Kingsley William Amis, CBE (16 April 1922 \u2013 22 October 1995) was an English novelist, poet, critic, and teacher. He wrote more than 20 novels, six volumes of poetry, a memoir, various short stories, radio and television scripts, along with works of social and literary criticism. A\n- Martin Amis: Martin Louis Amis (born 25 August 1949) is a British novelist. His best-known novels are \"Money\" (1984) and \"London Fields\" (1989). He has received the James Tait Black Memorial Prize for his memoir \"Experience\" and has been listed for the Booker Prize twice to date (shortlisted in 1991\n- Martin Adams: Martin Adams (born 4 June 1956) is an English professional darts player. Nicknamed Wolfie, he is a three-time BDO World Champion and three-time World Masters champion. He represents Cambridgeshire at county darts level and was the captain of England from 1993/94 to 2013, the longest an"
+      "observation": "- Martin Amis: Martin Louis Amis (born 25 August 1949) is a British novelist. His best-known novels are \"Money\" (1984) and \"London Fields\" (1989). He has received the James Tait Black Memorial Prize for his memoir \"Experience\" and has been listed for the Booker Prize twice to date (shortlisted in 1991\n- Kingsley Amis: Sir Kingsley William Amis, CBE (16 April 1922 \u2013 22 October 1995) was an English novelist, poet, critic, and teacher. He wrote more than 20 novels, six volumes of poetry, a memoir, various short stories, radio and television scripts, along with works of social and literary criticism. A\n- Martin Adams: Martin Adams (born 4 June 1956) is an English professional darts player. Nicknamed Wolfie, he is a three-time BDO World Champion and three-time World Masters champion. He represents Cambridgeshire at county darts level and was the captain of England from 1993/94 to 2013, the longest an"
     },
     {
       "type": "answer",
-      "content": "Thought: The second retrieval result clearly identifies Martin Amis as the son of Kingsley Amis and provides his birth date.\nAnswer: Martin Amis, son of Kingsley Amis, was born on August 25, 1949."
+      "content": "Answer: Martin Amis, son of Kingsley Amis, was born on 25 August 1949."
     }
   ],
-  "final_answer": "Martin Amis, son of Kingsley Amis, was born on August 25, 1949."
+  "final_answer": "Martin Amis, son of Kingsley Amis, was born on 25 August 1949."
 }

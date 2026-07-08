@@ -4,13 +4,13 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Martin Luther King III birth date vs Dexter Scott King birth date\")",
-      "query": "Martin Luther King III birth date vs Dexter Scott King birth date",
+      "content": "Action: retrieve(\"Martin Luther King III birth date and Dexter Scott King birth date\")",
+      "query": "Martin Luther King III birth date and Dexter Scott King birth date",
       "observation": "- Martin Luther King III: Martin Luther King III (born October 23, 1957) is an American human rights advocate and community activist. He is the oldest son and oldest living child of civil rights leaders Martin Luther King Jr. and Coretta Scott King.\n- Dexter Scott King: Dexter Scott King (born January 30, 1961) is the second son of civil rights leaders Martin Luther King, Jr. and Coretta Scott King. His siblings are Martin Luther King III, the Reverend Bernice Albertine King, and the late Yolanda Denise King.\n- Martin Luther King Jr. Day: Martin Luther King Jr. Day (officially Birthday of Martin Luther King, Jr.) is an American federal holiday marking the birthday of Martin Luther King Jr. It is observed on the third Monday of January each year, which is around King's birthday, January 15. The holiday is s"
     },
     {
       "type": "answer",
-      "content": "Thought: Martin Luther King III was born on October 23, 1957, and Dexter Scott King was born on January 30, 1961. Since Dexter Scott King was born later, he is younger.\nAnswer: Dexter Scott King is younger."
+      "content": "Thought: I have the birth dates for both Martin Luther King III and Dexter Scott King. Martin Luther King III was born on October 23, 1957, and Dexter Scott King was born on January 30, 1961. Since 1961 is after 1957, Dexter Scott King is younger.\nAnswer: Dexter Scott King is younger."
     }
   ],
   "final_answer": "Dexter Scott King is younger."

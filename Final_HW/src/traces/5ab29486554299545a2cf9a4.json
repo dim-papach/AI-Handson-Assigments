@@ -16,7 +16,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: I have retrieved the number of members for both Dada (3 members) and Alt-J (4 members). Alt-J has more members than Dada.\nAnswer: Alt-J has more members than Dada."
+      "content": "Thought: I have retrieved information about the members of both bands. Dada has 3 members, and Alt-J has 4 members.\nAnswer: Alt-J has more members than Dada."
     }
   ],
   "final_answer": "Alt-J has more members than Dada."

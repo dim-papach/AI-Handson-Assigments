@@ -4,13 +4,13 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Dean Mills Reservoir location\")",
-      "query": "Dean Mills Reservoir location",
-      "observation": "- Dean Mills Reservoir: Dean Mills Reservoir is a small water reservoir to the north of the town of Bolton, Greater Manchester located high on the slopes of Winter Hill.\n- Broad Bay (New Hampshire): Broad Bay is a 431 acre freshwater lake located in Carroll County in eastern New Hampshire, United States, in the towns of Freedom and Ossipee. Broad Bay is part of a chain of four lakes with identical water levels, due to a dam located downstream in Effingham Falls. Upstr\n- Red Rock River (Montana): The Red Rock River is a roughly 70 mi river in southwestern Montana in the United States. Its drainage basin covers over 1548 mi2 . Its furthest tributary, Hell Roaring Creek, originates in the Beaverhead National Forest within a few hundred meters of the North American Con"
+      "content": "Action: retrieve(\"Dean Mills Reservoir location town\")",
+      "query": "Dean Mills Reservoir location town",
+      "observation": "- Dean Mills Reservoir: Dean Mills Reservoir is a small water reservoir to the north of the town of Bolton, Greater Manchester located high on the slopes of Winter Hill.\n- Saco River: The Saco River is a river in northeastern New Hampshire and southwestern Maine in the United States. It drains a rural area of 1703 sqmi of forests and farmlands west and southwest of Portland, emptying into the Atlantic Ocean at Saco Bay, 136 mi from its source. It supplies drinking wat\n- Arnold Mills Historic District: Arnold Mills Historic District is a historic district encompassing a modest 19th-century mill village in eastern Cumberland, Rhode Island. The district lies along the Nate Whipple Highway (Rhode Island Route 120) and Sneech Pond Road, south of the Arnold Mills Reservo"
     },
     {
       "type": "answer",
-      "content": "Thought: The first result directly answers the question, stating that Dean Mills Reservoir is located to the north of the town of Bolton.\nAnswer: Bolton"
+      "content": "Thought: The observation clearly states that Dean Mills Reservoir is to the north of the town of Bolton.\nAnswer: Bolton"
     }
   ],
   "final_answer": "Bolton"

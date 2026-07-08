@@ -16,7 +16,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The information from the second retrieve call directly states that \"Through the Looking-Glass\" is the sequel to \"Alice's Adventures in Wonderland\".\nAnswer: Through the Looking-Glass is the sequel to \"Alice's Adventures in Wonderland\"."
+      "content": "Thought: The information from the second retrieval clearly states that \"Through the Looking-Glass\" is the sequel to \"Alice's Adventures in Wonderland\".\nAnswer: Through the Looking-Glass is the sequel to \"Alice's Adventures in Wonderland\"."
     }
   ],
   "final_answer": "Through the Looking-Glass is the sequel to \"Alice's Adventures in Wonderland\"."

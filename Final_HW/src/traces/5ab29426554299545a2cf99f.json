@@ -16,8 +16,8 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The question asks for the team to which the player who tied Calvin Murphy's record was sent in 2017. My previous retrieval identified Isaiah Thomas as the player who tied the record. The observation also states that Isaiah Thomas was traded to the Cleveland Cavaliers on August 22, 2017.\nAnswer: Isaiah Thomas, who tied Calvin Murphy's record, was sent to the Cleveland Cavaliers in 2017."
+      "content": "Thought: The question asks for the team Isaiah Thomas was sent to in 2017, after he tied Calvin Murphy's record. The previous retrieval states that Isaiah Thomas was traded to the Cleveland Cavaliers on August 22, 2017.\nAnswer: Isaiah Thomas was sent to the Cleveland Cavaliers in 2017."
     }
   ],
-  "final_answer": "Isaiah Thomas, who tied Calvin Murphy's record, was sent to the Cleveland Cavaliers in 2017."
+  "final_answer": "Isaiah Thomas was sent to the Cleveland Cavaliers in 2017."
 }

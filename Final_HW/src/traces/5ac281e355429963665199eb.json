@@ -16,7 +16,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The previous steps identified Kim Ji-soo as a South Korean actress born in 1972. The retrievals also showed that she starred in two films released in 2006: \"Romance\" and \"Traces of Love\". Both films fit the criteria.\nAnswer: The films \"Romance\" and \"Traces of Love\" debuted in 2006 with South Korean actress Kim Ji-soo, who was born in 1972."
+      "content": "Thought: The South Korean actress born in 1972 is Kim Ji-soo. My retrievals show that Kim Ji-soo starred in two films that debuted in 2006: \"Romance\" and \"Traces of Love\".\nAnswer: The films \"Romance\" and \"Traces of Love\" debuted in 2006 with South Korean actress Kim Ji-soo, who was born in 1972."
     }
   ],
   "final_answer": "The films \"Romance\" and \"Traces of Love\" debuted in 2006 with South Korean actress Kim Ji-soo, who was born in 1972."

@@ -10,7 +10,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The previous retrieval identified the Tian Tan Buddha (Big Buddha) as a large bronze statue completed in 1993, located near Po Lin Monastery. This statue is highly likely to be the \"most famous statute\" referred to in the question due to its prominence and proximity to the monastery.\nAnswer: 1993"
+      "content": "Thought: The previous retrieval identified the Tian Tan Buddha as a large bronze statue located near Po Lin Monastery, completed in 1993. This statue is also known as the Big Buddha, implying its fame. Therefore, 1993 is the year the most famous statue associated with the monastery was built.\nAnswer: 1993"
     }
   ],
   "final_answer": "1993"

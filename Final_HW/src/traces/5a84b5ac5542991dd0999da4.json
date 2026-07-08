@@ -10,7 +10,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieval result clearly states that the American Bulldog has \"Standard\" and \"Classic\" types. This directly answers the question.\nAnswer: The American Bulldog."
+      "content": "Thought: The previous retrieval clearly states that the American Bulldog has \"Standard\" and \"Classic\" types. This directly answers the question.\nAnswer: The American Bulldog."
     }
   ],
   "final_answer": "The American Bulldog."

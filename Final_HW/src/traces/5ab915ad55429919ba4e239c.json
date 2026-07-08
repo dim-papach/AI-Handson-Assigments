@@ -4,13 +4,25 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Muhammad Ali fight after Fight of the Century\")",
-      "query": "Muhammad Ali fight after Fight of the Century",
-      "observation": "- Muhammad Ali vs. Jimmy Ellis: Muhammad Ali and Jimmy Ellis fought each other in a boxing match at the Astrodome in Houston on July 26, 1971. Ali won the bout through a technical knockout when the referee stopped the fight in the twelfth round. This was Ali's first boxing match after Fight of the Cen\n- Fight of the Century (disambiguation): Fight of the Century usually refers to the 1971 boxing match between Muhammad Ali and Joe Frazier.\n- Muhammad Ali: Muhammad Ali ( ; born Cassius Marcellus Clay Jr.; January 17, 1942 \u2013 June 3, 2016) was an American professional boxer and activist. He is widely regarded as one of the most significant and celebrated sports figures of the 20th century. From early in his career, Ali was known as an insp"
+      "content": "Action: retrieve(\"Muhammad Ali fights after Fight of the Century with Joe Frazier\")",
+      "query": "Muhammad Ali fights after Fight of the Century with Joe Frazier",
+      "observation": "- Fight of the Century (disambiguation): Fight of the Century usually refers to the 1971 boxing match between Muhammad Ali and Joe Frazier.\n- Muhammad Ali: Muhammad Ali ( ; born Cassius Marcellus Clay Jr.; January 17, 1942 \u2013 June 3, 2016) was an American professional boxer and activist. He is widely regarded as one of the most significant and celebrated sports figures of the 20th century. From early in his career, Ali was known as an insp\n- Ali (film): Ali is a 2001 American biographical sports drama film written, produced and directed by Michael Mann. The film focuses on ten years in the life of the boxer Muhammad Ali, played by Will Smith, from 1964 to 1974, featuring his capture of the heavyweight title from Sonny Liston, his conver"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Muhammad Ali fights after Joe Frazier Fight of the Century Houston\")",
+      "query": "Muhammad Ali fights after Joe Frazier Fight of the Century Houston",
+      "observation": "- Muhammad Ali: Muhammad Ali ( ; born Cassius Marcellus Clay Jr.; January 17, 1942 \u2013 June 3, 2016) was an American professional boxer and activist. He is widely regarded as one of the most significant and celebrated sports figures of the 20th century. From early in his career, Ali was known as an insp\n- Fight of the Century (disambiguation): Fight of the Century usually refers to the 1971 boxing match between Muhammad Ali and Joe Frazier.\n- Ali (film): Ali is a 2001 American biographical sports drama film written, produced and directed by Michael Mann. The film focuses on ten years in the life of the boxer Muhammad Ali, played by Will Smith, from 1964 to 1974, featuring his capture of the heavyweight title from Sonny Liston, his conver"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"Muhammad Ali fight record after March 1971 Houston\")",
+      "query": "Muhammad Ali fight record after March 1971 Houston",
+      "observation": "- Muhammad Ali: Muhammad Ali ( ; born Cassius Marcellus Clay Jr.; January 17, 1942 \u2013 June 3, 2016) was an American professional boxer and activist. He is widely regarded as one of the most significant and celebrated sports figures of the 20th century. From early in his career, Ali was known as an insp\n- Ali (film): Ali is a 2001 American biographical sports drama film written, produced and directed by Michael Mann. The film focuses on ten years in the life of the boxer Muhammad Ali, played by Will Smith, from 1964 to 1974, featuring his capture of the heavyweight title from Sonny Liston, his conver\n- Muhammad Ali vs. Jimmy Ellis: Muhammad Ali and Jimmy Ellis fought each other in a boxing match at the Astrodome in Houston on July 26, 1971. Ali won the bout through a technical knockout when the referee stopped the fight in the twelfth round. This was Ali's first boxing match after Fight of the Cen"
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieval results clearly state that Muhammad Ali fought Jimmy Ellis in Houston on July 26, 1971, and that this was his first fight after the \"Fight of the Century\" with Joe Frazier.\nAnswer: Muhammad Ali fought Jimmy Ellis next in Houston after the Fight of the Century."
+      "content": "Thought: The last retrieval result clearly states that Muhammad Ali fought Jimmy Ellis in Houston on July 26, 1971, and that this was his first fight after the \"Fight of the Century\".\nAnswer: Muhammad Ali fought Jimmy Ellis next in Houston after the Fight of the Century."
     }
   ],
   "final_answer": "Muhammad Ali fought Jimmy Ellis next in Houston after the Fight of the Century."

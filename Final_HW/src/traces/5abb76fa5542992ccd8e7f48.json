@@ -12,11 +12,11 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"leading actress in The Others 2001 film\")",
       "query": "leading actress in The Others 2001 film",
-      "observation": "- The Others (2001 film): The Others (Spanish: \"Los Otros\" ) is a 2001 Spanish-American supernatural gothic horror film with elements of psychological horror. It was written, directed, and scored by Alejandro Amen\u00e1bar. It stars Nicole Kidman and Fionnula Flanagan.\n- Cate Blanchett: Catherine Elise Blanchett, {'1': \", '2': \", '3': \", '4': \"} ( ; born 14 May 1969) is an Australian actress and theatre director. She has received international acclaim and many accolades, including two Academy Awards, three Golden Globe Awards, three BAFTA Awards, six AACTA Awards, a\n- Emily Bergl: Emily Bergl (born Anne Emily Bergl, 25 April, 1975) is an English-American actress. She is best known for her role as Rachel Lang in the supernatural horror film \"\" (1999), Annie O'Donnell on the ABC television show \"Men in Trees\" (2006\u201308), Beth Young on \"Desperate Housewives\" (2010\u201311"
+      "observation": "- The Others (2001 film): The Others (Spanish: \"Los Otros\" ) is a 2001 Spanish-American supernatural gothic horror film with elements of psychological horror. It was written, directed, and scored by Alejandro Amen\u00e1bar. It stars Nicole Kidman and Fionnula Flanagan.\n- Cate Blanchett: Catherine Elise Blanchett, {'1': \", '2': \", '3': \", '4': \"} ( ; born 14 May 1969) is an Australian actress and theatre director. She has received international acclaim and many accolades, including two Academy Awards, three Golden Globe Awards, three BAFTA Awards, six AACTA Awards, a\n- Julie Wagner: Julie Anne Wagner (born October 22, 1965) is an American actress, performer, body double and stand in. She was born in New Berlin, Wisconsin. She was a body double for Julia Roberts in six films, including the 1999 drama, \"Erin Brockovich\" to the 2011 romantic comedy, \"Larry Crowne\" ; "
     },
     {
       "type": "answer",
-      "content": "Thought: The previous retrieval clearly states that Nicole Kidman starred in \"The Others\" (2001 film).\nAnswer: Nicole Kidman"
+      "content": "Thought: The question asks for the leading female star in \"The Others\". The retrieval results clearly state that Nicole Kidman starred in the film.\nAnswer: Nicole Kidman"
     }
   ],
   "final_answer": "Nicole Kidman"

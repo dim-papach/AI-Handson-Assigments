@@ -4,14 +4,14 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Thought: I need to identify Andrew \"Andy\" Spade's brother and then find out which show he was in during the 1990s.\nAction: retrieve(\"Andrew Andy Spade brother\")",
-      "query": "Andrew Andy Spade brother",
-      "observation": "- Andy Spade: Andrew \"Andy\" Spade is an American entrepreneur who is the co-founder of Partners & Spade, along with Anthony Sperduti. He is the brother of actor/comedian David Spade.\n- David Spade: David Wayne Spade (born July 22, 1964) is an American actor, stand-up comedian, writer and television personality. He rose to fame in the 1990s as a cast member on \"Saturday Night Live\", then began a successful acting career in both film and television. He also starred and co-starred in\n- Andrew Blunt: Andrew (Andy) Blunt is a Missouri political consultant and founder of state-based consulting firm Statehouse Strategies LLC. He is the son of Missouri Senator Roy Blunt and the brother of former Missouri Governor Matt Blunt. The Missouri Times named Andy Blunt one of the 100+ people to"
+      "content": "Action: retrieve(\"Andrew Spade brother\")",
+      "query": "Andrew Spade brother",
+      "observation": "- Andy Spade: Andrew \"Andy\" Spade is an American entrepreneur who is the co-founder of Partners & Spade, along with Anthony Sperduti. He is the brother of actor/comedian David Spade.\n- David Spade: David Wayne Spade (born July 22, 1964) is an American actor, stand-up comedian, writer and television personality. He rose to fame in the 1990s as a cast member on \"Saturday Night Live\", then began a successful acting career in both film and television. He also starred and co-starred in\n- Alex Foster (ice hockey): Alexander Dwight \"Alex\" Foster (born August 26, 1984 in Canton, Michigan) is an American professional ice hockey forward who is currently playing with the Toledo Walleye of the ECHL. He is the son of former NHL player Dwight Foster and nephew of former NHL player Wes Jarvis"
     },
     {
       "type": "answer",
-      "content": "Thought: The first result clearly states that Andrew \"Andy\" Spade is the brother of actor/comedian David Spade. Now I need to find out which show David Spade was in during the 1990s. The provided information already states he was a cast member on \"Saturday Night Live\" in the 1990s.\nAnswer: Saturday Night Live"
+      "content": "Thought: The previous retrieval identified Andrew \"Andy\" Spade's brother as David Spade and stated that David Spade was a cast member on \"Saturday Night Live\" in the 1990s.\nAnswer: Andrew \"Andy\" Spade's brother, David Spade, was in \"Saturday Night Live\" in the 1990s."
     }
   ],
-  "final_answer": "Saturday Night Live"
+  "final_answer": "Andrew \"Andy\" Spade's brother, David Spade, was in \"Saturday Night Live\" in the 1990s."
 }

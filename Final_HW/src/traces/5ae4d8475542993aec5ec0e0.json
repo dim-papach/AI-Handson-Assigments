@@ -10,19 +10,13 @@
     },
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Pl\u00e1cido Domingo opera roles Shakespeare composer\")",
-      "query": "Pl\u00e1cido Domingo opera roles Shakespeare composer",
-      "observation": "- Pl\u00e1cido Domingo: Jos\u00e9 Pl\u00e1cido Domingo Embil, {'1': \", '2': \", '3': \", '4': \"} (] ; born 21 January 1941), known as Pl\u00e1cido Domingo, is a Spanish tenor, conductor and arts administrator. He has recorded over a hundred complete operas and is well known for his versatility, regularly performing in Ital\n- The Enchanted Island (opera): The Enchanted Island is a \"pasticcio\" (pastiche) of music by various baroque composers, including George Frideric Handel, Antonio Vivaldi, and Jean-Philippe Rameau, devised and written by Jeremy Sams after \"The Tempest\" and \"A Midsummer Night's Dream\" by William Shakesp\n- Repertoire of Pl\u00e1cido Domingo: Spanish tenor Pl\u00e1cido Domingo has officially sung 147 roles in Italian, French, German, English, Spanish and Russian. His main repertoire however is Italian (\"Otello\", Cavaradossi in \"Tosca\", \"Don Carlo\", Des Grieux in \"Manon Lescaut\", Dick Johnson in \"La fanciulla del"
-    },
-    {
-      "type": "thought_action",
-      "content": "Thought: The previous retrievals mention \"Otello\" as part of Pl\u00e1cido Domingo's main repertoire. \"Otello\" is an opera based on William Shakespeare's play \"Othello\". I need to find the composer of the opera \"Otello\".\nAction: retrieve(\"composer of Otello opera\")",
-      "query": "composer of Otello opera",
-      "observation": "- Pl\u00e1cido Domingo: Jos\u00e9 Pl\u00e1cido Domingo Embil, {'1': \", '2': \", '3': \", '4': \"} (] ; born 21 January 1941), known as Pl\u00e1cido Domingo, is a Spanish tenor, conductor and arts administrator. He has recorded over a hundred complete operas and is well known for his versatility, regularly performing in Ital\n- Giuseppe Verdi: Giuseppe Fortunino Francesco Verdi (] ; 9 or 10 October 1813 \u2013 27 January 1901) was an Italian opera composer.\n- Lost operas by Claudio Monteverdi: The Italian composer Claudio Monteverdi (1567\u20131643), in addition to a large output of church music and madrigals, wrote prolifically for the stage. His theatrical works were written between 1604 and 1643 and included ten operas, of which three\u2014\"L'Orfeo\" (1607), \"Il"
+      "content": "Action: retrieve(\"Pl\u00e1cido Domingo opera Shakespeare composer\")",
+      "query": "Pl\u00e1cido Domingo opera Shakespeare composer",
+      "observation": "- Pl\u00e1cido Domingo: Jos\u00e9 Pl\u00e1cido Domingo Embil, {'1': \", '2': \", '3': \", '4': \"} (] ; born 21 January 1941), known as Pl\u00e1cido Domingo, is a Spanish tenor, conductor and arts administrator. He has recorded over a hundred complete operas and is well known for his versatility, regularly performing in Ital\n- The Enchanted Island (opera): The Enchanted Island is a \"pasticcio\" (pastiche) of music by various baroque composers, including George Frideric Handel, Antonio Vivaldi, and Jean-Philippe Rameau, devised and written by Jeremy Sams after \"The Tempest\" and \"A Midsummer Night's Dream\" by William Shakesp\n- Cavalleria rusticana (1982 film): Cavalleria rusticana is a 1982 Italian film directed by Franco Zeffirelli based on Pietro Mascagni's 1890 opera of the same name. It stars tenor Pl\u00e1cido Domingo, mezzo-soprano Elena Obraztsova, and baritone Renato Bruson, all singing their own roles. Georges Pr\u00eatre "
     },
     {
       "type": "answer",
-      "content": "Thought: The information states that Pl\u00e1cido Domingo's main repertoire includes \"Otello\". It also states that Giuseppe Verdi was an Italian opera composer. While the last observation doesn't explicitly link Verdi to \"Otello\", it's a widely known fact that Verdi composed the opera \"Otello\", which is based on Shakespeare's play \"Othello\". Given the context, this is the most logical answer.\nAnswer: Giuseppe Verdi"
+      "content": "Thought: The question asks for the composer of an opera from Pl\u00e1cido Domingo's repertoire that was based on a play by William Shakespeare. The initial search results mention \"Otello\" as part of Domingo's main repertoire. \"Otello\" is an opera by Giuseppe Verdi based on Shakespeare's play \"Othello\". This fits all criteria.\n\nAnswer: Giuseppe Verdi"
     }
   ],
   "final_answer": "Giuseppe Verdi"

@@ -12,11 +12,11 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"Didsbury population 2011 census\")",
       "query": "Didsbury population 2011 census",
-      "observation": "- Didsbury: Didsbury is a suburban area of Manchester, England. It lies on the north bank of the River Mersey, 4.5 mi south of Manchester city centre. The population at the 2011 census was 26,788.\n- Northenden: Northenden is a suburban area and electoral ward of the city of Manchester in North West England. The population of the ward taken at the 2011 census was 14,771. It lies on the south side of both the River Mersey and the M60 motorway, 4.2 mi west of Stockport and 5.2 mi south of Manchest\n- Crumpsall: Crumpsall is a suburban area and electoral ward of the city of Manchester, in Greater Manchester, England. The Ward population at the 2011 census was 15,959. It is about 3 mi north of Manchester city centre. The area is adjacent to the Cheetham Hill, Blackley and Harpurhey wards of the Ci"
+      "observation": "- Didsbury: Didsbury is a suburban area of Manchester, England. It lies on the north bank of the River Mersey, 4.5 mi south of Manchester city centre. The population at the 2011 census was 26,788.\n- Northenden: Northenden is a suburban area and electoral ward of the city of Manchester in North West England. The population of the ward taken at the 2011 census was 14,771. It lies on the south side of both the River Mersey and the M60 motorway, 4.2 mi west of Stockport and 5.2 mi south of Manchest\n- Mollington, Cheshire: Mollington is a small village and civil parish in the unitary authority of Cheshire West and Chester and the ceremonial county of Cheshire, England, It is located two miles north of the city of Chester, with approximate boundaries formed by the A41 Liverpool-Chester trunk road "
     },
     {
       "type": "answer",
-      "content": "Thought: BA Connect was headquartered in Didsbury. The population of Didsbury at the 2011 census was 26,788.\nAnswer: The population of Didsbury, where BA Connect was headquartered, was 26,788 in the 2011 census."
+      "content": "Thought: BA Connect was headquartered in Didsbury, Manchester. The population of Didsbury at the 2011 census was 26,788.\nAnswer: The population of Didsbury, where BA Connect was headquartered, was 26,788 in the 2011 census."
     }
   ],
   "final_answer": "The population of Didsbury, where BA Connect was headquartered, was 26,788 in the 2011 census."

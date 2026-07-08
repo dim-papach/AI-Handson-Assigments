@@ -6,11 +6,17 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"The Dakotas singer\")",
       "query": "The Dakotas singer",
-      "observation": "- The Dakotas (band): The Dakotas is a group of British musicians, which initially convened as a backing band in Manchester, England. However, they are most closely associated with the singer Billy J. Kramer, a Liverpudlian who was the lead vocalist for the group during the 1960s. In the U.S., they ar\n- Bob Dylan: Bob Dylan ( ; born Robert Allen Zimmerman, May 24, 1941) is an American singer, songwriter, musician, painter, and writer. He has been influential in popular music and culture for more than five decades. Much of his most celebrated work dates from the 1960s, when he became a reluctant \"vo\n- Jack Greene: Jack Henry Greene (January 7, 1930 \u2013 March 14, 2013) was an American country musician. Nicknamed the \"Jolly Greene Giant\" due to his height and deep voice, Greene was a long time member of the Grand Ole Opry. A three-time Grammy Award nominee, Greene is best known for his 1966 hit, \"The"
+      "observation": "- Bob Dylan: Bob Dylan ( ; born Robert Allen Zimmerman, May 24, 1941) is an American singer, songwriter, musician, painter, and writer. He has been influential in popular music and culture for more than five decades. Much of his most celebrated work dates from the 1960s, when he became a reluctant \"vo\n- Glenn Frey: Glenn Lewis Frey ( ; November 6, 1948 \u2013 January 18, 2016) was an American singer, songwriter and actor, best known as a founding member of the rock band Eagles. Frey was the lead singer and frontman for the Eagles, roles he came to share with fellow member Don Henley, with whom he wrote \n- Chuck Berry: Charles Edward Anderson Berry (October 18, 1926 \u2013 March 18, 2017) was an American singer, songwriter, musician, and one of the pioneers of rock and roll music. With songs such as \"Maybellene\" (1955), \"Roll Over Beethoven\" (1956), \"Rock and Roll Music\" (1957) and \"Johnny B. Goode\" (1958)"
+    },
+    {
+      "type": "thought_action",
+      "content": "Action: retrieve(\"The Dakotas lead singer\")",
+      "query": "The Dakotas lead singer",
+      "observation": "- The Dakotas (band): The Dakotas is a group of British musicians, which initially convened as a backing band in Manchester, England. However, they are most closely associated with the singer Billy J. Kramer, a Liverpudlian who was the lead vocalist for the group during the 1960s. In the U.S., they ar\n- Bruce Dickinson: Paul Bruce Dickinson (born 7 August 1958), known professionally as Bruce Dickinson, is an English singer, songwriter, musician, airline pilot, entrepreneur, author and broadcaster. He is the lead singer of the heavy metal band Iron Maiden and is renowned for his wide-ranging operati\n- Glenn Frey: Glenn Lewis Frey ( ; November 6, 1948 \u2013 January 18, 2016) was an American singer, songwriter and actor, best known as a founding member of the rock band Eagles. Frey was the lead singer and frontman for the Eagles, roles he came to share with fellow member Don Henley, with whom he wrote "
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieval result states that Billy J. Kramer was the lead vocalist for The Dakotas and is most closely associated with them. His given name is Billy.\nAnswer: Billy"
+      "content": "Thought: The retrieval results clearly state that Billy J. Kramer is the singer most closely associated with The Dakotas. The question asks for his given name.\nAnswer: Billy"
     }
   ],
   "final_answer": "Billy"

@@ -28,14 +28,14 @@
     },
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Chien-Shiung Wu \"Chinese Madame Curie\" death year\")",
-      "query": "Chien-Shiung Wu \"Chinese Madame Curie\" death year",
-      "observation": "- Chien-Shiung Wu: Chien-Shiung Wu (; May 31, 1912 \u2013 February 16, 1997) was a Chinese-American experimental physicist who made significant contributions in the field of nuclear physics. Wu worked on the Manhattan Project, where she helped develop the process for separating uranium metal into uranium-2\n- 2752 Wu Chien-Shiung: 2752 Wu Chien-Shiung (1965 SP) is a main-belt asteroid discovered on 20 September 1965 by Purple Mountain Observatory at Nanking. It was named for noted Chinese-American nuclear physicist Chien-Shiung Wu and was the first asteroid to be named after a living scientist.\n- Chien-Shiung Wu College: Chien-Shiung Wu College is a college named after lady Chien-Shiung Wu, an alumna of previous National Central University. The college is a part of Southeast University(SEU), Nanjing."
+      "content": "Action: retrieve(\"Chien-Shiung Wu \"Madame Curie\" death year\")",
+      "query": "Chien-Shiung Wu \"Madame Curie\" death year",
+      "observation": "- Chien-Shiung Wu: Chien-Shiung Wu (; May 31, 1912 \u2013 February 16, 1997) was a Chinese-American experimental physicist who made significant contributions in the field of nuclear physics. Wu worked on the Manhattan Project, where she helped develop the process for separating uranium metal into uranium-2\n- Marie Curie: Marie Sk\u0142odowska Curie ( ; ] ; ] ; 7 November 18674 July 1934; born Maria Salomea Sk\u0142odowska; ] ) was a Polish and naturalized-French physicist and chemist who conducted pioneering research on radioactivity. She was the first woman to win a Nobel Prize, the first person and only woman t\n- Hara Takashi: Hara Takashi (\u539f \u656c , 9 February 1856 \u2013 4 November 1921) was a Japanese politician and the 10th Prime Minister of Japan from 29 September 1918 until his assassination on 4 November 1921. He was also called Hara Kei informally. He was the first commoner appointed to the office of prime mi"
     },
     {
-      "type": "fallback",
-      "content": "Thought: The question asks for the death year of a scientist to whom Chien-Shiung Wu was compared due to her expertise in experimental physics. Although my previous searches didn't explicitly state the comparison, the repeated use of \"Madame Curie\" in my search queries suggests a common association. I need to confirm if Chien-Shiung Wu was indeed compared to Marie Curie and then find Marie Curie's death year. I will search for Marie Curie's death year.\nAction: retrieve(\"Marie Curie death year\")"
+      "type": "answer",
+      "content": "Thought: The question asks for the death year of a scientist to whom Chien-Shiung Wu was compared. My previous searches, particularly the one including \"Madame Curie of China\" and the subsequent retrieval of information about \"Marie Curie,\" indicate that Marie Curie is the scientist in question. The provided information for Marie Curie states her death date as July 4, 1934.\nAnswer: 1934"
     }
   ],
-  "final_answer": "The question asks for the death year of a scientist to whom Chien-Shiung Wu was compared due to her expertise in experimental physics. Although my previous searches didn't explicitly state the comparison, the repeated use of \"Madame Curie\" in my search queries suggests a common association. I need to confirm if Chien-Shiung Wu was indeed compared to Marie Curie and then find Marie Curie's death year. I will search for Marie Curie's death year.\nAction: retrieve(\"Marie Curie death year\")"
+  "final_answer": "1934"
 }

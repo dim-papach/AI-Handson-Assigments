@@ -4,14 +4,14 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Johnny Mathis: Wonderful Wonderful aired at what hotel in Atlantic City\")",
-      "query": "Johnny Mathis: Wonderful Wonderful aired at what hotel in Atlantic City",
-      "observation": "- Johnny Mathis: Wonderful, Wonderful!: Johnny Mathis: Wonderful, Wonderful! is a television concert by American pop singer Johnny Mathis that was recorded on October 27, 2006, at the Tropicana Hotel in Atlantic City and aired that December on most PBS stations. In addition to singing some of his bigg\n- Tropicana Casino &amp; Resort Atlantic City: The Tropicana Casino & Resort Atlantic City is a luxury hotel, casino, and spa resort located on Brighton Avenue and the Boardwalk in Atlantic City, New Jersey. It is owned by Tropicana Entertainment and is one of the largest hotels in New Jersey with jus\n- TEN Atlantic City: TEN (formerly Revel Casino Hotel Atlantic City) is a closed resort, hotel and casino in Atlantic City, New Jersey, United States. It is the northernmost casino on the Atlantic City Boardwalk, located on 20 acre of land, adjacent to the Showboat Hotel. Revel opened on April 2, 2012"
+      "content": "Action: retrieve(\"Johnny Mathis Wonderful Wonderful Atlantic City hotel\")",
+      "query": "Johnny Mathis Wonderful Wonderful Atlantic City hotel",
+      "observation": "- Johnny Mathis: Wonderful, Wonderful!: Johnny Mathis: Wonderful, Wonderful! is a television concert by American pop singer Johnny Mathis that was recorded on October 27, 2006, at the Tropicana Hotel in Atlantic City and aired that December on most PBS stations. In addition to singing some of his bigg\n- The Atlantic Club Casino Hotel: The Atlantic Club Casino Hotel, formerly known as Golden Nugget, Bally's Grand, Atlantic City Hilton and ACH, is a closed casino and hotel located at the southern end of the boardwalk in Atlantic City, New Jersey, owned and operated by Colony Capital. It was the city'\n- Tropicana Casino &amp; Resort Atlantic City: The Tropicana Casino & Resort Atlantic City is a luxury hotel, casino, and spa resort located on Brighton Avenue and the Boardwalk in Atlantic City, New Jersey. It is owned by Tropicana Entertainment and is one of the largest hotels in New Jersey with jus"
     },
     {
       "type": "answer",
-      "content": "Thought: The first search result directly states that \"Johnny Mathis: Wonderful, Wonderful!\" was recorded at the Tropicana Hotel in Atlantic City. The second result confirms that the Tropicana Casino & Resort Atlantic City is a luxury hotel, casino, and spa resort located in Atlantic City, New Jersey. This matches all the criteria in the question.\nAnswer: The Tropicana Casino & Resort Atlantic City."
+      "content": "Thought: The first search result directly states that \"Johnny Mathis: Wonderful, Wonderful!\" was recorded at the Tropicana Hotel in Atlantic City. The third search result confirms that the Tropicana Casino & Resort Atlantic City is a luxury hotel, casino, and spa resort located in Atlantic City, New Jersey. This matches all the criteria in the question.\nAnswer: Tropicana Hotel (Tropicana Casino & Resort Atlantic City)"
     }
   ],
-  "final_answer": "The Tropicana Casino & Resort Atlantic City."
+  "final_answer": "Tropicana Hotel (Tropicana Casino & Resort Atlantic City)"
 }

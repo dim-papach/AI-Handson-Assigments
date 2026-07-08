@@ -10,7 +10,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The observation clearly states that Liu Ailing played for the China national team at the 1991, 1995, and 1999 editions of the FIFA Women's World Cup. The FIFA Women's World Cup is also described as an international football competition for women. This directly answers the question.\nAnswer: The FIFA Women's World Cup."
+      "content": "Thought: The observation clearly states that Liu Ailing played for the China national team at the 1991, 1995, and 1999 editions of the FIFA Women's World Cup. The FIFA Women's World Cup is also described as an international football competition. This directly answers the question.\nAnswer: The FIFA Women's World Cup."
     }
   ],
   "final_answer": "The FIFA Women's World Cup."

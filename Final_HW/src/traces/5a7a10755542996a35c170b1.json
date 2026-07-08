@@ -4,8 +4,8 @@
   "trace": [
     {
       "type": "answer",
-      "content": "Thought: The question asks about a principle species of plant requiring ericaceous compost and its effect on surroundings due to cation uptake. Plants requiring ericaceous compost are typically acid-loving plants, often from the Ericaceae family (e.g., rhododendrons, azaleas, blueberries). These plants thrive in acidic conditions and often contribute to maintaining or increasing soil acidity. Their cation uptake mechanism often involves releasing hydrogen ions (H+) into the soil, which displaces cations from soil particles and makes them available for uptake, but also further acidifies the soil.\n\nTherefore, the effect on its surroundings would be increased soil acidity.\nAnswer: It can acidify its surroundings by releasing hydrogen ions during cation uptake."
+      "content": "Thought: The question asks about the effect of a principle ericaceous plant species on its surroundings due to its cation uptake. Ericaceous plants, such as rhododendrons, are known to thrive in acidic conditions. Their cation uptake mechanisms often involve releasing protons (H+) into the soil to facilitate nutrient absorption, particularly iron, which further acidifies the rhizosphere. This process can lead to a decrease in the pH of the surrounding soil.\nAnswer: The most principle species of plants requiring ericaceous compost, such as rhododendrons, can acidify their surroundings by releasing protons during cation uptake."
     }
   ],
-  "final_answer": "It can acidify its surroundings by releasing hydrogen ions during cation uptake."
+  "final_answer": "The most principle species of plants requiring ericaceous compost, such as rhododendrons, can acidify their surroundings by releasing protons during cation uptake."
 }

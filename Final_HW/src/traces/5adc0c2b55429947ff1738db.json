@@ -12,12 +12,12 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"Is To Shoot an Elephant a documentary about war?\")",
       "query": "Is To Shoot an Elephant a documentary about war?",
-      "observation": "- To Shoot an Elephant: To Shoot an Elephant is a 2009 documentary film about the 2008-2009 Gaza War directed by Alberto Arce and Mohammad Rujailahk.\n- The World at War (film): The World at War is a 1942 documentary film produced by the Office of War Information. One of the earliest long length films made by the government during the war, it attempted to explain the large picture of why the United States was at war, and the various causes and circu\n- War Horse (film): War Horse is a 2011 British war drama film directed and co-produced by Steven Spielberg from a screenplay written by Lee Hall and Richard Curtis, adapted from English author Michael Morpurgo's 1982 novel of the same name. The film's cast includes Jeremy Irvine (in his film acting d"
+      "observation": "- To Shoot an Elephant: To Shoot an Elephant is a 2009 documentary film about the 2008-2009 Gaza War directed by Alberto Arce and Mohammad Rujailahk.\n- The World at War (film): The World at War is a 1942 documentary film produced by the Office of War Information. One of the earliest long length films made by the government during the war, it attempted to explain the large picture of why the United States was at war, and the various causes and circu\n- Skinheads USA: Soldiers of the Race War: Skinheads USA: Soldiers of the Race War is a 1993 HBO documentary film about a group of white power skinheads involved in the neo-Nazi movement in the Southern state of Alabama. The film featured the white supremacist Bill Riccio, the then leader of the Aryan"
     },
     {
       "type": "answer",
-      "content": "Thought: I have information about both films. \"Agee\" is a documentary about the writer James Agee, not war. \"To Shoot an Elephant\" is a documentary about the 2008-2009 Gaza War. Therefore, only one of them is a documentary about war.\nAnswer: No, only \"To Shoot an Elephant\" is a documentary about war; \"Agee\" is about the writer James Agee."
+      "content": "Thought: \"Agee\" is a documentary about the writer James Agee, not war. \"To Shoot an Elephant\" is a documentary about the 2008-2009 Gaza War.\nAnswer: No, only \"To Shoot an Elephant\" is a documentary about war; \"Agee\" is a documentary about the writer James Agee."
     }
   ],
-  "final_answer": "No, only \"To Shoot an Elephant\" is a documentary about war; \"Agee\" is about the writer James Agee."
+  "final_answer": "No, only \"To Shoot an Elephant\" is a documentary about war; \"Agee\" is a documentary about the writer James Agee."
 }

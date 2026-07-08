@@ -10,7 +10,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The question asks for the active period of the rock band to which the name \"Pre-Creedence\" was changed. The observation states that \"Pre-Creedence\" is a compilation album by The Golliwogs, which changed its name to Creedence Clearwater Revival (CCR) in 1968. It also states that Creedence Clearwater Revival was active in the late 1960s and early 1970s.\nAnswer: Creedence Clearwater Revival was active in the late 1960s and early 1970s."
+      "content": "Thought: The question asks for the active period of the rock band to which the name \"Pre-Creedence\" was changed. The provided information states that \"Pre-Creedence\" is a compilation album by The Golliwogs, which changed its name to Creedence Clearwater Revival (CCR) in 1968. It also states that Creedence Clearwater Revival was \"active in the late 1960s and early 1970s.\"\nAnswer: Creedence Clearwater Revival was active in the late 1960s and early 1970s."
     }
   ],
   "final_answer": "Creedence Clearwater Revival was active in the late 1960s and early 1970s."

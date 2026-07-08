@@ -6,12 +6,12 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"who won 2000 World Rally Championship\")",
       "query": "who won 2000 World Rally Championship",
-      "observation": "- 2000 World Rally Championship: The 2000 World Rally Championship was the 28th season of the FIA World Rally Championship. The season consisted of 14 rallies. The drivers' world championship was won by Marcus Gr\u00f6nholm in a Peugeot 206 WRC, ahead of Richard Burns and Carlos Sainz. The manufacturers' t\n- Alain Prost: Alain Marie Pascal Prost, OBE, Chevalier de la L\u00e9gion d'honneur (born 24 February 1955) is a French former racing driver. A four-time Formula One Drivers' Champion, only Sebastian Vettel (four championships), Juan Manuel Fangio (five championships), and Michael Schumacher (seven champio\n- 2009 Singapore Grand Prix: The 2009 Singapore Grand Prix (formally the 2009 Formula 1 SingTel Singapore Grand Prix) was a Formula One motor race held at the Marina Bay Street Circuit in Singapore on 27 September 2009. The 61-lap race was the fourteenth round of the 2009 Formula One season. It was th"
+      "observation": "- 2000 World Rally Championship: The 2000 World Rally Championship was the 28th season of the FIA World Rally Championship. The season consisted of 14 rallies. The drivers' world championship was won by Marcus Gr\u00f6nholm in a Peugeot 206 WRC, ahead of Richard Burns and Carlos Sainz. The manufacturers' t\n- Alain Prost: Alain Marie Pascal Prost, OBE, Chevalier de la L\u00e9gion d'honneur (born 24 February 1955) is a French former racing driver. A four-time Formula One Drivers' Champion, only Sebastian Vettel (four championships), Juan Manuel Fangio (five championships), and Michael Schumacher (seven champio\n- Craig Breen: Craig Breen (born 2 February 1990) is an Irish rally driver. He competes in the European Rally Championship for the Peugeot Rally Academy. He was the 2012 WRC Super 2000 world rally champion, scoring class wins in the Monte Carlo Rally, Wales Rally GB, Rally France and the Rally of Spai"
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieval results indicate that Marcus Gr\u00f6nholm won the 2000 World Rally Championship, not a Spanish rally driver. Carlos Sainz, a Spanish driver, finished third. Therefore, no Spanish rally driver won the 2000 World Rally Championship.\nAnswer: No Spanish rally driver won the 2000 World Rally Championship."
+      "content": "Thought: The retrieval results indicate that Marcus Gr\u00f6nholm won the 2000 World Rally Championship, not a Spanish rally driver. Carlos Sainz, a Spanish driver, was mentioned as being behind Gr\u00f6nholm. Therefore, no Spanish rally driver won the championship that season.\nAnswer: No Spanish rally driver won the 2000 World Rally Championship; Marcus Gr\u00f6nholm won that season."
     }
   ],
-  "final_answer": "No Spanish rally driver won the 2000 World Rally Championship."
+  "final_answer": "No Spanish rally driver won the 2000 World Rally Championship; Marcus Gr\u00f6nholm won that season."
 }

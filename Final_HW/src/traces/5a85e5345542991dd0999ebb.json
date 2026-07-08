@@ -4,14 +4,14 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"clutch uses brake fluid\")",
-      "query": "clutch uses brake fluid",
-      "observation": "- Brake fluid: Brake fluid is a type of hydraulic fluid used in hydraulic brake and hydraulic clutch applications in automobiles, motorcycles, light trucks, and some bicycles. It is used to transfer force into pressure, and to amplify braking force. It works because liquids are not appreciably compres\n- Clutch: A clutch is a mechanical device which engages and disengages power transmission especially from driving shaft to driven shaft.\n- Hydraulic brake: A hydraulic brake is an arrangement of braking mechanism which uses brake fluid, typically containing glycol ethers or diethylene glycol, to transfer pressure from the controlling mechanism to the braking mechanism."
+      "content": "Action: retrieve(\"clutch system brake fluid\")",
+      "query": "clutch system brake fluid",
+      "observation": "- Brake fluid: Brake fluid is a type of hydraulic fluid used in hydraulic brake and hydraulic clutch applications in automobiles, motorcycles, light trucks, and some bicycles. It is used to transfer force into pressure, and to amplify braking force. It works because liquids are not appreciably compres\n- Clutch: A clutch is a mechanical device which engages and disengages power transmission especially from driving shaft to driven shaft.\n- Brake bleeding: Brake bleeding is the procedure performed on hydraulic brake systems whereby the brake lines (the pipes and hoses containing the brake fluid) are purged of any air bubbles. This is necessary because, while the brake fluid is an incompressible liquid, air bubbles are compressible gas "
     },
     {
       "type": "answer",
-      "content": "Thought: The question asks for a mechanical device that engages and disengages power transmission and uses brake fluid. The observation states that a clutch is a mechanical device that engages and disengages power transmission. It also states that brake fluid is used in hydraulic clutch applications. This directly answers the question.\nAnswer: A hydraulic clutch."
+      "content": "Thought: The question asks for a mechanical device that engages and disengages power transmission and uses brake fluid. The retrieval results state that a clutch is a mechanical device that engages and disengages power transmission, and that brake fluid is used in hydraulic brake and hydraulic clutch applications. This directly answers the question.\nAnswer: A clutch."
     }
   ],
-  "final_answer": "A hydraulic clutch."
+  "final_answer": "A clutch."
 }

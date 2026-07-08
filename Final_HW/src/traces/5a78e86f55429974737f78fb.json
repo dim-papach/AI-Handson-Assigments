@@ -4,14 +4,14 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Japanese calendar system emphasis first Emperor\")",
-      "query": "Japanese calendar system emphasis first Emperor",
-      "observation": "- Japanese imperial year: The Japanese imperial year (\u7687\u7d00 , k\u014dki ) or \"national calendar year\" is a unique calendar system in Japan. It is based on the legendary foundation of Japan by Emperor Jimmu in 660 BC. \"K\u014dki\" emphasizes the long history of Japan and the Imperial dynasty.\n- Emperor Jimmu: Emperor Jimmu (\u795e\u6b66\u5929\u7687 , Jinmu-tenn\u014d ) was the first Emperor of Japan, according to legend. His accession is traditionally dated as 660 BC. According to Japanese mythology, he is a descendant of the sun goddess Amaterasu, through her grandson Ninigi, as well as a descendant of the storm \n- Shang dynasty: The Shang dynasty () or Yin dynasty (), according to traditional historiography, ruled in the Yellow River valley in the second millennium\u00a0BC, succeeding the Xia dynasty and followed by the Zhou dynasty. The classic account of the Shang comes from texts such as the \"Book of Documents\""
+      "content": "Action: retrieve(\"Japan unique calendar system emphasis first Emperor\")",
+      "query": "Japan unique calendar system emphasis first Emperor",
+      "observation": "- Japanese imperial year: The Japanese imperial year (\u7687\u7d00 , k\u014dki ) or \"national calendar year\" is a unique calendar system in Japan. It is based on the legendary foundation of Japan by Emperor Jimmu in 660 BC. \"K\u014dki\" emphasizes the long history of Japan and the Imperial dynasty.\n- Emperor Jimmu: Emperor Jimmu (\u795e\u6b66\u5929\u7687 , Jinmu-tenn\u014d ) was the first Emperor of Japan, according to legend. His accession is traditionally dated as 660 BC. According to Japanese mythology, he is a descendant of the sun goddess Amaterasu, through her grandson Ninigi, as well as a descendant of the storm \n- Qin Shi Huang: Qin Shi Huang ( ; 18 February 25910 September 210) was the founder of the Qin dynasty (\u79e6\u671d ) and was the first emperor of a unified China. He was born Ying Zheng (\u5b34\u653f ) or Zhao Zheng (\u8d99\u653f ), a prince of the state of Qin. He became the King Zheng of Qin (\u79e6\u738b\u653f ) when he was thirteen, then C"
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieved information states that the Japanese imperial year (K\u014dki), based on the legendary foundation by Emperor Jimmu, emphasizes the long history of Japan and the Imperial dynasty. This directly answers the question.\nAnswer: The unique Japanese calendar system, K\u014dki, emphasizes the long history of Japan and the Imperial dynasty."
+      "content": "Thought: The retrieved information clearly states that the Japanese imperial year (k\u014dki), which is based on the legendary foundation by Emperor Jimmu (the first Emperor), emphasizes the long history of Japan and the Imperial dynasty.\nAnswer: The unique calendar system in Japan, created by the first Emperor Jimmu, emphasizes the long history of Japan and the Imperial dynasty."
     }
   ],
-  "final_answer": "The unique Japanese calendar system, K\u014dki, emphasizes the long history of Japan and the Imperial dynasty."
+  "final_answer": "The unique calendar system in Japan, created by the first Emperor Jimmu, emphasizes the long history of Japan and the Imperial dynasty."
 }

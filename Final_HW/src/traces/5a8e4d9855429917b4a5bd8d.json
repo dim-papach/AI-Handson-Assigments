@@ -10,7 +10,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The previous retrieval identified \"Child 44\" as a 2015 mystery thriller film produced by Worldview Entertainment. It also states that \"Child 44\" is based on Tom Rob Smith's 2008 novel.\nAnswer: Tom Rob Smith"
+      "content": "Thought: The initial retrieval states that Worldview Entertainment produced \"Child 44\". The \"Child 44\" entry confirms it is a 2015 mystery thriller film based on Tom Rob Smith's 2008 novel.\nAnswer: Tom Rob Smith"
     }
   ],
   "final_answer": "Tom Rob Smith"

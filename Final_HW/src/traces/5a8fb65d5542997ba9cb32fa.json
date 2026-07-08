@@ -10,7 +10,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieval results clearly state that \"Tunnels & Trolls\" was designed by Ken St. Andre and first published by Flying Buffalo. It also mentions Steven S. Crompton as an artist for \"Tunnels & Trolls\" supplements.\nAnswer: Flying Buffalo"
+      "content": "Thought: The retrieval results state that \"Tunnels & Trolls\" was designed by Ken St. Andre and first published by Flying Buffalo. It also mentions that Steven S. Crompton is known as the artist for \"Tunnels & Trolls\". This information directly answers the question.\nAnswer: Flying Buffalo"
     }
   ],
   "final_answer": "Flying Buffalo"

@@ -10,7 +10,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The previous retrieval states that VEU was similar to ONTV, and ONTV was owned by National Subscription Television, a joint venture between Oak Industries. Therefore, the defunct television service similar to VEU was ONTV, owned by Oak Industries.\nAnswer: VEU was similar to ONTV, which was owned by Oak Industries."
+      "content": "Thought: VEU was similar to ONTV, a defunct television service. ONTV was owned by National Subscription Television, a joint venture between Oak Industries.\nAnswer: VEU was similar to ONTV, which was owned by Oak Industries."
     }
   ],
   "final_answer": "VEU was similar to ONTV, which was owned by Oak Industries."

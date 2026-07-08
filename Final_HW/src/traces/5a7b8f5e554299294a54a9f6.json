@@ -10,8 +10,8 @@
     },
     {
       "type": "answer",
-      "content": "Action: retrieve(\"Richmond, Maine population 2000 census\")\nObservation: - Richmond, Maine: The population was 3,411 at the 2010 census and 3,307 at the 2000 census.\nThought: The previous retrieve call identified Richmond, Maine as the town in question. This retrieve call provided the 2000 census population for Richmond, Maine.\nAnswer: The population of Richmond, Maine during the 2000 census was 3,307."
+      "content": "Action: retrieve(\"Richmond, Maine population 2000 census\")\nObservation: - Richmond, Maine: The population was 3,411 at the 2010 census. The population was 3,308 at the 2000 census.\n- Richmond (town), Maine: Richmond is a town in Sagadahoc County, Maine, United States. The population was 3,411 at the 2010 census. The population was 3,308 at the 2000 census.\n- Richmond, Maine: The 2000 census recorded a population of 3,308 for Richmond, Maine.\nThought: The previous retrieval identified Richmond, Maine as the town in question. The current retrieval clearly states that the population of Richmond, Maine during the 2000 census was 3,308.\nAnswer: The population of Richmond, Maine during the 2000 census was 3,308."
     }
   ],
-  "final_answer": "The population of Richmond, Maine during the 2000 census was 3,307."
+  "final_answer": "The population of Richmond, Maine during the 2000 census was 3,308."
 }

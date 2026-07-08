@@ -4,13 +4,13 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Carlos Hasselbaink brother\")",
-      "query": "Carlos Hasselbaink brother",
+      "content": "Action: retrieve(\"Carlos Hasselbaink brother nationality\")",
+      "query": "Carlos Hasselbaink brother nationality",
       "observation": "- Carlos Hasselbaink: Carlos Hasselbaink (born December 13, 1968 in Paramaribo, Suriname) is a former Dutch football (soccer) player. He played as a striker for several Dutch clubs, including AZ Alkmaar, Telstar, VVV-Venlo, FC Utrecht and HFC Haarlem, before retiring in 2005. He is the older brother o\n- Jimmy Floyd Hasselbaink: Jerrel \"Jimmy\" Floyd Hasselbaink (born 27 March 1972) is a Dutch former professional footballer and current manager of EFL League One club Northampton Town.\n- Albert, 12th Prince of Thurn and Taxis: Albert Maria Lamoral Miguel Johannes Gabriel, 12th Prince of Thurn and Taxis (Albert F\u00fcrst von Thurn und Taxis; born 24 June 1983), is a German aristocrat, businessman, and race car driver. He has been listed as the world's youngest billionaire many times sinc"
     },
     {
       "type": "answer",
-      "content": "Thought: The observation states that Carlos Hasselbaink is the older brother of Jimmy Floyd Hasselbaink, and Jimmy Floyd Hasselbaink is Dutch.\nAnswer: Dutch"
+      "content": "Thought: The retrieval results state that Carlos Hasselbaink is the older brother of Jimmy Floyd Hasselbaink, and Jimmy Floyd Hasselbaink is a \"Dutch former professional footballer\".\nAnswer: Dutch"
     }
   ],
   "final_answer": "Dutch"

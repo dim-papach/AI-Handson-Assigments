@@ -15,9 +15,9 @@
       "observation": "- Alison Goldfrapp: Alison Elizabeth Margaret Goldfrapp (born 13 May 1966) is an English musician and record producer, best known as the lead vocalist of the electronic music duo Goldfrapp.\n- Anymore (Goldfrapp song): \"Anymore\" is a song performed by English group Goldfrapp from their seventh studio album \"Silver Eye\" (2017). It was released as a CD single and digital download on 23 January 2017 through Mute Records. The song was written and produced by Alison Goldfrapp and William Owen \n- Seventh Tree: Seventh Tree is the fourth studio album by English electronic music duo Goldfrapp, released on 22 February 2008 by Mute Records. It was named after a dream Alison Goldfrapp had about a \"very large tree\". Taking inspiration from paganism and surreal English children's books, Goldfrapp d"
     },
     {
-      "type": "fallback",
-      "content": "Michael Monroe can play more instruments, as he is described as a multi-instrumentalist, while Alison Goldfrapp is primarily known as a vocalist and producer."
+      "type": "forced_answer",
+      "content": "Answer: Michael Monroe can play more instruments, as he is described as a multi-instrumentalist, while Alison Goldfrapp is primarily known as a vocalist."
     }
   ],
-  "final_answer": "Michael Monroe can play more instruments, as he is described as a multi-instrumentalist, while Alison Goldfrapp is primarily known as a vocalist and producer."
+  "final_answer": "Michael Monroe can play more instruments, as he is described as a multi-instrumentalist, while Alison Goldfrapp is primarily known as a vocalist."
 }

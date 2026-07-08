@@ -10,8 +10,8 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The information provided clearly states that Summerlin is the community that contains Downtown Summerlin, and Summerlin occupies 22,500 acres.\nAnswer: The community that contains Downtown Summerlin, which is Summerlin, occupies 22,500 acres."
+      "content": "Thought: The question asks for the acreage of the community that contains Downtown Summerlin. The retrieved information states that \"Summerlin is an affluent planned community... The community occupies 22,500 acres\" and that \"Downtown Summerlin is the name for a 400 acre area in the center of Summerlin.\" This indicates that Summerlin is the community in question.\nAnswer: 22,500 acres"
     }
   ],
-  "final_answer": "The community that contains Downtown Summerlin, which is Summerlin, occupies 22,500 acres."
+  "final_answer": "22,500 acres"
 }

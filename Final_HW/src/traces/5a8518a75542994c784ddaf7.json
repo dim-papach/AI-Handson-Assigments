@@ -16,7 +16,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: 277 Park Avenue is described as an office building and is 687 ft tall with 50 floors. 126 Madison Avenue is described as a proposed residential skyscraper and will rise 730 feet with 47 stories. Both are tall, multi-story buildings, which are generally classified as skyscrapers.\n\nAnswer: Both 277 Park Avenue and 126 Madison Avenue are skyscrapers."
+      "content": "Thought: 277 Park Avenue is described as an office building and is 687 ft tall with 50 floors, which qualifies it as a skyscraper. 126 Madison Avenue is described as a proposed residential skyscraper. Therefore, both are skyscrapers.\nAnswer: Both 277 Park Avenue and 126 Madison Avenue are skyscrapers."
     }
   ],
   "final_answer": "Both 277 Park Avenue and 126 Madison Avenue are skyscrapers."

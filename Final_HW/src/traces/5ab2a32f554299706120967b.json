@@ -10,7 +10,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieval results clearly state that Eugene Rosenberg is a microbiologist at Tel Aviv University. The question asks for the university where he is a microbiologist.\nAnswer: Tel Aviv University"
+      "content": "Thought: The retrieval results clearly state that Eugene Rosenberg is a microbiologist at Tel Aviv University. This directly answers the question.\nAnswer: Tel Aviv University"
     }
   ],
   "final_answer": "Tel Aviv University"

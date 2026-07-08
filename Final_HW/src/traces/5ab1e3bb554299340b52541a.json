@@ -6,12 +6,12 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"music sub-genre inspired by The Last Poets and Gil Scott-Heron\")",
       "query": "music sub-genre inspired by The Last Poets and Gil Scott-Heron",
-      "observation": "- Gil Scott-Heron: Gilbert \"Gil\" Scott-Heron (April 1, 1949 \u2013 May 27, 2011) was an American soul and jazz poet, musician, and author, known primarily for his work as a spoken-word performer in the 1970s and 1980s. His collaborative efforts with musician Brian Jackson featured a musical fusion of jazz,\n- Political hip hop: Political hip hop is a subgenre of hip hop music that was developed in the 1980s as a way of turning rap music into a call for action and a form of social activism. Inspired by 1970s political preachers such as The Last Poets and musician Gil Scott-Heron, Public Enemy was the firs\n- Abiodun Oyewole: Abiodun Oyewole (born Charles Davis, February 1948), is a poet, teacher and founding member of the American music and spoken-word group The Last Poets, which developed into what is considered to be the first hip hop group. Critic Jason Ankeny wrote, \"With their politically charged r"
+      "observation": "- Gil Scott-Heron: Gilbert \"Gil\" Scott-Heron (April 1, 1949 \u2013 May 27, 2011) was an American soul and jazz poet, musician, and author, known primarily for his work as a spoken-word performer in the 1970s and 1980s. His collaborative efforts with musician Brian Jackson featured a musical fusion of jazz,\n- Political hip hop: Political hip hop is a subgenre of hip hop music that was developed in the 1980s as a way of turning rap music into a call for action and a form of social activism. Inspired by 1970s political preachers such as The Last Poets and musician Gil Scott-Heron, Public Enemy was the firs\n- The Mind of Gil Scott-Heron: The Mind of Gil Scott-Heron (subtitled \"A Collection of Poetry and Music\") is a 1978 album by spoken word and rap pioneer Gil Scott-Heron. Like many of Scott-Heron's albums, the album's content primarily addresses political and social issues; however, \"The Mind of Gil Sc"
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieved information directly states that political hip hop was inspired by The Last Poets and Gil Scott-Heron.\nAnswer: Political hip hop"
+      "content": "Thought: The provided information explicitly states that political hip hop was inspired by The Last Poets and Gil Scott-Heron.\nAnswer: Political hip hop."
     }
   ],
-  "final_answer": "Political hip hop"
+  "final_answer": "Political hip hop."
 }

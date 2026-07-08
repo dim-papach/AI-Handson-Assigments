@@ -4,8 +4,8 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"William Davis Ticknor, Sr. board chemical biotechnology company\")",
-      "query": "William Davis Ticknor, Sr. board chemical biotechnology company",
+      "content": "Action: retrieve(\"William Davis Ticknor, Sr. board chemical biotechnology company founding year\")",
+      "query": "William Davis Ticknor, Sr. board chemical biotechnology company founding year",
       "observation": "- William Davis Ticknor, Sr.: William Davis Ticknor, Sr. (January 11, 1881 \u2013 March 24, 1938) was president and chairman of the board of Commercial Solvents Corporation. He was also president of Commercial Pigments Corporation.\n- William Ticknor: William Davis Ticknor I (August 6, 1810 \u2013 April 10, 1864) was an American publisher in Boston, Massachusetts, USA, and a founder of the publishing house Ticknor and Fields.\n- Commercial Solvents Corporation: Commercial Solvents Corporation (CSC) was an American chemical and biotechnology company created in 1919."
     },
     {

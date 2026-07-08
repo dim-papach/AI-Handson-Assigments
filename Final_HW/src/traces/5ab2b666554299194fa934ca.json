@@ -16,8 +16,8 @@
     },
     {
       "type": "answer",
-      "content": "Action: retrieve(\"Robert Young wife\")\nObservation: - Robert Young (actor): Robert George Young (February 22, 1907 \u2013 July 21, 1998) was an American television, film, and radio actor, best known for his leading roles as Jim Anderson, the father character in \"Father Knows Best\" (CBS, then NBC, then CBS again), and the physician Marcus Welby in \"Marcus Welby, M.D.\" (ABC). Young was married to Elizabeth Louise Henderson from 1933 until her death in 1994. They had four daughters.\nThought: The question asks who married a man who starred in Marcus Welby, M.D. Robert Young starred in Marcus Welby, M.D. The observation states that Robert Young was married to Elizabeth Louise Henderson.\nAnswer: Elizabeth Louise Henderson married Robert Young, who starred in Marcus Welby, M.D."
+      "content": "Action: retrieve(\"Robert Young actor wife\")\nObservation: - Robert Young (actor): Robert George Young (February 22, 1907 \u2013 July 21, 1998) was an American television, film, and radio actor, best known for his leading roles as Jim Anderson, the father character in \"Father Knows Best\" (CBS, then NBC, then CBS again), and the physician Marcus Welby in \"Marcus Welby, M.D.\" (ABC). Young was married to Elizabeth Louise Henderson from 1933 until her death in 1994. They had four daughters: Carol Anne, Barbara, Betty Lou, and Kathy.\n\nThought: Robert Young starred in \"Marcus Welby, M.D.\" and was married to Elizabeth Louise Henderson.\nAnswer: Elizabeth Louise Henderson married a man who starred in Marcus Welby, M.D."
     }
   ],
-  "final_answer": "Elizabeth Louise Henderson married Robert Young, who starred in Marcus Welby, M.D."
+  "final_answer": "Elizabeth Louise Henderson married a man who starred in Marcus Welby, M.D."
 }

@@ -10,8 +10,8 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieval results clearly state that \"The Million Dollar Duck\" is a comedy film. The information for \"Don Quixote\" refers to a novel and a 1957 drama film, not a comedy. Therefore, I have enough information to answer the question.\nAnswer: The Million Dollar Duck is a comedy film."
+      "content": "Thought: The retrieval results clearly state that \"The Million Dollar Duck\" is a comedy film. The information for \"Don Quixote\" refers to a novel and a 1957 drama film, not a comedy.\nAnswer: The Million Dollar Duck"
     }
   ],
-  "final_answer": "The Million Dollar Duck is a comedy film."
+  "final_answer": "The Million Dollar Duck"
 }

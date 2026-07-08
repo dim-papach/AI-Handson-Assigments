@@ -10,7 +10,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The heights of both mountains are provided in the retrieval results. Gasherbrum II is 8035 m and Langtang Ri is 7205 m. Gasherbrum II is clearly taller.\nAnswer: Gasherbrum II is taller than Langtang Ri."
+      "content": "Thought: The retrieval results provide the heights for both mountains. Gasherbrum II is 8035 m tall, and Langtang Ri is 7205 m tall. Comparing these two values, Gasherbrum II is taller.\nAnswer: Gasherbrum II is taller than Langtang Ri."
     }
   ],
   "final_answer": "Gasherbrum II is taller than Langtang Ri."

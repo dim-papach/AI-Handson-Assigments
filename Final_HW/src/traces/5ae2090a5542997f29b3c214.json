@@ -12,11 +12,11 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"Kieran Crichlow nationality\")",
       "query": "Kieran Crichlow nationality",
-      "observation": "- Kieran Crichlow: Kieran Crichlow is an international footballer from Barbados. Born in England, he has played for a number of English non-league clubs, including Molesey, Witney United and Hampton & Richmond Borough.\n- Mark Noble: Mark James Noble (born 8 May 1987) is an English footballer who plays as a central midfielder and is captain of West Ham United. He has played almost all his youth and first team football for West Ham apart from two short loan spells, at Hull City and Ipswich Town. He has played for Engl\n- A-League Young Footballer of the Year: The A-League Young Footballer of the Year is an annual soccer award given to the player aged 23 or under at the start of the season who is adjudged to have been the best of the season in the A-League. It is currently called the NAB Young Footballer of the Year "
+      "observation": "- Kieran Crichlow: Kieran Crichlow is an international footballer from Barbados. Born in England, he has played for a number of English non-league clubs, including Molesey, Witney United and Hampton & Richmond Borough.\n- Monty Porter: Montague \"Monty\" Porter PSM (1935\u20132011) was an Australian premiership winning and state representative rugby league footballer of the 1950s and 1960s. He was a second rower with the St. George Dragons during their eleven-year premiership winning run from 1956 to 1966, playing in six wi\n- Mark Noble: Mark James Noble (born 8 May 1987) is an English footballer who plays as a central midfielder and is captain of West Ham United. He has played almost all his youth and first team football for West Ham apart from two short loan spells, at Hull City and Ipswich Town. He has played for Engl"
     },
     {
       "type": "answer",
-      "content": "Thought: The second retrieval clearly states that Kieran Crichlow is an international footballer from Barbados. Barbados is an island in the Lesser Antilles, as confirmed by the first retrieval.\nAnswer: Barbados"
+      "content": "Thought: The information from the second retrieve call explicitly states that Kieran Crichlow is an international footballer from Barbados. The first retrieve call confirms that Barbados is an island country in the Lesser Antilles.\nAnswer: Barbados"
     }
   ],
   "final_answer": "Barbados"

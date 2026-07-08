@@ -4,14 +4,14 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"first prime minister of Ghana Okyeame\")",
-      "query": "first prime minister of Ghana Okyeame",
-      "observation": "- Okyeame: Okyeame was a literary magazine founded by the Ghana Society of Writers in the post-Independence era, which saw the rapid rise of a new generation of thinkers, writers and poets in the country. The first issue of \"Okyeame\" appeared in 1960, and issues were published, at irregular intervals,\n- Kwame Nkrumah: Kwame Nkrumah PC (21 September 1909 \u2013 27 April 1972) was the first prime minister and president of Ghana, having led it to independence from Britain in 1957. An influential advocate of Pan-Africanism, Nkrumah was a founding member of the Organization of African Unity and winner of the\n- Nkrumah government: Dr. Kwame Nkrumah was the first Prime Minister and first President of Ghana. Nkrumah had run governments under the supervision of the British government through Charles Arden-Clarke, the Governor-General. His first government under colonial rule started from 21 March 1952 until i"
+      "content": "Action: retrieve(\"first prime minister of Ghana independence country\")",
+      "query": "first prime minister of Ghana independence country",
+      "observation": "- Kwame Nkrumah: Kwame Nkrumah PC (21 September 1909 \u2013 27 April 1972) was the first prime minister and president of Ghana, having led it to independence from Britain in 1957. An influential advocate of Pan-Africanism, Nkrumah was a founding member of the Organization of African Unity and winner of the\n- Nkrumah government: Dr. Kwame Nkrumah was the first Prime Minister and first President of Ghana. Nkrumah had run governments under the supervision of the British government through Charles Arden-Clarke, the Governor-General. His first government under colonial rule started from 21 March 1952 until i\n- Okyeame: Okyeame was a literary magazine founded by the Ghana Society of Writers in the post-Independence era, which saw the rapid rise of a new generation of thinkers, writers and poets in the country. The first issue of \"Okyeame\" appeared in 1960, and issues were published, at irregular intervals,"
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieved information states that Kwame Nkrumah was the first prime minister of Ghana and led it to independence from Britain. The literary magazine Okyeame was founded in the post-Independence era, which aligns with Nkrumah's leadership.\nAnswer: The literary magazine Okyeame was inspired by Kwame Nkrumah, the first Prime Minister of Ghana, who led Ghana to independence from Britain."
+      "content": "Thought: The question asks for the first prime minister of Ghana who inspired the literary magazine Okyeame, and the country from which Ghana gained independence. The retrieval results clearly state that Kwame Nkrumah was the first prime minister and president of Ghana, leading it to independence from Britain. The Okyeame magazine was founded in the post-Independence era, which aligns with Nkrumah's leadership.\nAnswer: Kwame Nkrumah, who led Ghana to independence from Britain."
     }
   ],
-  "final_answer": "The literary magazine Okyeame was inspired by Kwame Nkrumah, the first Prime Minister of Ghana, who led Ghana to independence from Britain."
+  "final_answer": "Kwame Nkrumah, who led Ghana to independence from Britain."
 }

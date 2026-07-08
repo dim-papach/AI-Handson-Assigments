@@ -10,8 +10,8 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The initial search results indicate that Devorah Adler was a political consultant and opposition research specialist for the Democratic National Committee. It also states that Barack Obama was the Democratic Party nominee in the 2008 presidential election and that he served in the U.S. Senate representing Illinois from 2005 to 2009. This directly answers the question about when the candidate served in the U.S. Senate.\nAnswer: Barack Obama served in the U.S. Senate from 2005 to 2009."
+      "content": "Thought: The information provided indicates that Devorah Adler was a political consultant and opposition research specialist for the Democratic National Committee. Barack Obama was the Democratic Party nominee in the 2008 presidential election. The text also states that Barack Obama served in the U.S. Senate representing Illinois from 2005 to 2009. Therefore, the candidate served in the U.S. Senate until 2009.\nAnswer: Barack Obama served in the U.S. Senate until 2009."
     }
   ],
-  "final_answer": "Barack Obama served in the U.S. Senate from 2005 to 2009."
+  "final_answer": "Barack Obama served in the U.S. Senate until 2009."
 }

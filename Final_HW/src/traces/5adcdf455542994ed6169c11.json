@@ -6,12 +6,12 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"No. 1455 Flight\")",
       "query": "No. 1455 Flight",
-      "observation": "- No. 1455 Flight RAF: No. 1455 (Fighter) Flight was formed at RAF Tangmere, West Sussex on 7 July 1941, equipped with Turbinlite Douglas Boston and Douglas Havoc aircraft. On operations they co-operated with the Hawker Hurricanes of 1 Squadron and 3 Squadron. The flight was replaced with 534 Squadron\n- John F. Kennedy International Airport: John F. Kennedy International Airport (IATA: JFK,\u00a0ICAO: KJFK,\u00a0FAA LID: JFK) , often referred to as Kennedy Airport, or simply JFK, is the primary international airport serving New York City. It is the busiest international air passenger gateway into North Ameri\n- Dubai International Airport: Dubai International Airport (IATA: DXB,\u00a0ICAO: OMDB) (Arabic: \u0645\u0637\u0627\u0631 \u062f\u0628\u064a \u0627\u0644\u062f\u0648\u0644\u064a\u200e \u200e ) is the primary international airport serving Dubai, United Arab Emirates and is the world's busiest airport by international passenger traffic. It is also the 3rd busiest airport in the wor"
+      "observation": "- No. 1455 Flight RAF: No. 1455 (Fighter) Flight was formed at RAF Tangmere, West Sussex on 7 July 1941, equipped with Turbinlite Douglas Boston and Douglas Havoc aircraft. On operations they co-operated with the Hawker Hurricanes of 1 Squadron and 3 Squadron. The flight was replaced with 534 Squadron\n- John F. Kennedy International Airport: John F. Kennedy International Airport (IATA: JFK,\u00a0ICAO: KJFK,\u00a0FAA LID: JFK) , often referred to as Kennedy Airport, or simply JFK, is the primary international airport serving New York City. It is the busiest international air passenger gateway into North Ameri\n- FedEx Express Flight 80: FedEx Express Flight 80 was a scheduled cargo flight from Guangzhou Baiyun International Airport in the People's Republic of China, to Narita International Airport in Narita, Chiba Prefecture (near Tokyo), Japan. On March 23, 2009, a McDonnell Douglas MD-11F (N526FE) operati"
     },
     {
       "type": "answer",
-      "content": "Thought: The observation states that No. 1455 Flight \"co-operated with the Hawker Hurricanes of 1 Squadron and 3 Squadron\" on operations. This implies they were both part of the same operational context, which was the Royal Air Force (RAF) during World War II. The flight itself was \"No. 1455 (Fighter) Flight RAF\".\nAnswer: They were both part of operations within the Royal Air Force (RAF)."
+      "content": "Thought: The observation states that No. 1455 Flight RAF co-operated with Hawker Hurricanes of 1 Squadron and 3 Squadron. This indicates they were both part of the Royal Air Force (RAF) and involved in its operations.\nAnswer: The Royal Air Force (RAF) operations."
     }
   ],
-  "final_answer": "They were both part of operations within the Royal Air Force (RAF)."
+  "final_answer": "The Royal Air Force (RAF) operations."
 }

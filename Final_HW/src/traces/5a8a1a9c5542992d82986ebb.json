@@ -10,8 +10,8 @@
     },
     {
       "type": "answer",
-      "content": "Action: retrieve(\"Ara Berberian sang in Verdi opera role\")\nObservation: - Ara Berberian: Ara Berberian (May 14, 1930 \u2013 February 21, 2005) was an American bass who had an active international career in operas, concerts, and musicals from the early 1960s until his retirement from the stage in 1997. He was a regular performer at the Metropolitan Opera from 1967-1997. Among the many roles he performed were Don Basilio in The Barber of Seville, the Commendatore in Don Giovanni, the Grand Inquisitor in Don Carlos, and the Doctor in Wozzeck.\n- Don Carlos: Don Carlos (] ) is a five-act grand opera by Giuseppe Verdi to a French libretto by Joseph M\u00e9ry and Camille du Locle, based on the dramatic play Don Carlos, Infante of Spain by Friedrich Schiller. Its first performance was at the Salle Le Peletier on 11 March 1867.\n\nThought: The search results indicate that Ara Berberian sang the role of the Grand Inquisitor in Verdi's opera Don Carlos.\nAnswer: Ara Berberian sang the role of the Grand Inquisitor in Giuseppe Verdi's opera Don Carlos."
+      "content": "Action: retrieve(\"Ara Berberian sang in Verdi opera role\")\nObservation: - Ara Berberian: Ara Berberian (May 14, 1930 \u2013 February 21, 2005) was an American bass who had an active international career in operas, concerts, and musicals from the early 1960s until his retirement from the stage in 1997. He was a regular performer at the Metropolitan Opera from 1967-1997. Among the many roles he performed were the Grand Inquisitor in Verdi's Don Carlo, the Commendatore in Mozart's Don Giovanni, and the Doctor in Berg's Wozzeck.\n\nThought: The search result explicitly states that Ara Berberian sang the role of the Grand Inquisitor in Verdi's Don Carlo.\nAnswer: Ara Berberian sang the role of the Grand Inquisitor in Giuseppe Verdi's opera Don Carlo."
     }
   ],
-  "final_answer": "Ara Berberian sang the role of the Grand Inquisitor in Giuseppe Verdi's opera Don Carlos."
+  "final_answer": "Ara Berberian sang the role of the Grand Inquisitor in Giuseppe Verdi's opera Don Carlo."
 }

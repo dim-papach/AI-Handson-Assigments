@@ -16,7 +16,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The first retrieval confirmed Dana Andrews starred in \"The Best Years of Our Lives\" (1946). The second retrieval confirmed Dana Andrews also starred in \"The Crowded Sky\" (1960). Therefore, Dana Andrews is the actor who starred in both films.\nAnswer: Dana Andrews"
+      "content": "Thought: The first retrieval identified Dana Andrews as an actor in \"The Best Years of Our Lives\". The second retrieval confirmed that Dana Andrews also starred in \"The Crowded Sky\".\nAnswer: Dana Andrews"
     }
   ],
   "final_answer": "Dana Andrews"

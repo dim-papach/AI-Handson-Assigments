@@ -10,7 +10,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The question asks about the star of the 1975 film that inspired The Dukes of Hazzard. The retrieval results clearly state that \"Moonrunners\" is the 1975 film that inspired the series, and it starred James Mitchum.\nAnswer: James Mitchum"
+      "content": "Thought: The previous retrieval clearly states that \"Moonrunners\" (the 1975 film that inspired The Dukes of Hazzard) starred James Mitchum.\nAnswer: James Mitchum"
     }
   ],
   "final_answer": "James Mitchum"

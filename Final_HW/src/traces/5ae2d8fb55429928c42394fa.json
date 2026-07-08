@@ -10,8 +10,8 @@
     },
     {
       "type": "answer",
-      "content": "Action: retrieve(\"who was Robins Air Force Base named after?\")\nObservation: Robins Air Force Base is named in honor of Brigadier General Augustine Warner Robins.\nThought: I have found that Robins Air Force Base was named after Brigadier General Augustine Warner Robins. This directly answers the question.\nAnswer: Robins Air Force Base, where the 413th Flight Test Group is stationed, was named after Brigadier General Augustine Warner Robins."
+      "content": "Action: retrieve(\"who was Robins Air Force Base named after?\")\nObservation: Robins Air Force Base is named in honor of Brigadier General Augustine Warner Robins.\nThought: I have found the name of the person after whom Robins Air Force Base was named.\nAnswer: Brigadier General Augustine Warner Robins"
     }
   ],
-  "final_answer": "Robins Air Force Base, where the 413th Flight Test Group is stationed, was named after Brigadier General Augustine Warner Robins."
+  "final_answer": "Brigadier General Augustine Warner Robins"
 }

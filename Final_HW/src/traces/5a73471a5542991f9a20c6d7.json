@@ -10,7 +10,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieved information directly identifies Duane Clarridge as an American senior operations officer for the Central Intelligence Agency for over 30 years and the person who ran Eclipse Group.\nAnswer: Duane Clarridge"
+      "content": "Thought: The retrieved information identifies Duane Clarridge as an American senior operations officer for the Central Intelligence Agency for over 30 years and states that he ran the Eclipse Group.\nAnswer: Duane Clarridge"
     }
   ],
   "final_answer": "Duane Clarridge"

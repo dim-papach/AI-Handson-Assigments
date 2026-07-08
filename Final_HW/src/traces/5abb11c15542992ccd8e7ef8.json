@@ -6,12 +6,12 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"Yolanda Saldivar parole eligibility date\")",
       "query": "Yolanda Saldivar parole eligibility date",
-      "observation": "- Yolanda Sald\u00edvar: Yolanda Sald\u00edvar (born September 19, 1960) is an American woman who was convicted of the murder of Tejano singer, Selena Quintanilla-P\u00e9rez on March 31, 1995, at the Days Inn motel in Corpus Christi, Texas. She will be eligible for parole on March 30, 2025.\n- Murder of Selena: Selena Quintanilla-P\u00e9rez (April 16, 1971 \u2013 March 31, 1995) was an American singer who achieved international fame as a member of Selena y Los Dinos and for her subsequent solo career in both Spanish and English Her father and manager, Abraham Quintanilla Jr., appointed Yolanda Sald\n- Life imprisonment in the United States: In the United States, 1 in every 2,000 residents is imprisoned for life. This is similar to the total imprisonment rate in Japan, which is roughly 51 per 100,000 residents. There are many U.S. states where a convict can be released on parole after a decade or "
+      "observation": "- Yolanda Sald\u00edvar: Yolanda Sald\u00edvar (born September 19, 1960) is an American woman who was convicted of the murder of Tejano singer, Selena Quintanilla-P\u00e9rez on March 31, 1995, at the Days Inn motel in Corpus Christi, Texas. She will be eligible for parole on March 30, 2025.\n- Murder of Selena: Selena Quintanilla-P\u00e9rez (April 16, 1971 \u2013 March 31, 1995) was an American singer who achieved international fame as a member of Selena y Los Dinos and for her subsequent solo career in both Spanish and English Her father and manager, Abraham Quintanilla Jr., appointed Yolanda Sald\n- Expatriation Act of 1907: The Expatriation Act of 1907 (59th Congress, 2nd session, chapter 2534, enacted March 2, 1907) was an act of the 59th United States Congress concerning United States nationality law and renunciation of citizenship. It effectively functioned as Congressional endorsement of t"
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieved information directly states the parole eligibility date for Yolanda Sald\u00edvar, who was Selena Quintanilla-P\u00e9rez's assistant and head of her fan club.\nAnswer: Yolanda Saldivar will be eligible for parole on March 30, 2025."
+      "content": "Thought: The retrieved information directly states the parole eligibility date for Yolanda Sald\u00edvar, who was Selena Quintanilla-P\u00e9rez's assistant and head of her fan club.\nAnswer: March 30, 2025"
     }
   ],
-  "final_answer": "Yolanda Saldivar will be eligible for parole on March 30, 2025."
+  "final_answer": "March 30, 2025"
 }

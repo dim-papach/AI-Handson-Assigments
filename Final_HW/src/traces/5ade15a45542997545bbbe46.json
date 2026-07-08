@@ -10,7 +10,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieval results confirm that both Eatza Pizza and Upper Crust Pizzeria are restaurant chains.\nAnswer: Yes, both Upper Crust Pizzeria and Eatza Pizza are restaurants."
+      "content": "Thought: The retrieval results confirm that Eatza Pizza was a buffet-style restaurant chain and Upper Crust Pizzeria is a chain of pizzeria restaurants.\nAnswer: Yes, both Upper Crust Pizzeria and Eatza Pizza are restaurants."
     }
   ],
   "final_answer": "Yes, both Upper Crust Pizzeria and Eatza Pizza are restaurants."

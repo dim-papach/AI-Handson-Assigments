@@ -6,18 +6,18 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"sophomore starter 1963 college football Atlanta Falcons eleven seasons\")",
       "query": "sophomore starter 1963 college football Atlanta Falcons eleven seasons",
-      "observation": "- 1963 Texas Longhorns football team: The 1963 Texas Longhorns football team represented the University of Texas at Austin in the 1963 college football season. The Longhorns won their first national championship. Tommy Nobis was the only sophomore starter, and was an important participant on the Longh\n- Eric Dickerson: Eric Demetric Dickerson (born September 2, 1960) is a former college and professional American football player who was a running back in the National Football League (NFL) for eleven seasons during the 1980s and 1990s. Dickerson played college football for the SMU Mustangs of Souther\n- Patrick Kerney: Patrick Manning Kerney ( ; born December 30, 1976) is a former American football defensive end who played in the National Football League (NFL) for eleven seasons. He played college football for the University of Virginia in Charlottesville and was selected by the Atlanta Falcons in "
+      "observation": "- 1963 Texas Longhorns football team: The 1963 Texas Longhorns football team represented the University of Texas at Austin in the 1963 college football season. The Longhorns won their first national championship. Tommy Nobis was the only sophomore starter, and was an important participant on the Longh\n- Eric Dickerson: Eric Demetric Dickerson (born September 2, 1960) is a former college and professional American football player who was a running back in the National Football League (NFL) for eleven seasons during the 1980s and 1990s. Dickerson played college football for the SMU Mustangs of Souther\n- Marc Bulger: Marc Robert Bulger ( ; born April 5, 1977) is a former American football quarterback who played in the National Football League (NFL) for eleven seasons, the majority of it with the St. Louis Rams. He was drafted by the New Orleans Saints in the sixth round of the 2000 NFL Draft and was"
     },
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Tommy Nobis Atlanta Falcons career length\")",
-      "query": "Tommy Nobis Atlanta Falcons career length",
-      "observation": "- Tommy Nobis: Thomas Henry Nobis Jr. (born September 20, 1943) is a former American football linebacker who played in the National Football League (NFL) for eleven seasons with the Atlanta Falcons. He played college football at the University of Texas and was the first overall selection in the 1966 N\n- Natrone Means: Natrone Jermaine Means (born April 26, 1972) is a former professional American Football running back who played for the San Diego Chargers, Jacksonville Jaguars, and Carolina Panthers of the NFL from 1993 to 2000. He was selected by the Chargers in the 2nd round (41st overall) of the \n- Patrick Kerney: Patrick Manning Kerney ( ; born December 30, 1976) is a former American football defensive end who played in the National Football League (NFL) for eleven seasons. He played college football for the University of Virginia in Charlottesville and was selected by the Atlanta Falcons in "
+      "content": "Action: retrieve(\"Tommy Nobis NFL career Atlanta Falcons seasons\")",
+      "query": "Tommy Nobis NFL career Atlanta Falcons seasons",
+      "observation": "- Tommy Nobis: Thomas Henry Nobis Jr. (born September 20, 1943) is a former American football linebacker who played in the National Football League (NFL) for eleven seasons with the Atlanta Falcons. He played college football at the University of Texas and was the first overall selection in the 1966 N\n- 2010 Green Bay Packers season: The 2010 Green Bay Packers season was the 91st season in the National Football League for the Packers and the 92nd season for the team overall. Although they finished with only a respectable 10\u20136 record, good for a second-place finish in the NFC North, the Packers neve\n- 1963 Texas Longhorns football team: The 1963 Texas Longhorns football team represented the University of Texas at Austin in the 1963 college football season. The Longhorns won their first national championship. Tommy Nobis was the only sophomore starter, and was an important participant on the Longh"
     },
     {
-      "type": "fallback",
-      "content": "The team represented the University of Texas at Austin in the 1963 college football season."
+      "type": "answer",
+      "content": "Thought: The first retrieval identified Tommy Nobis as the only sophomore starter for the 1963 Texas Longhorns football team. The second retrieval confirmed that Tommy Nobis played eleven seasons with the Atlanta Falcons. Therefore, the school represented by the team is the University of Texas at Austin.\nAnswer: The University of Texas at Austin."
     }
   ],
-  "final_answer": "The team represented the University of Texas at Austin in the 1963 college football season."
+  "final_answer": "The University of Texas at Austin."
 }

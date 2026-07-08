@@ -6,11 +6,11 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"Anthony Doerr Pulitzer Prize novel publisher\")",
       "query": "Anthony Doerr Pulitzer Prize novel publisher",
-      "observation": "- Anthony Doerr: Anthony Doerr (born October 27, 1973) is an American author of novels and short stories. He gained widespread recognition for his 2014 novel \"All the Light We Cannot See\", which won the Pulitzer Prize for Fiction.\n- All the Light We Cannot See: All the Light We Cannot See is a novel written by American author Anthony Doerr, published by Scribner on May 6, 2014. It won the 2015 Pulitzer Prize for Fiction and the 2015 Andrew Carnegie Medal for Excellence in Fiction.\n- Pulitzer Prize for Fiction: The Pulitzer Prize for Fiction is one of the seven American Pulitzer Prizes that are annually awarded for Letters, Drama, and Music. It recognizes distinguished fiction by an American author, preferably dealing with American life, published during the preceding calendar y"
+      "observation": "- Anthony Doerr: Anthony Doerr (born October 27, 1973) is an American author of novels and short stories. He gained widespread recognition for his 2014 novel \"All the Light We Cannot See\", which won the Pulitzer Prize for Fiction.\n- All the Light We Cannot See: All the Light We Cannot See is a novel written by American author Anthony Doerr, published by Scribner on May 6, 2014. It won the 2015 Pulitzer Prize for Fiction and the 2015 Andrew Carnegie Medal for Excellence in Fiction.\n- Nobel Prize in Literature: Since 1901, the Nobel Prize in Literature (Swedish: \"Nobelpriset i litteratur\" ) has been awarded annually to an author from any country who has, in the words of the will of Alfred Nobel, produced \"in the field of literature the most outstanding work in an ideal direction\""
     },
     {
       "type": "answer",
-      "content": "Answer: Scribner"
+      "content": "Thought: The observation clearly states that \"All the Light We Cannot See\" by Anthony Doerr, which won the Pulitzer Prize for Fiction, was published by Scribner.\nAnswer: Scribner"
     }
   ],
   "final_answer": "Scribner"

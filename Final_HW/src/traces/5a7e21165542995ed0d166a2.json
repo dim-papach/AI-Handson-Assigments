@@ -12,12 +12,12 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"Ray Wilson birth date\")",
       "query": "Ray Wilson birth date",
-      "observation": "- Ray Wilson (musician): Raymond Wilson (born 8 September 1968) is a Scottish musician, best known as vocalist in the post-grunge band Stiltskin, and in Genesis from 1996 to 1998.\n- An Audience and Ray Wilson: An Audience and Ray Wilson is a live acoustic album by Ray Wilson released in 2006 prior to his reforming of Stiltskin. The recording comes from a live performance given by Ray Wilson on 18 May 2003 in the Agnieszka Osiecka studio of Polish Radio in Warsaw. According to t\n- Owen Wilson: Owen Cunningham Wilson (born November 18, 1968) is an American actor, producer, screenwriter and comedian. He has had a long association with filmmaker Wes Anderson, with whom he shared writing and acting credits for \"Bottle Rocket\" (1996) and \"The Royal Tenenbaums\" (2001), the latter o"
+      "observation": "- Ray Wilson (musician): Raymond Wilson (born 8 September 1968) is a Scottish musician, best known as vocalist in the post-grunge band Stiltskin, and in Genesis from 1996 to 1998.\n- Otis Wilson: Otis Ray Wilson (born September 15, 1957) is a former American football linebacker in the National Football League for the Chicago Bears and the Los Angeles Raiders. He won a Super Bowl as a member of the 1985 Chicago Bears. He is also the father of former Cincinnati Bengals running bac\n- An Audience and Ray Wilson: An Audience and Ray Wilson is a live acoustic album by Ray Wilson released in 2006 prior to his reforming of Stiltskin. The recording comes from a live performance given by Ray Wilson on 18 May 2003 in the Agnieszka Osiecka studio of Polish Radio in Warsaw. According to t"
     },
     {
-      "type": "fallback",
-      "content": "Ray Wilson is younger, born on September 8, 1968, while Billy Idol was born on November 30, 1955."
+      "type": "answer",
+      "content": "Thought: I have the birth dates for both Billy Idol and Ray Wilson. Billy Idol was born on November 30, 1955, and Ray Wilson was born on September 8, 1968. I can now determine who is younger.\nAnswer: Ray Wilson is younger."
     }
   ],
-  "final_answer": "Ray Wilson is younger, born on September 8, 1968, while Billy Idol was born on November 30, 1955."
+  "final_answer": "Ray Wilson is younger."
 }

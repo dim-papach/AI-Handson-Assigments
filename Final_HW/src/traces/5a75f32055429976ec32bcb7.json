@@ -6,11 +6,11 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"actor born August 26 1909 starred in The Cowboys TV show\")",
       "query": "actor born August 26 1909 starred in The Cowboys TV show",
-      "observation": "- The Cowboys (TV series): \" The Cowboys \" was a short-lived Western television series based on the 1972 motion picture of the same name starring John Wayne. It aired on the American Broadcasting Company (ABC) television network from February 6 to May 8, 1974. The television show starred Jim Davis, Di\n- Jim Davis (actor): Jim Davis (August 26, 1909 \u2013 April 26, 1981) was an American actor, best known for his role as Jock Ewing in the CBS prime-time soap opera, \"Dallas\", a role which continued until he was too ill from a terminal illness to perform.\n- Ricky Ricardo Jr.: Enrique Alberto Ricardo IV, \"Little Ricky,\" is a fictional character from the American television series \"I Love Lucy\" (1951\u201357, with Ricky Jr. becoming a part of the show as of his birth in 1953) and \"The Lucy-Desi Comedy Hour\" (1957\u201360). Little Ricky was played by a number of ac"
+      "observation": "- The Cowboys (TV series): \" The Cowboys \" was a short-lived Western television series based on the 1972 motion picture of the same name starring John Wayne. It aired on the American Broadcasting Company (ABC) television network from February 6 to May 8, 1974. The television show starred Jim Davis, Di\n- Jim Davis (actor): Jim Davis (August 26, 1909 \u2013 April 26, 1981) was an American actor, best known for his role as Jock Ewing in the CBS prime-time soap opera, \"Dallas\", a role which continued until he was too ill from a terminal illness to perform.\n- Paul Garner: Paul Albert \"Mousie\" Garner (July 31, 1909\u00a0\u2013 August 8, 2004) was an American actor. Garner earned his nickname by assuming the role of a shy, simpering jokester. Garner was one of the last actors still doing shtick from vaudeville, and has been referred to as \"The Grand Old Man Of Vaude"
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieval results clearly indicate that Jim Davis was born on August 26, 1909, and starred in \"The Cowboys\" TV series.\nAnswer: Jim Davis"
+      "content": "Thought: The retrieval results clearly state that Jim Davis was born on August 26, 1909, and that he starred in \"The Cowboys\" TV series.\nAnswer: Jim Davis"
     }
   ],
   "final_answer": "Jim Davis"

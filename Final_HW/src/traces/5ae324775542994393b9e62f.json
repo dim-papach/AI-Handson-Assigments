@@ -10,9 +10,9 @@
     },
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Seoul city size rank\")",
-      "query": "Seoul city size rank",
-      "observation": "- Seoul: Seoul ( ; \uc11c\uc6b8; ] ), officially the Seoul Special Metropolitan City \u2013 is the capital and largest metropolis of the Republic of Korea (commonly known as South Korea). Seoul is the world's 16th largest city, and forms the heart of the Seoul Capital Area, which includes the surrounding Incheon met\n- Seoul World Cup Stadium: The Seoul World Cup Stadium, also known as Sangam Stadium, is a stadium used mostly for association football matches. The venue is located in 240, World Cup-ro, Mapo-gu, Seoul, South Korea. It was built for the 2002 FIFA World Cup and opened in November 2001. It is currently\n- Tumen, Jilin: Tumen is a county-level city in Yanbian Korean Autonomous Prefecture, eastern Jilin province, Northeast China. Of its 136,000 inhabitants, approximately 78,000 (or 57%) are of Korean descent. The two official languages are Chinese and Korean. Tumen is separated from Namyang of North Ha"
+      "content": "Action: retrieve(\"Seoul city size rank in the world\")",
+      "query": "Seoul city size rank in the world",
+      "observation": "- Seoul: Seoul ( ; \uc11c\uc6b8; ] ), officially the Seoul Special Metropolitan City \u2013 is the capital and largest metropolis of the Republic of Korea (commonly known as South Korea). Seoul is the world's 16th largest city, and forms the heart of the Seoul Capital Area, which includes the surrounding Incheon met\n- Tumen, Jilin: Tumen is a county-level city in Yanbian Korean Autonomous Prefecture, eastern Jilin province, Northeast China. Of its 136,000 inhabitants, approximately 78,000 (or 57%) are of Korean descent. The two official languages are Chinese and Korean. Tumen is separated from Namyang of North Ha\n- Seoul World Cup Stadium: The Seoul World Cup Stadium, also known as Sangam Stadium, is a stadium used mostly for association football matches. The venue is located in 240, World Cup-ro, Mapo-gu, Seoul, South Korea. It was built for the 2002 FIFA World Cup and opened in November 2001. It is currently"
     },
     {
       "type": "answer",

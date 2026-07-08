@@ -4,13 +4,13 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"TSV Schilksee 2014 promotion league\")",
-      "query": "TSV Schilksee 2014 promotion league",
-      "observation": "- TSV Schilksee: TSV Schilksee is a German association football club from the Schilksee suburb of Kiel, Schleswig-Holstein. The club's greatest success has been promotion to the tier four Regionalliga Nord in 2014, following a league championship in the Schleswig-Holstein-Liga.\n- 2017\u201318 Borussia Dortmund season: The 2017\u201318 Borussia Dortmund season is the 109th season in the football club's history and 42nd consecutive and 51st overall season in the top flight of German football, the Bundesliga, having been promoted from the 2. Bundesliga Nord in 1976. In addition to the do\n- 2017\u201318 FC Bayern Munich season: The 2017\u201318 FC Bayern Munich season is the 118th season in the football club's history and 53rd consecutive and overall season in the top flight of German football, the Bundesliga, having been promoted from the Regionalliga in 1965. Bayern Munich also are participati"
+      "content": "Action: retrieve(\"TSV Schilksee promoted to 2014\")",
+      "query": "TSV Schilksee promoted to 2014",
+      "observation": "- TSV Schilksee: TSV Schilksee is a German association football club from the Schilksee suburb of Kiel, Schleswig-Holstein. The club's greatest success has been promotion to the tier four Regionalliga Nord in 2014, following a league championship in the Schleswig-Holstein-Liga.\n- 2014 All-Big Ten Conference football team: The 2014 All-Big Ten Conference football team consists of American football players chosen as All-Big Ten Conference players for the 2014 Big Ten Conference football season. The conference recognizes two official All-Big Ten selectors: (1) the Big Ten confe\n- Norbert Farkas (alpine skier): Norbert Farkas (born April 7, 1992 in Budapest) is an alpine skier from Hungary. He competed for Hungary at the 2014 Winter Olympics in the slalom and giant slalom. He is 11-time Hungarian National Champion, 28-time Hungarian National Junior Champion. A team member of "
     },
     {
       "type": "answer",
-      "content": "Thought: The previous retrieval states that TSV Schilksee was promoted to the \"tier four Regionalliga Nord\" in 2014. I need to provide the English translation of this league name. \"Regionalliga\" translates to \"Regional League\" and \"Nord\" translates to \"North\".\nAnswer: Regional League North"
+      "content": "Thought: The previous retrieval states that TSV Schilksee was promoted to the \"tier four Regionalliga Nord\" in 2014. I need to find the English translation of \"Regionalliga Nord\". \"Regionalliga\" translates to \"Regional League\" and \"Nord\" translates to \"North\".\nAnswer: Regional League North"
     }
   ],
   "final_answer": "Regional League North"

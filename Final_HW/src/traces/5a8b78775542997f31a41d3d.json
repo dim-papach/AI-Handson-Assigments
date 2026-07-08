@@ -4,20 +4,20 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Chimaji Appa elder brother role to Shahu\")",
-      "query": "Chimaji Appa elder brother role to Shahu",
-      "observation": "- Chimaji Appa: Shreemant Chimaji Ballal Peshwa (aka Chimaji Appa)(1707\u20131740) was the son of Balaji Vishwanath Bhat and the younger brother of Bajirao Peshwa of Maratha Empire. He was an able military commander who liberated the western coast of India from Portuguese rule. The high watermark of his ca\n- Shahu I: Shahu Bhonsle (1682\u20131749 CE) was the fifth Chhatrapati of the Maratha Empire created by his grandfather, Shivaji. Shahu, he was taken prisoner with his mother in 1689 by Mughal General,Nusrat Jang. He came out of captivity by the Mughals and defeated his aunt Tarabai in an internecine confl\n- Rajaram II of Satara: Rajaram II Bhonsle, also known as Ramaraja, was the 6th monarch of Maratha Empire. He was an adopted son of Chhattrapati Shahu. Tarabai had presented him to Shahu as her own grandson and used him to grab power after Shahu's death. However, after being sidelined, she stated that"
+      "content": "Action: retrieve(\"Chimaji Appa elder brother role to Chhatrapati Shahu\")",
+      "query": "Chimaji Appa elder brother role to Chhatrapati Shahu",
+      "observation": "- Chimaji Appa: Shreemant Chimaji Ballal Peshwa (aka Chimaji Appa)(1707\u20131740) was the son of Balaji Vishwanath Bhat and the younger brother of Bajirao Peshwa of Maratha Empire. He was an able military commander who liberated the western coast of India from Portuguese rule. The high watermark of his ca\n- Rajaram II of Satara: Rajaram II Bhonsle, also known as Ramaraja, was the 6th monarch of Maratha Empire. He was an adopted son of Chhattrapati Shahu. Tarabai had presented him to Shahu as her own grandson and used him to grab power after Shahu's death. However, after being sidelined, she stated that\n- Shahu I: Shahu Bhonsle (1682\u20131749 CE) was the fifth Chhatrapati of the Maratha Empire created by his grandfather, Shivaji. Shahu, he was taken prisoner with his mother in 1689 by Mughal General,Nusrat Jang. He came out of captivity by the Mughals and defeated his aunt Tarabai in an internecine confl"
     },
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Bajirao Peshwa role to Shahu\")",
-      "query": "Bajirao Peshwa role to Shahu",
+      "content": "Action: retrieve(\"Bajirao Peshwa role to Chhatrapati Shahu from 1720\")",
+      "query": "Bajirao Peshwa role to Chhatrapati Shahu from 1720",
       "observation": "- Baji Rao I: Baji Rao (18 August 1700 \u2013 28 April 1740) was a general of the Maratha Empire in India. He served as \"Peshwa\" (Prime Minister) to the fifth Maratha Chhatrapati (Emperor) Shahu from 1720 until his death. He is also known by the name Bajirao Ballal.\n- Rajaram II of Satara: Rajaram II Bhonsle, also known as Ramaraja, was the 6th monarch of Maratha Empire. He was an adopted son of Chhattrapati Shahu. Tarabai had presented him to Shahu as her own grandson and used him to grab power after Shahu's death. However, after being sidelined, she stated that\n- Maratha emperors: The Maratha emperors, from the early 17th century to the early 18th century, built and ruled the Maratha Empire on the Indian subcontinent, mainly corresponding to the modern countries of Bangladesh, India and Pakistan. ) Their power rapidly dwindled during the 18th century and the"
     },
     {
       "type": "answer",
-      "content": "Thought: The first retrieval identified Chimaji Appa's elder brother as Bajirao Peshwa. The second retrieval states that Bajirao served as \"Peshwa\" (Prime Minister) to the fifth Maratha Chhatrapati Shahu from 1720 until his death.\nAnswer: Peshwa (Prime Minister)"
+      "content": "Thought: The question asks about the role of Chimaji Appa's elder brother to Chhatrapati Shahu from 1720 until his death. The first observation identifies Chimaji Appa's elder brother as Bajirao Peshwa. The second observation states that Baji Rao I served as \"Peshwa\" (Prime Minister) to Chhatrapati Shahu from 1720 until his death.\nAnswer: Chimaji Appa's elder brother, Bajirao Peshwa, served as Peshwa (Prime Minister) to the fifth Maratha Chhatrapati Shahu from 1720 until his death."
     }
   ],
-  "final_answer": "Peshwa (Prime Minister)"
+  "final_answer": "Chimaji Appa's elder brother, Bajirao Peshwa, served as Peshwa (Prime Minister) to the fifth Maratha Chhatrapati Shahu from 1720 until his death."
 }

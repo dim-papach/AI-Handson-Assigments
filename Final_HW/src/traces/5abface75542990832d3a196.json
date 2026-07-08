@@ -4,13 +4,13 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Por Baazar cameo Farhan Akhtar\")",
-      "query": "Por Baazar cameo Farhan Akhtar",
-      "observation": "- Por Baazar: Por Bazaar (English: Child Trafficking ) is a 2014 Marathi language thriller film which is produced by video Palace and directed by Manva Naik. It stars Sai Tamhankar, Swarangi Marathe, Satya Manjrekar, Anurag Worlikar, Dharmaj Joshi, Sakheel Parchure, and Ankush Chaudhari in negative ro\n- Farhan Akhtar: Farhan Akhtar (born 9 January 1974) is an Indian film director, screenwriter, producer, actor, playback singer and television host. Born in Mumbai to screenwriters Javed Akhtar and Honey Irani, he grew up under the influence of the Hindi film industry. He began his career in Bollywood\n- Asghar Farhadi: Asghar Farhadi (Persian: \u0627\u0635\u063a\u0631 \u0641\u0631\u0647\u0627\u062f\u06cc\u200e \u200e ; ]    born 7 May 1972) is an Iranian film director and screenwriter. Among other awards, he has received a Golden Globe Award as well as two Academy Awards for Best Foreign Language Film for his movies \"A Separation\" and \"The Salesman\" in 2012"
+      "content": "Action: retrieve(\"Javed Akhtar child director actor singer Por Baazar cameo\")",
+      "query": "Javed Akhtar child director actor singer Por Baazar cameo",
+      "observation": "- Por Baazar: Por Bazaar (English: Child Trafficking ) is a 2014 Marathi language thriller film which is produced by video Palace and directed by Manva Naik. It stars Sai Tamhankar, Swarangi Marathe, Satya Manjrekar, Anurag Worlikar, Dharmaj Joshi, Sakheel Parchure, and Ankush Chaudhari in negative ro\n- Javed Akhtar: Javed Akhtar (born 17 January 1945) is an Indian poet, lyricist and screenwriter. Akhtar is a mainstream writer and some of his most successful work was carried out with Salim Khan as half of the script-writing duo credited as Salim-Javed between 1971 and 1982. He is a recipient of the\n- Farhan Akhtar: Farhan Akhtar (born 9 January 1974) is an Indian film director, screenwriter, producer, actor, playback singer and television host. Born in Mumbai to screenwriters Javed Akhtar and Honey Irani, he grew up under the influence of the Hindi film industry. He began his career in Bollywood"
     },
     {
       "type": "answer",
-      "content": "Thought: The previous retrieval identified Farhan Akhtar as the person described, and stated he was born to Javed Akhtar and Honey Irani. The question asks \"who?\" in relation to Javed Akhtar, referring to the other parent.\nAnswer: Honey Irani"
+      "content": "Thought: The question asks for the name of the person who, along with Javed Akhtar, is the parent of the individual described. The previous retrieval identified Farhan Akhtar as the person fitting the description (director, screenwriter, producer, actor, playback singer, and television host) and stated he was born to Javed Akhtar and Honey Irani. Therefore, the \"who?\" in the question refers to Honey Irani.\nAnswer: Honey Irani"
     }
   ],
   "final_answer": "Honey Irani"

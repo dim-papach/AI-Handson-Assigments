@@ -16,7 +16,7 @@
     },
     {
       "type": "answer",
-      "content": "Thought: The question asks for the birth year of the Argentine singer and actor who both directed and starred in \"El Tio Disparate\". The first retrieval identified Palito Ortega as the director and star of \"El Tio Disparate\" and also as an Argentine singer and actor. The second retrieval provided Palito Ortega's birth year.\nAnswer: 1942"
+      "content": "Thought: The question asks for the birth year of the Argentine singer and actor who both directed and starred in \"El T\u00edo Disparate\". The first retrieval identified Palito Ortega as the director and star of \"El T\u00edo Disparate\" and also as an Argentine singer and actor. The second retrieval provided Palito Ortega's birth year.\nAnswer: 1942"
     }
   ],
   "final_answer": "1942"

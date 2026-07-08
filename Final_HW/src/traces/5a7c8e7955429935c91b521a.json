@@ -4,13 +4,19 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Back Home TV drama adaptation cast English actress born 1946\")",
-      "query": "Back Home TV drama adaptation cast English actress born 1946",
-      "observation": "- Back Home (novel): Back Home is a children's historical novel by Michelle Magorian, first published in 1984. The novel was adapted into a TV drama, \"Back Home\" (1990), starring Hayley Mills and Haley Carr, and again in 2001 starring Sarah Lancashire, Stephanie Cole and Jessica Fox.\n- Hayley Mills: Hayley Catherine Rose Vivien Mills (born 18 April 1946) is an English actress. The daughter of Sir John Mills and Mary Hayley Bell, and younger sister of actress Juliet Mills, Mills began her acting career as a child and was hailed as a promising newcomer, winning the BAFTA Award for M\n- Penelope Wilton: Dame Penelope Alice Wilton, (born 3 June 1946) is an English actress. She is known for starring opposite Richard Briers in the BBC sitcom \"Ever Decreasing Circles\" (1984\u201389); playing Homily in \"The Borrowers\" (1992) and \"The Return of the Borrowers\" (1993); and for her role as Isobe"
+      "content": "Action: retrieve(\"Back Home TV drama actress born 1946\")",
+      "query": "Back Home TV drama actress born 1946",
+      "observation": "- Back Home (novel): Back Home is a children's historical novel by Michelle Magorian, first published in 1984. The novel was adapted into a TV drama, \"Back Home\" (1990), starring Hayley Mills and Haley Carr, and again in 2001 starring Sarah Lancashire, Stephanie Cole and Jessica Fox.\n- Lesley Ann Warren: Lesley Ann Warren (born August 16, 1946) is an American actress and singer. She was nominated for the Academy Award for Best Supporting Actress for the 1982 film \"Victor/Victoria\". She is also an Emmy Award nominee and five-time Golden Globe Award nominee, winning the Golden Globe\n- Julie Harris (actress): Julia Ann \"Julie\" Harris (December 2, 1925 \u2013 August 24, 2013) was an American stage, screen, and television actress. A 10-time Tony Award nominee and five-time winner, she won for \"I Am a Camera\" (1952), \"The Lark\" (1956), \"Forty Carats\" (1969), \"The Last of Mrs. Lincoln\" (19"
+    },
+    {
+      "type": "thought_action",
+      "content": "Thought: The previous retrieval identified Hayley Mills as an actress in the 1990 TV drama \"Back Home\". I need to confirm if she is English and born in 1946.\n\nAction: retrieve(\"Hayley Mills birth year nationality\")",
+      "query": "Hayley Mills birth year nationality",
+      "observation": "- Hayley Mills: Hayley Catherine Rose Vivien Mills (born 18 April 1946) is an English actress. The daughter of Sir John Mills and Mary Hayley Bell, and younger sister of actress Juliet Mills, Mills began her acting career as a child and was hailed as a promising newcomer, winning the BAFTA Award for M\n- Kate Winslet: Kate Elizabeth Winslet, CBE (born 5 October 1975), is an English actress. She is the recipient of an Academy Award, three BAFTA Awards, a BIFA Award, four Golden Globe Awards, a Grammy Award, a Primetime Emmy Award, an AACTA Award, and three Screen Actors Guild Awards. Winslet is the y\n- Nicole Kidman: Nicole Mary Kidman, AC ( , ; born 20 June 1967) is an Australian actress, producer and occasional singer. She is the recipient of several awards, including an Academy Award, two Primetime Emmy Awards, a BAFTA Award, three Golden Globe Awards, and the Silver Bear for Best Actress."
     },
     {
       "type": "answer",
-      "content": "Thought: The retrieval results indicate that the 1990 TV drama adaptation of \"Back Home\" starred Hayley Mills. Hayley Mills is an English actress born on April 18, 1946, which matches all the criteria in the question.\nAnswer: Hayley Mills"
+      "content": "Thought: The information confirms that Hayley Mills is an English actress born in 1946 and starred in the 1990 TV drama adaptation of \"Back Home\". This matches all criteria in the question.\nAnswer: Hayley Mills"
     }
   ],
   "final_answer": "Hayley Mills"

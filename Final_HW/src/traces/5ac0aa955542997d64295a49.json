@@ -4,14 +4,14 @@
   "trace": [
     {
       "type": "thought_action",
-      "content": "Action: retrieve(\"Fucking Hell lager village region\")",
-      "query": "Fucking Hell lager village region",
-      "observation": "- Fucking Hell: Fucking Hell is a German Pilsner or pale lager with an alcohol content of 4.9%. It is named after the village of Fucking in Austria; \"hell\" is the German word for 'pale' and a typical description of this kind of beer. The beer's name was initially controversial. Both the local authorit\n- Fucking, Austria: Fucking (] , rhymes with \"\"booking\"\") is an Austrian village in the municipality of Tarsdorf, in the Innviertel region of western Upper Austria. The village is 33 km north of Salzburg, 4 km east of the Inn river, which forms the German border.\n- Deschutes Brewery: Deschutes Brewery is a craft brewery founded in 1988 as a brew pub in Bend, Oregon, USA, known for such products as Black Butte Porter and Mirror Pond Pale Ale. In 2008, the brewery opened a second pub in Portland\u2019s Pearl District. Deschutes Brewery now ships beer to 28 states, th"
+      "content": "Action: retrieve(\"village Fucking Hell lager named after region\")",
+      "query": "village Fucking Hell lager named after region",
+      "observation": "- Fucking Hell: Fucking Hell is a German Pilsner or pale lager with an alcohol content of 4.9%. It is named after the village of Fucking in Austria; \"hell\" is the German word for 'pale' and a typical description of this kind of beer. The beer's name was initially controversial. Both the local authorit\n- Fucking, Austria: Fucking (] , rhymes with \"\"booking\"\") is an Austrian village in the municipality of Tarsdorf, in the Innviertel region of western Upper Austria. The village is 33 km north of Salzburg, 4 km east of the Inn river, which forms the German border.\n- Gouda cheese: Gouda ( or , ] ; Dutch: \"Goudse kaas\" , meaning \"cheese from Gouda\") is a Dutch yellow cheese made from cow's milk. It is named after the city of Gouda in the Netherlands. It is one of the most popular cheeses worldwide, accounting for 50 to 60% of the world's cheese consumption. The n"
     },
     {
       "type": "answer",
-      "content": "Thought: The lager Fucking Hell is named after the village of Fucking in Austria. The village of Fucking is located in the Innviertel region of western Upper Austria.\nAnswer: Innviertel"
+      "content": "Thought: The lager Fucking Hell is named after the village of Fucking in Austria. The village of Fucking is located in the Innviertel region of western Upper Austria.\nAnswer: The village of Fucking, after which lager Fucking Hell is named, is located in the Innviertel region of western Upper Austria."
     }
   ],
-  "final_answer": "Innviertel"
+  "final_answer": "The village of Fucking, after which lager Fucking Hell is named, is located in the Innviertel region of western Upper Austria."
 }

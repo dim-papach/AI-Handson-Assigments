@@ -6,11 +6,11 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"The Human Factor 1979 cast\")",
       "query": "The Human Factor 1979 cast",
-      "observation": "- The Human Factor (1979 film): The Human Factor is a 1979 British thriller film starring Richard Attenborough, Nicol Williamson, Derek Jacobi, and John Gielgud. It is based on the 1978 novel \"The Human Factor\" by Graham Greene, with the screenplay written by Tom Stoppard. It examined British espionag\n- The Human Factor (Graham Greene book): The Human Factor is an espionage novel by Graham Greene, first published in 1978 and adapted into the 1979 film \"The Human Factor\", directed by Otto Preminger using a screenplay by Tom Stoppard.\n- Peter Finch: Frederick George Peter Ingle Finch (28 September 191614 January 1977) was an English-born Australian actor. He is best remembered for his role as \"crazed\" television anchorman Howard Beale in the film \"Network\", which earned him a posthumous Academy Award for Best Actor, his fifth Best "
+      "observation": "- The Human Factor (1979 film): The Human Factor is a 1979 British thriller film starring Richard Attenborough, Nicol Williamson, Derek Jacobi, and John Gielgud. It is based on the 1978 novel \"The Human Factor\" by Graham Greene, with the screenplay written by Tom Stoppard. It examined British espionag\n- The Human Factor (Graham Greene book): The Human Factor is an espionage novel by Graham Greene, first published in 1978 and adapted into the 1979 film \"The Human Factor\", directed by Otto Preminger using a screenplay by Tom Stoppard.\n- Owen Wilson: Owen Cunningham Wilson (born November 18, 1968) is an American actor, producer, screenwriter and comedian. He has had a long association with filmmaker Wes Anderson, with whom he shared writing and acting credits for \"Bottle Rocket\" (1996) and \"The Royal Tenenbaums\" (2001), the latter o"
     },
     {
       "type": "answer",
-      "content": "Thought: The question asks who starred in the film \"The Human Factor\" in 1979 alongside Richard Attenborough and Derek Jacobi. The retrieval results for \"The Human Factor 1979 cast\" clearly list the main actors.\nAnswer: Nicol Williamson and John Gielgud."
+      "content": "Thought: The question asks who starred in \"The Human Factor\" (1979) alongside Richard Attenborough and Derek Jacobi. The retrieval results clearly list the main actors for the 1979 film.\nAnswer: Nicol Williamson and John Gielgud."
     }
   ],
   "final_answer": "Nicol Williamson and John Gielgud."

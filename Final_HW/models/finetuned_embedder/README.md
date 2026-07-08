@@ -8,107 +8,112 @@ tags:
 - loss:MultipleNegativesRankingLoss
 base_model: BAAI/bge-small-en-v1.5
 widget:
-- source_sentence: When I've Been Drinkin' was cowritten by what American Country
-    singer born in 1985
+- source_sentence: Who was the Austrian Communist of Jewish origins that Edith Tudor-Hart
+    recommended for recruitment by the KGB?
   sentences:
-  - 'Wuerffel Trophy: The Wuerffel Trophy is an award given annually to the college
-    football player "who best combines exemplary community service with athletic and
-    academic achievement." The trophy, designed by W. Stanley Proctor and named in
-    honor of former University of Florida quarterback Danny Wuerffel by the All Sports
-    Association, shows Wuerffel praying after scoring a touchdown.'
-  - 'When I''ve Been Drinkin'': "When I''ve Been Drinkin''" is a song co-written and
-    recorded by American country music artist Jon Pardi. The single was released on
-    September 22, 2014 as the fourth single from Pardi''s debut studio album "Write
-    You a Song". The song was written by Bart Butler, Pardi, and Jeremy Spillman.'
-  - 'Tubby Smith: Orlando Henry "Tubby" Smith (born June 30, 1951) is an American
-    college basketball coach. He is currently the men''s basketball head coach for
-    the University of Memphis. Smith previously served in the same role at the University
-    of Tulsa (1991–1995), the University of Georgia (1995–1997), the University of
-    Kentucky (1997–2007), the University of Minnesota (2007–2013), and Texas Tech
-    University (2013–2016). With Kentucky, he coached the Wildcats to the 1998 NCAA
-    championship.'
-- source_sentence: What Australian rules football player played with the Fitzroy in
-    the Victorian Football League, the West Adelaide Football Club, and the South
-    Adelaide Football Club, or the Panthers in the southern suburbs of Adelaide.
+  - 'United States Senate election in Utah, 1976: The 1976 United States Senate election
+    in Utah took place on November 2, 1976. Incumbent Democratic U.S. Senator Frank
+    Moss ran for re-election to a fourth term but was defeated by his Republican opponent
+    Orrin Hatch. 40 years after the election, Hatch is currently the longest-serving
+    Republican Senator, having been re-elected for seven terms.'
+  - 'Edith Tudor-Hart: Edith Tudor-Hart (née Edith Suschitzky; 1908–1973) was an Austrian-British
+    photographer, communist-sympathiser and spy for the Soviet Union. Some of her
+    work is in the National Gallery in London. Brought up in a family of socialists,
+    she trained in photography at Walter Gropius''s Bauhaus in Dessau, and carried
+    her political ideals through her art. Through her connections with Arnold Deutsch,
+    Tudor-Hart was instrumental in the recruiting of the Cambridge Spy ring which
+    damaged British intelligence from World War II until their discovery in the late
+    1960s. She recommended Litzi Friedmann and Kim Philby for recruitment by the KGB
+    and acted as an intermediary for Anthony Blunt and Bob Stewart when the "rezidentura"
+    at the Soviet Embassy in London suspended its operations in February 1940.<ref
+    name="Guardian 21/8/2015">The Guardian", 21 August 2015, "How MI5 failed to expose
+    matriarch of Cambridge spy ring" by Ian Cobain</ref>'
+  - 'West Pennine Moors: The West Pennine Moors cover an area of approximately 90
+    sqmi of moorland and reservoirs in Lancashire and Greater Manchester, England.'
+- source_sentence: Calicute international airport a wholly owned subsidiary of flag
+    carrier airline is operated by who?
   sentences:
-  - 'Frank Capra: Frank Russell Capra (born Francesco Rosario Capra; May 18, 1897September
-    3, 1991) was an Italian-American film director, producer and writer who became
-    the creative force behind some of the major award-winning films of the 1930s and
-    1940s. Born in Italy and raised in Los Angeles from the age of five, his rags-to-riches
-    story has led film historians such as Ian Freer to consider him the "American
-    dream personified."'
-  - 'Tim Rushlow: Timothy Ray "Tim" Rushlow (born October 6, 1966) is an American
-    country music artist. Between 1991 and 1997, Rushlow was lead vocalist of country
-    music group Little Texas, which recorded four albums and a Greatest Hits package,
-    in addition to charting more than fifteen singles on the "Billboard" country singles
-    charts during Rushlow''s tenure as lead vocalist.'
-  - 'South Adelaide Football Club: The South Adelaide Football Club is an Australian
-    rules football club that competes in the South Australian National Football League
-    (SANFL). Known as the "Panthers", their home ground is Hickinbotham Oval (formerly
-    Noarlunga Oval), located in Noarlunga Downs in the southern suburbs of Adelaide.'
-- source_sentence: Are Bothriochloa and Bystropogon both types of plant?
+  - '2016 Missouri Tigers football team: The 2016 Missouri Tigers football team (also
+    called "Mizzou") represented the University of Missouri in the 2016 NCAA Division
+    I FBS football season. The Tigers played their home games at Faurot Field in Columbia,
+    Missouri, and competed in the Eastern Division of the Southeastern Conference
+    (SEC). They were led by first-year head coach Barry Odom. They finished the season
+    4–8, 2–6 in SEC play to finish in last place in the East Division.'
+  - 'Life of Pi (film): Life of Pi is a 2012 American survival drama film based on
+    Yann Martel''s 2001 novel of the same name. Directed by Ang Lee, the film''s adapted
+    screenplay was written by David Magee, and it stars Suraj Sharma, Irrfan Khan,
+    Rafe Spall, Tabu, Adil Hussain, and Gérard Depardieu. The storyline revolves around
+    an Indian man named "Pi" Patel, telling a novelist about his life story, and how
+    at 16 he survives a shipwreck in which his family dies, and is adrift in the Pacific
+    Ocean on a lifeboat with a Bengal tiger. The film had its worldwide premiere as
+    the opening film of the 51st New York Film Festival at both the Walter Reade Theater
+    and Alice Tully Hall in New York City on September 28, 2012.'
+  - 'Air India Express: Air India Express is an Indian low-cost carrier headquartered
+    in Kochi. It is operated by Air India Express Limited (AIEL), a wholly owned subsidiary
+    of flag carrier airline Air India. It operates around 550 flights per week to
+    29 destinations including the Middle East and Southeast Asia.'
+- source_sentence: Who was the acting instructor of the actor who played the role
+    of Tracy Billings?
   sentences:
-  - 'Aciphylla: Aciphylla is a genus of about 40 species of plants in the Apiaceae
-    family, endemic to New Zealand and Australia. They generally grow as tall spikes
-    surrounded by rosettes of stiff, pointed leaves. Some species are known as Spaniard
-    Grass.'
-  - 'Bystropogon: Bystropogon is a genus of evergreen shrubs in the Lamiaceae. It
-    is native to the Canary Islands and Madeira in the western Atlantic Ocean. Allied
-    to the "Origanum" and "Thymus", the genus is characterized by tiny flowers in
-    much-branched clusters, with plume-like sepals that elongate at the fruiting stage,
-    giving the whole tip of each branch a fuzzy appearance. Stems are square in cross-section
-    and leaves, arranged in opposite pairs, are aromatic when crushed.'
-  - 'Víctor García (Spanish singer): Víctor García (born 5 June 1970 in Brisbane,
-    Australia) is the lead vocalist and songwriter for the heavy metal band WarCry.
-    He is the central figure and sole original member of WarCry and a former Avalanch
-    lead vocalist, being considered one of the best Spanish metal singers. García
-    has often cited that his biggest and most important influences are Stryper, Manowar,
-    and Virgin Steele.'
-- source_sentence: What occupation do Henry King and Clarence G. Badger have in common?
+  - 'Monty Python''s Life of Brian (album): Monty Python''s Life of Brian is the second
+    soundtrack album by Monty Python, released in 1979 alongside the film of the same
+    name. It contains scenes from the film interrupted by linking sections performed
+    by Eric Idle and Graham Chapman, who also acted as producers following an aborted
+    attempt at a soundtrack album by Michael Palin. The album opens with a brief rendition
+    of "Hava Nagila" on Scottish bagpipes, which had earlier been considered for use
+    in a scene later cut from the film.'
+  - 'Arthur Mendoza: Arthur Mendoza was the principal acting instructor for the Stella
+    Adler Conservatory of Acting West. He has taught in Los Angeles for more than
+    20 years and has worked with such talents as Khandi Alexander, Sasha Barrese,
+    Peta Wilson, Finola Hughes, Branford Marsalis, Deidre Hall, John Jopson, and Salma
+    Hayek, and he worked extensively with Benicio del Toro after he won a scholarship
+    to the Conservatory. He has performed in more than 124 plays and worked on television
+    and in film, including episodes of Falcon Crest and "Our House" and the film "Deep
+    Cover".'
+  - 'Alaska: Alaska ( ) is a U.S. state located in the northwest extremity of North
+    America. The Canadian administrative divisions of British Columbia and Yukon border
+    the state to the east, its most extreme western part is Attu Island, and it has
+    a maritime border with Russia to the west across the Bering Strait. To the north
+    are the Chukchi and Beaufort seas–the southern parts of the Arctic Ocean. The
+    Pacific Ocean lies to the south and southwest. It is the largest state in the
+    United States by area and the'
+- source_sentence: A Faust Symphony in three character pictures, was written by Hungarian
+    composer Franz Liszt and was inspired by Johann Wolfgang von Goethe's drama, "Faust",
+    a tragic play in how many parts?
   sentences:
-  - 'The Walt Disney Company: The Walt Disney Company, commonly known as Disney, is
-    an American diversified multinational mass media and entertainment conglomerate,
-    headquartered at the Walt Disney Studios in Burbank, California. It is the world''s
-    second largest media conglomerate in terms of revenue, after Comcast. Disney was
-    founded on October 16, 1923 – by brothers Walt Disney and Roy O. Disney – as the
-    Disney Brothers Cartoon Studio, and established itself as a leader in the American
-    animation industry before diversifying into live-action film production, television,
-    and theme parks. The company also operated under the names The Walt Disney Studio
-    and then Walt Disney Productions. Taking on its current name in 1986, it expanded
-    its existing operations and also started divisions focused upon theater, radio,
-    music, publishing, and online media.'
-  - 'Minnesota Golden Gophers football: The Minnesota Golden Gophers football program
-    represents the University of Minnesota in college football at the NCAA Division
-    I Football Bowl Subdivision (FBS) level. Founded in 1882, the program is one of
-    the oldest in college football. Minnesota has been a member of the Big Ten Conference
-    since its inception in 1896 as the Western Conference. The Golden Gophers claim
-    seven national championships: 1904, 1934, 1935, 1936, 1940, 1941, and 1960. Since
-    2009, the Gophers have played all their home games at TCF Bank Stadium in Minneapolis,
-    Minnesota. In January 2017, the Gophers fired head coach Tracy Claeys and hired
-    former Western Michigan head coach P. J. Fleck as the new head coach.'
-  - 'Henry King (director): Henry King (January 24, 1886June 29, 1982) was an American
-    film director.'
-- source_sentence: What type of media does Lin-Manuel Miranda and Million Dollar Arm
-    have in common?
+  - 'The Middle (TV series): The Middle is an American sitcom about a middle-class
+    family living in Indiana facing the day-to-day struggles of home life, work, and
+    raising children. The show premiered September 30, 2009, on the ABC network and
+    features "Everybody Loves Raymond" actress Patricia Heaton and "Scrubs" actor
+    Neil Flynn. "The Middle" was created by former "Roseanne" and "Murphy Brown" writers
+    Eileen Heisler and DeAnn Heline of Blackie and Blondie Productions. The show is
+    produced by Warner Bros. Television and Blackie and Blondie Productions. "The
+    Middle" has been praised by television critics and earned numerous award nominations.'
+  - '56 Leonard Street: 56 Leonard Street is an 821 ft tall, 57-story skyscraper on
+    Leonard Street in Tribeca, New York City, United States. Herzog & de Meuron describes
+    the building as "houses stacked in the sky." It is the tallest structure in Tribeca.'
+  - 'Goethe''s Faust: Johann Wolfgang von Goethe''s Faust is a tragic play in two
+    parts usually known in English as "Faust, Part One" and "Faust, Part Two". Although
+    rarely staged in its entirety, it is the play with the largest audience numbers
+    on German-language stages. "Faust" is considered by many to be Goethe''s "magnum
+    opus" and the greatest work of German literature.'
+- source_sentence: What hall of fame was the founder of FAME Studios inducted into?
   sentences:
-  - 'A-League Young Footballer of the Year: The A-League Young Footballer of the Year
-    is an annual soccer award given to the player aged 23 or under at the start of
-    the season who is adjudged to have been the best of the season in the A-League.
-    It is currently called the NAB Young Footballer of the Year for sponsorship purposes.
-    The award has been presented since the 2005–06 season and the winner is chosen
-    by a panel of experts and media representatives. In 2014, the age for eligibility
-    was lifted from 21 to 23. The first winner of the award was Perth Glory midfielder
-    Nick Ward. The current holder is Jamie Maclaren, who won the award for his performances
-    throughout the 2015–16 campaign for Brisbane Roar.'
-  - 'Eicca Toppinen: Eino Matti "Eicca" Toppinen (born 5 August 1975) is a Finnish
-    cellist, songwriter, producer, arranger, and (as a hobby) drummer. In 1993 he
-    formed the quartet Apocalyptica.'
-  - 'Lin-Manuel Miranda: Lin-Manuel Miranda ( ; born January 16, 1980) is an American
-    composer, lyricist, playwright, and actor best known for creating and starring
-    in the Broadway musicals "Hamilton" and "In the Heights". He co-wrote the songs
-    for Disney''s "Moana" soundtrack (2016) and is set to star in their upcoming film
-    "Mary Poppins Returns". Miranda''s awards include a Pulitzer Prize, two Grammy
-    Awards, an Emmy Award, a MacArthur Fellowship, and three Tony Awards.'
+  - 'Billy Hughes (musician): Everette Ishmael "Billy" Hughes (September 14, 1908
+    – May 6, 1995) was a Western Swing musician and songwriter. Born in Sallisaw,
+    Oklahoma, he left for California during the Okie exodus of the 1930s. Billy Hughes
+    and His Buccaroos performed during the 1940s and early 1950s. He also owned an
+    independent recording company, Fargo Records. As a writer he is best known for
+    "Tennessee Saturday Night" which was recorded by Red Foley and became a No. 1
+    hit in 1949. He died in Horatio, Arkansas.'
+  - 'Macondo: Macondo is a fictional town described in Gabriel García Márquez''s novel,
+    "One Hundred Years of Solitude". It is the home town of the Buendía family.'
+  - 'Rick Hall: Roe Erister "Rick" Hall (born January 31, 1932) is an American record
+    producer, songwriter, music publisher, and musician best known as the owner and
+    proprietor of FAME Studios in Muscle Shoals, Alabama, and "Father of Muscle Shoals
+    Music". Hall was inducted into the Alabama Music Hall of Fame in 1985 and also
+    received the John Herbert Orr Pioneer Award. Hall remains active in the music
+    industry with FAME Studios, FAME Records, and FAME Publishing.'
 pipeline_tag: sentence-similarity
 library_name: sentence-transformers
 ---
@@ -163,9 +168,9 @@ from sentence_transformers import SentenceTransformer
 model = SentenceTransformer("sentence_transformers_model_id")
 # Run inference
 sentences = [
-    'What type of media does Lin-Manuel Miranda and Million Dollar Arm have in common?',
-    'Lin-Manuel Miranda: Lin-Manuel Miranda ( ; born January 16, 1980) is an American composer, lyricist, playwright, and actor best known for creating and starring in the Broadway musicals "Hamilton" and "In the Heights". He co-wrote the songs for Disney\'s "Moana" soundtrack (2016) and is set to star in their upcoming film "Mary Poppins Returns". Miranda\'s awards include a Pulitzer Prize, two Grammy Awards, an Emmy Award, a MacArthur Fellowship, and three Tony Awards.',
-    'Eicca Toppinen: Eino Matti "Eicca" Toppinen (born 5 August 1975) is a Finnish cellist, songwriter, producer, arranger, and (as a hobby) drummer. In 1993 he formed the quartet Apocalyptica.',
+    'What hall of fame was the founder of FAME Studios inducted into?',
+    'Rick Hall: Roe Erister "Rick" Hall (born January 31, 1932) is an American record producer, songwriter, music publisher, and musician best known as the owner and proprietor of FAME Studios in Muscle Shoals, Alabama, and "Father of Muscle Shoals Music". Hall was inducted into the Alabama Music Hall of Fame in 1985 and also received the John Herbert Orr Pioneer Award. Hall remains active in the music industry with FAME Studios, FAME Records, and FAME Publishing.',
+    'Macondo: Macondo is a fictional town described in Gabriel García Márquez\'s novel, "One Hundred Years of Solitude". It is the home town of the Buendía family.',
 ]
 embeddings = model.encode(sentences)
 print(embeddings.shape)
@@ -174,9 +179,9 @@ print(embeddings.shape)
 # Get the similarity scores for the embeddings
 similarities = model.similarity(embeddings, embeddings)
 print(similarities)
-# tensor([[ 1.0000,  0.4537, -0.0517],
-#         [ 0.4537,  1.0000,  0.0410],
-#         [-0.0517,  0.0410,  1.0000]])
+# tensor([[ 1.0000,  0.6020, -0.1254],
+#         [ 0.6020,  1.0000,  0.0106],
+#         [-0.1254,  0.0106,  1.0000]])
 ```
 <!--
 ### Direct Usage (Transformers)
@@ -223,17 +228,17 @@ You can finetune this model on your own dataset.
 * Size: 5,000 training samples
 * Columns: <code>sentence_0</code> and <code>sentence_1</code>
 * Approximate statistics based on the first 100 samples:
-  |          | sentence_0                                                                        | sentence_1                                                                          |
-  |:---------|:----------------------------------------------------------------------------------|:------------------------------------------------------------------------------------|
-  | type     | string                                                                            | string                                                                              |
-  | modality | text                                                                              | text                                                                                |
-  | details  | <ul><li>min: 11 tokens</li><li>mean: 21.5 tokens</li><li>max: 76 tokens</li></ul> | <ul><li>min: 24 tokens</li><li>mean: 96.74 tokens</li><li>max: 270 tokens</li></ul> |
+  |          | sentence_0                                                                         | sentence_1                                                                           |
+  |:---------|:-----------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------|
+  | type     | string                                                                             | string                                                                               |
+  | modality | text                                                                               | text                                                                                 |
+  | details  | <ul><li>min: 11 tokens</li><li>mean: 26.26 tokens</li><li>max: 81 tokens</li></ul> | <ul><li>min: 31 tokens</li><li>mean: 102.36 tokens</li><li>max: 230 tokens</li></ul> |
 * Samples:
-  | sentence_0                                                                                        | sentence_1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-  |:--------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | <code>Who directed the film that won 6 out 10 of its nominations at the 37th César Awards?</code> | <code>37th César Awards: The 37th César Awards ceremony, presented by the French Academy of Cinema Arts and Techniques (Académie des Arts et Techniques du Cinéma), was held on 24 February 2012, at the Théâtre du Châtelet in Paris. The awards honoured the best films of 2011. "The Artist" won six out of its ten nominations, including Best Film, Best Director (Michel Hazanavicius), Best Actress (Bérénice Bejo), and Best Cinematography (Guillaume Schiffman). The ceremony was chaired by Guillaume Canet, with Antoine de Caunes as master of ceremonies. Nominations were announced 27 January 2012.</code> |
-  | <code>When was the English zoo owner that founded The Aspinall Foundation born? </code>           | <code>The Aspinall Foundation: The Aspinall Foundation (formerly The John Aspinall Foundation) is a British charity (Registered Charity 326567) which works to promote wildlife conservation. It was set up by professional gambler and zoo owner John Aspinall in 1984 and runs the two zoos he set up, Port Lympne Wild Animal Park and Howletts Wild Animal Park in Kent, England. It also supports a number of conservation projects overseas to protect endangered species. The charity is now run by John's son, Damian Aspinall.</code>                                                                             |
-  | <code>Antoine Fuqua and Duncan Jones both have what job?</code>                                   | <code>Antoine Fuqua: Antoine Fuqua (born January 19, 1966) is an American film director and producer. Initially active as a music video director, he has worked primarily in the action and thriller film subgenres, and is best known for his 2001 Academy Award-winning film "Training Day".</code>                                                                                                                                                                                                                                                                                                                      |
+  | sentence_0                                                                                              | sentence_1                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+  |:--------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | <code>How often is the magazine founded by Daniel Fowle published?</code>                               | <code>The New Hampshire Gazette: The New Hampshire Gazette is a non-profit, alternative, bi-weekly newspaper published in Portsmouth, New Hampshire. Its editors claim that the paper, published on-and-off in one form or another since 1756, is the oldest newspaper in the United States and has trademarked the phrase "The Nation's Oldest Newspaper."</code>                                                                                             |
+  | <code>Near what city did Oli Sihvonen study art with Josef Albers?</code>                               | <code>Oli Sihvonen: Oli Sihvonen (1921-1991) was a post-war American artist known for hard-edge abstract paintings. Sihvonen's style was greatly influenced by Josef Albers who taught him color theory and Bauhaus aesthetics at Black Mountain College in the 1940s. Sihvonen was also influenced by Russian Constructivism, Piet Mondrian, and Pierre Matisse. His work has been linked to Abstract Expressionism, Minimalism, Hard-Edge and Op-Art.</code> |
+  | <code>Which university was founded first, The Northcap University or San Diego State University?</code> | <code>The Northcap University: The NorthCap University, formerly ITM University, is an autonomous university situated in Sector 23-A, Gurugram, Haryana, India. It was founded in 1996 by Educate India Society, registered under the Registration of Societies Act of 1860 as an Engineering Institute, to provide education in Technical and Management. Formerly it was under Maharshi Dayanand University, Rohtak.</code>                                  |
 * Loss: [<code>MultipleNegativesRankingLoss</code>](https://sbert.net/docs/package_reference/sentence_transformer/losses.html#multiplenegativesrankingloss) with these parameters:
   ```json
   {
@@ -363,12 +368,12 @@ You can finetune this model on your own dataset.
 ### Training Logs
 | Epoch | Step | Training Loss |
 |:-----:|:----:|:-------------:|
-| 0.8   | 500  | 0.0670        |
-| 1.6   | 1000 | 0.0363        |
+| 0.8   | 500  | 0.0599        |
+| 1.6   | 1000 | 0.0345        |
 
 
 ### Training Time
-- **Training**: 43.1 minutes
+- **Training**: 44.7 minutes
 
 ### Framework Versions
 - Python: 3.12.3
@@ -376,7 +381,7 @@ You can finetune this model on your own dataset.
 - Transformers: 5.9.0
 - PyTorch: 2.11.0+cu130
 - Accelerate: 1.14.0
-- Datasets: 3.6.0
+- Datasets: 5.0.0
 - Tokenizers: 0.22.2
 
 ## Citation

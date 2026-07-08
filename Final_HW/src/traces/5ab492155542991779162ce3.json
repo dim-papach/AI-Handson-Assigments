@@ -6,11 +6,11 @@
       "type": "thought_action",
       "content": "Action: retrieve(\"Palestine Brigade RAF origin English soldier request\")",
       "query": "Palestine Brigade RAF origin English soldier request",
-      "observation": "- Palestine Brigade RAF: The Palestine Brigade of the Royal Flying Corps, and later Royal Air Force, was formed 5 October 1917 in response to General Allenby's request for an air formation for his planned offensive against the Ottoman Empire in Palestine.\n- Edmund Allenby, 1st Viscount Allenby: Field Marshal Edmund Henry Hynman Allenby, 1st Viscount Allenby, (23 April 1861 \u2013 14 May 1936) was an English soldier and British Imperial Governor. He fought in the Second Boer War and also in the First World War, in which he led the British Empire's Egyptian E\n- No. 40 Wing RAF: No. 40 Wing formed part of the Royal Air Force (RAF) Palestine Brigade during World War I and immediately after. It was established in October 1917 as 40th (Army) Wing, Royal Flying Corps (RFC), and become part of the RAF in April 1918, when the RFC merged with the Royal Naval Air S"
+      "observation": "- Palestine Brigade RAF: The Palestine Brigade of the Royal Flying Corps, and later Royal Air Force, was formed 5 October 1917 in response to General Allenby's request for an air formation for his planned offensive against the Ottoman Empire in Palestine.\n- No. 40 Wing RAF: No. 40 Wing formed part of the Royal Air Force (RAF) Palestine Brigade during World War I and immediately after. It was established in October 1917 as 40th (Army) Wing, Royal Flying Corps (RFC), and become part of the RAF in April 1918, when the RFC merged with the Royal Naval Air S\n- Royal Air Force: The Royal Air Force (RAF) is the United Kingdom's aerial warfare force. Formed towards the end of the First World War on 1 April 1918, it is the oldest independent air force in the world. Following victory over the Central Powers in 1918 the RAF emerged as, at the time, the largest "
     },
     {
       "type": "answer",
-      "content": "Thought: The Palestine Brigade RAF was formed in response to General Allenby's request. Edmund Allenby is identified as an English soldier.\nAnswer: General Allenby"
+      "content": "Thought: The observation clearly states that the Palestine Brigade RAF was formed in response to General Allenby's request.\nAnswer: General Allenby"
     }
   ],
   "final_answer": "General Allenby"
